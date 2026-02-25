@@ -2,9 +2,7 @@
 name: commit-manager
 agent: agent
 model: GPT-5.3-Codex
-tools:
-  - terminal
-  - edit
+tools: [execute, read, agent]
 description:  Gerenciamento semântico de commits: valida sincronia da branch, analisa  mudanças pendentes, agrupa arquivos por tipo/módulo  realiza commits Conventional Commits em português-BR. Nunca executa git push.
 ---
 
@@ -171,7 +169,7 @@ Para cada grupo:
 git add <lista de arquivos do grupo>
 ```
 
-**b.** Propor mensagem no formato:
+**b.** Definir mensagem no formato:
 
 ```
 <tipo>(<módulo>): <descrição imperativa em português, máx 72 chars>
@@ -187,27 +185,11 @@ chore(db): migration V5__adicionar_coluna_limite_cheque_especial
 docs(agents): atualizar spec DOM-05a com verificações C1-C6
 ```
 
-**c.** Exibir ao usuário:
-- Lista de arquivos do grupo
-- Mensagem proposta
-
-**d.** Aguardar confirmação:
-- `S` → confirmar e usar a mensagem proposta
-- `N` → rejeitar e solicitar mensagem alternativa
-- Qualquer outro texto → usar como mensagem alternativa
-
-**e.** Se confirmado (`S`):
+**c.** Realizar commit:
 
 ```bash
 git commit -m "<mensagem proposta>"
 ```
-
-**f.** Se rejeitado ou editado: usar a mensagem fornecida pelo usuário:
-
-```bash
-git commit -m "<mensagem do usuário>"
-```
-
 ---
 
 ## Passo 8 — Resumo final
