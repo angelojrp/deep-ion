@@ -2,9 +2,38 @@ from __future__ import annotations
 
 import json
 import os
+import pathlib
 from dataclasses import dataclass
 from typing import Any, Dict, List, Optional
 from urllib import parse, request
+
+
+def _load_dotenv() -> None:
+    """Carrega variáveis de um arquivo .env sem dependências externas.
+
+    Procura o .env subindo a árvore de diretórios a partir deste arquivo
+    (útil tanto para execução local quanto durante testes).
+    Variáveis já presentes no ambiente nunca são sobrescritas, garantindo
+    compatibilidade com GitHub Actions que injeta GITHUB_TOKEN nativamente.
+    """
+    start = pathlib.Path(__file__).resolve().parent
+    for directory in [start, *start.parents]:
+        env_file = directory / ".env"
+        if env_file.is_file():
+            with env_file.open(encoding="utf-8") as fh:
+                for raw_line in fh:
+                    line = raw_line.strip()
+                    if not line or line.startswith("#") or "=" not in line:
+                        continue
+                    key, _, value = line.partition("=")
+                    key = key.strip()
+                    value = value.strip().strip('"').strip("'")
+                    if key and key not in os.environ:
+                        os.environ[key] = value
+            break
+
+
+_load_dotenv()
 
 
 @dataclass
