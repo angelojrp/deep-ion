@@ -1,0 +1,72 @@
+name: issue-welcome
+
+on:
+  issues:
+    types: [opened]
+
+permissions:
+  issues: write
+
+jobs:
+  post-commands:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Post available commands
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const body = `## 👋 Bem-vindo ao pipeline da Fábrica de Software Autônoma!
+
+            Esta issue será processada pelo pipeline de agentes. Abaixo estão os comandos disponíveis para cada etapa.
+
+            ---
+
+            ### 🚦 Gate 1 — Aprovação de Descoberta (DOM-01 → DOM-02)
+            | Comando | Descrição |
+            |---------|-----------|
+            | \`/gate1-approve\` | Aprova a classificação e inicia a análise de requisitos (DOM-02) |
+            | \`/gate1-reject <motivo>\` | Rejeita a demanda com justificativa |
+
+            ### 📋 Checkpoint A — Revisão do BAR (SKILL-REQ-01)
+            | Comando | Descrição |
+            |---------|-----------|
+            | \`/ba-approve\` | Aprova o Business Analysis Record (BAR) e avança para modelagem de Use Cases |
+            | \`/ba-reject <motivo>\` | Rejeita o BAR com justificativa |
+            | \`/ba-revise <campo>=<valor>\` | Solicita revisão de um campo específico do BAR |
+
+            ### 🔍 Gate 2 — Aprovação de Requisitos (DOM-05a → DOM-03)
+            | Comando | Descrição |
+            |---------|-----------|
+            | \`/gate2-approve\` | Aprova os artefatos de requisitos e inicia a arquitetura (DOM-03) |
+            | \`/gate2-reject <motivo>\` | Rejeita os artefatos com justificativa |
+
+            ### 🏛️ Gate 3 — Aprovação de Arquitetura (DOM-03 → DOM-04)
+            | Comando | Descrição |
+            |---------|-----------|
+            | \`/gate3-approve\` | Aprova a arquitetura e inicia o desenvolvimento (DOM-04) |
+            | \`/gate3-reject <motivo>\` | Rejeita a arquitetura com justificativa |
+
+            ### ✅ Gate 4 — Aprovação Técnica do PR (DOM-05b → merge)
+            | Comando | Descrição |
+            |---------|-----------|
+            | \`/gate4-approve\` | Aprova o PR após QA técnico e libera para homologação |
+            | \`/gate4-reject <motivo>\` | Rejeita o PR com justificativa |
+
+            ### 🔁 Reclassificação de Impacto
+            | Comando | Descrição |
+            |---------|-----------|
+            | \`/reclassify-T0\` | Reclassifica a demanda como T0 — Trivial (autônomo) |
+            | \`/reclassify-T1\` | Reclassifica a demanda como T1 — Semi-autônomo |
+            | \`/reclassify-T2\` | Reclassifica a demanda como T2 — Multi-gate |
+            | \`/reclassify-T3\` | Reclassifica a demanda como T3 — Totalmente assistido |
+
+            ---
+
+            > 💡 **Dica:** Apenas membros autorizados podem executar comandos de gate. A sequência correta do pipeline é: Gate 1 → Checkpoint A → Gate 2 → Gate 3 → Gate 4.`;
+
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.payload.issue.number,
+              body
+            });
