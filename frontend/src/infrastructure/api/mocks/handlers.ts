@@ -7,6 +7,9 @@ import { chatbotHandlers } from './chatbot.handlers'
 import { projectsHandlers } from './projects.handlers'
 import { blueprintsManagementHandlers } from './blueprints-management.handlers'
 import { usersHandlers } from './users.handlers'
+import { agentsHandlers } from './agents.handlers'
+import { pipelinesHandlers } from './pipelines.handlers'
+import { projectKickoffHandlers } from './project-kickoff.handlers'
 
 export const handlers: RequestHandler[] = [
   ...poDashboardHandlers,
@@ -17,4 +20,7 @@ export const handlers: RequestHandler[] = [
   ...projectsHandlers,
   ...blueprintsManagementHandlers,
   ...usersHandlers,
+  ...agentsHandlers,
+  ...pipelinesHandlers,
+  ...projectKickoffHandlers,
 ]

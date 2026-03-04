@@ -9,6 +9,10 @@ import { cn } from '@shared/utils/cn'
 import type { ProjectStatus } from '@domain/models/project'
 
 const statusConfig: Record<ProjectStatus, { label: string; className: string }> = {
+  pending: {
+    label: 'projectsPage.status.pending',
+    className: 'bg-info-light text-info border-info-border',
+  },
   active: {
     label: 'projectsPage.status.active',
     className: 'bg-success-light text-success border-success-border',

@@ -12,6 +12,9 @@ import {
   X,
   MessageCircle,
   Users,
+  Bot,
+  GitBranch,
+  Rocket,
 } from 'lucide-react'
 import { cn } from '@shared/utils/cn'
 import { ROUTES } from '@shared/constants/routes'
@@ -24,7 +27,10 @@ const navItems = [
   { key: 'uxDashboard', to: ROUTES.UX_DASHBOARD, icon: Palette },
   { key: 'tenants', to: ROUTES.TENANTS, icon: Building2 },
   { key: 'projects', to: ROUTES.PROJECTS, icon: FolderKanban },
+  { key: 'kickoff', to: ROUTES.PROJECT_KICKOFF, icon: Rocket },
   { key: 'blueprints', to: ROUTES.BLUEPRINTS, icon: Layers },
+  { key: 'agents', to: ROUTES.AGENTS, icon: Bot },
+  { key: 'pipelines', to: ROUTES.PIPELINES, icon: GitBranch },
   { key: 'users', to: ROUTES.USERS, icon: Users },
   { key: 'chatbot', to: ROUTES.CHATBOT, icon: MessageCircle },
   { key: 'settings', to: ROUTES.SETTINGS, icon: Settings },

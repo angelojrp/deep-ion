@@ -29,6 +29,8 @@
   --color-bg: #f1f5f9;
   --color-surface: #ffffff;
   --color-surface-2: #f8fafc;
+  --color-card: #ffffff;
+  --color-muted: #f1f5f9;
   --color-border: #e2e8f0;
   --color-border-strong: #cbd5e1;
 
@@ -58,6 +60,8 @@
   --color-bg: #1a222c;
   --color-surface: #24303f;
   --color-surface-2: #1a222c;
+  --color-card: #24303f;
+  --color-muted: #1a222c;
   --color-border: #2e3a47;
   --color-border-strong: #3d4d60;
 

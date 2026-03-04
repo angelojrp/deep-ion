@@ -1,0 +1,122 @@
+{
+  "agents": [
+    {
+      "id": "agent-dom04-dev",
+      "domainId": "DOM-04",
+      "name": "Dev Implementer",
+      "slug": "dev-implementer",
+      "description": "Implementa histórias e corrige regressões com foco em entrega contínua.",
+      "version": "1.2.0",
+      "status": "active",
+      "autonomyLevel": "semi",
+      "skills": [
+        {
+          "id": "skill-dom04-pr-check",
+          "code": "PR_CHECKLIST",
+          "name": "Validação de Pull Request",
+          "description": "Executa checklist técnico antes de merge.",
+          "triggerType": "gate-approval",
+          "triggerValue": "pull_request",
+          "timeoutSeconds": 240,
+          "confidenceThreshold": 0.82,
+          "checks": [
+            {
+              "id": "chk-lint",
+              "code": "LINT_OK",
+              "description": "Sem erros de lint",
+              "type": "deterministic",
+              "blocking": true
+            },
+            {
+              "id": "chk-test",
+              "code": "TESTS_OK",
+              "description": "Testes automatizados passando",
+              "type": "deterministic",
+              "blocking": true
+            }
+          ],
+          "requiredLlmTier": "mid",
+          "enabled": true,
+          "executionCount": 64,
+          "lastExecutedAt": "2026-03-04T09:20:00Z",
+          "avgDurationSeconds": 78
+        }
+      ],
+      "authorizedLlms": [
+        {
+          "id": "llm-gpt-4.1-mini",
+          "provider": "openai",
+          "modelId": "gpt-4.1-mini",
+          "displayName": "GPT-4.1 Mini",
+          "tier": "mid",
+          "maxTokens": 128000,
+          "temperatureDefault": 0.2,
+          "temperatureRange": [0, 1],
+          "costPer1kInput": 0.00015,
+          "costPer1kOutput": 0.0006,
+          "isDefault": true,
+          "enabled": true
+        }
+      ],
+      "prompts": [
+        {
+          "id": "prompt-review-system",
+          "type": "system",
+          "name": "Review Técnico",
+          "description": "Prompt base para revisão de alterações.",
+          "content": "Você é um agente de revisão técnica de código.",
+          "variables": ["diff", "context"],
+          "version": "1.0.0",
+          "isActive": true,
+          "createdAt": "2026-02-20T10:00:00Z",
+          "updatedAt": "2026-03-01T10:00:00Z"
+        }
+      ],
+      "executionConfig": {
+        "maxConcurrentIssues": 3,
+        "retryOnFailure": true,
+        "maxRetries": 2,
+        "cooldownSeconds": 30,
+        "notifyOnError": true,
+        "notifyOnEscalation": true,
+        "autoEscalateAfterSeconds": 600
+      },
+      "tags": ["frontend", "ci", "quality-gate"],
+      "createdAt": "2026-02-20T10:00:00Z",
+      "updatedAt": "2026-03-04T09:30:00Z",
+      "createdBy": "Platform Team",
+      "lastActiveAt": "2026-03-04T09:20:00Z",
+      "totalExecutions": 328,
+      "successRate": 96
+    },
+    {
+      "id": "agent-dom02-req",
+      "domainId": "DOM-02",
+      "name": "Requirements Analyst",
+      "slug": "requirements-analyst",
+      "description": "Consolida critérios de aceite e rastreabilidade de requisitos.",
+      "version": "1.0.4",
+      "status": "maintenance",
+      "autonomyLevel": "assisted",
+      "skills": [],
+      "authorizedLlms": [],
+      "prompts": [],
+      "executionConfig": {
+        "maxConcurrentIssues": 1,
+        "retryOnFailure": false,
+        "maxRetries": 0,
+        "cooldownSeconds": 60,
+        "notifyOnError": true,
+        "notifyOnEscalation": false,
+        "autoEscalateAfterSeconds": 1200
+      },
+      "tags": ["requirements", "traceability"],
+      "createdAt": "2026-02-18T09:00:00Z",
+      "updatedAt": "2026-03-03T16:30:00Z",
+      "createdBy": "Business Team",
+      "lastActiveAt": null,
+      "totalExecutions": 47,
+      "successRate": 89
+    }
+  ]
+}

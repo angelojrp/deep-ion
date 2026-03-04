@@ -10,8 +10,11 @@
     "uxDashboard": "Analista de UX",
     "tenants": "Tenants",
     "projects": "Projetos",
+    "kickoff": "Iniciar Projeto",
     "blueprints": "Blueprints",
     "users": "Usuários",
+    "agents": "Agentes IA",
+    "pipelines": "Pipelines",
     "settings": "Configurações",
     "chatbot": "Assistente IA",
     "sidebar": "Menu lateral",
@@ -627,6 +630,7 @@
     "updatedAt": "Atualizado em",
     "viewDetails": "Ver detalhes",
     "status": {
+      "pending": "Pendente",
       "active": "Ativo",
       "configuring": "Configurando",
       "archived": "Arquivado"
@@ -964,5 +968,332 @@
     "addExperience": "Adicionar experiência",
     "addEducation": "Adicionar formação",
     "addSocialLink": "Adicionar link"
+  },
+  "pipelinesPage": {
+    "title": "Pipelines",
+    "subtitle": "Configuração de pipelines de agentes IA — global ou por projeto",
+    "searchPlaceholder": "Buscar pipelines por nome ou projeto...",
+    "filterScope": "Filtrar por escopo",
+    "filterStatus": "Filtrar por status",
+    "allScopes": "Todos os escopos",
+    "allStatuses": "Todos os status",
+    "createPipeline": "Novo Pipeline",
+    "openPipeline": "Abrir pipeline {{name}}",
+    "assignments": "atribuições",
+    "domains": "domínios",
+    "scope": {
+      "global": "Global",
+      "project": "Por Projeto"
+    },
+    "status": {
+      "active": "Ativo",
+      "draft": "Rascunho",
+      "archived": "Arquivado"
+    },
+    "form": {
+      "title": "Criar Novo Pipeline",
+      "subtitle": "Configure as informações básicas do pipeline",
+      "name": "Nome do Pipeline",
+      "namePlaceholder": "Ex.: Pipeline Portal Financeiro",
+      "description": "Descrição",
+      "descriptionPlaceholder": "Descreva o propósito e escopo do pipeline...",
+      "scope": "Escopo",
+      "errors": {
+        "nameRequired": "Nome é obrigatório",
+        "descriptionRequired": "Descrição é obrigatória",
+        "submitFailed": "Falha ao criar pipeline. Tente novamente."
+      }
+    },
+    "detail": {
+      "backToList": "Voltar para pipelines",
+      "tabs": {
+        "label": "Abas do pipeline",
+        "matrix": "Matriz Domínio × Tier",
+        "tiers": "Configuração de Tiers",
+        "settings": "Informações"
+      },
+      "matrixHelp": "Configure os agentes IA para cada combinação de domínio (DOM-01 a DOM-05) e tier de classificação (T0 a T3). Clique em uma célula vazia para atribuir um agente ou edite uma atribuição existente.",
+      "tiersHelp": "Configuração dos critérios de classificação e SLA para cada tier do pipeline.",
+      "domain": "Domínio",
+      "assign": "Atribuir",
+      "addAssignment": "Atribuir agente para {{domain}} no tier {{tier}}",
+      "cost": "custo",
+      "autoApprove": "Auto-aprovar",
+      "criteria": "Critérios de Classificação",
+      "noCriteria": "Nenhum critério definido — todas as demandas são elegíveis.",
+      "generalInfo": "Informações Gerais",
+      "pipelineName": "Nome",
+      "pipelineScope": "Escopo",
+      "project": "Projeto",
+      "createdBy": "Criado por",
+      "createdAt": "Criado em",
+      "updatedAt": "Atualizado em",
+      "stats": "Resumo",
+      "totalTiers": "Tiers",
+      "totalAssignments": "Atribuições",
+      "domainsConfigured": "Domínios configurados",
+      "batchAgents": "Agentes em Batch",
+      "editor": {
+        "agent": "Agente",
+        "selectAgent": "Selecionar agente...",
+        "noAgentsForDomain": "Nenhum agente cadastrado para este domínio. Cadastre em Agentes IA.",
+        "llmModel": "Modelo LLM",
+        "selectLlm": "Selecionar modelo...",
+        "executionMode": "Modo de Execução",
+        "batchWarning": "Modo batch economiza ~{{savings}}% no custo de tokens, mas adiciona delay no processamento. Ideal para tiers menos urgentes.",
+        "enabled": "Habilitado",
+        "enable": "Habilitar",
+        "disable": "Desabilitar"
+      }
+    }
+  },
+  "agentsPage": {
+    "title": "Agentes IA",
+    "subtitle": "Gerenciamento de agentes inteligentes por domínio",
+    "searchPlaceholder": "Buscar agentes por nome, descrição ou tag...",
+    "filterDomain": "Filtrar por domínio",
+    "filterStatus": "Filtrar por status",
+    "allDomains": "Todos os domínios",
+    "allStatuses": "Todos os status",
+    "createAgent": "Novo Agente",
+    "skills": "Skills",
+    "llms": "Modelos LLM",
+    "prompts": "Prompts",
+    "executions": "Execuções",
+    "successRate": "Taxa de sucesso",
+    "status": {
+      "active": "Ativo",
+      "inactive": "Inativo",
+      "error": "Erro",
+      "maintenance": "Manutenção"
+    },
+    "autonomy": {
+      "full": "Autônomo",
+      "semi": "Semi-autônomo",
+      "assisted": "Assistido",
+      "none": "Sem autonomia"
+    },
+    "form": {
+      "title": "Criar Novo Agente",
+      "subtitle": "Configure as informações básicas do agente IA",
+      "domain": "Domínio",
+      "name": "Nome do Agente",
+      "namePlaceholder": "Ex.: Discovery Agent v2",
+      "description": "Descrição",
+      "descriptionPlaceholder": "Descreva o propósito e responsabilidades do agente...",
+      "autonomyLevel": "Nível de Autonomia",
+      "tags": "Tags",
+      "tagsPlaceholder": "Ex.: triagem, classificação, discovery",
+      "tagsHelp": "Separar por vírgula",
+      "errors": {
+        "nameRequired": "Nome é obrigatório",
+        "descriptionRequired": "Descrição é obrigatória",
+        "submitFailed": "Falha ao criar agente. Tente novamente."
+      }
+    }
+  },
+  "agentDetail": {
+    "backToList": "Voltar para agentes",
+    "tabs": {
+      "label": "Abas do agente",
+      "overview": "Visão Geral",
+      "skills": "Skills",
+      "llms": "Modelos LLM",
+      "prompts": "Prompts",
+      "config": "Configuração"
+    },
+    "overview": {
+      "totalExecutions": "Total de Execuções",
+      "successRate": "Taxa de Sucesso",
+      "skills": "Skills",
+      "llms": "Modelos LLM",
+      "metadata": "Metadados",
+      "createdBy": "Criado por",
+      "createdAt": "Criado em",
+      "updatedAt": "Atualizado em",
+      "lastActive": "Última atividade"
+    },
+    "skills": {
+      "empty": "Nenhuma skill cadastrada",
+      "enabled": "Habilitada",
+      "disabled": "Desabilitada",
+      "trigger": "Trigger",
+      "timeout": "Timeout",
+      "confidence": "Confiança mínima",
+      "requiredTier": "Tier LLM",
+      "executionCount": "Execuções",
+      "avgDuration": "Duração média",
+      "lastExecuted": "Última execução",
+      "checks": "Verificações",
+      "deterministic": "Determinístico",
+      "llmAssisted": "LLM-Assistido",
+      "blocking": "Bloqueante"
+    },
+    "llms": {
+      "empty": "Nenhum modelo LLM autorizado",
+      "default": "Padrão",
+      "provider": "Provedor",
+      "tier": "Tier",
+      "maxTokens": "Max tokens",
+      "temperature": "Temperatura",
+      "costInput": "Custo input",
+      "costOutput": "Custo output"
+    },
+    "prompts": {
+      "empty": "Nenhum prompt cadastrado",
+      "inactive": "Inativo",
+      "viewContent": "Ver conteúdo do prompt",
+      "view": "Ver",
+      "hide": "Ocultar",
+      "variables": "Variáveis",
+      "content": "Conteúdo",
+      "created": "Criado",
+      "updated": "Atualizado"
+    },
+    "config": {
+      "title": "Configuração de Execução",
+      "maxConcurrentIssues": "Issues simultâneas",
+      "maxRetries": "Max tentativas",
+      "cooldownSeconds": "Cooldown",
+      "autoEscalateAfterSeconds": "Auto-escalar após",
+      "retryOnFailure": "Retry em falha",
+      "notifications": "Notificações",
+      "yes": "Sim",
+      "no": "Não"
+    }
+  },
+  "kickoff": {
+    "page": {
+      "title": "Iniciar Projeto",
+      "subtitle": "Workflow de kickoff com agentes IA"
+    },
+    "activeKickoffs": "Kickoffs em Andamento",
+    "startNew": "Iniciar Novo Projeto",
+    "emptyState": "Nenhum kickoff em andamento. Inicie um novo projeto para começar.",
+    "startedBy": "Iniciado por {{name}}",
+    "cancel": "Cancelar",
+    "stepper": {
+      "label": "Etapas do kickoff"
+    },
+    "steps": {
+      "initialDescription": "Descrição Inicial",
+      "visionGeneration": "Gerando Visão",
+      "visionReview": "Revisão da Visão",
+      "visionApproved": "Visão Aprovada",
+      "architectureCheck": "Verificação Arquitetura",
+      "architectureTask": "Tarefa do Arquiteto",
+      "architectureGeneration": "Gerando Arquitetura",
+      "architectureReview": "Revisão Arquitetura",
+      "architectureApproved": "Arquitetura Aprovada",
+      "scaffoldGeneration": "Gerando Scaffold",
+      "completed": "Concluído"
+    },
+    "newKickoff": {
+      "title": "Iniciar Novo Projeto",
+      "selectProject": "Selecione um projeto pendente",
+      "descriptionLabel": "Descrição inicial do projeto",
+      "descriptionPlaceholder": "Descreva o objetivo, escopo e principais funcionalidades do projeto...",
+      "noPendingProjects": "Não há projetos com status pendente disponíveis. Cadastre um novo projeto abaixo.",
+      "start": "Iniciar Kickoff",
+      "starting": "Iniciando...",
+      "createProject": {
+        "title": "Cadastrar Novo Projeto",
+        "name": "Nome do projeto",
+        "namePlaceholder": "Ex.: Portal Financeiro ACME",
+        "slug": "Identificador (slug)",
+        "slugPlaceholder": "ex.: portal-financeiro-acme",
+        "slugHelp": "Identificador único. Use apenas letras minúsculas, números e hífens.",
+        "description": "Descrição",
+        "descriptionPlaceholder": "Descreva brevemente o objetivo do projeto...",
+        "submit": "Cadastrar Projeto",
+        "submitting": "Cadastrando...",
+        "success": "Projeto \"{{name}}\" cadastrado com sucesso!",
+        "errors": {
+          "nameRequired": "Nome do projeto é obrigatório",
+          "slugRequired": "Identificador é obrigatório",
+          "slugInvalid": "Use apenas letras minúsculas, números e hífens",
+          "descriptionRequired": "Descrição é obrigatória"
+        }
+      }
+    },
+    "detail": {
+      "loading": "Carregando kickoff...",
+      "error": "Erro ao carregar",
+      "notFound": "Kickoff não encontrado para este projeto.",
+      "backToList": "Voltar para kickoffs",
+      "subtitle": "Workflow de Inicialização do Projeto",
+      "initialDescription": "Descrição Inicial do Projeto",
+      "generateVision": "Gerar Documento de Visão (DOM-02)",
+      "generateScaffold": "Gerar Scaffold dos Módulos (DOM-03)"
+    },
+    "visionDoc": {
+      "title": "Documento de Visão"
+    },
+    "archDoc": {
+      "title": "Documento de Arquitetura"
+    },
+    "docStatus": {
+      "pending": "Pendente",
+      "generating": "Gerando...",
+      "draft": "Rascunho",
+      "inReview": "Em Revisão",
+      "approved": "Aprovado",
+      "rejected": "Rejeitado"
+    },
+    "generatedBy": "Gerado por {{agent}}",
+    "reviewedBy": "Revisado por {{name}}",
+    "edit": "Editar",
+    "save": "Salvar",
+    "editSection": "Editar seção: {{title}}",
+    "editSectionContent": "Conteúdo da seção: {{title}}",
+    "approve": "Aprovar Documento",
+    "reject": "Solicitar Revisão",
+    "confirmReject": "Confirmar Rejeição",
+    "rejectComment": "Motivo da rejeição",
+    "rejectCommentPlaceholder": "Descreva o motivo da rejeição e as melhorias necessárias...",
+    "agentProcessing": {
+      "title": "Agente {{agent}} em processamento",
+      "generatingVision": "Gerando documento de visão a partir da descrição inicial...",
+      "generatingArchitecture": "Gerando documento de arquitetura com base na visão aprovada...",
+      "generatingScaffold": "Criando scaffold dos módulos conforme o documento de arquitetura..."
+    },
+    "archCheck": {
+      "title": "Verificação de Módulos e Blueprints",
+      "description": "O sistema verificará se o projeto possui os módulos e blueprints arquiteturais configurados antes de gerar o documento de arquitetura.",
+      "checking": "Verificando...",
+      "checkNow": "Verificar Agora",
+      "modules": "Módulos do projeto configurados",
+      "blueprints": "Blueprints arquiteturais atribuídos",
+      "missingTitle": "Itens pendentes de configuração",
+      "configureModules": "Configurar Módulos (Tarefa do Arquiteto)",
+      "proceed": "Prosseguir com Geração"
+    },
+    "scaffold": {
+      "title": "Scaffold dos Módulos",
+      "totalFiles": "{{count}} arquivos gerados no total",
+      "success": "Sucesso",
+      "error": "Erro",
+      "filesCount": "{{count}} arquivos"
+    },
+    "completed": {
+      "title": "Kickoff Concluído!",
+      "message": "O projeto \"{{name}}\" foi inicializado com sucesso. Todos os documentos foram aprovados e os módulos foram scaffolded.",
+      "goToProjects": "Ir para Projetos"
+    },
+    "tasks": {
+      "title": "Tarefas do Workflow",
+      "assignedTo": "Atribuído a {{name}}",
+      "roles": {
+        "po": "Product Owner",
+        "business-analyst": "Analista de Negócios",
+        "architect": "Arquiteto"
+      },
+      "status": {
+        "pending": "Pendente",
+        "in_progress": "Em Andamento",
+        "completed": "Concluída",
+        "blocked": "Bloqueada"
+      }
+    }
   }
 }

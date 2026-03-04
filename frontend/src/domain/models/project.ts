@@ -5,7 +5,7 @@
  * ────────────────────────────────────────────────────────── */
 
 /** Status do projeto */
-export type ProjectStatus = 'active' | 'configuring' | 'archived'
+export type ProjectStatus = 'pending' | 'active' | 'configuring' | 'archived'
 
 /** Papel do membro na equipe — lista extensível por tenant (§5 do brief) */
 export type MemberRole =

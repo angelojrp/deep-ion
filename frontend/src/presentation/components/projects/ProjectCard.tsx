@@ -22,6 +22,11 @@ interface ProjectCardProps {
 }
 
 const statusConfig: Record<ProjectStatus, { label: string; className: string; icon: typeof Activity }> = {
+  pending: {
+    label: 'projectsPage.status.pending',
+    className: 'bg-info-light text-info border-info-border',
+    icon: Activity,
+  },
   active: {
     label: 'projectsPage.status.active',
     className: 'bg-success-light text-success border-success-border',

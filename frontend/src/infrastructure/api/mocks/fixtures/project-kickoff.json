@@ -1,0 +1,209 @@
+{
+  "kickoffs": [
+    {
+      "id": "kickoff-001",
+      "projectId": "proj-005",
+      "projectName": "Sistema de Conciliação Automática",
+      "currentStep": "vision_review",
+      "initialDescription": "Sistema para conciliação automática de transações financeiras entre diferentes fontes de dados (extratos bancários, ERPs, gateways de pagamento). O sistema deve processar alto volume de transações diárias e gerar relatórios de divergências para análise humana.",
+      "visionDocument": {
+        "id": "vdoc-001",
+        "projectId": "proj-005",
+        "version": 1,
+        "status": "in_review",
+        "sections": [
+          {
+            "id": "vs-001",
+            "title": "Visão Geral",
+            "content": "O Sistema de Conciliação Automática é uma plataforma que automatiza o processo de reconciliação de transações financeiras entre múltiplas fontes de dados. A solução visa reduzir o tempo de conciliação de dias para minutos, eliminando erros manuais e proporcionando visibilidade em tempo real das divergências.\n\n**Problema atual:** A conciliação manual de transações entre extratos bancários, sistemas ERP e gateways de pagamento consome em média 3 dias úteis por mês e é suscetível a erros humanos.\n\n**Solução proposta:** Motor de conciliação baseado em regras configuráveis que processa automaticamente transações de múltiplas fontes, identifica correspondências e gera alertas para divergências que requerem análise humana.",
+            "order": 1
+          },
+          {
+            "id": "vs-002",
+            "title": "Objetivos de Negócio",
+            "content": "1. **Reduzir tempo de conciliação** — De 3 dias úteis para menos de 2 horas por ciclo\n2. **Eliminar erros manuais** — Automação de 95% das correspondências de transações\n3. **Visibilidade em tempo real** — Dashboard com status de conciliação e divergências\n4. **Auditoria completa** — Rastreabilidade de cada decisão de matching\n5. **Escalabilidade** — Suportar até 500 mil transações/dia por tenant",
+            "order": 2
+          },
+          {
+            "id": "vs-003",
+            "title": "Escopo Funcional",
+            "content": "### Módulo de Ingestão\n- Importação de extratos bancários (OFX, CSV, API)\n- Integração com ERPs (SAP, TOTVS, Oracle)\n- Conexão com gateways de pagamento (Adyen, Stripe, PagSeguro)\n\n### Motor de Conciliação\n- Regras de matching configuráveis por tenant\n- Matching exato, fuzzy e por intervalo de valores\n- Tolerância configurável para diferenças de centavos\n\n### Gestão de Divergências\n- Fila de análise para itens não conciliados\n- Workflow de aprovação para ajustes manuais\n- Classificação automática de tipos de divergência\n\n### Relatórios e Dashboard\n- Dashboard em tempo real com KPIs de conciliação\n- Relatórios de divergências por período, fonte e tipo\n- Exportação para Excel e PDF",
+            "order": 3
+          },
+          {
+            "id": "vs-004",
+            "title": "Stakeholders",
+            "content": "| Stakeholder | Papel | Interesse |\n|---|---|---|\n| Diretoria Financeira | Sponsor | ROI e redução de riscos operacionais |\n| Gerência de Tesouraria | Usuário-chave | Agilidade na conciliação diária |\n| Equipe de Contabilidade | Usuário | Redução de trabalho manual |\n| TI Corporativa | Suporte | Integrações e infraestrutura |\n| Auditoria Interna | Compliance | Rastreabilidade e controles |",
+            "order": 4
+          },
+          {
+            "id": "vs-005",
+            "title": "Restrições e Premissas",
+            "content": "**Restrições:**\n- Conformidade LGPD para dados financeiros\n- Dados não podem sair do território brasileiro\n- SLA de 99.9% de disponibilidade\n- Janela de processamento noturno de 4 horas\n\n**Premissas:**\n- Acesso às APIs dos bancos parceiros já negociado\n- Infraestrutura cloud (AWS) já disponível no tenant\n- Equipe de desenvolvimento alocada a partir de abril/2026",
+            "order": 5
+          }
+        ],
+        "generatedBy": "DOM-02",
+        "reviewedBy": null,
+        "reviewerRole": null,
+        "comments": [
+          {
+            "id": "rc-001",
+            "sectionId": "vs-003",
+            "author": "Ana Costa",
+            "authorRole": "business-analyst",
+            "content": "Sugiro incluir integração com o Banco Central (API PIX) como fonte de dados adicional.",
+            "resolved": false,
+            "createdAt": "2026-03-04T11:30:00Z"
+          }
+        ],
+        "createdAt": "2026-03-04T10:00:00Z",
+        "updatedAt": "2026-03-04T11:30:00Z"
+      },
+      "architectureCheck": null,
+      "architectureDocument": null,
+      "tasks": [
+        {
+          "id": "task-001",
+          "projectId": "proj-005",
+          "type": "review_vision",
+          "title": "Revisar documento de visão",
+          "description": "Analisar e refinar o documento de visão gerado pelo agente DOM-02 para o Sistema de Conciliação Automática.",
+          "assignedTo": "Ana Costa",
+          "assignedRole": "business-analyst",
+          "status": "in_progress",
+          "createdAt": "2026-03-04T10:05:00Z",
+          "completedAt": null
+        }
+      ],
+      "scaffoldResults": [],
+      "startedBy": "Maria Santos",
+      "startedAt": "2026-03-04T09:30:00Z",
+      "completedAt": null
+    },
+    {
+      "id": "kickoff-002",
+      "projectId": "proj-006",
+      "projectName": "Portal de Atendimento ao Cliente",
+      "currentStep": "architecture_review",
+      "initialDescription": "Portal web para atendimento ao cliente com chatbot IA, base de conhecimento, sistema de tickets e métricas de satisfação. Integração com CRM existente.",
+      "visionDocument": {
+        "id": "vdoc-002",
+        "projectId": "proj-006",
+        "version": 2,
+        "status": "approved",
+        "sections": [
+          {
+            "id": "vs-010",
+            "title": "Visão Geral",
+            "content": "Portal integrado de atendimento ao cliente que combina chatbot com IA generativa, base de conhecimento self-service e sistema de tickets para escalonamento humano. O objetivo é reduzir o volume de chamados em 40% e melhorar o NPS em 20 pontos.",
+            "order": 1
+          },
+          {
+            "id": "vs-011",
+            "title": "Objetivos de Negócio",
+            "content": "1. Reduzir chamados por telefone em 40%\n2. Melhorar NPS de 45 para 65 pontos\n3. Tempo médio de resolução < 4 horas\n4. Disponibilidade 24/7 via chatbot\n5. Base de conhecimento com 500+ artigos indexados",
+            "order": 2
+          }
+        ],
+        "generatedBy": "DOM-02",
+        "reviewedBy": "Patrícia Alves",
+        "reviewerRole": "business-analyst",
+        "comments": [],
+        "createdAt": "2026-03-01T08:00:00Z",
+        "updatedAt": "2026-03-02T14:00:00Z"
+      },
+      "architectureCheck": {
+        "hasModules": true,
+        "hasBlueprints": true,
+        "missingItems": [],
+        "ready": true
+      },
+      "architectureDocument": {
+        "id": "adoc-002",
+        "projectId": "proj-006",
+        "version": 1,
+        "status": "in_review",
+        "sections": [
+          {
+            "id": "as-001",
+            "title": "Visão Arquitetural",
+            "content": "Arquitetura baseada em microsserviços com API Gateway, composta por 3 módulos principais:\n\n1. **Frontend Web (React SPA)** — Portal do cliente e painel administrativo\n2. **Backend API (Modulith)** — APIs RESTful para tickets, base de conhecimento e métricas\n3. **Motor de IA (Python Agent)** — Chatbot com RAG sobre a base de conhecimento\n\nComunicação entre módulos via REST síncrono e eventos assíncronos (RabbitMQ).",
+            "order": 1
+          },
+          {
+            "id": "as-002",
+            "title": "Diagrama de Módulos",
+            "content": "```\n┌─────────────────┐     ┌──────────────────┐     ┌─────────────────┐\n│   Frontend Web  │────▶│  Backend API     │────▶│  Motor de IA    │\n│   (React SPA)   │     │  (Spring Boot)   │     │  (Python Agent) │\n└────────┬────────┘     └────────┬─────────┘     └────────┬────────┘\n         │                       │                         │\n         └───────────────────────┴─────────────────────────┘\n                            │\n                     ┌──────┴──────┐\n                     │  PostgreSQL │\n                     │  RabbitMQ   │\n                     └─────────────┘\n```",
+            "order": 2
+          },
+          {
+            "id": "as-003",
+            "title": "Decisões Arquiteturais",
+            "content": "| ADR | Decisão | Justificativa |\n|-----|---------|---------------|\n| ADR-001 | React SPA para frontend | Reutilização do blueprint existente, equipe capacitada |\n| ADR-002 | Modulith para backend | Complexidade moderada, deploy simplificado |\n| ADR-003 | Python Agent para IA | Ecossistema LangChain, RAG nativo |\n| ADR-004 | PostgreSQL para persistência | ACID compliance, suporte JSON nativo |\n| ADR-005 | RabbitMQ para eventos | Desacoplamento entre módulos, retry nativo |",
+            "order": 3
+          }
+        ],
+        "generatedBy": "DOM-03",
+        "reviewedBy": null,
+        "reviewerRole": null,
+        "comments": [],
+        "createdAt": "2026-03-02T15:00:00Z",
+        "updatedAt": "2026-03-02T15:00:00Z"
+      },
+      "tasks": [
+        {
+          "id": "task-002",
+          "projectId": "proj-006",
+          "type": "review_vision",
+          "title": "Revisar documento de visão",
+          "description": "Revisar o documento de visão do Portal de Atendimento.",
+          "assignedTo": "Patrícia Alves",
+          "assignedRole": "business-analyst",
+          "status": "completed",
+          "createdAt": "2026-03-01T08:05:00Z",
+          "completedAt": "2026-03-02T14:00:00Z"
+        },
+        {
+          "id": "task-003",
+          "projectId": "proj-006",
+          "type": "review_architecture",
+          "title": "Revisar documento de arquitetura",
+          "description": "Analisar e refinar o documento de arquitetura gerado pelo agente DOM-03.",
+          "assignedTo": "João Oliveira",
+          "assignedRole": "architect",
+          "status": "in_progress",
+          "createdAt": "2026-03-02T15:05:00Z",
+          "completedAt": null
+        }
+      ],
+      "scaffoldResults": [],
+      "startedBy": "Luciana Ferreira",
+      "startedAt": "2026-03-01T07:30:00Z",
+      "completedAt": null
+    }
+  ],
+  "pendingProjects": [
+    {
+      "id": "proj-005",
+      "name": "Sistema de Conciliação Automática",
+      "slug": "sistema-conciliacao-automatica",
+      "description": "",
+      "status": "pending"
+    },
+    {
+      "id": "proj-007",
+      "name": "Plataforma de Compliance LGPD",
+      "slug": "plataforma-compliance-lgpd",
+      "description": "",
+      "status": "pending"
+    },
+    {
+      "id": "proj-008",
+      "name": "Motor de Scoring de Crédito",
+      "slug": "motor-scoring-credito",
+      "description": "",
+      "status": "pending"
+    }
+  ]
+}

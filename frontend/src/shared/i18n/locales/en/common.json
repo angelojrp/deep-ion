@@ -10,8 +10,11 @@
     "uxDashboard": "UX Analyst",
     "tenants": "Tenants",
     "projects": "Projects",
+    "kickoff": "Start Project",
     "blueprints": "Blueprints",
     "users": "Users",
+    "agents": "AI Agents",
+    "pipelines": "Pipelines",
     "settings": "Settings",
     "chatbot": "AI Assistant",
     "sidebar": "Sidebar navigation",
@@ -627,6 +630,7 @@
     "updatedAt": "Updated at",
     "viewDetails": "View details",
     "status": {
+      "pending": "Pending",
       "active": "Active",
       "configuring": "Configuring",
       "archived": "Archived"
@@ -964,5 +968,332 @@
     "addExperience": "Add experience",
     "addEducation": "Add education",
     "addSocialLink": "Add link"
+  },
+  "pipelinesPage": {
+    "title": "Pipelines",
+    "subtitle": "AI agent pipeline configuration — global or per project",
+    "searchPlaceholder": "Search pipelines by name or project...",
+    "filterScope": "Filter by scope",
+    "filterStatus": "Filter by status",
+    "allScopes": "All scopes",
+    "allStatuses": "All statuses",
+    "createPipeline": "New Pipeline",
+    "openPipeline": "Open pipeline {{name}}",
+    "assignments": "assignments",
+    "domains": "domains",
+    "scope": {
+      "global": "Global",
+      "project": "Per Project"
+    },
+    "status": {
+      "active": "Active",
+      "draft": "Draft",
+      "archived": "Archived"
+    },
+    "form": {
+      "title": "Create New Pipeline",
+      "subtitle": "Configure basic pipeline information",
+      "name": "Pipeline Name",
+      "namePlaceholder": "E.g.: Financial Portal Pipeline",
+      "description": "Description",
+      "descriptionPlaceholder": "Describe the purpose and scope of the pipeline...",
+      "scope": "Scope",
+      "errors": {
+        "nameRequired": "Name is required",
+        "descriptionRequired": "Description is required",
+        "submitFailed": "Failed to create pipeline. Please try again."
+      }
+    },
+    "detail": {
+      "backToList": "Back to pipelines",
+      "tabs": {
+        "label": "Pipeline tabs",
+        "matrix": "Domain × Tier Matrix",
+        "tiers": "Tier Configuration",
+        "settings": "Information"
+      },
+      "matrixHelp": "Configure AI agents for each combination of domain (DOM-01 to DOM-05) and classification tier (T0 to T3). Click an empty cell to assign an agent or edit an existing assignment.",
+      "tiersHelp": "Classification criteria and SLA configuration for each pipeline tier.",
+      "domain": "Domain",
+      "assign": "Assign",
+      "addAssignment": "Assign agent for {{domain}} on tier {{tier}}",
+      "cost": "cost",
+      "autoApprove": "Auto-approve",
+      "criteria": "Classification Criteria",
+      "noCriteria": "No criteria defined — all demands are eligible.",
+      "generalInfo": "General Information",
+      "pipelineName": "Name",
+      "pipelineScope": "Scope",
+      "project": "Project",
+      "createdBy": "Created by",
+      "createdAt": "Created at",
+      "updatedAt": "Updated at",
+      "stats": "Summary",
+      "totalTiers": "Tiers",
+      "totalAssignments": "Assignments",
+      "domainsConfigured": "Domains configured",
+      "batchAgents": "Batch Agents",
+      "editor": {
+        "agent": "Agent",
+        "selectAgent": "Select agent...",
+        "noAgentsForDomain": "No agents registered for this domain. Register in AI Agents.",
+        "llmModel": "LLM Model",
+        "selectLlm": "Select model...",
+        "executionMode": "Execution Mode",
+        "batchWarning": "Batch mode saves ~{{savings}}% on token costs but adds processing delay. Ideal for less urgent tiers.",
+        "enabled": "Enabled",
+        "enable": "Enable",
+        "disable": "Disable"
+      }
+    }
+  },
+  "agentsPage": {
+    "title": "AI Agents",
+    "subtitle": "Manage intelligent agents by domain",
+    "searchPlaceholder": "Search agents by name, description or tag...",
+    "filterDomain": "Filter by domain",
+    "filterStatus": "Filter by status",
+    "allDomains": "All domains",
+    "allStatuses": "All statuses",
+    "createAgent": "New Agent",
+    "skills": "Skills",
+    "llms": "LLM Models",
+    "prompts": "Prompts",
+    "executions": "Executions",
+    "successRate": "Success rate",
+    "status": {
+      "active": "Active",
+      "inactive": "Inactive",
+      "error": "Error",
+      "maintenance": "Maintenance"
+    },
+    "autonomy": {
+      "full": "Autonomous",
+      "semi": "Semi-autonomous",
+      "assisted": "Assisted",
+      "none": "No autonomy"
+    },
+    "form": {
+      "title": "Create New Agent",
+      "subtitle": "Configure the basic information for the AI agent",
+      "domain": "Domain",
+      "name": "Agent Name",
+      "namePlaceholder": "E.g.: Discovery Agent v2",
+      "description": "Description",
+      "descriptionPlaceholder": "Describe the purpose and responsibilities of the agent...",
+      "autonomyLevel": "Autonomy Level",
+      "tags": "Tags",
+      "tagsPlaceholder": "E.g.: triage, classification, discovery",
+      "tagsHelp": "Separate by comma",
+      "errors": {
+        "nameRequired": "Name is required",
+        "descriptionRequired": "Description is required",
+        "submitFailed": "Failed to create agent. Please try again."
+      }
+    }
+  },
+  "agentDetail": {
+    "backToList": "Back to agents",
+    "tabs": {
+      "label": "Agent tabs",
+      "overview": "Overview",
+      "skills": "Skills",
+      "llms": "LLM Models",
+      "prompts": "Prompts",
+      "config": "Configuration"
+    },
+    "overview": {
+      "totalExecutions": "Total Executions",
+      "successRate": "Success Rate",
+      "skills": "Skills",
+      "llms": "LLM Models",
+      "metadata": "Metadata",
+      "createdBy": "Created by",
+      "createdAt": "Created at",
+      "updatedAt": "Updated at",
+      "lastActive": "Last active"
+    },
+    "skills": {
+      "empty": "No skills registered",
+      "enabled": "Enabled",
+      "disabled": "Disabled",
+      "trigger": "Trigger",
+      "timeout": "Timeout",
+      "confidence": "Min confidence",
+      "requiredTier": "LLM Tier",
+      "executionCount": "Executions",
+      "avgDuration": "Avg duration",
+      "lastExecuted": "Last executed",
+      "checks": "Checks",
+      "deterministic": "Deterministic",
+      "llmAssisted": "LLM-Assisted",
+      "blocking": "Blocking"
+    },
+    "llms": {
+      "empty": "No authorized LLM models",
+      "default": "Default",
+      "provider": "Provider",
+      "tier": "Tier",
+      "maxTokens": "Max tokens",
+      "temperature": "Temperature",
+      "costInput": "Input cost",
+      "costOutput": "Output cost"
+    },
+    "prompts": {
+      "empty": "No prompts registered",
+      "inactive": "Inactive",
+      "viewContent": "View prompt content",
+      "view": "View",
+      "hide": "Hide",
+      "variables": "Variables",
+      "content": "Content",
+      "created": "Created",
+      "updated": "Updated"
+    },
+    "config": {
+      "title": "Execution Configuration",
+      "maxConcurrentIssues": "Concurrent issues",
+      "maxRetries": "Max retries",
+      "cooldownSeconds": "Cooldown",
+      "autoEscalateAfterSeconds": "Auto-escalate after",
+      "retryOnFailure": "Retry on failure",
+      "notifications": "Notifications",
+      "yes": "Yes",
+      "no": "No"
+    }
+  },
+  "kickoff": {
+    "page": {
+      "title": "Start Project",
+      "subtitle": "Project kickoff workflow with AI agents"
+    },
+    "activeKickoffs": "Active Kickoffs",
+    "startNew": "Start New Project",
+    "emptyState": "No kickoffs in progress. Start a new project to begin.",
+    "startedBy": "Started by {{name}}",
+    "cancel": "Cancel",
+    "stepper": {
+      "label": "Kickoff steps"
+    },
+    "steps": {
+      "initialDescription": "Initial Description",
+      "visionGeneration": "Generating Vision",
+      "visionReview": "Vision Review",
+      "visionApproved": "Vision Approved",
+      "architectureCheck": "Architecture Check",
+      "architectureTask": "Architect Task",
+      "architectureGeneration": "Generating Architecture",
+      "architectureReview": "Architecture Review",
+      "architectureApproved": "Architecture Approved",
+      "scaffoldGeneration": "Generating Scaffold",
+      "completed": "Completed"
+    },
+    "newKickoff": {
+      "title": "Start New Project",
+      "selectProject": "Select a pending project",
+      "descriptionLabel": "Initial project description",
+      "descriptionPlaceholder": "Describe the objective, scope and main features of the project...",
+      "noPendingProjects": "No projects with pending status available. Register a new project below.",
+      "start": "Start Kickoff",
+      "starting": "Starting...",
+      "createProject": {
+        "title": "Register New Project",
+        "name": "Project name",
+        "namePlaceholder": "E.g.: ACME Financial Portal",
+        "slug": "Identifier (slug)",
+        "slugPlaceholder": "e.g.: acme-financial-portal",
+        "slugHelp": "Unique identifier. Use only lowercase letters, numbers and hyphens.",
+        "description": "Description",
+        "descriptionPlaceholder": "Briefly describe the project objective...",
+        "submit": "Register Project",
+        "submitting": "Registering...",
+        "success": "Project \"{{name}}\" registered successfully!",
+        "errors": {
+          "nameRequired": "Project name is required",
+          "slugRequired": "Identifier is required",
+          "slugInvalid": "Use only lowercase letters, numbers and hyphens",
+          "descriptionRequired": "Description is required"
+        }
+      }
+    },
+    "detail": {
+      "loading": "Loading kickoff...",
+      "error": "Error loading",
+      "notFound": "Kickoff not found for this project.",
+      "backToList": "Back to kickoffs",
+      "subtitle": "Project Initialization Workflow",
+      "initialDescription": "Initial Project Description",
+      "generateVision": "Generate Vision Document (DOM-02)",
+      "generateScaffold": "Generate Module Scaffold (DOM-03)"
+    },
+    "visionDoc": {
+      "title": "Vision Document"
+    },
+    "archDoc": {
+      "title": "Architecture Document"
+    },
+    "docStatus": {
+      "pending": "Pending",
+      "generating": "Generating...",
+      "draft": "Draft",
+      "inReview": "In Review",
+      "approved": "Approved",
+      "rejected": "Rejected"
+    },
+    "generatedBy": "Generated by {{agent}}",
+    "reviewedBy": "Reviewed by {{name}}",
+    "edit": "Edit",
+    "save": "Save",
+    "editSection": "Edit section: {{title}}",
+    "editSectionContent": "Section content: {{title}}",
+    "approve": "Approve Document",
+    "reject": "Request Revision",
+    "confirmReject": "Confirm Rejection",
+    "rejectComment": "Rejection reason",
+    "rejectCommentPlaceholder": "Describe the reason for rejection and necessary improvements...",
+    "agentProcessing": {
+      "title": "Agent {{agent}} processing",
+      "generatingVision": "Generating vision document from initial description...",
+      "generatingArchitecture": "Generating architecture document based on approved vision...",
+      "generatingScaffold": "Creating module scaffolds according to the architecture document..."
+    },
+    "archCheck": {
+      "title": "Modules & Blueprints Check",
+      "description": "The system will verify if the project has modules and architectural blueprints configured before generating the architecture document.",
+      "checking": "Checking...",
+      "checkNow": "Check Now",
+      "modules": "Project modules configured",
+      "blueprints": "Architectural blueprints assigned",
+      "missingTitle": "Pending configuration items",
+      "configureModules": "Configure Modules (Architect Task)",
+      "proceed": "Proceed with Generation"
+    },
+    "scaffold": {
+      "title": "Module Scaffolds",
+      "totalFiles": "{{count}} files generated in total",
+      "success": "Success",
+      "error": "Error",
+      "filesCount": "{{count}} files"
+    },
+    "completed": {
+      "title": "Kickoff Complete!",
+      "message": "Project \"{{name}}\" has been successfully initialized. All documents have been approved and modules have been scaffolded.",
+      "goToProjects": "Go to Projects"
+    },
+    "tasks": {
+      "title": "Workflow Tasks",
+      "assignedTo": "Assigned to {{name}}",
+      "roles": {
+        "po": "Product Owner",
+        "business-analyst": "Business Analyst",
+        "architect": "Architect"
+      },
+      "status": {
+        "pending": "Pending",
+        "in_progress": "In Progress",
+        "completed": "Completed",
+        "blocked": "Blocked"
+      }
+    }
   }
 }

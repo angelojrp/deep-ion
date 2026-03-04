@@ -1,0 +1,574 @@
+{
+  "pipelines": [
+    {
+      "id": "pipe-global-001",
+      "name": "Pipeline Global Padrão",
+      "description": "Configuração padrão do pipeline de agentes IA aplicada a todos os projetos sem pipeline específico.",
+      "scope": "global",
+      "projectId": null,
+      "projectName": null,
+      "status": "active",
+      "tiers": [
+        {
+          "tier": "T0",
+          "name": "Hotfix",
+          "description": "Correções críticas em produção — bypass de gates",
+          "color": "#ef4444",
+          "criteria": [
+            { "id": "crit-t0-1", "field": "labels", "operator": "contains", "value": "hotfix", "description": "Issue contém label 'hotfix'" },
+            { "id": "crit-t0-2", "field": "priority", "operator": "equals", "value": "critical", "description": "Prioridade é crítica" }
+          ],
+          "maxLeadTimeDays": 1,
+          "slaHours": 4,
+          "autoApproveGates": true
+        },
+        {
+          "tier": "T1",
+          "name": "Quick Win",
+          "description": "Ajustes simples sem impacto arquitetural",
+          "color": "#f59e0b",
+          "criteria": [
+            { "id": "crit-t1-1", "field": "story_points", "operator": "less_than", "value": "3", "description": "Story points menor que 3" },
+            { "id": "crit-t1-2", "field": "components_affected", "operator": "less_than", "value": "2", "description": "Menos de 2 componentes afetados" }
+          ],
+          "maxLeadTimeDays": 3,
+          "slaHours": 24,
+          "autoApproveGates": false
+        },
+        {
+          "tier": "T2",
+          "name": "Feature",
+          "description": "Funcionalidades com escopo definido e impacto moderado",
+          "color": "#3b82f6",
+          "criteria": [
+            { "id": "crit-t2-1", "field": "story_points", "operator": "less_than", "value": "13", "description": "Story points menor que 13" },
+            { "id": "crit-t2-2", "field": "has_architectural_impact", "operator": "equals", "value": "false", "description": "Sem impacto arquitetural" }
+          ],
+          "maxLeadTimeDays": 10,
+          "slaHours": 72,
+          "autoApproveGates": false
+        },
+        {
+          "tier": "T3",
+          "name": "Epic",
+          "description": "Entregas complexas, multi-sprint, com impacto arquitetural",
+          "color": "#8b5cf6",
+          "criteria": [
+            { "id": "crit-t3-1", "field": "story_points", "operator": "greater_than", "value": "13", "description": "Story points maior que 13" },
+            { "id": "crit-t3-2", "field": "has_architectural_impact", "operator": "equals", "value": "true", "description": "Possui impacto arquitetural" }
+          ],
+          "maxLeadTimeDays": 30,
+          "slaHours": 168,
+          "autoApproveGates": false
+        }
+      ],
+      "assignments": [
+        {
+          "id": "assign-g-dom01-t0",
+          "domainId": "DOM-01",
+          "tier": "T0",
+          "agentId": "agent-dom01-disc",
+          "agentName": "Discovery Classifier",
+          "agentSlug": "discovery-classifier",
+          "llmConfig": {
+            "id": "llm-cfg-1",
+            "provider": "openai",
+            "modelId": "gpt-4.1-mini",
+            "displayName": "GPT-4.1 Mini",
+            "costPer1kInput": 0.00015,
+            "costPer1kOutput": 0.0006
+          },
+          "executionMode": "realtime",
+          "enabled": true
+        },
+        {
+          "id": "assign-g-dom01-t1",
+          "domainId": "DOM-01",
+          "tier": "T1",
+          "agentId": "agent-dom01-disc",
+          "agentName": "Discovery Classifier",
+          "agentSlug": "discovery-classifier",
+          "llmConfig": {
+            "id": "llm-cfg-2",
+            "provider": "openai",
+            "modelId": "gpt-4.1-mini",
+            "displayName": "GPT-4.1 Mini",
+            "costPer1kInput": 0.00015,
+            "costPer1kOutput": 0.0006
+          },
+          "executionMode": "realtime",
+          "enabled": true
+        },
+        {
+          "id": "assign-g-dom01-t2",
+          "domainId": "DOM-01",
+          "tier": "T2",
+          "agentId": "agent-dom01-disc",
+          "agentName": "Discovery Classifier",
+          "agentSlug": "discovery-classifier",
+          "llmConfig": {
+            "id": "llm-cfg-3",
+            "provider": "anthropic",
+            "modelId": "claude-sonnet-4",
+            "displayName": "Claude Sonnet 4",
+            "costPer1kInput": 0.003,
+            "costPer1kOutput": 0.015
+          },
+          "executionMode": "batch",
+          "enabled": true
+        },
+        {
+          "id": "assign-g-dom01-t3",
+          "domainId": "DOM-01",
+          "tier": "T3",
+          "agentId": "agent-dom01-disc",
+          "agentName": "Discovery Classifier",
+          "agentSlug": "discovery-classifier",
+          "llmConfig": {
+            "id": "llm-cfg-4",
+            "provider": "anthropic",
+            "modelId": "claude-opus-4",
+            "displayName": "Claude Opus 4",
+            "costPer1kInput": 0.015,
+            "costPer1kOutput": 0.075
+          },
+          "executionMode": "batch",
+          "enabled": true
+        },
+        {
+          "id": "assign-g-dom02-t1",
+          "domainId": "DOM-02",
+          "tier": "T1",
+          "agentId": "agent-dom02-req",
+          "agentName": "Requirements Analyst",
+          "agentSlug": "requirements-analyst",
+          "llmConfig": {
+            "id": "llm-cfg-5",
+            "provider": "openai",
+            "modelId": "gpt-4.1-mini",
+            "displayName": "GPT-4.1 Mini",
+            "costPer1kInput": 0.00015,
+            "costPer1kOutput": 0.0006
+          },
+          "executionMode": "realtime",
+          "enabled": true
+        },
+        {
+          "id": "assign-g-dom02-t2",
+          "domainId": "DOM-02",
+          "tier": "T2",
+          "agentId": "agent-dom02-req",
+          "agentName": "Requirements Analyst",
+          "agentSlug": "requirements-analyst",
+          "llmConfig": {
+            "id": "llm-cfg-6",
+            "provider": "anthropic",
+            "modelId": "claude-sonnet-4",
+            "displayName": "Claude Sonnet 4",
+            "costPer1kInput": 0.003,
+            "costPer1kOutput": 0.015
+          },
+          "executionMode": "batch",
+          "enabled": true
+        },
+        {
+          "id": "assign-g-dom02-t3",
+          "domainId": "DOM-02",
+          "tier": "T3",
+          "agentId": "agent-dom02-req",
+          "agentName": "Requirements Analyst",
+          "agentSlug": "requirements-analyst",
+          "llmConfig": {
+            "id": "llm-cfg-7",
+            "provider": "anthropic",
+            "modelId": "claude-opus-4",
+            "displayName": "Claude Opus 4",
+            "costPer1kInput": 0.015,
+            "costPer1kOutput": 0.075
+          },
+          "executionMode": "batch",
+          "enabled": true
+        },
+        {
+          "id": "assign-g-dom03-t2",
+          "domainId": "DOM-03",
+          "tier": "T2",
+          "agentId": "agent-dom03-arch",
+          "agentName": "Architecture Advisor",
+          "agentSlug": "architecture-advisor",
+          "llmConfig": {
+            "id": "llm-cfg-8",
+            "provider": "anthropic",
+            "modelId": "claude-sonnet-4",
+            "displayName": "Claude Sonnet 4",
+            "costPer1kInput": 0.003,
+            "costPer1kOutput": 0.015
+          },
+          "executionMode": "batch",
+          "enabled": true
+        },
+        {
+          "id": "assign-g-dom03-t3",
+          "domainId": "DOM-03",
+          "tier": "T3",
+          "agentId": "agent-dom03-arch",
+          "agentName": "Architecture Advisor",
+          "agentSlug": "architecture-advisor",
+          "llmConfig": {
+            "id": "llm-cfg-9",
+            "provider": "anthropic",
+            "modelId": "claude-opus-4",
+            "displayName": "Claude Opus 4",
+            "costPer1kInput": 0.015,
+            "costPer1kOutput": 0.075
+          },
+          "executionMode": "batch",
+          "enabled": true
+        },
+        {
+          "id": "assign-g-dom04-t1",
+          "domainId": "DOM-04",
+          "tier": "T1",
+          "agentId": "agent-dom04-dev",
+          "agentName": "Dev Implementer",
+          "agentSlug": "dev-implementer",
+          "llmConfig": {
+            "id": "llm-cfg-10",
+            "provider": "openai",
+            "modelId": "gpt-4.1-mini",
+            "displayName": "GPT-4.1 Mini",
+            "costPer1kInput": 0.00015,
+            "costPer1kOutput": 0.0006
+          },
+          "executionMode": "realtime",
+          "enabled": true
+        },
+        {
+          "id": "assign-g-dom04-t2",
+          "domainId": "DOM-04",
+          "tier": "T2",
+          "agentId": "agent-dom04-dev",
+          "agentName": "Dev Implementer",
+          "agentSlug": "dev-implementer",
+          "llmConfig": {
+            "id": "llm-cfg-11",
+            "provider": "anthropic",
+            "modelId": "claude-sonnet-4",
+            "displayName": "Claude Sonnet 4",
+            "costPer1kInput": 0.003,
+            "costPer1kOutput": 0.015
+          },
+          "executionMode": "batch",
+          "enabled": true
+        },
+        {
+          "id": "assign-g-dom04-t3",
+          "domainId": "DOM-04",
+          "tier": "T3",
+          "agentId": "agent-dom04-dev",
+          "agentName": "Dev Implementer",
+          "agentSlug": "dev-implementer",
+          "llmConfig": {
+            "id": "llm-cfg-12",
+            "provider": "anthropic",
+            "modelId": "claude-opus-4",
+            "displayName": "Claude Opus 4",
+            "costPer1kInput": 0.015,
+            "costPer1kOutput": 0.075
+          },
+          "executionMode": "batch",
+          "enabled": true
+        },
+        {
+          "id": "assign-g-dom05-t1",
+          "domainId": "DOM-05",
+          "tier": "T1",
+          "agentId": "agent-dom05-qa",
+          "agentName": "QA Validator",
+          "agentSlug": "qa-validator",
+          "llmConfig": {
+            "id": "llm-cfg-13",
+            "provider": "openai",
+            "modelId": "gpt-4.1-mini",
+            "displayName": "GPT-4.1 Mini",
+            "costPer1kInput": 0.00015,
+            "costPer1kOutput": 0.0006
+          },
+          "executionMode": "realtime",
+          "enabled": true
+        },
+        {
+          "id": "assign-g-dom05-t2",
+          "domainId": "DOM-05",
+          "tier": "T2",
+          "agentId": "agent-dom05-qa",
+          "agentName": "QA Validator",
+          "agentSlug": "qa-validator",
+          "llmConfig": {
+            "id": "llm-cfg-14",
+            "provider": "anthropic",
+            "modelId": "claude-sonnet-4",
+            "displayName": "Claude Sonnet 4",
+            "costPer1kInput": 0.003,
+            "costPer1kOutput": 0.015
+          },
+          "executionMode": "batch",
+          "enabled": true
+        },
+        {
+          "id": "assign-g-dom05-t3",
+          "domainId": "DOM-05",
+          "tier": "T3",
+          "agentId": "agent-dom05-qa",
+          "agentName": "QA Validator",
+          "agentSlug": "qa-validator",
+          "llmConfig": {
+            "id": "llm-cfg-15",
+            "provider": "anthropic",
+            "modelId": "claude-opus-4",
+            "displayName": "Claude Opus 4",
+            "costPer1kInput": 0.015,
+            "costPer1kOutput": 0.075
+          },
+          "executionMode": "batch",
+          "enabled": true
+        }
+      ],
+      "createdAt": "2026-01-10T10:00:00Z",
+      "updatedAt": "2026-03-03T14:30:00Z",
+      "createdBy": "Platform Admin"
+    },
+    {
+      "id": "pipe-proj-001",
+      "name": "Pipeline Portal Financeiro",
+      "description": "Pipeline customizado para o projeto Portal Financeiro ACME com agentes especializados em fintech.",
+      "scope": "project",
+      "projectId": "proj-001",
+      "projectName": "Portal Financeiro ACME",
+      "status": "active",
+      "tiers": [
+        {
+          "tier": "T0",
+          "name": "Hotfix Financeiro",
+          "description": "Correções em fluxos financeiros críticos — processo emergencial",
+          "color": "#ef4444",
+          "criteria": [
+            { "id": "crit-p-t0-1", "field": "labels", "operator": "contains", "value": "hotfix-financeiro", "description": "Label 'hotfix-financeiro'" },
+            { "id": "crit-p-t0-2", "field": "affects_transactions", "operator": "equals", "value": "true", "description": "Afeta transações financeiras" }
+          ],
+          "maxLeadTimeDays": 1,
+          "slaHours": 2,
+          "autoApproveGates": true
+        },
+        {
+          "tier": "T1",
+          "name": "Ajuste de Regra",
+          "description": "Alterações em regras de negócio sem novo fluxo",
+          "color": "#f59e0b",
+          "criteria": [
+            { "id": "crit-p-t1-1", "field": "story_points", "operator": "less_than", "value": "3", "description": "Story points menor que 3" }
+          ],
+          "maxLeadTimeDays": 3,
+          "slaHours": 16,
+          "autoApproveGates": false
+        },
+        {
+          "tier": "T2",
+          "name": "Nova Funcionalidade",
+          "description": "Feature financeira com escopo definido",
+          "color": "#3b82f6",
+          "criteria": [
+            { "id": "crit-p-t2-1", "field": "story_points", "operator": "less_than", "value": "13", "description": "Story points menor que 13" }
+          ],
+          "maxLeadTimeDays": 10,
+          "slaHours": 48,
+          "autoApproveGates": false
+        },
+        {
+          "tier": "T3",
+          "name": "Módulo Financeiro",
+          "description": "Novo módulo completo com impacto em integrações",
+          "color": "#8b5cf6",
+          "criteria": [
+            { "id": "crit-p-t3-1", "field": "story_points", "operator": "greater_than", "value": "13", "description": "Story points maior que 13" }
+          ],
+          "maxLeadTimeDays": 20,
+          "slaHours": 120,
+          "autoApproveGates": false
+        }
+      ],
+      "assignments": [
+        {
+          "id": "assign-p-dom01-t0",
+          "domainId": "DOM-01",
+          "tier": "T0",
+          "agentId": "agent-dom01-disc",
+          "agentName": "Discovery Classifier",
+          "agentSlug": "discovery-classifier",
+          "llmConfig": {
+            "id": "llm-pcfg-1",
+            "provider": "openai",
+            "modelId": "gpt-4.1-mini",
+            "displayName": "GPT-4.1 Mini",
+            "costPer1kInput": 0.00015,
+            "costPer1kOutput": 0.0006
+          },
+          "executionMode": "realtime",
+          "enabled": true
+        },
+        {
+          "id": "assign-p-dom04-t2",
+          "domainId": "DOM-04",
+          "tier": "T2",
+          "agentId": "agent-dom04-dev",
+          "agentName": "Dev Implementer",
+          "agentSlug": "dev-implementer",
+          "llmConfig": {
+            "id": "llm-pcfg-2",
+            "provider": "anthropic",
+            "modelId": "claude-sonnet-4",
+            "displayName": "Claude Sonnet 4",
+            "costPer1kInput": 0.003,
+            "costPer1kOutput": 0.015
+          },
+          "executionMode": "realtime",
+          "enabled": true
+        },
+        {
+          "id": "assign-p-dom05-t2",
+          "domainId": "DOM-05",
+          "tier": "T2",
+          "agentId": "agent-dom05-qa",
+          "agentName": "QA Validator",
+          "agentSlug": "qa-validator",
+          "llmConfig": {
+            "id": "llm-pcfg-3",
+            "provider": "anthropic",
+            "modelId": "claude-sonnet-4",
+            "displayName": "Claude Sonnet 4",
+            "costPer1kInput": 0.003,
+            "costPer1kOutput": 0.015
+          },
+          "executionMode": "batch",
+          "enabled": true
+        }
+      ],
+      "createdAt": "2026-02-01T14:00:00Z",
+      "updatedAt": "2026-03-02T16:45:00Z",
+      "createdBy": "Maria Santos"
+    },
+    {
+      "id": "pipe-proj-002",
+      "name": "Pipeline App Mobile",
+      "description": "Pipeline do projeto App Mobile Vendas — em configuração inicial.",
+      "scope": "project",
+      "projectId": "proj-002",
+      "projectName": "App Mobile Vendas",
+      "status": "draft",
+      "tiers": [
+        {
+          "tier": "T0",
+          "name": "Hotfix",
+          "description": "Correções críticas",
+          "color": "#ef4444",
+          "criteria": [],
+          "maxLeadTimeDays": 1,
+          "slaHours": 4,
+          "autoApproveGates": true
+        },
+        {
+          "tier": "T1",
+          "name": "Quick Win",
+          "description": "Ajustes simples",
+          "color": "#f59e0b",
+          "criteria": [],
+          "maxLeadTimeDays": 3,
+          "slaHours": 24,
+          "autoApproveGates": false
+        },
+        {
+          "tier": "T2",
+          "name": "Feature",
+          "description": "Funcionalidades médias",
+          "color": "#3b82f6",
+          "criteria": [],
+          "maxLeadTimeDays": 10,
+          "slaHours": 72,
+          "autoApproveGates": false
+        },
+        {
+          "tier": "T3",
+          "name": "Epic",
+          "description": "Entregas complexas",
+          "color": "#8b5cf6",
+          "criteria": [],
+          "maxLeadTimeDays": 30,
+          "slaHours": 168,
+          "autoApproveGates": false
+        }
+      ],
+      "assignments": [],
+      "createdAt": "2026-03-01T10:00:00Z",
+      "updatedAt": "2026-03-01T10:00:00Z",
+      "createdBy": "João Oliveira"
+    }
+  ],
+  "availableLlms": [
+    {
+      "provider": "openai",
+      "modelId": "gpt-4.1-mini",
+      "displayName": "GPT-4.1 Mini",
+      "costPer1kInput": 0.00015,
+      "costPer1kOutput": 0.0006
+    },
+    {
+      "provider": "openai",
+      "modelId": "gpt-4.1",
+      "displayName": "GPT-4.1",
+      "costPer1kInput": 0.002,
+      "costPer1kOutput": 0.008
+    },
+    {
+      "provider": "openai",
+      "modelId": "o3-mini",
+      "displayName": "o3-mini",
+      "costPer1kInput": 0.0011,
+      "costPer1kOutput": 0.0044
+    },
+    {
+      "provider": "anthropic",
+      "modelId": "claude-haiku-3.5",
+      "displayName": "Claude 3.5 Haiku",
+      "costPer1kInput": 0.0008,
+      "costPer1kOutput": 0.004
+    },
+    {
+      "provider": "anthropic",
+      "modelId": "claude-sonnet-4",
+      "displayName": "Claude Sonnet 4",
+      "costPer1kInput": 0.003,
+      "costPer1kOutput": 0.015
+    },
+    {
+      "provider": "anthropic",
+      "modelId": "claude-opus-4",
+      "displayName": "Claude Opus 4",
+      "costPer1kInput": 0.015,
+      "costPer1kOutput": 0.075
+    },
+    {
+      "provider": "google",
+      "modelId": "gemini-2.5-flash",
+      "displayName": "Gemini 2.5 Flash",
+      "costPer1kInput": 0.00015,
+      "costPer1kOutput": 0.0006
+    },
+    {
+      "provider": "google",
+      "modelId": "gemini-2.5-pro",
+      "displayName": "Gemini 2.5 Pro",
+      "costPer1kInput": 0.00125,
+      "costPer1kOutput": 0.01
+    }
+  ]
+}

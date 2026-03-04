@@ -46,6 +46,21 @@ const UserProfilePage = lazy(() =>
 const NotFoundPage = lazy(() =>
   import('@presentation/pages/NotFoundPage').then((m) => ({ default: m.NotFoundPage })),
 )
+const AgentsPage = lazy(() =>
+  import('@presentation/pages/AgentsPage').then((m) => ({ default: m.AgentsPage })),
+)
+const AgentDetailPage = lazy(() =>
+  import('@presentation/pages/AgentDetailPage').then((m) => ({ default: m.AgentDetailPage })),
+)
+const PipelinesPage = lazy(() =>
+  import('@presentation/pages/PipelinesPage').then((m) => ({ default: m.PipelinesPage })),
+)
+const ProjectKickoffPage = lazy(() =>
+  import('@presentation/pages/ProjectKickoffPage').then((m) => ({ default: m.ProjectKickoffPage })),
+)
+const ProjectKickoffDetailPage = lazy(() =>
+  import('@presentation/pages/ProjectKickoffDetailPage').then((m) => ({ default: m.ProjectKickoffDetailPage })),
+)
 
 function LoadingFallback() {
   const { t } = useTranslation()
@@ -133,6 +148,22 @@ const router = createBrowserRouter([
         ),
       },
       {
+        path: ROUTES.PROJECT_KICKOFF,
+        element: (
+          <Suspense fallback={<LoadingFallback />}>
+            <ProjectKickoffPage />
+          </Suspense>
+        ),
+      },
+      {
+        path: ROUTES.PROJECT_KICKOFF_DETAIL,
+        element: (
+          <Suspense fallback={<LoadingFallback />}>
+            <ProjectKickoffDetailPage />
+          </Suspense>
+        ),
+      },
+      {
         path: ROUTES.BLUEPRINTS,
         element: (
           <Suspense fallback={<LoadingFallback />}>
@@ -161,6 +192,30 @@ const router = createBrowserRouter([
         element: (
           <Suspense fallback={<LoadingFallback />}>
             <UsersPage />
+          </Suspense>
+        ),
+      },
+      {
+        path: ROUTES.AGENTS,
+        element: (
+          <Suspense fallback={<LoadingFallback />}>
+            <AgentsPage />
+          </Suspense>
+        ),
+      },
+      {
+        path: ROUTES.AGENT_DETAIL,
+        element: (
+          <Suspense fallback={<LoadingFallback />}>
+            <AgentDetailPage />
+          </Suspense>
+        ),
+      },
+      {
+        path: ROUTES.PIPELINES,
+        element: (
+          <Suspense fallback={<LoadingFallback />}>
+            <PipelinesPage />
           </Suspense>
         ),
       },
