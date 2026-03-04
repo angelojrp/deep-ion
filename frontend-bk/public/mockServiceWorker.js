@@ -1,0 +1,1 @@
+/* Mock Service Worker placeholder. Run `npm run msw:init` to refresh this file. */

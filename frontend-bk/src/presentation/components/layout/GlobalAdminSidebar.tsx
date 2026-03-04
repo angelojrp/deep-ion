@@ -1,0 +1,1 @@
+export const GlobalAdminSidebar = (): JSX.Element => <aside className="rounded border p-3">Admin sidebar</aside>

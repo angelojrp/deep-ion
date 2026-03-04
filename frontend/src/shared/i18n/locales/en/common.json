@@ -1,0 +1,968 @@
+{
+  "app": {
+    "name": "deep-ion",
+    "description": "AI agents platform for software development lifecycle"
+  },
+  "nav": {
+    "dashboard": "Dashboard",
+    "baDashboard": "Business Analyst",
+    "raDashboard": "Requirements Analyst",
+    "uxDashboard": "UX Analyst",
+    "tenants": "Tenants",
+    "projects": "Projects",
+    "blueprints": "Blueprints",
+    "users": "Users",
+    "settings": "Settings",
+    "chatbot": "AI Assistant",
+    "sidebar": "Sidebar navigation",
+    "menu": "Menu"
+  },
+  "header": {
+    "toggleSidebar": "Toggle sidebar",
+    "toggleDarkMode": "Toggle dark mode",
+    "searchPlaceholder": "Search or type a command...",
+    "notifications": "Notifications",
+    "newNotifications": "New notifications",
+    "userMenu": "User menu",
+    "profile": "My Profile",
+    "logout": "Log Out",
+    "role": "Administrator"
+  },
+  "pages": {
+    "dashboard": {
+      "title": "Dashboard",
+      "subtitle": "Platform overview"
+    },
+    "tenants": {
+      "title": "Tenants",
+      "subtitle": "Organization management"
+    },
+    "projects": {
+      "title": "Projects",
+      "subtitle": "Project management"
+    },
+    "settings": {
+      "title": "Settings",
+      "subtitle": "Platform settings"
+    },
+    "notFound": {
+      "title": "Page not found",
+      "description": "The page you are looking for does not exist or has been removed.",
+      "backHome": "Back to home"
+    }
+  },
+  "common": {
+    "loading": "Loading...",
+    "error": "An error occurred",
+    "retry": "Try again",
+    "save": "Save",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "edit": "Edit",
+    "create": "Create",
+    "search": "Search",
+    "filter": "Filter",
+    "noResults": "No results found",
+    "confirm": "Confirm",
+    "close": "Close"
+  },
+  "poDashboard": {
+    "pageTitle": "Product Owner Dashboard",
+    "pageSubtitle": "Market View — Real-time value flow and risk",
+    "lastUpdated": "Last updated",
+    "kpi": {
+      "activeDemands": "Active Demands",
+      "blocked": "Blocked",
+      "flowEfficiency": "Flow Efficiency",
+      "leadTime": "Lead Time",
+      "predictability": "Predictability",
+      "compliance": "Audit"
+    },
+    "pipeline": {
+      "title": "Value Pipeline",
+      "blocked": "{{count}} blocked",
+      "more": "more",
+      "stages": {
+        "discovery": "Discovery",
+        "analysis": "Analysis",
+        "gate-1": "Gate 1",
+        "gate-2": "Gate 2",
+        "development": "Development",
+        "gate-3": "Gate 3",
+        "gate-4": "Gate 4",
+        "done": "Done"
+      }
+    },
+    "delivery": {
+      "title": "Delivery Velocity",
+      "cycleTime": "Cycle Time by Tier",
+      "target": "Target",
+      "leadTime": "Lead Time",
+      "leadTimeBench": "Market: 5–12d",
+      "flowEfficiency": "Flow Efficiency",
+      "aboveTarget": "Above target (>40%)",
+      "belowTarget": "Below target (<40%)",
+      "predictability": "Predictability",
+      "throughput": "Throughput",
+      "perWeek": "demands/week",
+      "throughputTrend": "Weekly Trend",
+      "started": "Started",
+      "completed": "Completed"
+    },
+    "backlog": {
+      "title": "Backlog Health",
+      "active": "Active",
+      "blocked": "Blocked",
+      "tierDistribution": "Tier Distribution",
+      "wip": "WIP",
+      "moscowDistribution": "MoSCoW Distribution",
+      "moscow": {
+        "must": "Must",
+        "should": "Should",
+        "could": "Could",
+        "wont": "Won't"
+      },
+      "ageByStage": "Average Age by Stage"
+    },
+    "quality": {
+      "title": "Business Quality",
+      "briefPassRate": "Briefs → Gate 2 without block",
+      "confidenceScore": "Confidence Score (CAL)",
+      "gherkinComplete": "Gherkin Criteria complete",
+      "traceability": "Traceability Coverage",
+      "reworkRate": "Rework Rate",
+      "target": "Target",
+      "openQuestions": "{{count}} open questions (QA-NN) unanswered"
+    },
+    "valueEffort": {
+      "title": "Value vs. Effort (WSJF)",
+      "description": "Relative position: size = tier complexity, position = value × effort",
+      "highValue": "↑ High Value",
+      "lowValue": "↓ Low Value",
+      "highEffort": "High Effort →",
+      "lowEffort": "← Low Effort",
+      "quickWins": "Quick Wins",
+      "strategic": "Strategic",
+      "fillIns": "Fill-ins",
+      "avoid": "Avoid",
+      "blocked": "Blocked"
+    },
+    "compliance": {
+      "title": "Compliance & Risks",
+      "lgpdFlags": "Active LGPD Flags",
+      "auditedRecords": "Audited DecisionRecords",
+      "rnViolations": "Undetected RN Violations",
+      "t3Pending": "T3 human gate > 48h",
+      "archViolations": "Architectural Violations",
+      "businessRisks": "Business Risks",
+      "probability": "Prob.",
+      "status": {
+        "active": "Active",
+        "mitigated": "Mitigated",
+        "monitoring": "Monitoring"
+      },
+      "dependencies": "External Dependencies"
+    },
+    "roadmap": {
+      "title": "Roadmap Progress",
+      "target": "Target",
+      "onTrack": "On track",
+      "atRisk": "At risk",
+      "weeksRemaining": "Weeks remaining",
+      "avgThroughput": "Avg throughput/week",
+      "businessDebt": "Business debt"
+    }
+  },
+  "baDashboard": {
+    "pageTitle": "Business Analyst Dashboard",
+    "pageSubtitle": "USR-07 — Business artifacts, discovery and backlog health",
+    "lastUpdated": "Last updated",
+    "kpi": {
+      "totalBriefs": "Total Briefs",
+      "briefsFinal": "FINAL Briefs",
+      "inDiscovery": "In Discovery",
+      "stuckDemands": "Stuck",
+      "pendingEscalations": "Escalations",
+      "backlogAge": "Backlog Age"
+    },
+    "alerts": {
+      "title": "Alerts"
+    },
+    "filters": {
+      "title": "Filters",
+      "toggle": "Show/hide filters",
+      "project": "Project",
+      "tier": "Classification",
+      "briefStatus": "Brief Status",
+      "allProjects": "All projects",
+      "allTiers": "All classifications",
+      "allStatuses": "All statuses"
+    },
+    "briefs": {
+      "title": "Briefs & Vision",
+      "distribution": "Briefs distribution",
+      "status": {
+        "draft": "Draft",
+        "final": "Final",
+        "refining": "Refining"
+      },
+      "avgRefinementCycles": "Avg refinement cycles",
+      "avgDaysInDraft": "Avg days in DRAFT",
+      "openQuestions": "Briefs with open questions",
+      "completeness": "Completeness",
+      "cycles": "Cycles",
+      "rejected": "Gate 2 Rejected",
+      "pendingVisionDocs": "Pending Vision Documents"
+    },
+    "pipeline": {
+      "title": "Discovery Pipeline",
+      "stuckAlert": "{{count}} demand(s) stuck > 5 business days",
+      "avgTimeByPhase": "Average time by phase",
+      "throughput": "Discovery Throughput",
+      "entered": "Entered",
+      "exited": "Exited"
+    },
+    "quality": {
+      "title": "Artifact Quality",
+      "avgCompleteness": "Average brief completeness",
+      "reworkRate": "Rework rate",
+      "target": "Target",
+      "gate2Rejected": "Gate 2 Rejected",
+      "lastAudit": "DOM-05a Audit Results",
+      "completenessLabel": "Completeness",
+      "consistencyLabel": "Consistency"
+    },
+    "impact": {
+      "title": "Impact Classification (T0–T3)",
+      "distribution": "Distribution by classification",
+      "trend": "Trend over time",
+      "month": "Month",
+      "activeT3": "Active T3 Demands"
+    },
+    "escalations": {
+      "title": "Escalations & Confidence Score",
+      "pending": "Pending",
+      "resolved": "Resolved",
+      "avgTime": "Avg time",
+      "lowConfidence": "Confidence < 0.65",
+      "byProject": "Escalations by project"
+    },
+    "backlog": {
+      "title": "Backlog Health",
+      "avgAge": "Average age",
+      "stale": "No movement",
+      "staleDemands": "Demands without movement > 2 sprints",
+      "duplicates": "Duplicates detected",
+      "duplicateOf": "Duplicate of",
+      "inactiveStakeholders": "Inactive stakeholders"
+    },
+    "quickActions": {
+      "title": "Quick Actions",
+      "newBrief": "Create new brief",
+      "refineBrief": "Refine DRAFT brief",
+      "createVision": "Create project vision",
+      "viewQuestions": "View open questions",
+      "escalate": "Escalate demand"
+    }
+  },
+  "raDashboard": {
+    "pageTitle": "Requirements Analyst Dashboard",
+    "pageSubtitle": "USR-08 — Traceability, specification quality and requirements debt",
+    "lastUpdated": "Last updated",
+    "kpi": {
+      "totalUCs": "Use Cases",
+      "totalRNs": "Business Rules",
+      "traceability": "Traceability",
+      "investScore": "INVEST Score",
+      "gate2Approval": "Gate 2",
+      "debtIndex": "Debt"
+    },
+    "alerts": {
+      "title": "Alerts"
+    },
+    "filters": {
+      "title": "Filters",
+      "toggle": "Show/hide filters",
+      "project": "Project",
+      "module": "Module",
+      "ucStatus": "UC Status",
+      "allProjects": "All projects",
+      "allModules": "All modules",
+      "allStatuses": "All statuses"
+    },
+    "useCases": {
+      "title": "Use Cases",
+      "distribution": "UC distribution by status",
+      "status": {
+        "draft": "Draft",
+        "validated": "Validated",
+        "implemented": "Implemented",
+        "archived": "Archived"
+      },
+      "avgModelingDays": "Avg modeling time",
+      "modules": "Modules",
+      "byModule": "UCs by module",
+      "withoutRN": "{{count}} UCs without business rule",
+      "withoutGherkin": "UCs without Gherkin criteria",
+      "recentlyModified": "Recently modified"
+    },
+    "businessRules": {
+      "title": "Business Rules",
+      "total": "Total",
+      "status": {
+        "active": "Active",
+        "deprecated": "Deprecated",
+        "inReview": "In Review"
+      },
+      "byModule": "BRs by module",
+      "withoutFE": "{{count}} BRs without exception flow",
+      "orphaned": "{{count}} orphaned BRs (no UC)",
+      "contradictions": "{{count}} contradiction(s)"
+    },
+    "traceability": {
+      "title": "Traceability",
+      "coverage": "Traceability coverage",
+      "brokenLinks": "Broken links",
+      "brokenLinksTitle": "Broken traceability links",
+      "byModule": "Coverage by module",
+      "matrix": "Traceability Matrix",
+      "uc": "UC",
+      "rn": "BR",
+      "criteria": "Criteria",
+      "code": "Code",
+      "statusLabel": "Status"
+    },
+    "specQuality": {
+      "title": "Specification Quality",
+      "investScore": "INVEST",
+      "refined": "Refined",
+      "belowThreshold": "Score < 7",
+      "refinementProgress": "Refinement progress",
+      "gherkinCoverage": "Gherkin coverage by module",
+      "storiesBelowTitle": "Stories below threshold score",
+      "vagueCriteria": "Vague acceptance criteria"
+    },
+    "audit": {
+      "title": "DOM-05a Audit",
+      "gate2Approval": "Gate 2 approval rate",
+      "lastResult": "Last audit result",
+      "completeness": "Completeness",
+      "consistency": "Consistency",
+      "complianceTrend": "Compliance trend",
+      "failedItems": "{{count}} failed item(s)"
+    },
+    "conflicts": {
+      "title": "Conflicts & Duplicates",
+      "conflictCount": "{{count}} requirement conflict(s)",
+      "duplicateCount": "{{count}} duplicate(s) detected",
+      "duplicateOf": "Duplicate of"
+    },
+    "changeImpact": {
+      "title": "Change Impact",
+      "unreviewed": "{{count}} unreviewed",
+      "reviewed": "Reviewed",
+      "notReviewed": "Not reviewed",
+      "screens": "screens"
+    },
+    "debt": {
+      "title": "Requirements Debt",
+      "debtIndex": "Index",
+      "toDetail": "To Detail",
+      "placeholders": "Placeholders",
+      "toDetailTitle": "Requirements to detail",
+      "placeholderRules": "BRs with placeholder text",
+      "incompleteOverDays": "Incomplete > 7 days"
+    },
+    "quickActions": {
+      "title": "Quick Actions",
+      "newUC": "Create new UC",
+      "updateUC": "Update UC",
+      "critiqueStories": "Critique stories",
+      "refineStories": "Refine stories",
+      "sliceEpic": "Slice epic",
+      "viewTraceability": "View traceability",
+      "analyzeImpact": "Analyze impact"
+    }
+  },
+  "uxDashboard": {
+    "pageTitle": "UX Analyst Dashboard",
+    "pageSubtitle": "Prototypes, accessibility and design consistency",
+    "lastUpdated": "Updated at",
+    "alerts": {
+      "title": "Alerts"
+    },
+    "filters": {
+      "title": "Filters",
+      "toggle": "Toggle filters",
+      "project": "Project",
+      "allProjects": "All projects",
+      "status": "Prototype status",
+      "allStatuses": "All statuses",
+      "platform": "Platform",
+      "allPlatforms": "All platforms",
+      "accessibility": "Accessibility",
+      "allA11y": "All scores",
+      "aboveThreshold": "Above WCAG threshold",
+      "belowThreshold": "Below WCAG threshold"
+    },
+    "kpi": {
+      "totalPrototypes": "Total Prototypes",
+      "pendingGateUx": "Pending Gate UX",
+      "ucCoverage": "UC Coverage",
+      "wcagScore": "WCAG Score",
+      "a11yViolations": "A11Y Violations",
+      "firstApprovalRate": "1st Review Approval"
+    },
+    "prototypes": {
+      "title": "Prototypes",
+      "distribution": "Prototype distribution by status",
+      "throughput": "Weekly Throughput",
+      "status": {
+        "draft": "Draft",
+        "final": "Final",
+        "approved": "Approved",
+        "rejected": "Rejected"
+      }
+    },
+    "gateUx": {
+      "title": "Gate UX",
+      "pending": "Pending",
+      "avgTime": "Avg time",
+      "firstApproval": "1st approval",
+      "openQuestions": "Open questions",
+      "avgResolution": "Avg resolution time"
+    },
+    "coverage": {
+      "title": "Screen Coverage",
+      "ucCoverage": "UCs with prototype",
+      "withPrototype": "With prototype",
+      "withoutPrototype": "Without prototype",
+      "screenProgress": "Screens generated",
+      "withoutMobile": "{{count}} screen(s) without mobile version",
+      "breakpoints": "Breakpoints",
+      "prototype": "Prototype"
+    },
+    "consistency": {
+      "title": "Design Consistency",
+      "reuseRate": "Reuse rate",
+      "colorPalette": "Color palette",
+      "typography": "Typography",
+      "icons": "Standardized icons",
+      "navInconsistencies": "{{count}} navigation inconsistency(ies)",
+      "deviations": "Design System Deviations"
+    },
+    "accessibility": {
+      "title": "Accessibility",
+      "wcagScore": "WCAG AA",
+      "keyboardNav": "Keyboard navigation",
+      "ariaLandmarks": "ARIA landmarks",
+      "withoutCheck": "{{count}} screen(s) without a11y check",
+      "violations": "Violations"
+    },
+    "usability": {
+      "title": "Usability",
+      "heuristicScore": "Nielsen Score",
+      "clickDepth": "Click depth",
+      "feedbackCoverage": "Feedback covered",
+      "statesCoverage": "States coverage",
+      "emptyState": "Empty state",
+      "errorState": "Error state",
+      "loadingState": "Loading state",
+      "deadEnds": "Dead ends",
+      "noDeadEnds": "No dead ends detected"
+    },
+    "feedbackLoop": {
+      "title": "Feedback Loop",
+      "draftToFinal": "Draft → Final",
+      "roundTrips": "Round trips",
+      "firstApproval": "1st approval",
+      "aiQuality": "AI Quality",
+      "rejectionPatterns": "Rejection Patterns"
+    },
+    "designDebt": {
+      "title": "Design Debt",
+      "debtIndex": "Debt index",
+      "screensWithTags": "Screens w/ tags",
+      "approvedWithCaveats": "Approved with caveats",
+      "backlog": "Improvement backlog"
+    },
+    "pendingPrototypes": {
+      "title": "Prototypes Pending Action",
+      "prototype": "Prototype",
+      "uc": "UC",
+      "status": "Status",
+      "cycle": "Cycle",
+      "platform": "Platform",
+      "action": "Action",
+      "review": "Review",
+      "approve": "Approve",
+      "escalate": "Escalate",
+      "viewFeedback": "View feedback",
+      "lastCycle": "Last refinement cycle"
+    },
+    "quickActions": {
+      "title": "Quick Actions",
+      "approve": "Approve prototype",
+      "reject": "Reject prototype",
+      "refine": "Refine prototype",
+      "generate": "Generate new prototype",
+      "compare": "Compare versions",
+      "checkA11y": "Check accessibility",
+      "viewMapping": "View UC → Screen"
+    }
+  },
+  "chatbot": {
+    "fab": {
+      "open": "Open AI assistant",
+      "close": "Close AI assistant"
+    },
+    "widget": {
+      "title": "deep-ion Assistant",
+      "subtitle": "AI for project management",
+      "welcomeTitle": "How can I help?",
+      "welcomeMessage": "Ask about metrics, pipelines, demand status, AI agents, or any platform information. You can type or use voice commands.",
+      "newConversation": "New conversation",
+      "openFullPage": "Open full page"
+    },
+    "input": {
+      "placeholder": "Type your message...",
+      "send": "Send message",
+      "startRecording": "Start voice recording",
+      "stopRecording": "Stop voice recording",
+      "listening": "Listening..."
+    },
+    "message": {
+      "userLabel": "User message",
+      "assistantLabel": "Assistant message",
+      "voiceInput": "Voice input"
+    },
+    "page": {
+      "title": "AI Assistant",
+      "subtitle": "Chat with AI and browse conversation history",
+      "conversationList": "Conversation list",
+      "searchPlaceholder": "Search conversations...",
+      "newConversation": "New conversation",
+      "backToList": "Back to conversations",
+      "archived": "Archived",
+      "messages": "msgs",
+      "suggestion1": "Which demands are blocked?",
+      "suggestion2": "What's the sprint velocity?",
+      "suggestion3": "AI agents status",
+      "voiceHint": "You can also use voice commands"
+    }
+  },
+  "blueprintsPage": {
+    "title": "Blueprint Management",
+    "subtitle": "Create, clone, edit and version architectural blueprints",
+    "list": {
+      "title": "Registered blueprints",
+      "newBlueprint": "New",
+      "selectBlueprint": "Select blueprint {{name}}",
+      "cloneBlueprint": "Clone"
+    },
+    "categories": {
+      "backend": "Backend",
+      "frontend": "Frontend",
+      "batch": "Batch",
+      "fullstack": "Fullstack"
+    },
+    "form": {
+      "createTitle": "Create blueprint",
+      "editTitle": "Edit blueprint",
+      "subtitle": "Required fields: name, description and category.",
+      "cloneFromLabel": "Clone from existing blueprint (optional)",
+      "cloneFromPlaceholder": "Select a blueprint to use as baseline",
+      "name": "Name",
+      "namePlaceholder": "E.g.: Frontend React SPA",
+      "description": "Description",
+      "descriptionPlaceholder": "Describe this blueprint objectives and standards...",
+      "category": "Category",
+      "creationType": "Creation/editing method",
+      "modeManual": "Manual",
+      "modeAssisted": "AI-assisted",
+      "editModeInfo": "In edit mode, you can switch freely between manual and AI-assisted methods, regardless of how the blueprint was initially created.",
+      "manualEditor": "Manual YAML editor",
+      "uploadYaml": "Upload file",
+      "assistantChatTitle": "Assisted creation chatbot",
+      "publishNewVersion": "Publish a new version on save",
+      "errors": {
+        "nameRequired": "Name is required",
+        "descriptionRequired": "Description is required",
+        "categoryRequired": "Category is required"
+      }
+    },
+    "assistant": {
+      "welcome": "Hi! I can help you build your blueprint. Start by describing your target architecture.",
+      "editWelcome": "You are in assisted edit mode. I can suggest updates for the next version.",
+      "placeholder": "Describe the blueprint or ask the agent for guidance...",
+      "send": "Send",
+      "helpCategory": "Suggestion: pick the category based on the blueprint primary focus (backend, frontend, batch or fullstack).",
+      "helpVersioning": "Best practice: publish a new version for structural changes and keep in-use versions active until projects are manually migrated.",
+      "defaultReply": "Understood. I can turn this into YAML structure and suggest quality criteria for the blueprint."
+    },
+    "linkedProjects": {
+      "title": "Blueprint linked to projects",
+      "description": "This blueprint is already in use. All in-use versions must remain active. Each project must be manually updated by an architect to adopt a new blueprint version."
+    },
+    "versions": {
+      "title": "Versions",
+      "status": {
+        "active": "active",
+        "in-use": "in use",
+        "superseded": "superseded"
+      }
+    },
+    "history": {
+      "title": "Change history"
+    }
+  },
+  "projectsPage": {
+    "title": "Projects",
+    "subtitle": "Manage your tenant's projects",
+    "searchPlaceholder": "Search projects...",
+    "filterByStatus": "Filter by status",
+    "newProject": "New Project",
+    "emptyState": "No projects found. Create the first project to get started.",
+    "showing": "Showing {{count}} of {{total}} projects",
+    "updatedAt": "Updated at",
+    "viewDetails": "View details",
+    "status": {
+      "active": "Active",
+      "configuring": "Configuring",
+      "archived": "Archived"
+    },
+    "filters": {
+      "all": "All statuses"
+    },
+    "stats": {
+      "members": "members",
+      "aiProviders": "AI providers"
+    },
+    "providers": {
+      "github": "GitHub",
+      "gitlab": "GitLab",
+      "bitbucket": "Bitbucket",
+      "azure-devops": "Azure DevOps"
+    },
+    "multiModule": {
+      "none": "Single module",
+      "subfolder": "Monorepo (subfolders)",
+      "independent": "Independent repositories"
+    },
+    "aiProviders": {
+      "openai": "OpenAI",
+      "anthropic": "Anthropic",
+      "google-ai": "Google AI",
+      "azure-openai": "Azure OpenAI",
+      "aws-bedrock": "AWS Bedrock"
+    },
+    "actions": {
+      "menu": "Project actions"
+    },
+    "deleteDialog": {
+      "title": "Delete project",
+      "subtitle": "This action cannot be undone",
+      "message": "Are you sure you want to delete the project \"{{name}}\"? All associated data will be permanently removed."
+    },
+    "form": {
+      "createTitle": "New Project",
+      "createSubtitle": "Fill in the details to create a new project",
+      "backToList": "Back to projects",
+      "basicData": "Basic Information",
+      "name": "Project name",
+      "namePlaceholder": "E.g.: ACME Financial Portal",
+      "slug": "Identifier (slug)",
+      "slugPlaceholder": "e.g.: acme-financial-portal",
+      "slugHelp": "Unique project identifier. Used in URLs and internal references.",
+      "description": "Description",
+      "descriptionPlaceholder": "Briefly describe the project's purpose...",
+      "createButton": "Create Project",
+      "teamSection": "Project Team",
+      "teamHelp": "Select tenant members and assign one or more roles to each. At least one member with the PO role is required.",
+      "addMember": "Add member",
+      "selectMember": "Select a member to add...",
+      "noMembers": "No members added. Select tenant members to compose the team.",
+      "memberRole": "Member roles",
+      "removeMember": "Remove member",
+      "repoSection": "Repository",
+      "repoProvider": "Provider",
+      "repoUseGlobal": "Use tenant global configuration",
+      "repoGlobalInfo": "Tenant global configuration active:",
+      "repoServerUrl": "Server URL",
+      "repoServerUrlPlaceholder": "https://gitlab.company.com (for self-hosted)",
+      "repoAccessToken": "Access token",
+      "repoAccessTokenPlaceholder": "Repository access token",
+      "repoPath": "Repository path",
+      "repoPathPlaceholder": "org/repo (e.g.: acme-corp/financial-portal)",
+      "multiModuleLabel": "Multi-module project?",
+      "multiModuleHelp": {
+        "none": "The project has a single repository.",
+        "subfolder": "Monorepo — all modules in subfolders within the same repository.",
+        "independent": "Each module has its own repository. Individual configuration will be done in the Architecture section."
+      },
+      "repoIndependentInfo": "For projects with independent repositories per module, each repository will be configured individually in the Architecture section of the respective module.",
+      "docSection": "Documentation",
+      "docTypeLabel": "Documentation type",
+      "docTypes": {
+        "embedded": "Embedded in repository",
+        "independent": "Separate repository"
+      },
+      "docRepoPath": "Documentation repository",
+      "docRepoPathPlaceholder": "org/repo-docs (e.g.: acme-corp/portal-docs)",
+      "docSecurityWarning": "With embedded documentation, any developer with repository access can view and modify the documentation. If it contains sensitive information, use a separate repository.",
+      "docEmbedDisabled": "Embedded documentation is not available for projects with independent repositories per module.",
+      "aiSection": "AI API Providers",
+      "aiHelp": "Configure the AI model providers used by the agent pipeline. You can select multiple providers.",
+      "aiAddProvider": "Add Provider",
+      "aiRemoveProvider": "Remove provider",
+      "aiNoProviders": "No AI providers configured. Add providers for the agent pipeline.",
+      "aiProviderIndex": "Provider #{{index}}",
+      "aiProviderName": "Provider",
+      "aiDefaultModel": "Default model",
+      "aiDefaultModelPlaceholder": "e.g.: gpt-4o, claude-sonnet-4",
+      "aiApiKey": "API Key",
+      "aiApiKeyPlaceholder": "API access key",
+      "aiEndpointUrl": "Endpoint URL",
+      "aiEndpointUrlPlaceholder": "Only when needed (e.g.: Azure OpenAI)",
+      "aiRateTokens": "Token limit/min",
+      "aiRateTokensPlaceholder": "Optional",
+      "aiRateRequests": "Request limit/day",
+      "aiRateRequestsPlaceholder": "Optional",
+      "aiGlobalInfo": "Tenant globally configured providers:",
+      "aiCostWarning": "The deep-ion platform does not control AI provider budgets. Cost monitoring and control should be done directly on the provider's dashboard.",
+      "archSection": "Architecture",
+      "archHelp": "Define the project modules and the architectural blueprint for each one.",
+      "archSingleHelp": "The project has a single module. Select the architectural blueprint.",
+      "archMonorepoHelp": "Monorepo — provide the folder and blueprint for each module.",
+      "archIndependentHelp": "Independent repositories — provide the blueprint and repository for each module.",
+      "archModuleName": "Module name",
+      "archModuleNamePlaceholder": "E.g.: Frontend Web",
+      "archBlueprint": "Architectural Blueprint",
+      "archSelectBlueprint": "Select a blueprint...",
+      "archFolderPath": "Repository folder",
+      "archFolderPathPlaceholder": "E.g.: frontend",
+      "archRepoPath": "Module repository",
+      "archRepoPathPlaceholder": "org/repo (e.g.: acme-corp/frontend)",
+      "archAddModule": "Add Module",
+      "archRemoveModule": "Remove module",
+      "archModuleIndex": "Module #{{index}}",
+      "archNoModules": "No modules configured. Add modules to define the project architecture.",
+      "archSingleModuleLimit": "Single-module projects allow only one module.",
+      "errors": {
+        "nameRequired": "Project name is required",
+        "slugRequired": "Identifier is required",
+        "slugInvalid": "Identifier must contain only lowercase letters, numbers and hyphens",
+        "descriptionRequired": "Description is required",
+        "poRequired": "The team must have at least one member with the Product Owner (PO) role",
+        "apiKeyRequired": "API Key is required",
+        "moduleBlueprintRequired": "Blueprint is required for each module",
+        "moduleNameRequired": "Module name is required",
+        "moduleFolderRequired": "Module folder is required in monorepo",
+        "moduleRepoRequired": "Module repository is required"
+      }
+    },
+    "detail": {
+      "loading": "Loading project...",
+      "repository": {
+        "title": "Repository",
+        "provider": "Provider",
+        "globalConfig": "Using tenant global configuration",
+        "serverUrl": "Server",
+        "path": "Repository",
+        "notConfigured": "Repository not yet configured",
+        "multiModule": "Multi-module"
+      },
+      "documentation": {
+        "title": "Documentation",
+        "type": "Type",
+        "repo": "Repository",
+        "securityWarning": "Embedded documentation — any repository collaborator can access and modify."
+      },
+      "aiProviders": {
+        "title": "AI Providers",
+        "count": "providers",
+        "empty": "No AI providers configured.",
+        "model": "Model",
+        "endpoint": "Endpoint",
+        "costWarning": "AI provider cost control is the tenant's responsibility. Monitor usage directly on the provider's dashboard."
+      },
+      "architecture": {
+        "title": "Architecture",
+        "modules": "modules",
+        "blueprint": "Blueprint",
+        "folder": "Folder",
+        "repository": "Repository",
+        "empty": "No architecture modules configured."
+      },
+      "team": {
+        "title": "Team",
+        "members": "members",
+        "roles": {
+          "po": "Product Owner",
+          "architect": "Architect",
+          "tech-lead": "Tech Lead",
+          "developer": "Developer",
+          "qa": "QA",
+          "devops": "DevOps",
+          "business-analyst": "Business Analyst"
+        }
+      },
+      "meta": {
+        "title": "Project Information",
+        "id": "ID",
+        "slug": "Slug",
+        "tenant": "Tenant",
+        "createdAt": "Created at"
+      }
+    }
+  },
+  "usersPage": {
+    "title": "Users",
+    "subtitle": "User registration and management",
+    "searchPlaceholder": "Search by name or email...",
+    "newUser": "New User",
+    "emptyState": "No users registered. Add the first user to get started.",
+    "showing": "Showing {{count}} of {{total}} users",
+    "resendInvite": "Resend invite",
+    "resendSuccess": "Invite resent to {{email}}",
+    "table": {
+      "user": "User",
+      "roles": "Roles",
+      "status": "Status",
+      "invite": "Invite",
+      "actions": "Actions"
+    },
+    "status": {
+      "active": "Active",
+      "inactive": "Inactive",
+      "pending": "Pending"
+    },
+    "inviteStatus": {
+      "pending": "Pending",
+      "accepted": "Accepted",
+      "expired": "Expired"
+    },
+    "roles": {
+      "admin": "Administrator",
+      "po": "Product Owner",
+      "architect": "Architect",
+      "tech-lead": "Tech Lead",
+      "developer": "Developer",
+      "qa": "QA",
+      "devops": "DevOps",
+      "business-analyst": "Business Analyst",
+      "requirements-analyst": "Requirements Analyst",
+      "ux-analyst": "UX Analyst"
+    },
+    "form": {
+      "createTitle": "Register User",
+      "createSubtitle": "Fill in the details and send the email invite",
+      "name": "Full name",
+      "namePlaceholder": "E.g.: John Doe",
+      "email": "Email",
+      "emailPlaceholder": "E.g.: john.doe@company.com",
+      "roles": "Roles",
+      "rolesHelp": "Select one or more roles the user can take on the platform",
+      "inviteInfo": "An email with an invite link will be sent to the user. The link is valid for 7 days. The user will be able to complete their profile after accepting the invite.",
+      "sendInvite": "Send Invite",
+      "inviteSent": "Invite sent successfully!",
+      "successMessage": "An email with an access link was sent to {{email}}. The user can complete their profile after accepting the invite.",
+      "errors": {
+        "nameRequired": "Name is required",
+        "emailRequired": "Email is required",
+        "emailInvalid": "Invalid email",
+        "rolesRequired": "Select at least one role",
+        "submitFailed": "Failed to register user. Please try again."
+      }
+    },
+    "deleteDialog": {
+      "title": "Delete user",
+      "message": "Are you sure you want to delete user \"{{name}}\"? This action cannot be undone."
+    }
+  },
+  "profilePage": {
+    "title": "My Profile",
+    "subtitle": "Complete and update your professional information",
+    "saveSuccess": "Profile updated successfully!",
+    "changePhoto": "Change photo",
+    "sections": {
+      "basicInfo": "Basic Information",
+      "locationAvailability": "Location & Availability",
+      "phones": "Phone Numbers",
+      "languages": "Languages",
+      "skills": "Skills",
+      "certifications": "Certifications",
+      "experience": "Professional Experience",
+      "education": "Education",
+      "socialLinks": "Links & Social Networks"
+    },
+    "fields": {
+      "name": "Name",
+      "email": "Email",
+      "bio": "About me",
+      "bioPlaceholder": "Briefly describe your experience and areas of expertise...",
+      "bioHint": "Maximum 500 characters",
+      "location": "Location",
+      "locationPlaceholder": "E.g.: São Paulo, SP",
+      "timezone": "Timezone",
+      "selectTimezone": "Select timezone",
+      "availability": "Hours/week",
+      "availabilityHint": "Weekly availability in hours",
+      "phoneType": "Type",
+      "phoneNumber": "Number",
+      "primary": "Primary",
+      "languagesPlaceholder": "Type a language and press Enter...",
+      "skillsPlaceholder": "Type a skill and press Enter...",
+      "certName": "Certification name",
+      "certNamePlaceholder": "E.g.: AWS Solutions Architect",
+      "certIssuer": "Issuer",
+      "certIssuerPlaceholder": "E.g.: Amazon Web Services",
+      "issueDate": "Issue date",
+      "expirationDate": "Expiration date",
+      "credentialUrl": "Credential URL",
+      "company": "Company",
+      "companyPlaceholder": "E.g.: ACME Corp",
+      "role": "Role",
+      "rolePlaceholder": "E.g.: Senior Developer",
+      "startDate": "Start date",
+      "endDate": "End date",
+      "currentPosition": "Current position",
+      "description": "Description",
+      "descriptionPlaceholder": "Describe your main activities and achievements...",
+      "institution": "Institution",
+      "institutionPlaceholder": "E.g.: University of São Paulo",
+      "degree": "Degree",
+      "selectDegree": "Select degree",
+      "fieldOfStudy": "Field of study",
+      "fieldPlaceholder": "E.g.: Computer Science",
+      "currentlyStudying": "Currently studying",
+      "linkType": "Type",
+      "linkUrl": "URL",
+      "linkLabel": "Label",
+      "linkLabelPlaceholder": "E.g.: My LinkedIn"
+    },
+    "phoneTypes": {
+      "mobile": "Mobile",
+      "work": "Work",
+      "home": "Home"
+    },
+    "linkTypes": {
+      "portfolio": "Portfolio",
+      "other": "Other"
+    },
+    "degrees": {
+      "technical": "Technical",
+      "bachelor": "Bachelor's",
+      "licentiate": "Licentiate",
+      "postGrad": "Post-Graduate",
+      "mba": "MBA",
+      "masters": "Master's",
+      "doctorate": "Doctorate"
+    },
+    "addPhone": "Add phone",
+    "addCertification": "Add certification",
+    "addExperience": "Add experience",
+    "addEducation": "Add education",
+    "addSocialLink": "Add link"
+  }
+}

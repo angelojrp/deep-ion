@@ -1,0 +1,1 @@
+export const LoginCallbackPage = (): JSX.Element => <div>Login callback</div>

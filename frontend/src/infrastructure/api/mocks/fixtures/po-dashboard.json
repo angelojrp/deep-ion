@@ -1,0 +1,491 @@
+{
+  "pipeline": {
+    "demands": [
+      {
+        "id": "DEM-001",
+        "title": "Cadastro de novos tenants via API REST",
+        "tier": "T1",
+        "stage": "gate-4",
+        "status": "active",
+        "ageDays": 2,
+        "reworkCount": 0,
+        "moscowPriority": "must",
+        "lgpdFlag": false,
+        "createdAt": "2026-02-28T09:00:00Z",
+        "assignee": "CAL-Agent"
+      },
+      {
+        "id": "DEM-002",
+        "title": "Validação LGPD para dados de PF",
+        "tier": "T3",
+        "stage": "gate-2",
+        "status": "escalated",
+        "ageDays": 5,
+        "reworkCount": 2,
+        "moscowPriority": "must",
+        "lgpdFlag": true,
+        "createdAt": "2026-02-25T14:30:00Z",
+        "assignee": "Maria Santos"
+      },
+      {
+        "id": "DEM-003",
+        "title": "Dashboard de métricas do pipeline",
+        "tier": "T2",
+        "stage": "development",
+        "status": "active",
+        "ageDays": 3,
+        "reworkCount": 1,
+        "moscowPriority": "should",
+        "lgpdFlag": false,
+        "createdAt": "2026-02-27T11:00:00Z",
+        "assignee": "DOM-04-Agent"
+      },
+      {
+        "id": "DEM-004",
+        "title": "Integração Keycloak SSO multi-tenant",
+        "tier": "T2",
+        "stage": "analysis",
+        "status": "blocked",
+        "ageDays": 7,
+        "reworkCount": 0,
+        "moscowPriority": "must",
+        "lgpdFlag": false,
+        "createdAt": "2026-02-23T08:00:00Z",
+        "assignee": "DOM-05a-Agent"
+      },
+      {
+        "id": "DEM-005",
+        "title": "Pipeline de CI/CD para agentes Python",
+        "tier": "T1",
+        "stage": "gate-3",
+        "status": "active",
+        "ageDays": 1,
+        "reworkCount": 0,
+        "moscowPriority": "should",
+        "lgpdFlag": false,
+        "createdAt": "2026-03-01T16:00:00Z",
+        "assignee": "CAL-Agent"
+      },
+      {
+        "id": "DEM-006",
+        "title": "Exportação de relatórios PDF",
+        "tier": "T3",
+        "stage": "gate-1",
+        "status": "escalated",
+        "ageDays": 4,
+        "reworkCount": 1,
+        "moscowPriority": "must",
+        "lgpdFlag": true,
+        "createdAt": "2026-02-26T10:00:00Z",
+        "assignee": "João Oliveira"
+      },
+      {
+        "id": "DEM-007",
+        "title": "Auto-scaling de workers",
+        "tier": "T0",
+        "stage": "done",
+        "status": "done",
+        "ageDays": 0,
+        "reworkCount": 0,
+        "moscowPriority": "could",
+        "lgpdFlag": false,
+        "createdAt": "2026-03-01T09:00:00Z",
+        "assignee": "CAL-Agent"
+      },
+      {
+        "id": "DEM-008",
+        "title": "Notificações Slack para gates",
+        "tier": "T1",
+        "stage": "development",
+        "status": "active",
+        "ageDays": 2,
+        "reworkCount": 0,
+        "moscowPriority": "should",
+        "lgpdFlag": false,
+        "createdAt": "2026-02-28T13:00:00Z",
+        "assignee": "DOM-04-Agent"
+      },
+      {
+        "id": "DEM-009",
+        "title": "Auditoria de DecisionRecords",
+        "tier": "T2",
+        "stage": "discovery",
+        "status": "active",
+        "ageDays": 1,
+        "reworkCount": 0,
+        "moscowPriority": "should",
+        "lgpdFlag": false,
+        "createdAt": "2026-03-02T08:00:00Z",
+        "assignee": "Ana Costa"
+      },
+      {
+        "id": "DEM-010",
+        "title": "API de fallback chain LLM",
+        "tier": "T2",
+        "stage": "gate-2",
+        "status": "active",
+        "ageDays": 3,
+        "reworkCount": 1,
+        "moscowPriority": "must",
+        "lgpdFlag": false,
+        "createdAt": "2026-02-27T15:00:00Z",
+        "assignee": "DOM-05b-Agent"
+      },
+      {
+        "id": "DEM-011",
+        "title": "Gestão de API keys",
+        "tier": "T3",
+        "stage": "gate-1",
+        "status": "blocked",
+        "ageDays": 6,
+        "reworkCount": 0,
+        "moscowPriority": "must",
+        "lgpdFlag": true,
+        "createdAt": "2026-02-24T10:00:00Z",
+        "assignee": "Carlos Ferreira"
+      },
+      {
+        "id": "DEM-012",
+        "title": "Widget confidence score",
+        "tier": "T0",
+        "stage": "done",
+        "status": "done",
+        "ageDays": 0,
+        "reworkCount": 0,
+        "moscowPriority": "could",
+        "lgpdFlag": false,
+        "createdAt": "2026-03-02T10:00:00Z",
+        "assignee": "CAL-Agent"
+      },
+      {
+        "id": "DEM-013",
+        "title": "Traceability Matrix UC-RN-FE",
+        "tier": "T2",
+        "stage": "analysis",
+        "status": "active",
+        "ageDays": 2,
+        "reworkCount": 0,
+        "moscowPriority": "must",
+        "lgpdFlag": false,
+        "createdAt": "2026-03-01T08:00:00Z",
+        "assignee": "DOM-02-Agent"
+      },
+      {
+        "id": "DEM-014",
+        "title": "Painel custos provider LLM",
+        "tier": "T1",
+        "stage": "gate-4",
+        "status": "active",
+        "ageDays": 1,
+        "reworkCount": 0,
+        "moscowPriority": "should",
+        "lgpdFlag": false,
+        "createdAt": "2026-03-02T14:00:00Z",
+        "assignee": "CAL-Agent"
+      },
+      {
+        "id": "DEM-015",
+        "title": "Controle concorrência pipelines",
+        "tier": "T2",
+        "stage": "development",
+        "status": "active",
+        "ageDays": 4,
+        "reworkCount": 1,
+        "moscowPriority": "should",
+        "lgpdFlag": false,
+        "createdAt": "2026-02-26T09:00:00Z",
+        "assignee": "DOM-05a-Agent"
+      }
+    ],
+    "stageCounts": [
+      {
+        "stage": "discovery",
+        "count": 1,
+        "blockedCount": 0
+      },
+      {
+        "stage": "analysis",
+        "count": 2,
+        "blockedCount": 1
+      },
+      {
+        "stage": "gate-1",
+        "count": 2,
+        "blockedCount": 1
+      },
+      {
+        "stage": "gate-2",
+        "count": 2,
+        "blockedCount": 0
+      },
+      {
+        "stage": "development",
+        "count": 3,
+        "blockedCount": 0
+      },
+      {
+        "stage": "gate-3",
+        "count": 1,
+        "blockedCount": 0
+      },
+      {
+        "stage": "gate-4",
+        "count": 2,
+        "blockedCount": 0
+      },
+      {
+        "stage": "done",
+        "count": 2,
+        "blockedCount": 0
+      }
+    ]
+  },
+  "delivery": {
+    "cycleTimeByTier": [
+      {
+        "tier": "T0",
+        "avgDays": 0.02,
+        "p50Days": 0.01,
+        "p85Days": 0.04,
+        "targetDays": 0.02
+      },
+      {
+        "tier": "T1",
+        "avgDays": 0.18,
+        "p50Days": 0.12,
+        "p85Days": 0.35,
+        "targetDays": 0.5
+      },
+      {
+        "tier": "T2",
+        "avgDays": 1.8,
+        "p50Days": 1.5,
+        "p85Days": 2.8,
+        "targetDays": 2.0
+      },
+      {
+        "tier": "T3",
+        "avgDays": 5.2,
+        "p50Days": 4.0,
+        "p85Days": 7.5,
+        "targetDays": 5.0
+      }
+    ],
+    "leadTimeDays": 3.4,
+    "flowEfficiency": 0.42,
+    "throughputWeekly": [
+      {
+        "week": "2026-W05",
+        "completed": 8,
+        "started": 12
+      },
+      {
+        "week": "2026-W06",
+        "completed": 11,
+        "started": 9
+      },
+      {
+        "week": "2026-W07",
+        "completed": 9,
+        "started": 10
+      },
+      {
+        "week": "2026-W08",
+        "completed": 14,
+        "started": 11
+      },
+      {
+        "week": "2026-W09",
+        "completed": 12,
+        "started": 13
+      }
+    ],
+    "predictability": 0.87
+  },
+  "backlog": {
+    "tierDistribution": [
+      {
+        "tier": "T0",
+        "count": 5,
+        "wip": 1
+      },
+      {
+        "tier": "T1",
+        "count": 12,
+        "wip": 3
+      },
+      {
+        "tier": "T2",
+        "count": 18,
+        "wip": 5
+      },
+      {
+        "tier": "T3",
+        "count": 6,
+        "wip": 2
+      }
+    ],
+    "moscowDistribution": [
+      {
+        "priority": "must",
+        "count": 18,
+        "delivered": 11
+      },
+      {
+        "priority": "should",
+        "count": 14,
+        "delivered": 7
+      },
+      {
+        "priority": "could",
+        "count": 7,
+        "delivered": 3
+      },
+      {
+        "priority": "wont",
+        "count": 2,
+        "delivered": 0
+      }
+    ],
+    "stageAgeAverage": [
+      {
+        "stage": "discovery",
+        "avgDays": 1.2
+      },
+      {
+        "stage": "analysis",
+        "avgDays": 3.5
+      },
+      {
+        "stage": "gate-1",
+        "avgDays": 2.1
+      },
+      {
+        "stage": "gate-2",
+        "avgDays": 1.8
+      },
+      {
+        "stage": "development",
+        "avgDays": 2.9
+      },
+      {
+        "stage": "gate-3",
+        "avgDays": 0.8
+      },
+      {
+        "stage": "gate-4",
+        "avgDays": 0.5
+      }
+    ],
+    "totalActive": 41,
+    "totalBlocked": 3
+  },
+  "quality": {
+    "briefGatePassRate": 0.78,
+    "avgConfidenceScore": 0.72,
+    "gherkinCompleteness": 0.85,
+    "openQuestionsCount": 7,
+    "traceabilityCoverage": 0.68,
+    "reworkRate": 0.15
+  },
+  "compliance": {
+    "activeLgpdFlags": 3,
+    "auditedDecisionRecordsPercent": 0.91,
+    "undetectedRnViolations": 0,
+    "t3PendingGateOver48h": 1,
+    "archConformanceViolationsPercent": 0.03,
+    "businessRisks": [
+      {
+        "id": "RNE-01",
+        "name": "Dep. provider LLM unico",
+        "severity": "high",
+        "status": "monitoring",
+        "probability": 0.35,
+        "description": "Risco indisponibilidade"
+      },
+      {
+        "id": "RNE-03",
+        "name": "Latencia Keycloak",
+        "severity": "medium",
+        "status": "active",
+        "probability": 0.2,
+        "description": "SSO latencia > 500ms"
+      },
+      {
+        "id": "RNE-05",
+        "name": "AI Act pipeline T0/T1",
+        "severity": "high",
+        "status": "monitoring",
+        "probability": 0.45,
+        "description": "Gate humano obrigatorio"
+      },
+      {
+        "id": "RNE-07",
+        "name": "Escalabilidade filas",
+        "severity": "low",
+        "status": "mitigated",
+        "probability": 0.1,
+        "description": "Saturacao > 500 demandas"
+      },
+      {
+        "id": "RNE-09",
+        "name": "LGPD tenants internacionais",
+        "severity": "high",
+        "status": "active",
+        "probability": 0.55,
+        "description": "Cross-border adequacao"
+      }
+    ],
+    "externalDependencies": [
+      {
+        "name": "GitHub API",
+        "status": "healthy",
+        "lastCheckedAt": "2026-03-03T08:30:00Z"
+      },
+      {
+        "name": "Keycloak SSO",
+        "status": "degraded",
+        "lastCheckedAt": "2026-03-03T08:25:00Z"
+      },
+      {
+        "name": "OpenAI API",
+        "status": "healthy",
+        "lastCheckedAt": "2026-03-03T08:28:00Z"
+      },
+      {
+        "name": "Anthropic API",
+        "status": "healthy",
+        "lastCheckedAt": "2026-03-03T08:28:00Z"
+      },
+      {
+        "name": "MCP Servers",
+        "status": "healthy",
+        "lastCheckedAt": "2026-03-03T08:29:00Z"
+      }
+    ]
+  },
+  "roadmap": {
+    "milestones": [
+      {
+        "id": "M1",
+        "name": "Marco 1 - MVP Pipeline Autonomo",
+        "targetDate": "2026-05-15",
+        "mustTotal": 18,
+        "mustCompleted": 11,
+        "overallProgress": 0.61
+      },
+      {
+        "id": "M2",
+        "name": "Marco 2 - Multi-tenant + Governanca",
+        "targetDate": "2026-09-30",
+        "mustTotal": 24,
+        "mustCompleted": 7,
+        "overallProgress": 0.29
+      }
+    ],
+    "remainingCapacityWeeks": 14,
+    "weeklyThroughputAvg": 10.8,
+    "businessDebtCount": 4
+  },
+  "updatedAt": "2026-03-03T08:30:00Z"
+}

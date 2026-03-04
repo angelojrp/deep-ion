@@ -1,0 +1,1 @@
+export const Topbar = (): JSX.Element => <header className="mb-4 border-b pb-3">deep-ion</header>

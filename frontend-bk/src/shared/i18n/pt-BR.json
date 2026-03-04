@@ -1,0 +1,13 @@
+{
+  "common": {
+    "appName": "deep-ion",
+    "loading": "Carregando..."
+  },
+  "landing": {
+    "title": "Fábrica autônoma deep-ion",
+    "subtitle": "Pipeline de agentes para SDLC"
+  },
+  "agent": {
+    "escalated_to_human": "Escalado para revisão humana"
+  }
+}

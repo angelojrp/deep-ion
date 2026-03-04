@@ -1,0 +1,282 @@
+{
+  "availableBlueprints": [
+    {
+      "id": "frontend-react-spa",
+      "name": "Frontend React SPA",
+      "description": "Single Page Application com React 18, TypeScript 5, Tailwind CSS v4 e arquitetura em camadas (presentation/application/domain/infrastructure)."
+    },
+    {
+      "id": "modulith-api-first",
+      "name": "Modulith API-First",
+      "description": "Backend modular API-first com Spring Boot 3, Java 21, arquitetura hexagonal e contratos OpenAPI."
+    },
+    {
+      "id": "python-agent-first",
+      "name": "Python Agent-First",
+      "description": "Motor de agentes IA com Python 3.12, LangChain, arquitetura baseada em skills e orquestração de pipelines."
+    }
+  ],
+  "projects": [
+    {
+      "id": "proj-001",
+      "tenantId": "tenant-acme",
+      "name": "Portal Financeiro ACME",
+      "slug": "portal-financeiro-acme",
+      "description": "Portal de gestão financeira com módulos de cobrança, conciliação e relatórios gerenciais para a ACME Corp.",
+      "status": "active",
+      "repository": {
+        "provider": "github",
+        "useGlobalConfig": true,
+        "serverUrl": null,
+        "accessTokenMasked": "ghp_****...Xk9m",
+        "repositoryPath": "acme-corp/portal-financeiro",
+        "multiModule": "subfolder"
+      },
+      "architecture": {
+        "modules": [
+          {
+            "id": "mod-001",
+            "name": "Frontend Web",
+            "blueprintId": "frontend-react-spa",
+            "folderPath": "frontend",
+            "repositoryPath": null
+          },
+          {
+            "id": "mod-002",
+            "name": "API Backend",
+            "blueprintId": "modulith-api-first",
+            "folderPath": "backend",
+            "repositoryPath": null
+          }
+        ]
+      },
+      "documentation": {
+        "type": "embedded",
+        "repositoryPath": null
+      },
+      "aiProviders": [
+        {
+          "id": "aip-001",
+          "provider": "openai",
+          "endpointUrl": null,
+          "apiKeyMasked": "sk-****...3f7a",
+          "defaultModel": "gpt-4o",
+          "rateLimitTokensPerMin": 90000,
+          "rateLimitRequestsPerDay": 10000
+        },
+        {
+          "id": "aip-002",
+          "provider": "anthropic",
+          "endpointUrl": null,
+          "apiKeyMasked": "sk-ant-****...9b2c",
+          "defaultModel": "claude-sonnet-4",
+          "rateLimitTokensPerMin": null,
+          "rateLimitRequestsPerDay": null
+        }
+      ],
+      "members": [
+        { "id": "usr-001", "name": "Maria Santos", "roles": ["po", "business-analyst"] },
+        { "id": "usr-002", "name": "João Oliveira", "roles": ["architect", "tech-lead"] },
+        { "id": "usr-003", "name": "Ana Costa", "roles": ["business-analyst"] },
+        { "id": "usr-004", "name": "Carlos Souza", "roles": ["developer"] },
+        { "id": "usr-005", "name": "Fernanda Lima", "roles": ["developer", "qa"] }
+      ],
+      "createdAt": "2026-01-15T10:00:00Z",
+      "updatedAt": "2026-03-03T09:15:00Z"
+    },
+    {
+      "id": "proj-002",
+      "tenantId": "tenant-acme",
+      "name": "App Mobile Vendas",
+      "slug": "app-mobile-vendas",
+      "description": "Aplicativo mobile para a equipe de vendas com catálogo de produtos, pedidos e tracking de entregas.",
+      "status": "active",
+      "repository": {
+        "provider": "github",
+        "useGlobalConfig": true,
+        "serverUrl": null,
+        "accessTokenMasked": "ghp_****...Xk9m",
+        "repositoryPath": "acme-corp/app-mobile-vendas",
+        "multiModule": "none"
+      },
+      "architecture": {
+        "modules": [
+          {
+            "id": "mod-003",
+            "name": "App Mobile Vendas",
+            "blueprintId": "frontend-react-spa",
+            "folderPath": null,
+            "repositoryPath": null
+          }
+        ]
+      },
+      "documentation": {
+        "type": "independent",
+        "repositoryPath": "acme-corp/app-vendas-docs"
+      },
+      "aiProviders": [
+        {
+          "id": "aip-003",
+          "provider": "anthropic",
+          "endpointUrl": null,
+          "apiKeyMasked": "sk-ant-****...9b2c",
+          "defaultModel": "claude-sonnet-4",
+          "rateLimitTokensPerMin": null,
+          "rateLimitRequestsPerDay": 5000
+        }
+      ],
+      "members": [
+        { "id": "usr-001", "name": "Maria Santos", "roles": ["po"] },
+        { "id": "usr-006", "name": "Ricardo Mendes", "roles": ["developer", "devops"] },
+        { "id": "usr-007", "name": "Patrícia Alves", "roles": ["business-analyst", "qa"] }
+      ],
+      "createdAt": "2026-02-10T14:00:00Z",
+      "updatedAt": "2026-03-03T08:00:00Z"
+    },
+    {
+      "id": "proj-003",
+      "tenantId": "tenant-acme",
+      "name": "Engine de Agentes IA",
+      "slug": "engine-agentes-ia",
+      "description": "Motor de orquestração dos agentes DOM-01 a DOM-05b, com pipeline de processamento de demandas e gates de qualidade.",
+      "status": "active",
+      "repository": {
+        "provider": "gitlab",
+        "useGlobalConfig": false,
+        "serverUrl": "https://gitlab.acme-corp.internal",
+        "accessTokenMasked": "glpat-****...7d3e",
+        "repositoryPath": "ai-team/engine-agentes",
+        "multiModule": "independent"
+      },
+      "architecture": {
+        "modules": [
+          {
+            "id": "mod-004",
+            "name": "Agent Orchestrator",
+            "blueprintId": "python-agent-first",
+            "folderPath": null,
+            "repositoryPath": "ai-team/agent-orchestrator"
+          },
+          {
+            "id": "mod-005",
+            "name": "Skills API",
+            "blueprintId": "modulith-api-first",
+            "folderPath": null,
+            "repositoryPath": "ai-team/skills-api"
+          },
+          {
+            "id": "mod-006",
+            "name": "Dashboard Frontend",
+            "blueprintId": "frontend-react-spa",
+            "folderPath": null,
+            "repositoryPath": "ai-team/dashboard-frontend"
+          }
+        ]
+      },
+      "documentation": {
+        "type": "independent",
+        "repositoryPath": "ai-team/engine-docs"
+      },
+      "aiProviders": [
+        {
+          "id": "aip-004",
+          "provider": "openai",
+          "endpointUrl": null,
+          "apiKeyMasked": "sk-****...3f7a",
+          "defaultModel": "gpt-4o",
+          "rateLimitTokensPerMin": 90000,
+          "rateLimitRequestsPerDay": null
+        },
+        {
+          "id": "aip-005",
+          "provider": "anthropic",
+          "endpointUrl": null,
+          "apiKeyMasked": "sk-ant-****...9b2c",
+          "defaultModel": "claude-sonnet-4",
+          "rateLimitTokensPerMin": null,
+          "rateLimitRequestsPerDay": null
+        },
+        {
+          "id": "aip-006",
+          "provider": "google-ai",
+          "endpointUrl": null,
+          "apiKeyMasked": "AIza****...mN8p",
+          "defaultModel": "gemini-2.0-flash",
+          "rateLimitTokensPerMin": null,
+          "rateLimitRequestsPerDay": null
+        }
+      ],
+      "members": [
+        { "id": "usr-002", "name": "João Oliveira", "roles": ["architect"] },
+        { "id": "usr-008", "name": "Luciana Ferreira", "roles": ["po", "tech-lead"] },
+        { "id": "usr-009", "name": "Diego Martins", "roles": ["developer"] },
+        { "id": "usr-010", "name": "Camila Ribeiro", "roles": ["developer", "devops"] }
+      ],
+      "createdAt": "2026-01-20T09:00:00Z",
+      "updatedAt": "2026-03-03T07:30:00Z"
+    },
+    {
+      "id": "proj-004",
+      "tenantId": "tenant-acme",
+      "name": "API de Integração Bancária",
+      "slug": "api-integracao-bancaria",
+      "description": "API para integração com bancos parceiros — PIX, TED, boletos e conciliação automática.",
+      "status": "configuring",
+      "repository": {
+        "provider": "github",
+        "useGlobalConfig": true,
+        "serverUrl": null,
+        "accessTokenMasked": "ghp_****...Xk9m",
+        "repositoryPath": null,
+        "multiModule": "none"
+      },
+      "architecture": {
+        "modules": []
+      },
+      "documentation": {
+        "type": "embedded",
+        "repositoryPath": null
+      },
+      "aiProviders": [],
+      "members": [
+        { "id": "usr-001", "name": "Maria Santos", "roles": ["po"] },
+        { "id": "usr-002", "name": "João Oliveira", "roles": ["architect", "tech-lead"] }
+      ],
+      "createdAt": "2026-03-02T10:00:00Z",
+      "updatedAt": "2026-03-02T10:00:00Z"
+    }
+  ],
+  "tenantMembers": [
+    { "id": "usr-001", "name": "Maria Santos", "email": "maria.santos@acme.com", "defaultRole": "po" },
+    { "id": "usr-002", "name": "João Oliveira", "email": "joao.oliveira@acme.com", "defaultRole": "architect" },
+    { "id": "usr-003", "name": "Ana Costa", "email": "ana.costa@acme.com", "defaultRole": "business-analyst" },
+    { "id": "usr-004", "name": "Carlos Souza", "email": "carlos.souza@acme.com", "defaultRole": "developer" },
+    { "id": "usr-005", "name": "Fernanda Lima", "email": "fernanda.lima@acme.com", "defaultRole": "developer" },
+    { "id": "usr-006", "name": "Ricardo Mendes", "email": "ricardo.mendes@acme.com", "defaultRole": "devops" },
+    { "id": "usr-007", "name": "Patrícia Alves", "email": "patricia.alves@acme.com", "defaultRole": "business-analyst" },
+    { "id": "usr-008", "name": "Luciana Ferreira", "email": "luciana.ferreira@acme.com", "defaultRole": "po" },
+    { "id": "usr-009", "name": "Diego Martins", "email": "diego.martins@acme.com", "defaultRole": "developer" },
+    { "id": "usr-010", "name": "Camila Ribeiro", "email": "camila.ribeiro@acme.com", "defaultRole": "developer" }
+  ],
+  "tenantGlobalConfig": {
+    "repository": {
+      "provider": "github",
+      "serverUrl": null,
+      "accessTokenMasked": "ghp_****...Xk9m"
+    },
+    "aiProviders": [
+      {
+        "provider": "openai",
+        "endpointUrl": null,
+        "apiKeyMasked": "sk-****...3f7a",
+        "defaultModel": "gpt-4o"
+      },
+      {
+        "provider": "anthropic",
+        "endpointUrl": null,
+        "apiKeyMasked": "sk-ant-****...9b2c",
+        "defaultModel": "claude-sonnet-4"
+      }
+    ]
+  }
+}

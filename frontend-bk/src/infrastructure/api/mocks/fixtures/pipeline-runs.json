@@ -1,0 +1,10 @@
+[
+  {
+    "id": "run-1",
+    "issueNumber": 42,
+    "classification": "T2",
+    "currentStage": "DOM-04",
+    "gates": ["Gate 1", "Gate 2"],
+    "startedAt": "2026-03-02T08:00:00Z"
+  }
+]

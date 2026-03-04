@@ -1,0 +1,158 @@
+[
+  {
+    "id": "conv-001",
+    "title": "Análise de pipeline de aprovação",
+    "status": "active",
+    "lastMessageAt": "2026-03-03T14:30:00Z",
+    "messageCount": 6,
+    "preview": "O pipeline Gate-2 tem 3 demandas bloqueadas...",
+    "createdAt": "2026-03-03T10:00:00Z",
+    "messages": [
+      {
+        "id": "msg-001",
+        "conversationId": "conv-001",
+        "role": "user",
+        "content": "Quais demandas estão bloqueadas no pipeline?",
+        "inputType": "text",
+        "createdAt": "2026-03-03T10:00:00Z"
+      },
+      {
+        "id": "msg-002",
+        "conversationId": "conv-001",
+        "role": "assistant",
+        "content": "Atualmente há 3 demandas bloqueadas no pipeline:\n\n1. **DEM-042** — Integração com gateway de pagamento (Gate-2, aguardando aprovação de compliance)\n2. **DEM-038** — Migração de base de clientes PJ (Gate-1, dependência técnica)\n3. **DEM-051** — Novo fluxo de onboarding KYC (Gate-2, pendente revisão de segurança)\n\nDeseja que eu detalhe alguma delas?",
+        "inputType": "text",
+        "createdAt": "2026-03-03T10:00:15Z"
+      },
+      {
+        "id": "msg-003",
+        "conversationId": "conv-001",
+        "role": "user",
+        "content": "Detalhe a DEM-042",
+        "inputType": "text",
+        "createdAt": "2026-03-03T10:05:00Z"
+      },
+      {
+        "id": "msg-004",
+        "conversationId": "conv-001",
+        "role": "assistant",
+        "content": "**DEM-042 — Integração com gateway de pagamento**\n\n- **Status:** Bloqueada em Gate-2\n- **Responsável:** Carlos Mendes\n- **Tier:** Tier-1 (Alta prioridade)\n- **Bloqueio:** Aguardando aprovação do time de compliance para análise de risco do provedor XPTO Pay\n- **Tempo bloqueada:** 5 dias\n- **Impacto estimado:** R$ 45.000,00/dia em receita potencial\n\n**Ação sugerida:** Agendar reunião com compliance para destravar aprovação. Deseja que eu crie um lembrete?",
+        "inputType": "text",
+        "createdAt": "2026-03-03T10:05:12Z"
+      },
+      {
+        "id": "msg-005",
+        "conversationId": "conv-001",
+        "role": "user",
+        "content": "Sim, crie o lembrete para amanhã às 10h",
+        "inputType": "voice",
+        "createdAt": "2026-03-03T14:25:00Z"
+      },
+      {
+        "id": "msg-006",
+        "conversationId": "conv-001",
+        "role": "assistant",
+        "content": "Lembrete criado com sucesso! ✅\n\n📅 **04/03/2026 às 10:00**\n📋 Reunião com compliance — Aprovação DEM-042 (Gateway XPTO Pay)\n\nVocê será notificado 15 minutos antes. Posso ajudar com mais alguma coisa?",
+        "inputType": "text",
+        "createdAt": "2026-03-03T14:25:08Z"
+      }
+    ]
+  },
+  {
+    "id": "conv-002",
+    "title": "Consulta de métricas de velocity",
+    "status": "active",
+    "lastMessageAt": "2026-03-02T16:45:00Z",
+    "messageCount": 4,
+    "preview": "A velocity do sprint atual é de 42 pontos...",
+    "createdAt": "2026-03-02T14:00:00Z",
+    "messages": [
+      {
+        "id": "msg-007",
+        "conversationId": "conv-002",
+        "role": "user",
+        "content": "Qual a velocity do sprint atual?",
+        "inputType": "text",
+        "createdAt": "2026-03-02T14:00:00Z"
+      },
+      {
+        "id": "msg-008",
+        "conversationId": "conv-002",
+        "role": "assistant",
+        "content": "A velocity do sprint atual (Sprint 24) é de **42 pontos** entregues até o momento, com 3 dias restantes.\n\n📊 Comparativo:\n- Sprint 23: 38 pontos (completo)\n- Sprint 22: 45 pontos (completo)\n- Média últimos 3 sprints: 41.7 pontos\n\nEstamos dentro da faixa esperada. Deseja ver o breakdown por time?",
+        "inputType": "text",
+        "createdAt": "2026-03-02T14:00:10Z"
+      },
+      {
+        "id": "msg-009",
+        "conversationId": "conv-002",
+        "role": "user",
+        "content": "Mostre o breakdown por time",
+        "inputType": "voice",
+        "createdAt": "2026-03-02T16:40:00Z"
+      },
+      {
+        "id": "msg-010",
+        "conversationId": "conv-002",
+        "role": "assistant",
+        "content": "**Breakdown por time — Sprint 24:**\n\n| Time | Pontos | Meta | Status |\n|------|--------|------|--------|\n| Pagamentos | 18 | 20 | 🟡 90% |\n| Onboarding | 14 | 15 | 🟢 93% |\n| Core Banking | 10 | 12 | 🟡 83% |\n\n**Observação:** Time Core Banking pode precisar de suporte nos últimos 3 dias para atingir a meta.",
+        "inputType": "text",
+        "createdAt": "2026-03-02T16:40:08Z"
+      }
+    ]
+  },
+  {
+    "id": "conv-003",
+    "title": "Status dos agentes IA",
+    "status": "archived",
+    "lastMessageAt": "2026-02-28T11:20:00Z",
+    "messageCount": 2,
+    "preview": "Todos os 5 agentes estão operacionais...",
+    "createdAt": "2026-02-28T11:15:00Z",
+    "messages": [
+      {
+        "id": "msg-011",
+        "conversationId": "conv-003",
+        "role": "user",
+        "content": "Status dos agentes",
+        "inputType": "text",
+        "createdAt": "2026-02-28T11:15:00Z"
+      },
+      {
+        "id": "msg-012",
+        "conversationId": "conv-003",
+        "role": "assistant",
+        "content": "**Status dos agentes IA:**\n\n✅ **DOM-02** — Analista de Negócios — Operacional\n✅ **DOM-04** — UX Engineer — Operacional\n✅ **DOM-05a** — Analista de Requisitos — Operacional\n✅ **DOM-05b** — Analista de Requisitos (Review) — Operacional\n⚠️ **DOM-03** — Arquiteto — Em manutenção (retorno previsto: 01/03)\n\n4 de 5 agentes operacionais. Posso ajudar com mais alguma coisa?",
+        "inputType": "text",
+        "createdAt": "2026-02-28T11:15:12Z"
+      }
+    ]
+  },
+  {
+    "id": "conv-004",
+    "title": "Relatório semanal de compliance",
+    "status": "active",
+    "lastMessageAt": "2026-03-01T09:30:00Z",
+    "messageCount": 2,
+    "preview": "O score de compliance geral está em 94%...",
+    "createdAt": "2026-03-01T09:25:00Z",
+    "messages": [
+      {
+        "id": "msg-013",
+        "conversationId": "conv-004",
+        "role": "user",
+        "content": "Gere o relatório semanal de compliance",
+        "inputType": "text",
+        "createdAt": "2026-03-01T09:25:00Z"
+      },
+      {
+        "id": "msg-014",
+        "conversationId": "conv-004",
+        "role": "assistant",
+        "content": "**Relatório Semanal de Compliance — 24/02 a 01/03/2026**\n\n📊 **Score Geral:** 94% (meta: 90%)\n\n**Por área:**\n- LGPD / Proteção de Dados: 96% ✅\n- PCI-DSS (Pagamentos): 92% ✅\n- KYC / AML: 93% ✅\n- Segurança da Informação: 95% ✅\n\n**Pendências:**\n- 2 políticas aguardando atualização (prazo: 07/03)\n- 1 auditoria interna agendada (05/03)\n\n**Risco:** Baixo. Todas as métricas acima da meta.",
+        "inputType": "text",
+        "createdAt": "2026-03-01T09:25:15Z"
+      }
+    ]
+  }
+]

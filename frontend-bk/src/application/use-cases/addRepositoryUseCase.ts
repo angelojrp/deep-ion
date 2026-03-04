@@ -1,0 +1,1 @@
+export const addRepositoryUseCase = async (): Promise<boolean> => Promise.resolve(true)

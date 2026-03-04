@@ -1,0 +1,369 @@
+{
+  "prototypeSummary": {
+    "totalDraft": 5,
+    "totalFinal": 8,
+    "totalApproved": 12,
+    "totalRejected": 2,
+    "pendingGateUx": 2,
+    "avgTimeInGateDays": 1.5,
+    "approvalFirstReviewRate": 0.6,
+    "throughputPerWeek": [
+      {
+        "week": "2026-W07",
+        "label": "Sem 07",
+        "approved": 2,
+        "rejected": 1
+      },
+      {
+        "week": "2026-W08",
+        "label": "Sem 08",
+        "approved": 3,
+        "rejected": 0
+      },
+      {
+        "week": "2026-W09",
+        "label": "Sem 09",
+        "approved": 4,
+        "rejected": 1
+      },
+      {
+        "week": "2026-W10",
+        "label": "Sem 10",
+        "approved": 3,
+        "rejected": 0
+      }
+    ]
+  },
+  "uxQuestions": {
+    "openQuestions": [
+      {
+        "id": "QP-01",
+        "prototypeId": "PT-001",
+        "prototypeName": "Cadastro de Tenant — Passo 1",
+        "question": "O fluxo de upload de logo deve ter preview em tempo real?",
+        "status": "open",
+        "createdAt": "2026-03-01T10:00:00Z"
+      },
+      {
+        "id": "QP-02",
+        "prototypeId": "PT-001",
+        "prototypeName": "Cadastro de Tenant — Passo 1",
+        "question": "Validação de CNPJ deve ocorrer inline ou no submit?",
+        "status": "open",
+        "createdAt": "2026-03-01T10:30:00Z"
+      },
+      {
+        "id": "QP-03",
+        "prototypeId": "PT-002",
+        "prototypeName": "Dashboard Motor de Crédito",
+        "question": "Gráfico de score deve ter tooltip com details on hover?",
+        "status": "open",
+        "createdAt": "2026-03-02T09:00:00Z"
+      }
+    ],
+    "avgResolutionTimeDays": 1.2,
+    "recurrentPatterns": [
+      {
+        "pattern": "Navegação entre telas confusa",
+        "count": 7,
+        "percentage": 35
+      },
+      {
+        "pattern": "Falta de empty state",
+        "count": 5,
+        "percentage": 25
+      },
+      {
+        "pattern": "Problemas de acessibilidade",
+        "count": 4,
+        "percentage": 20
+      },
+      {
+        "pattern": "Inconsistência visual",
+        "count": 3,
+        "percentage": 15
+      },
+      {
+        "pattern": "Outros",
+        "count": 1,
+        "percentage": 5
+      }
+    ]
+  },
+  "screenCoverage": {
+    "ucsWithPrototype": 15,
+    "ucsWithoutPrototype": 5,
+    "totalScreensGenerated": 32,
+    "totalScreensPlanned": 42,
+    "screensWithoutMobile": 8,
+    "breakpointCoverage": [
+      {
+        "prototypeId": "PT-001",
+        "prototypeName": "Cadastro de Tenant — Passo 1",
+        "desktop": true,
+        "tablet": true,
+        "mobile": true
+      },
+      {
+        "prototypeId": "PT-002",
+        "prototypeName": "Dashboard Motor de Crédito",
+        "desktop": true,
+        "tablet": true,
+        "mobile": false
+      },
+      {
+        "prototypeId": "PT-003",
+        "prototypeName": "Listagem de Transações",
+        "desktop": true,
+        "tablet": false,
+        "mobile": false
+      },
+      {
+        "prototypeId": "PT-004",
+        "prototypeName": "Detalhes de Agente IA",
+        "desktop": true,
+        "tablet": true,
+        "mobile": true
+      },
+      {
+        "prototypeId": "PT-005",
+        "prototypeName": "Portal Antifraude",
+        "desktop": true,
+        "tablet": false,
+        "mobile": false
+      }
+    ]
+  },
+  "designConsistency": {
+    "componentReuseRate": 0.82,
+    "designSystemDeviations": [
+      {
+        "id": "DEV-001",
+        "prototypeId": "PT-003",
+        "prototypeName": "Listagem de Transações",
+        "component": "DataTable",
+        "deviation": "Espaçamento não segue grid de 8px",
+        "severity": "medium"
+      },
+      {
+        "id": "DEV-002",
+        "prototypeId": "PT-005",
+        "prototypeName": "Portal Antifraude",
+        "component": "AlertBanner",
+        "deviation": "Cor de alerta fora da paleta definida",
+        "severity": "high"
+      },
+      {
+        "id": "DEV-003",
+        "prototypeId": "PT-002",
+        "prototypeName": "Dashboard Motor de Crédito",
+        "component": "Sidebar",
+        "deviation": "Ícones com tamanho inconsistente (20px vs 16px)",
+        "severity": "low"
+      }
+    ],
+    "navigationInconsistencies": 1,
+    "colorPaletteCompliant": true,
+    "typographyCompliant": true,
+    "iconsStandardized": false
+  },
+  "accessibility": {
+    "avgWcagScore": 85,
+    "violations": [
+      {
+        "id": "A11Y-001",
+        "screenName": "Cadastro de Tenant — Passo 2",
+        "prototypeId": "PT-001",
+        "type": "contrast",
+        "description": "Contraste insuficiente no label do campo Razão Social (ratio 3.2:1, mínimo 4.5:1)",
+        "severity": "critical"
+      },
+      {
+        "id": "A11Y-002",
+        "screenName": "Listagem de Transações",
+        "prototypeId": "PT-003",
+        "type": "alt-text",
+        "description": "Ícone de status sem texto alternativo acessível",
+        "severity": "major"
+      },
+      {
+        "id": "A11Y-003",
+        "screenName": "Portal Antifraude",
+        "prototypeId": "PT-005",
+        "type": "focus",
+        "description": "Ordem de foco inconsistente no formulário de filtros",
+        "severity": "major"
+      }
+    ],
+    "screensWithoutA11yCheck": 2,
+    "keyboardNavValidated": 18,
+    "totalScreens": 32,
+    "ariaLandmarksValidated": 22
+  },
+  "usability": {
+    "avgHeuristicScore": 7.8,
+    "avgClickDepth": 2.4,
+    "deadEndFlows": [
+      {
+        "id": "DE-001",
+        "screenName": "Confirmação de Exclusão de Agente",
+        "prototypeId": "PT-004",
+        "description": "Após confirmar exclusão, usuário não tem caminho de volta claro"
+      }
+    ],
+    "feedbackCovered": 28,
+    "totalActions": 35,
+    "statesCoverage": {
+      "withEmptyState": 20,
+      "withErrorState": 18,
+      "withLoadingState": 25,
+      "totalScreens": 32
+    }
+  },
+  "feedbackLoop": {
+    "avgDraftToFinalDays": 2.1,
+    "avgRoundTrips": 1.4,
+    "approvalFirstReviewRate": 0.6,
+    "rejectionPatterns": [
+      {
+        "reason": "Navegação confusa",
+        "count": 7,
+        "percentage": 35
+      },
+      {
+        "reason": "Falta empty state",
+        "count": 5,
+        "percentage": 25
+      },
+      {
+        "reason": "Acessibilidade",
+        "count": 4,
+        "percentage": 20
+      },
+      {
+        "reason": "Inconsistência",
+        "count": 3,
+        "percentage": 15
+      },
+      {
+        "reason": "Outro",
+        "count": 1,
+        "percentage": 5
+      }
+    ],
+    "aiQualityScore": 72
+  },
+  "designDebt": {
+    "approvedWithCaveats": [
+      {
+        "id": "CAV-001",
+        "prototypeId": "PT-002",
+        "prototypeName": "Dashboard Motor de Crédito",
+        "caveat": "Gráfico de tendência aceito sem responsividade mobile — wave 2",
+        "createdAt": "2026-02-28T15:00:00Z"
+      },
+      {
+        "id": "CAV-002",
+        "prototypeId": "PT-003",
+        "prototypeName": "Listagem de Transações",
+        "caveat": "Filtros avançados simplificados — full version wave 3",
+        "createdAt": "2026-03-01T11:00:00Z"
+      }
+    ],
+    "screensWithDebtTags": 4,
+    "backlogItems": [
+      {
+        "id": "DDB-001",
+        "title": "Responsividade mobile Dashboard Motor de Crédito",
+        "priority": "high",
+        "wave": "wave-2"
+      },
+      {
+        "id": "DDB-002",
+        "title": "Filtros avançados Listagem de Transações",
+        "priority": "medium",
+        "wave": "wave-3"
+      },
+      {
+        "id": "DDB-003",
+        "title": "Micro-interações de feedback em formulários",
+        "priority": "low",
+        "wave": "wave-3"
+      }
+    ],
+    "debtIndex": 0.15
+  },
+  "pendingPrototypes": [
+    {
+      "id": "PT-001",
+      "ucId": "UC-005",
+      "ucName": "Cadastro de Tenant Multi-step",
+      "status": "draft",
+      "cycle": 1,
+      "maxCycles": 3,
+      "platform": "web+mobile",
+      "wcagScore": 78,
+      "lastUpdatedAt": "2026-03-02T14:00:00Z"
+    },
+    {
+      "id": "PT-006",
+      "ucId": "UC-012",
+      "ucName": "Análise de Risco de Crédito",
+      "status": "draft",
+      "cycle": 3,
+      "maxCycles": 3,
+      "platform": "web",
+      "wcagScore": 82,
+      "lastUpdatedAt": "2026-03-01T09:30:00Z"
+    },
+    {
+      "id": "PT-003",
+      "ucId": "UC-008",
+      "ucName": "Listagem de Transações com Filtros",
+      "status": "rejected",
+      "cycle": 2,
+      "maxCycles": 3,
+      "platform": "web",
+      "wcagScore": 65,
+      "lastUpdatedAt": "2026-02-28T16:00:00Z"
+    }
+  ],
+  "alerts": [
+    {
+      "id": "ALT-001",
+      "message": "2 protótipos aguardando aprovação no Gate UX há mais de 24h",
+      "severity": "critical",
+      "category": "gate-ux",
+      "createdAt": "2026-03-03T08:00:00Z"
+    },
+    {
+      "id": "ALT-002",
+      "message": "PT-006 no 3º ciclo de refinamento — último antes de escalada",
+      "severity": "warning",
+      "category": "cycle",
+      "createdAt": "2026-03-03T08:00:00Z"
+    },
+    {
+      "id": "ALT-003",
+      "message": "3 violações de acessibilidade WCAG AA detectadas",
+      "severity": "critical",
+      "category": "a11y",
+      "createdAt": "2026-03-03T08:00:00Z"
+    },
+    {
+      "id": "ALT-004",
+      "message": "5 UCs sem protótipo vinculado",
+      "severity": "warning",
+      "category": "coverage",
+      "createdAt": "2026-03-03T08:00:00Z"
+    },
+    {
+      "id": "ALT-005",
+      "message": "8 telas sem versão mobile quando projeto exige responsividade",
+      "severity": "warning",
+      "category": "coverage",
+      "createdAt": "2026-03-03T08:00:00Z"
+    }
+  ],
+  "updatedAt": "2026-03-03T08:15:00Z"
+}

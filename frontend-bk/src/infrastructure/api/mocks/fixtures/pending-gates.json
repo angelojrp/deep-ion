@@ -1,0 +1,12 @@
+[
+  {
+    "id": "pg-1",
+    "gateNumber": 2,
+    "issueNumber": 42,
+    "prNumber": 12,
+    "agentId": "DOM-05a",
+    "summary": "Aguardando aprovação de qualidade de negócio",
+    "classification": "T2",
+    "createdAt": "2026-03-02T09:45:00Z"
+  }
+]

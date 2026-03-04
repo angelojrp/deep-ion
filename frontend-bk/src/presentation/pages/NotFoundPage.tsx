@@ -1,0 +1,1 @@
+export const NotFoundPage = (): JSX.Element => <div>Página não encontrada</div>

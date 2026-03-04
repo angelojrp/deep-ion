@@ -1,0 +1,222 @@
+{
+  "useCases": {
+    "totalDraft": 24,
+    "totalValidated": 18,
+    "totalImplemented": 6,
+    "totalArchived": 2,
+    "withoutBusinessRules": [
+      { "id": "UC-018", "title": "Recálculo automático de limite pré-aprovado", "module": "Motor de Crédito", "createdAt": "2026-02-20T10:00:00Z" },
+      { "id": "UC-023", "title": "Notificação de vencimento de documento PJ", "module": "Onboarding PJ", "createdAt": "2026-02-25T14:30:00Z" },
+      { "id": "UC-031", "title": "Exportação de relatório de transações suspeitas", "module": "Antifraude", "createdAt": "2026-02-27T09:15:00Z" },
+      { "id": "UC-036", "title": "Consulta de score de crédito em batch", "module": "Motor de Crédito", "createdAt": "2026-02-28T16:00:00Z" },
+      { "id": "UC-042", "title": "Cancelamento de proposta pelo operador", "module": "Onboarding PJ", "createdAt": "2026-03-01T11:30:00Z" }
+    ],
+    "withoutGherkin": [
+      { "id": "UC-012", "title": "Abertura de conta digital PJ", "module": "Onboarding PJ" },
+      { "id": "UC-018", "title": "Recálculo automático de limite pré-aprovado", "module": "Motor de Crédito" },
+      { "id": "UC-025", "title": "Disparo de alerta de fraude em tempo real", "module": "Antifraude" },
+      { "id": "UC-031", "title": "Exportação de relatório de transações suspeitas", "module": "Antifraude" }
+    ],
+    "recentlyModified": [
+      { "id": "UC-015", "title": "Validação LGPD para dados PF", "module": "Motor de Crédito", "modifiedAt": "2026-03-03T09:00:00Z", "modifiedBy": "Ana Costa" },
+      { "id": "UC-008", "title": "Integração Keycloak SSO multi-tenant", "module": "Infraestrutura", "modifiedAt": "2026-03-02T16:30:00Z", "modifiedBy": "Carlos Lima" },
+      { "id": "UC-022", "title": "Fluxo de aprovação de crédito PJ", "module": "Motor de Crédito", "modifiedAt": "2026-03-02T14:00:00Z", "modifiedBy": "Maria Silva" }
+    ],
+    "byModule": [
+      { "module": "Motor de Crédito", "count": 15 },
+      { "module": "Onboarding PJ", "count": 12 },
+      { "module": "Antifraude", "count": 10 },
+      { "module": "Infraestrutura", "count": 8 },
+      { "module": "Portal Admin", "count": 5 }
+    ],
+    "avgModelingDays": 3.8
+  },
+  "businessRules": {
+    "total": 45,
+    "active": 38,
+    "deprecated": 4,
+    "inReview": 3,
+    "withoutExceptionFlow": [
+      { "id": "RN-009", "title": "Limite de crédito não pode exceder 5x a renda comprovada", "module": "Motor de Crédito" },
+      { "id": "RN-022", "title": "Prazo de validade da proposta é de 30 dias corridos", "module": "Onboarding PJ" },
+      { "id": "RN-038", "title": "Bloqueio automático por 3 tentativas de senha incorretas", "module": "Antifraude" }
+    ],
+    "orphaned": [
+      { "id": "RN-015", "title": "Taxa de juros mínima para operações consignadas", "module": "Motor de Crédito" },
+      { "id": "RN-041", "title": "Tempo máximo de resposta para consulta SERASA", "module": "Infraestrutura" }
+    ],
+    "contradictions": [
+      {
+        "ruleA": { "id": "RN-005", "title": "Aprovação automática para scores > 700" },
+        "ruleB": { "id": "RN-019", "title": "Toda proposta PJ requer análise humana" },
+        "description": "RN-005 aprova automaticamente mas RN-019 exige análise humana para PJ"
+      }
+    ],
+    "byModule": [
+      { "module": "Motor de Crédito", "count": 18 },
+      { "module": "Onboarding PJ", "count": 12 },
+      { "module": "Antifraude", "count": 8 },
+      { "module": "Infraestrutura", "count": 4 },
+      { "module": "Portal Admin", "count": 3 }
+    ]
+  },
+  "traceability": {
+    "coveragePercent": 82,
+    "matrix": [
+      { "ucId": "UC-001", "ucTitle": "Cadastro de novo tenant", "hasRN": true, "hasCriteria": true, "hasCode": true, "status": "complete" },
+      { "ucId": "UC-002", "ucTitle": "Login SSO multi-tenant", "hasRN": true, "hasCriteria": true, "hasCode": true, "status": "complete" },
+      { "ucId": "UC-003", "ucTitle": "Simulação de crédito PF", "hasRN": true, "hasCriteria": true, "hasCode": false, "status": "partial" },
+      { "ucId": "UC-005", "ucTitle": "Análise de risco automatizada", "hasRN": true, "hasCriteria": false, "hasCode": false, "status": "partial" },
+      { "ucId": "UC-008", "ucTitle": "Integração Keycloak SSO", "hasRN": false, "hasCriteria": false, "hasCode": false, "status": "missing" },
+      { "ucId": "UC-010", "ucTitle": "Dashboard PO", "hasRN": true, "hasCriteria": true, "hasCode": true, "status": "complete" },
+      { "ucId": "UC-012", "ucTitle": "Abertura de conta digital PJ", "hasRN": true, "hasCriteria": false, "hasCode": false, "status": "partial" },
+      { "ucId": "UC-015", "ucTitle": "Validação LGPD para dados PF", "hasRN": true, "hasCriteria": true, "hasCode": false, "status": "partial" },
+      { "ucId": "UC-018", "ucTitle": "Recálculo limite pré-aprovado", "hasRN": false, "hasCriteria": false, "hasCode": false, "status": "missing" },
+      { "ucId": "UC-022", "ucTitle": "Aprovação de crédito PJ", "hasRN": true, "hasCriteria": true, "hasCode": true, "status": "complete" }
+    ],
+    "brokenLinks": [
+      { "sourceId": "UC-029", "sourceTitle": "Reconciliação de lotes", "targetId": "RN-044", "issue": "RN-044 foi removida do catálogo" }
+    ],
+    "byModule": [
+      { "module": "Motor de Crédito", "coverage": 88 },
+      { "module": "Onboarding PJ", "coverage": 75 },
+      { "module": "Antifraude", "coverage": 70 },
+      { "module": "Infraestrutura", "coverage": 90 },
+      { "module": "Portal Admin", "coverage": 95 }
+    ],
+    "coverageTrend": [
+      { "week": "2026-W06", "coverage": 68 },
+      { "week": "2026-W07", "coverage": 72 },
+      { "week": "2026-W08", "coverage": 76 },
+      { "week": "2026-W09", "coverage": 82 }
+    ]
+  },
+  "specQuality": {
+    "avgInvestScore": 7.8,
+    "storiesBelowThreshold": [
+      { "id": "US-034", "title": "Como operador, quero cancelar proposta", "score": 5.2, "module": "Onboarding PJ", "issues": ["Não independente", "Critérios vagos"] },
+      { "id": "US-018", "title": "Como analista, quero recalcular limite", "score": 6.1, "module": "Motor de Crédito", "issues": ["Muito grande", "Sem critério mensurável"] },
+      { "id": "US-041", "title": "Como admin, quero gerenciar permissões", "score": 6.5, "module": "Portal Admin", "issues": ["Critérios incompletos"] },
+      { "id": "US-029", "title": "Como cliente PJ, quero consultar extrato", "score": 4.8, "module": "Onboarding PJ", "issues": ["Épico não fatiado", "Sem valor claro"] }
+    ],
+    "refinedPercent": 70,
+    "pendingRefinement": 12,
+    "totalStories": 40,
+    "vagueCriteria": [
+      { "storyId": "US-018", "storyTitle": "Recalcular limite pré-aprovado", "criterion": "O sistema deve recalcular rapidamente", "issue": "Termo 'rapidamente' é impreciso" },
+      { "storyId": "US-034", "storyTitle": "Cancelar proposta", "criterion": "O operador deve ter permissão adequada", "issue": "Não define qual permissão é necessária" }
+    ],
+    "gherkinCoverageByModule": [
+      { "module": "Motor de Crédito", "covered": 12, "total": 15 },
+      { "module": "Onboarding PJ", "covered": 7, "total": 12 },
+      { "module": "Antifraude", "covered": 8, "total": 10 },
+      { "module": "Infraestrutura", "covered": 7, "total": 8 },
+      { "module": "Portal Admin", "covered": 3, "total": 5 }
+    ]
+  },
+  "auditDom05a": {
+    "lastAuditResult": {
+      "demandId": "DEM-008",
+      "demandName": "Motor de Crédito v2 — Sprint 4",
+      "completeness": 0.88,
+      "consistency": 0.92,
+      "auditedAt": "2026-03-02T10:00:00Z"
+    },
+    "failedItems": [
+      { "id": "ART-015", "name": "UC-031 — Exportação de relatório", "reason": "Critérios Gherkin ausentes", "failedAt": "2026-03-02T10:00:00Z" },
+      { "id": "ART-022", "name": "RN-038 — Bloqueio por senha", "reason": "Fluxo de exceção não mapeado", "failedAt": "2026-03-02T10:00:00Z" },
+      { "id": "ART-028", "name": "US-034 — Cancelar proposta", "reason": "Score INVEST 5.2 (abaixo do threshold)", "failedAt": "2026-03-01T16:00:00Z" }
+    ],
+    "complianceTrend": [
+      { "week": "2026-W06", "approvalRate": 0.72 },
+      { "week": "2026-W07", "approvalRate": 0.78 },
+      { "week": "2026-W08", "approvalRate": 0.82 },
+      { "week": "2026-W09", "approvalRate": 0.85 }
+    ],
+    "gate2ApprovalRate": 0.85
+  },
+  "conflictsDuplicates": {
+    "conflicts": [
+      {
+        "demandA": { "id": "DEM-003", "title": "Motor de Crédito v2" },
+        "demandB": { "id": "DEM-007", "title": "Onboarding PJ Express" },
+        "description": "Ambas definem regras de validação de CPF/CNPJ com lógicas diferentes"
+      },
+      {
+        "demandA": { "id": "DEM-005", "title": "Antifraude Transacional" },
+        "demandB": { "id": "DEM-003", "title": "Motor de Crédito v2" },
+        "description": "Threshold de score para bloqueio diverge entre os módulos"
+      }
+    ],
+    "duplicates": [
+      { "id": "REQ-045", "title": "Validação de CNPJ na base da Receita Federal", "duplicateOfId": "REQ-012", "duplicateOfTitle": "Consulta de situação cadastral CNPJ" },
+      { "id": "REQ-067", "title": "Envio de e-mail de confirmação", "duplicateOfId": "REQ-033", "duplicateOfTitle": "Notificação por e-mail ao cliente" }
+    ]
+  },
+  "changeImpact": {
+    "recentChanges": [
+      {
+        "id": "CHG-001",
+        "artifactId": "UC-015",
+        "artifactTitle": "Validação LGPD para dados PF",
+        "changedAt": "2026-03-03T09:00:00Z",
+        "changedBy": "Ana Costa",
+        "affectedRNs": 3,
+        "affectedStories": 5,
+        "affectedScreens": 2,
+        "reviewed": true
+      },
+      {
+        "id": "CHG-002",
+        "artifactId": "RN-032",
+        "artifactTitle": "Nova regra de limite para consignado",
+        "changedAt": "2026-03-02T14:00:00Z",
+        "changedBy": "Carlos Lima",
+        "affectedRNs": 0,
+        "affectedStories": 3,
+        "affectedScreens": 1,
+        "reviewed": true
+      },
+      {
+        "id": "CHG-003",
+        "artifactId": "UC-022",
+        "artifactTitle": "Fluxo de aprovação de crédito PJ",
+        "changedAt": "2026-03-01T11:00:00Z",
+        "changedBy": "Maria Silva",
+        "affectedRNs": 4,
+        "affectedStories": 8,
+        "affectedScreens": 3,
+        "reviewed": false
+      }
+    ],
+    "unreviewedCount": 1
+  },
+  "requirementsDebt": {
+    "toDetail": [
+      { "id": "UC-039", "title": "Integração com bureau de crédito externo", "daysOpen": 12 },
+      { "id": "UC-044", "title": "Relatório consolidado de operações", "daysOpen": 8 },
+      { "id": "RN-048", "title": "Regra de escalonamento de alçada", "daysOpen": 15 },
+      { "id": "RN-051", "title": "Política de retry para serviços externos", "daysOpen": 6 },
+      { "id": "US-052", "title": "Exportação de dados para auditoria", "daysOpen": 10 }
+    ],
+    "placeholderRules": [
+      { "id": "RN-048", "title": "Regra de escalonamento de alçada", "text": "[TODO: Definir alçadas por valor e tipo de operação]" },
+      { "id": "RN-051", "title": "Política de retry para serviços externos", "text": "[TODO: Definir tempos e quantidade de retentativas]" }
+    ],
+    "incompleteOverXDays": [
+      { "id": "UC-039", "title": "Integração com bureau de crédito externo", "daysIncomplete": 12 },
+      { "id": "RN-048", "title": "Regra de escalonamento de alçada", "daysIncomplete": 15 },
+      { "id": "US-052", "title": "Exportação de dados para auditoria", "daysIncomplete": 10 }
+    ],
+    "debtIndex": 0.18
+  },
+  "alerts": [
+    { "id": "ALR-001", "message": "5 UCs sem regra de negócio associada", "severity": "critical", "category": "uc", "createdAt": "2026-03-03T08:00:00Z" },
+    { "id": "ALR-002", "message": "3 RNs sem fluxo de exceção mapeado", "severity": "critical", "category": "rn", "createdAt": "2026-03-03T08:00:00Z" },
+    { "id": "ALR-003", "message": "2 conflitos de requisitos detectados", "severity": "warning", "category": "conflict", "createdAt": "2026-03-03T08:00:00Z" },
+    { "id": "ALR-004", "message": "1 link de rastreabilidade quebrado", "severity": "warning", "category": "traceability", "createdAt": "2026-03-03T08:00:00Z" },
+    { "id": "ALR-005", "message": "4 stories com score INVEST < 7 aguardando refinamento", "severity": "warning", "category": "quality", "createdAt": "2026-03-03T08:00:00Z" },
+    { "id": "ALR-006", "message": "1 mudança em UC/RN sem revisão de impacto downstream", "severity": "critical", "category": "impact", "createdAt": "2026-03-03T08:00:00Z" }
+  ],
+  "updatedAt": "2026-03-03T10:30:00Z"
+}

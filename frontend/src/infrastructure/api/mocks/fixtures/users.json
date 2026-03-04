@@ -1,0 +1,329 @@
+{
+  "users": [
+    {
+      "id": "usr-001",
+      "name": "Ana Carolina Mendes",
+      "email": "ana.mendes@acme.com.br",
+      "roles": ["admin", "po"],
+      "status": "active",
+      "inviteStatus": "accepted",
+      "inviteSentAt": "2025-11-10T08:00:00Z",
+      "inviteAcceptedAt": "2025-11-10T09:15:00Z",
+      "createdAt": "2025-11-10T08:00:00Z",
+      "updatedAt": "2026-02-28T14:30:00Z",
+      "profile": {
+        "userId": "usr-001",
+        "photoUrl": "https://api.dicebear.com/9.x/avataaars/svg?seed=Ana",
+        "phones": [
+          { "id": "ph-001", "type": "mobile", "number": "+55 11 99876-5432", "isPrimary": true },
+          { "id": "ph-002", "type": "work", "number": "+55 11 3456-7890", "isPrimary": false }
+        ],
+        "bio": "Product Owner com 8 anos de experiência em fintechs e plataformas digitais. Especialista em discovery e validação de hipóteses de negócio.",
+        "location": "São Paulo, SP",
+        "timezone": "America/Sao_Paulo",
+        "languages": ["Português", "Inglês", "Espanhol"],
+        "skills": ["Product Discovery", "Lean Startup", "OKRs", "Scrum", "Kanban", "SQL", "Data Analytics", "User Research"],
+        "certifications": [
+          {
+            "id": "cert-001",
+            "name": "Certified Scrum Product Owner (CSPO)",
+            "issuer": "Scrum Alliance",
+            "issueDate": "2022-03-15",
+            "expirationDate": "2026-03-15",
+            "credentialUrl": "https://www.scrumalliance.org/verify/cert-001"
+          },
+          {
+            "id": "cert-002",
+            "name": "SAFe Product Owner/Product Manager",
+            "issuer": "Scaled Agile",
+            "issueDate": "2023-08-20",
+            "expirationDate": "2026-08-20",
+            "credentialUrl": null
+          }
+        ],
+        "experience": [
+          {
+            "id": "exp-001",
+            "company": "ACME Corp",
+            "role": "Product Owner Sênior",
+            "startDate": "2023-01-01",
+            "endDate": null,
+            "current": true,
+            "description": "Liderança de produto do Portal Financeiro com foco em conciliação bancária e gestão de cobranças."
+          },
+          {
+            "id": "exp-002",
+            "company": "FinTech Solutions",
+            "role": "Product Owner",
+            "startDate": "2020-06-01",
+            "endDate": "2022-12-31",
+            "current": false,
+            "description": "Responsável pela plataforma de pagamentos PIX e open banking."
+          }
+        ],
+        "education": [
+          {
+            "id": "edu-001",
+            "institution": "Universidade de São Paulo (USP)",
+            "degree": "MBA",
+            "field": "Gestão de Produtos Digitais",
+            "startDate": "2021-02-01",
+            "endDate": "2022-12-01",
+            "current": false
+          },
+          {
+            "id": "edu-002",
+            "institution": "Universidade Federal de Minas Gerais (UFMG)",
+            "degree": "Bacharelado",
+            "field": "Administração de Empresas",
+            "startDate": "2013-02-01",
+            "endDate": "2017-12-01",
+            "current": false
+          }
+        ],
+        "socialLinks": [
+          { "id": "sl-001", "type": "linkedin", "url": "https://linkedin.com/in/ana-mendes", "label": "LinkedIn" },
+          { "id": "sl-002", "type": "github", "url": "https://github.com/anamendes", "label": "GitHub" }
+        ],
+        "availabilityHoursPerWeek": 40,
+        "completedAt": "2025-11-12T10:00:00Z",
+        "updatedAt": "2026-02-28T14:30:00Z"
+      }
+    },
+    {
+      "id": "usr-002",
+      "name": "Ricardo Oliveira Santos",
+      "email": "ricardo.santos@acme.com.br",
+      "roles": ["architect", "tech-lead"],
+      "status": "active",
+      "inviteStatus": "accepted",
+      "inviteSentAt": "2025-11-12T10:00:00Z",
+      "inviteAcceptedAt": "2025-11-12T11:30:00Z",
+      "createdAt": "2025-11-12T10:00:00Z",
+      "updatedAt": "2026-03-01T09:00:00Z",
+      "profile": {
+        "userId": "usr-002",
+        "photoUrl": "https://api.dicebear.com/9.x/avataaars/svg?seed=Ricardo",
+        "phones": [
+          { "id": "ph-003", "type": "mobile", "number": "+55 21 98765-4321", "isPrimary": true }
+        ],
+        "bio": "Arquiteto de software com 12 anos de experiência. Especialista em microsserviços, cloud-native e arquitetura hexagonal.",
+        "location": "Rio de Janeiro, RJ",
+        "timezone": "America/Sao_Paulo",
+        "languages": ["Português", "Inglês"],
+        "skills": ["Java", "Spring Boot", "Kubernetes", "AWS", "Terraform", "Domain-Driven Design", "Event Sourcing", "CQRS", "PostgreSQL", "Redis"],
+        "certifications": [
+          {
+            "id": "cert-003",
+            "name": "AWS Solutions Architect Professional",
+            "issuer": "Amazon Web Services",
+            "issueDate": "2024-01-10",
+            "expirationDate": "2027-01-10",
+            "credentialUrl": "https://aws.amazon.com/verify/cert-003"
+          },
+          {
+            "id": "cert-004",
+            "name": "Certified Kubernetes Administrator (CKA)",
+            "issuer": "CNCF",
+            "issueDate": "2023-05-20",
+            "expirationDate": "2026-05-20",
+            "credentialUrl": null
+          }
+        ],
+        "experience": [
+          {
+            "id": "exp-003",
+            "company": "ACME Corp",
+            "role": "Arquiteto de Software",
+            "startDate": "2022-04-01",
+            "endDate": null,
+            "current": true,
+            "description": "Definição da arquitetura do Portal Financeiro e governança técnica dos módulos."
+          }
+        ],
+        "education": [
+          {
+            "id": "edu-003",
+            "institution": "PUC-Rio",
+            "degree": "Mestrado",
+            "field": "Engenharia de Software",
+            "startDate": "2015-03-01",
+            "endDate": "2017-07-01",
+            "current": false
+          }
+        ],
+        "socialLinks": [
+          { "id": "sl-003", "type": "linkedin", "url": "https://linkedin.com/in/ricardosantos", "label": "LinkedIn" },
+          { "id": "sl-004", "type": "github", "url": "https://github.com/ricardoosantos", "label": "GitHub" },
+          { "id": "sl-005", "type": "portfolio", "url": "https://ricardosantos.dev", "label": "Blog Técnico" }
+        ],
+        "availabilityHoursPerWeek": 40,
+        "completedAt": "2025-11-13T08:00:00Z",
+        "updatedAt": "2026-03-01T09:00:00Z"
+      }
+    },
+    {
+      "id": "usr-003",
+      "name": "Juliana Ferreira Costa",
+      "email": "juliana.costa@acme.com.br",
+      "roles": ["developer", "qa"],
+      "status": "active",
+      "inviteStatus": "accepted",
+      "inviteSentAt": "2025-12-01T14:00:00Z",
+      "inviteAcceptedAt": "2025-12-01T16:00:00Z",
+      "createdAt": "2025-12-01T14:00:00Z",
+      "updatedAt": "2026-02-15T11:00:00Z",
+      "profile": {
+        "userId": "usr-003",
+        "photoUrl": "https://api.dicebear.com/9.x/avataaars/svg?seed=Juliana",
+        "phones": [
+          { "id": "ph-004", "type": "mobile", "number": "+55 31 97654-3210", "isPrimary": true }
+        ],
+        "bio": "Desenvolvedora full-stack com foco em qualidade e testes automatizados. Apaixonada por clean code e boas práticas.",
+        "location": "Belo Horizonte, MG",
+        "timezone": "America/Sao_Paulo",
+        "languages": ["Português", "Inglês"],
+        "skills": ["TypeScript", "React", "Node.js", "Jest", "Cypress", "Docker", "CI/CD", "TDD"],
+        "certifications": [
+          {
+            "id": "cert-005",
+            "name": "ISTQB Certified Tester Foundation Level",
+            "issuer": "ISTQB",
+            "issueDate": "2023-09-15",
+            "expirationDate": null,
+            "credentialUrl": null
+          }
+        ],
+        "experience": [
+          {
+            "id": "exp-004",
+            "company": "ACME Corp",
+            "role": "Desenvolvedora Full-Stack",
+            "startDate": "2023-06-01",
+            "endDate": null,
+            "current": true,
+            "description": "Desenvolvimento de features do Portal Financeiro e automação de testes."
+          }
+        ],
+        "education": [
+          {
+            "id": "edu-004",
+            "institution": "UFMG",
+            "degree": "Bacharelado",
+            "field": "Ciência da Computação",
+            "startDate": "2016-02-01",
+            "endDate": "2020-12-01",
+            "current": false
+          }
+        ],
+        "socialLinks": [
+          { "id": "sl-006", "type": "linkedin", "url": "https://linkedin.com/in/julianacosta", "label": "LinkedIn" },
+          { "id": "sl-007", "type": "github", "url": "https://github.com/jucosta", "label": "GitHub" }
+        ],
+        "availabilityHoursPerWeek": 40,
+        "completedAt": "2025-12-02T09:00:00Z",
+        "updatedAt": "2026-02-15T11:00:00Z"
+      }
+    },
+    {
+      "id": "usr-004",
+      "name": "Carlos Eduardo Lima",
+      "email": "carlos.lima@acme.com.br",
+      "roles": ["business-analyst"],
+      "status": "pending",
+      "inviteStatus": "pending",
+      "inviteSentAt": "2026-03-01T10:00:00Z",
+      "inviteAcceptedAt": null,
+      "createdAt": "2026-03-01T10:00:00Z",
+      "updatedAt": "2026-03-01T10:00:00Z",
+      "profile": null
+    },
+    {
+      "id": "usr-005",
+      "name": "Mariana Souza Alves",
+      "email": "mariana.alves@acme.com.br",
+      "roles": ["ux-analyst"],
+      "status": "pending",
+      "inviteStatus": "pending",
+      "inviteSentAt": "2026-03-02T15:00:00Z",
+      "inviteAcceptedAt": null,
+      "createdAt": "2026-03-02T15:00:00Z",
+      "updatedAt": "2026-03-02T15:00:00Z",
+      "profile": null
+    },
+    {
+      "id": "usr-006",
+      "name": "Fernando Augusto Ribeiro",
+      "email": "fernando.ribeiro@acme.com.br",
+      "roles": ["devops"],
+      "status": "active",
+      "inviteStatus": "accepted",
+      "inviteSentAt": "2025-12-15T09:00:00Z",
+      "inviteAcceptedAt": "2025-12-15T10:30:00Z",
+      "createdAt": "2025-12-15T09:00:00Z",
+      "updatedAt": "2026-01-20T16:00:00Z",
+      "profile": {
+        "userId": "usr-006",
+        "photoUrl": "https://api.dicebear.com/9.x/avataaars/svg?seed=Fernando",
+        "phones": [
+          { "id": "ph-005", "type": "mobile", "number": "+55 41 96543-2109", "isPrimary": true }
+        ],
+        "bio": "Engenheiro DevOps com experiência em automação de infraestrutura, observabilidade e pipelines CI/CD seguros.",
+        "location": "Curitiba, PR",
+        "timezone": "America/Sao_Paulo",
+        "languages": ["Português", "Inglês"],
+        "skills": ["Kubernetes", "Terraform", "ArgoCD", "Prometheus", "Grafana", "AWS", "GCP", "GitHub Actions", "Vault"],
+        "certifications": [
+          {
+            "id": "cert-006",
+            "name": "HashiCorp Certified: Terraform Associate",
+            "issuer": "HashiCorp",
+            "issueDate": "2024-06-10",
+            "expirationDate": "2026-06-10",
+            "credentialUrl": null
+          }
+        ],
+        "experience": [
+          {
+            "id": "exp-005",
+            "company": "ACME Corp",
+            "role": "Engenheiro DevOps",
+            "startDate": "2024-01-01",
+            "endDate": null,
+            "current": true,
+            "description": "Manutenção da infraestrutura cloud e pipelines de entrega contínua."
+          }
+        ],
+        "education": [
+          {
+            "id": "edu-005",
+            "institution": "UTFPR",
+            "degree": "Bacharelado",
+            "field": "Engenharia da Computação",
+            "startDate": "2014-02-01",
+            "endDate": "2019-12-01",
+            "current": false
+          }
+        ],
+        "socialLinks": [
+          { "id": "sl-008", "type": "linkedin", "url": "https://linkedin.com/in/fernandoribeiro", "label": "LinkedIn" }
+        ],
+        "availabilityHoursPerWeek": 40,
+        "completedAt": "2025-12-16T10:00:00Z",
+        "updatedAt": "2026-01-20T16:00:00Z"
+      }
+    }
+  ],
+  "availableRoles": [
+    { "value": "admin", "label": "Administrador" },
+    { "value": "po", "label": "Product Owner" },
+    { "value": "architect", "label": "Arquiteto" },
+    { "value": "tech-lead", "label": "Tech Lead" },
+    { "value": "developer", "label": "Desenvolvedor" },
+    { "value": "qa", "label": "QA" },
+    { "value": "devops", "label": "DevOps" },
+    { "value": "business-analyst", "label": "Analista de Negócios" },
+    { "value": "requirements-analyst", "label": "Analista de Requisitos" },
+    { "value": "ux-analyst", "label": "Analista de UX" }
+  ]
+}

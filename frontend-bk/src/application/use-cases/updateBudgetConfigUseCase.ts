@@ -1,0 +1,1 @@
+export const updateBudgetConfigUseCase = async (): Promise<boolean> => Promise.resolve(true)

@@ -1,0 +1,73 @@
+== UX CONTEXT — deep-ion Frontend Design System ==
+
+This context block is injected into all UX agent prompts to ensure consistency.
+
+PROJECT STACK:
+- React 18.3.1 + TypeScript 5.7.2 (strict mode)
+- Tailwind CSS v4.0.0 (utility-first, JIT compiled)
+- shadcn/ui (Radix UI primitives + CVA + tailwind-merge)
+- TanStack Query v5.62.7 (server state)
+- Zustand v5.0.2 (client UI state only)
+- react-router-dom v6.30.0 (lazy loading mandatory)
+- react-i18next v15.4.1 (pt-BR default, en supported)
+- Vitest 2.1.8 + @testing-library/react 16.1.0
+
+LAYER ARCHITECTURE:
+- presentation/* → React components, pages, routes (UI only)
+- application/* → hooks (useXxx), use-cases, Zustand stores
+- domain/* → pure TypeScript models, validators, errors (NO framework imports)
+- infrastructure/* → API adapters, auth (OAuth2/PKCE), HTTP client
+
+PATH ALIASES:
+- @presentation/* → src/presentation/*
+- @application/* → src/application/*
+- @domain/* → src/domain/*
+- @infrastructure/* → src/infrastructure/*
+- @shared/* → src/shared/*
+- @assets/* → src/assets/*
+
+COMPONENT CONVENTIONS:
+- Use cn() from @shared/utils for Tailwind class merging
+- Named exports only (no default exports)
+- Props interface: {ComponentName}Props
+- All user-facing text via useTranslation() from react-i18next
+- WCAG 2.1 AA mandatory: aria-label on interactive elements, keyboard nav, focus management
+
+EXISTING COMPONENTS (shadcn/ui + custom):
+- UI primitives: Button, Card, Dialog, Input, Label, Select, Tabs, Toast, Badge, Avatar, DropdownMenu, Tooltip
+- Custom: ClassificationBadge, ConfidenceScoreBadge, GateActionButton, MaskedApiKey, PipelineProgress
+- Layout: AppShell, GlobalAdminSidebar, PageHeader, TenantSidebar, Topbar
+
+DESIGN TOKENS (from frontend-react-spa.yaml):
+- Colors: primary, secondary, destructive, muted, accent, background, foreground, card, popover, border, input, ring
+- Radius: sm (0.25rem), md (0.5rem), lg (0.75rem), xl (1rem)
+- All tokens available as CSS custom properties and Tailwind classes
+
+NIELSEN'S 10 HEURISTICS (summary):
+1. Visibility of system status — always show feedback
+2. Match between system and real world — use domain language
+3. User control and freedom — undo, cancel, go back
+4. Consistency and standards — same patterns everywhere
+5. Error prevention — validate early, confirm destructive ops
+6. Recognition rather than recall — show context, don't hide info
+7. Flexibility and efficiency — shortcuts for power users
+8. Aesthetic and minimalist design — every element earns its place
+9. Help users with errors — clear, specific, actionable messages
+10. Help and documentation — inline guidance for complex flows
+
+WCAG 2.1 AA KEY CRITERIA:
+- 1.1.1: Non-text content needs text alternatives (alt, aria-label)
+- 1.3.1: Info structure programmatically determinable (headings, labels)
+- 1.4.3: Contrast ratio ≥ 4.5:1 normal text, ≥ 3:1 large text
+- 2.1.1: All functionality keyboard-accessible
+- 2.4.7: Focus indicator visible
+- 3.3.1: Error identification — input errors clearly described
+- 3.3.2: Labels or instructions provided for user input
+
+FINTECH-SPECIFIC UX RULES:
+- Financial amounts always in BRL format: R$ 1.234,56
+- CPF always masked: ***.***.XXX-XX (LGPD compliance)
+- Destructive financial operations require explicit confirmation dialog
+- Transaction status uses semantic colors: confirmada=green, pendente=yellow, cancelada=red
+- Balance display: positive=green, negative=red, zero=muted
+- Date format: dd/mm/yyyy (Brazilian standard)

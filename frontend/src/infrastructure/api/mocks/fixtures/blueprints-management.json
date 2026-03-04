@@ -1,0 +1,90 @@
+{
+  "blueprints": [
+    {
+      "id": "bp-frontend-spa",
+      "name": "Frontend React SPA",
+      "description": "Blueprint para aplicações web SPA com React, TypeScript e camadas limpas.",
+      "category": "frontend",
+      "creationMode": "manual",
+      "currentVersion": "1.4.0",
+      "manualYaml": "blueprintName: frontend-react-spa\nstack:\n  framework: react\n  typescript: true\n  styling: tailwind\nfeatures:\n  - i18n\n  - msw\n  - react-query\n",
+      "linkedProjects": [
+        {
+          "projectId": "proj-portal-financeiro",
+          "projectName": "Portal Financeiro",
+          "version": "1.3.0"
+        },
+        {
+          "projectId": "proj-onboarding-cliente",
+          "projectName": "Onboarding Cliente PJ",
+          "version": "1.4.0"
+        }
+      ],
+      "versions": [
+        {
+          "version": "1.4.0",
+          "status": "in-use",
+          "createdAt": "2026-03-01T10:00:00Z",
+          "notes": "Ajuste de estrutura de rotas lazy e i18n."
+        },
+        {
+          "version": "1.3.0",
+          "status": "in-use",
+          "createdAt": "2026-02-20T09:00:00Z",
+          "notes": "Estabilização de testes e mocking MSW."
+        },
+        {
+          "version": "1.2.0",
+          "status": "superseded",
+          "createdAt": "2026-01-15T08:00:00Z",
+          "notes": "Versão base produtiva."
+        }
+      ],
+      "history": [
+        {
+          "id": "h-001",
+          "date": "2026-03-01T10:00:00Z",
+          "author": "Marina Costa",
+          "action": "Nova versão",
+          "detail": "Publicou versão 1.4.0 mantendo 1.3.0 ativa em projetos legados."
+        },
+        {
+          "id": "h-002",
+          "date": "2026-02-20T09:00:00Z",
+          "author": "Marina Costa",
+          "action": "Edição manual",
+          "detail": "Atualizou blueprint em YAML com políticas de lint e build."
+        }
+      ],
+      "updatedAt": "2026-03-01T10:00:00Z"
+    },
+    {
+      "id": "bp-modulith-backend",
+      "name": "Backend Modulith API First",
+      "description": "Blueprint para backend modulith com contrato API-first e trilha de compliance.",
+      "category": "backend",
+      "creationMode": "assisted",
+      "currentVersion": "2.0.0",
+      "manualYaml": "blueprintName: backend-modulith\nstack:\n  language: python\n  architecture: modulith\ncompliance:\n  - lgpd\n  - audit-trail\n",
+      "linkedProjects": [],
+      "versions": [
+        {
+          "version": "2.0.0",
+          "status": "active",
+          "createdAt": "2026-02-10T11:30:00Z",
+          "notes": "Versão inicial gerada com assistência de IA."
+        }
+      ],
+      "history": [
+        {
+          "id": "h-101",
+          "date": "2026-02-10T11:30:00Z",
+          "author": "Rafael Lima",
+          "action": "Criação assistida",
+          "detail": "Blueprint criado via chatbot com refinamento arquitetural."
+        }
+      ],
+      "updatedAt": "2026-02-10T11:30:00Z"
+    }
+  ]
+}

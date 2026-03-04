@@ -1,0 +1,15 @@
+{
+  "name": "fintech-docs-viewer",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Módulo independente para visualizar Markdown da pasta docs no navegador",
+  "type": "module",
+  "scripts": {
+    "dev": "node src/server.js",
+    "start": "node src/server.js"
+  },
+  "dependencies": {
+    "express": "^4.21.2",
+    "marked": "^15.0.7"
+  }
+}
