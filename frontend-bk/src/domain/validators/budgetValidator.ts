@@ -1,1 +1,0 @@
-export const isBudgetThresholdValid = (value: number): boolean => value >= 1 && value <= 100

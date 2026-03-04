@@ -1,1 +1,0 @@
-export const TenantSidebar = (): JSX.Element => <aside className="rounded border p-3">Tenant sidebar</aside>

@@ -1,1 +1,0 @@
-export const rejectGateUseCase = async (_issueNumber: number, _command: string): Promise<boolean> => Promise.resolve(true)

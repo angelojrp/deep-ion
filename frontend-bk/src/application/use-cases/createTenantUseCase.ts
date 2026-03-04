@@ -1,1 +1,0 @@
-export const createTenantUseCase = async (): Promise<boolean> => Promise.resolve(true)
