@@ -1,0 +1,181 @@
+name: fe-ux-agent
+
+on:
+  issues:
+    types: [labeled]
+  pull_request:
+    types: [labeled]
+
+permissions:
+  contents: read
+  issues: write
+  pull-requests: write
+
+jobs:
+  # ── SKILL-UX-00: UX Analysis ──────────────────────────────────────────────
+  ux-analysis:
+    if: >-
+      github.event_name == 'issues' &&
+      github.event.label.name == 'ux/analise-solicitada'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: pip install pydantic typer pyyaml
+
+      - name: Preflight env check
+        id: preflight
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          if [ -z "${GITHUB_TOKEN:-}" ]; then
+            echo "token_ok=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "token_ok=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Comment missing token
+        if: steps.preflight.outputs.token_ok != 'true'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.payload.issue.number,
+              body: '⚠️ DOM-04 UX Analysis: `GITHUB_TOKEN` ausente. Execução interrompida.'
+            });
+
+      - name: Run UX Analysis
+        if: steps.preflight.outputs.token_ok == 'true'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+          PYTHONPATH: src
+        run: |
+          python src/deep_ion/dom_04_frontend/skill_dev_fe_ux_00.py \
+            --issue ${{ github.event.issue.number }}
+
+  # ── SKILL-UX-01: Prototype Generator ───────────────────────────────────────
+  ux-prototype:
+    if: >-
+      github.event_name == 'issues' &&
+      github.event.label.name == 'ux/prototipo-solicitado'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: pip install pydantic typer pyyaml
+
+      - name: Preflight env check
+        id: preflight
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          if [ -z "${GITHUB_TOKEN:-}" ]; then
+            echo "token_ok=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "token_ok=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Run UX Prototype Generator
+        if: steps.preflight.outputs.token_ok == 'true'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+          PYTHONPATH: src
+        run: |
+          python src/deep_ion/dom_04_frontend/skill_dev_fe_ux_01.py \
+            --issue ${{ github.event.issue.number }}
+
+  # ── SKILL-UX-02: Component Generator ──────────────────────────────────────
+  ux-component:
+    if: >-
+      github.event_name == 'issues' &&
+      github.event.label.name == 'ux/componente-solicitado'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: pip install pydantic typer pyyaml
+
+      - name: Preflight env check
+        id: preflight
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          if [ -z "${GITHUB_TOKEN:-}" ]; then
+            echo "token_ok=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "token_ok=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Run UX Component Generator
+        if: steps.preflight.outputs.token_ok == 'true'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+          PYTHONPATH: src
+        run: |
+          python src/deep_ion/dom_04_frontend/skill_dev_fe_ux_02.py \
+            --issue ${{ github.event.issue.number }}
+
+  # ── SKILL-UX-03: PR UX Review ─────────────────────────────────────────────
+  ux-review:
+    if: >-
+      github.event_name == 'pull_request' &&
+      github.event.label.name == 'ux/review-solicitado'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: pip install pydantic typer pyyaml
+
+      - name: Preflight env check
+        id: preflight
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          if [ -z "${GITHUB_TOKEN:-}" ]; then
+            echo "token_ok=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "token_ok=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Run UX PR Review
+        if: steps.preflight.outputs.token_ok == 'true'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+          PYTHONPATH: src
+        run: |
+          python src/deep_ion/dom_04_frontend/skill_dev_fe_ux_03.py \
+            --pr ${{ github.event.pull_request.number }}

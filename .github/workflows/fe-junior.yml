@@ -1,0 +1,60 @@
+name: fe-junior
+
+on:
+  issues:
+    types: [labeled]
+
+permissions:
+  contents: read
+  issues: write
+  pull-requests: write
+
+jobs:
+  junior-codegen:
+    if: github.event.label.name == 'fe-agent/junior'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: |
+          pip install pydantic typer pyyaml
+
+      - name: Preflight env check
+        id: preflight
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          if [ -z "${GITHUB_TOKEN:-}" ]; then
+            echo "token_ok=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "token_ok=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Comment missing token
+        if: steps.preflight.outputs.token_ok != 'true'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.payload.issue.number,
+              body: '⚠️ DOM-04 FE Junior: `GITHUB_TOKEN` ausente. Execução interrompida.'
+            });
+
+      - name: Run FE Junior Agent
+        if: steps.preflight.outputs.token_ok == 'true'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+          PYTHONPATH: src
+        run: |
+          python src/deep_ion/dom_04_frontend/skill_dev_fe_junior.py \
+            --issue ${{ github.event.issue.number }}

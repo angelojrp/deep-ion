@@ -77,12 +77,23 @@ jobs:
           GITHUB_REPOSITORY: ${{ github.repository }}
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
           AI_PROVIDER_API_KEY: ${{ secrets.AI_PROVIDER_API_KEY }}
-          AI_PROVIDER_MODEL: gpt-4o-mini
+          AI_PROVIDER_MODEL: ${{ vars.AI_PROVIDER_MODEL || 'gpt-4o' }}
         run: |
-          if [ -z "${OPENAI_API_KEY:-}" ] && [ -z "${AI_PROVIDER_API_KEY:-}" ]; then
-            echo "ai_ok=false" >> "$GITHUB_OUTPUT"
+          # GITHUB_TOKEN é sempre disponível — Copilot Models é o provider padrão.
+          if [ -n "${GITHUB_TOKEN:-}" ]; then
+            echo "ai_ok=true"
+            echo "ai_provider=copilot" >> "$GITHUB_OUTPUT"
+          elif [ -n "${OPENAI_API_KEY:-}" ] || [ -n "${AI_PROVIDER_API_KEY:-}" ]; then
+            echo "ai_ok=true"
+            echo "ai_provider=openai" >> "$GITHUB_OUTPUT"
           else
+            echo "ai_ok=false" >> "$GITHUB_OUTPUT"
+            echo "ai_provider=none" >> "$GITHUB_OUTPUT"
+          fi
+          if [ -n "${GITHUB_TOKEN:-}" ] || [ -n "${OPENAI_API_KEY:-}" ] || [ -n "${AI_PROVIDER_API_KEY:-}" ]; then
             echo "ai_ok=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "ai_ok=false" >> "$GITHUB_OUTPUT"
           fi
 
       - name: Comment missing AI config (REQ-01)
@@ -95,7 +106,7 @@ jobs:
               owner: context.repo.owner,
               repo: context.repo.repo,
               issue_number,
-              body: 'ℹ️ DOM-02 preflight: chave de IA não configurada (`OPENAI_API_KEY`/`AI_PROVIDER_API_KEY`). O REQ-01 seguirá com fallback determinístico local.'
+              body: 'ℹ️ DOM-02 preflight: nenhum provider de IA disponível (`GITHUB_TOKEN`/`OPENAI_API_KEY`/`AI_PROVIDER_API_KEY`). O REQ-01 seguirá com fallback determinístico local.'
             });
 
       - name: Run SKILL-REQ-01
@@ -103,6 +114,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GITHUB_REPOSITORY: ${{ github.repository }}
-          AI_PROVIDER_MODEL: gpt-4o-mini
+          AI_PROVIDER: copilot
+          AI_PROVIDER_MODEL: ${{ vars.AI_PROVIDER_MODEL || 'gpt-4o' }}
         run: |
           python .github/requirements/skill_req_01.py --issue ${{ github.event.issue.number }}
