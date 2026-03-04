@@ -10,6 +10,7 @@ import { usersHandlers } from './users.handlers'
 import { agentsHandlers } from './agents.handlers'
 import { pipelinesHandlers } from './pipelines.handlers'
 import { projectKickoffHandlers } from './project-kickoff.handlers'
+import { tenantsHandlers } from './tenants.handlers'
 
 export const handlers: RequestHandler[] = [
   ...poDashboardHandlers,
@@ -23,4 +24,5 @@ export const handlers: RequestHandler[] = [
   ...agentsHandlers,
   ...pipelinesHandlers,
   ...projectKickoffHandlers,
+  ...tenantsHandlers,
 ]

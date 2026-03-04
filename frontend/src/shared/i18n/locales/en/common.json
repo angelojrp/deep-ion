@@ -1295,5 +1295,123 @@
         "blocked": "Blocked"
       }
     }
+  },
+  "tenants": {
+    "pageTitle": "Tenant Management",
+    "pageSubtitle": "View and manage client organizations on the platform",
+    "newTenant": "+ New Tenant",
+    "provisionFirst": "+ Provision First Tenant",
+    "searchPlaceholder": "Search by name or slug...",
+    "filterAll": "All",
+    "filterActive": "Active",
+    "filterInactive": "Inactive",
+    "columns": {
+      "tenant": "Tenant",
+      "tenantId": "ID",
+      "status": "Status",
+      "members": "Members",
+      "createdAt": "Created at",
+      "actions": "Actions"
+    },
+    "status": {
+      "ATIVO": "Active",
+      "INATIVO": "Inactive"
+    },
+    "actions": {
+      "viewDetails": "View details",
+      "edit": "Edit",
+      "deactivate": "Deactivate"
+    },
+    "empty": {
+      "title": "No tenants registered",
+      "description": "No tenants registered. Provision the first tenant to get started.",
+      "noResults": "No tenants found for \"{{term}}\"."
+    },
+    "error": {
+      "load": "Could not load tenants. Check your connection and try again.",
+      "create": "Could not provision the tenant. Try again.",
+      "update": "Could not save. Check the fields and try again.",
+      "deactivate": "Could not deactivate the tenant. Try again.",
+      "reactivate": "Could not reactivate the tenant. Try again.",
+      "slugDuplicate": "This slug is already in use. Choose a different slug."
+    },
+    "success": {
+      "created": "Tenant {{name}} provisioned. Invite sent to {{email}}.",
+      "updated": "Changes saved successfully.",
+      "deactivated": "{{name}} has been deactivated. Member access has been blocked.",
+      "reactivated": "{{name}} has been reactivated. Member access has been restored."
+    },
+    "create": {
+      "title": "Provision New Tenant",
+      "subtitle": "Fill in the details to create a new client organization",
+      "sectionOrg": "Organization Details",
+      "sectionAdmin": "Initial Administrator",
+      "sectionPhones": "Administrator Phones",
+      "nome": "Organization name",
+      "nomePlaceholder": "E.g.: ACME Corp",
+      "slug": "Slug",
+      "slugHelp": "Only lowercase letters, numbers and hyphens. Auto-generated — editable before saving.",
+      "slugReadonly": "The slug cannot be changed after creation.",
+      "slugPreview": "app.deepion.net/{{slug}}",
+      "emailAdmin": "Administrator email",
+      "emailAdminPlaceholder": "admin@company.com",
+      "primeiroNome": "First name",
+      "primeiroNomePlaceholder": "Maria",
+      "sobrenome": "Last name",
+      "sobrenomePlaceholder": "Santos",
+      "telefone": "Phone",
+      "telefonePlaceholder": "+55 11999887766",
+      "addPhone": "+ Add phone",
+      "removePhone": "Remove phone",
+      "countryCode": "Country code",
+      "submit": "Provision Tenant",
+      "submitting": "Provisioning..."
+    },
+    "detail": {
+      "title": "Tenant Detail",
+      "sectionIdentification": "Identification",
+      "sectionStatus": "Status",
+      "sectionMembers": "Squad Members",
+      "sectionDangerZone": "Danger Zone",
+      "tenantId": "Tenant ID",
+      "tenantIdHelp": "Auto-generated (ULID). Propagated as tenant_id claim in the JWT.",
+      "nome": "Organization name",
+      "slug": "Slug",
+      "slugReadonly": "\uD83D\uDD12 The slug cannot be changed after creation.",
+      "statusLabel": "Tenant status",
+      "statusActive": "Active",
+      "statusInactive": "Inactive",
+      "reactivateHelp": "Reactivating will enable member access immediately.",
+      "deactivateHelp": "Turning off will prompt confirmation before deactivating the tenant.",
+      "membersCount": "{{count}} active member(s)",
+      "membersInfo": "Individual member management is done by the Tenant Administrator.",
+      "infrastructure": "In MVP, all tenants operate on shared infrastructure.",
+      "emailAdmin": "Initial admin email",
+      "createdAt": "Created at",
+      "saveChanges": "Save Changes",
+      "saving": "Saving...",
+      "deactivateTenant": "Deactivate Tenant",
+      "deactivateWarning": "Deactivating immediately invalidates all active member sessions.",
+      "backToList": "Back to list"
+    },
+    "deactivate": {
+      "title": "Deactivate Tenant",
+      "message": "Are you sure you want to deactivate the tenant <strong>{{name}}</strong>?",
+      "warning": "Deactivating the tenant will immediately invalidate all active sessions of {{count}} members.",
+      "confirm": "Deactivate Tenant",
+      "confirming": "Deactivating...",
+      "cancel": "Cancel"
+    },
+    "pagination": {
+      "showing": "Showing {{from}}-{{to}} of {{total}} tenants",
+      "previous": "Previous",
+      "next": "Next",
+      "page": "Page {{page}} of {{totalPages}}"
+    },
+    "summary": {
+      "total": "{{count}} tenant(s)",
+      "active": "{{count}} active",
+      "inactive": "{{count}} inactive"
+    }
   }
 }

@@ -1295,5 +1295,123 @@
         "blocked": "Bloqueada"
       }
     }
+  },
+  "tenants": {
+    "pageTitle": "Gestão de Tenants",
+    "pageSubtitle": "Visualize e gerencie as organizações clientes da plataforma",
+    "newTenant": "+ Novo Tenant",
+    "provisionFirst": "+ Provisionar Primeiro Tenant",
+    "searchPlaceholder": "Buscar por nome ou slug...",
+    "filterAll": "Todos",
+    "filterActive": "Ativos",
+    "filterInactive": "Inativos",
+    "columns": {
+      "tenant": "Tenant",
+      "tenantId": "ID",
+      "status": "Status",
+      "members": "Membros",
+      "createdAt": "Criado em",
+      "actions": "Ações"
+    },
+    "status": {
+      "ATIVO": "Ativo",
+      "INATIVO": "Inativo"
+    },
+    "actions": {
+      "viewDetails": "Ver detalhes",
+      "edit": "Editar",
+      "deactivate": "Desativar"
+    },
+    "empty": {
+      "title": "Nenhum tenant cadastrado",
+      "description": "Nenhum tenant cadastrado. Provisione o primeiro tenant para começar.",
+      "noResults": "Nenhum tenant encontrado para \"{{term}}\"."
+    },
+    "error": {
+      "load": "Não foi possível carregar os tenants. Verifique a conexão e tente novamente.",
+      "create": "Não foi possível provisionar o tenant. Tente novamente.",
+      "update": "Não foi possível salvar. Verifique os campos e tente novamente.",
+      "deactivate": "Não foi possível desativar o tenant. Tente novamente.",
+      "reactivate": "Não foi possível reativar o tenant. Tente novamente.",
+      "slugDuplicate": "Este slug já está em uso. Escolha um slug diferente."
+    },
+    "success": {
+      "created": "Tenant {{name}} provisionado. Convite enviado para {{email}}.",
+      "updated": "Alterações salvas com sucesso.",
+      "deactivated": "{{name}} foi desativado. O acesso dos membros foi bloqueado.",
+      "reactivated": "{{name}} foi reativado. O acesso dos membros foi restaurado."
+    },
+    "create": {
+      "title": "Provisionar Novo Tenant",
+      "subtitle": "Preencha os dados para criar uma nova organização cliente",
+      "sectionOrg": "Dados da Organização",
+      "sectionAdmin": "Administrador Inicial",
+      "sectionPhones": "Telefones do Administrador",
+      "nome": "Nome da organização",
+      "nomePlaceholder": "Ex: ACME Corp",
+      "slug": "Slug",
+      "slugHelp": "Apenas letras minúsculas, números e hífens. Gerado automaticamente — editável antes de salvar.",
+      "slugReadonly": "O slug não pode ser alterado após o cadastro.",
+      "slugPreview": "app.deepion.net/{{slug}}",
+      "emailAdmin": "E-mail do administrador",
+      "emailAdminPlaceholder": "admin@empresa.com.br",
+      "primeiroNome": "Primeiro nome",
+      "primeiroNomePlaceholder": "Maria",
+      "sobrenome": "Sobrenome",
+      "sobrenomePlaceholder": "Santos",
+      "telefone": "Telefone",
+      "telefonePlaceholder": "+55 11999887766",
+      "addPhone": "+ Adicionar telefone",
+      "removePhone": "Remover telefone",
+      "countryCode": "Código do país",
+      "submit": "Provisionar Tenant",
+      "submitting": "Provisionando..."
+    },
+    "detail": {
+      "title": "Detalhe do Tenant",
+      "sectionIdentification": "Identificação",
+      "sectionStatus": "Status",
+      "sectionMembers": "Membros do Squad",
+      "sectionDangerZone": "Zona de Perigo",
+      "tenantId": "Tenant ID",
+      "tenantIdHelp": "Gerado automaticamente (ULID). Propagado como claim tenant_id no JWT.",
+      "nome": "Nome da organização",
+      "slug": "Slug",
+      "slugReadonly": "\uD83D\uDD12 O slug não pode ser alterado após o cadastro.",
+      "statusLabel": "Status do tenant",
+      "statusActive": "Ativo",
+      "statusInactive": "Inativo",
+      "reactivateHelp": "Reativar habilitará o acesso dos membros imediatamente.",
+      "deactivateHelp": "Ao desligar, o sistema solicitará confirmação antes de desativar o tenant.",
+      "membersCount": "{{count}} membro(s) ativo(s)",
+      "membersInfo": "O gerenciamento individual de membros é feito pelo Administrador do Tenant.",
+      "infrastructure": "No MVP, todos os tenants operam em infraestrutura compartilhada.",
+      "emailAdmin": "E-mail do admin inicial",
+      "createdAt": "Criado em",
+      "saveChanges": "Salvar Alterações",
+      "saving": "Salvando...",
+      "deactivateTenant": "Desativar Tenant",
+      "deactivateWarning": "Desativar invalida imediatamente todas as sessões ativas dos membros.",
+      "backToList": "Voltar à listagem"
+    },
+    "deactivate": {
+      "title": "Desativar Tenant",
+      "message": "Tem certeza que deseja desativar o tenant <strong>{{name}}</strong>?",
+      "warning": "Desativar tenant invalidará imediatamente todas as sessões ativas dos {{count}} membros.",
+      "confirm": "Desativar Tenant",
+      "confirming": "Desativando...",
+      "cancel": "Cancelar"
+    },
+    "pagination": {
+      "showing": "Exibindo {{from}}-{{to}} de {{total}} tenants",
+      "previous": "Anterior",
+      "next": "Próxima",
+      "page": "Página {{page}} de {{totalPages}}"
+    },
+    "summary": {
+      "total": "{{count}} tenant(s)",
+      "active": "{{count}} ativo(s)",
+      "inactive": "{{count}} inativo(s)"
+    }
   }
 }

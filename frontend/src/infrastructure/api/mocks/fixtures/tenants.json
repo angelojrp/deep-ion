@@ -1,0 +1,122 @@
+[
+  {
+    "tenant_id": "01HXYZ1A2B3C4D5E6F7G8H9J0K",
+    "nome": "ACME Corp",
+    "slug": "acme-corp",
+    "status": "ATIVO",
+    "criado_em": "2026-01-15T10:30:00Z",
+    "email_admin": "maria.santos@acmecorp.com.br",
+    "primeiro_nome_admin": "Maria",
+    "sobrenome_admin": "Santos",
+    "telefones_admin": ["+55 11998765432", "+55 1134567890"],
+    "membros_ativos": 12
+  },
+  {
+    "tenant_id": "01HXYZ2B3C4D5E6F7G8H9J0KL",
+    "nome": "FinPay Soluções",
+    "slug": "finpay-solucoes",
+    "status": "ATIVO",
+    "criado_em": "2026-01-20T14:00:00Z",
+    "email_admin": "carlos.oliveira@finpay.com.br",
+    "primeiro_nome_admin": "Carlos",
+    "sobrenome_admin": "Oliveira",
+    "telefones_admin": ["+55 21987654321"],
+    "membros_ativos": 8
+  },
+  {
+    "tenant_id": "01HXYZ3C4D5E6F7G8H9J0KLM",
+    "nome": "TechBank Digital",
+    "slug": "techbank-digital",
+    "status": "ATIVO",
+    "criado_em": "2026-02-01T09:15:00Z",
+    "email_admin": "ana.costa@techbank.com.br",
+    "primeiro_nome_admin": "Ana",
+    "sobrenome_admin": "Costa",
+    "telefones_admin": ["+55 31999887766"],
+    "membros_ativos": 15
+  },
+  {
+    "tenant_id": "01HXYZ4D5E6F7G8H9J0KLMN",
+    "nome": "Credix Financeira",
+    "slug": "credix-financeira",
+    "status": "INATIVO",
+    "criado_em": "2026-02-05T11:45:00Z",
+    "email_admin": "roberto.silva@credix.com.br",
+    "primeiro_nome_admin": "Roberto",
+    "sobrenome_admin": "Silva",
+    "telefones_admin": [],
+    "membros_ativos": 0
+  },
+  {
+    "tenant_id": "01HXYZ5E6F7G8H9J0KLMNP",
+    "nome": "NovaPag Serviços",
+    "slug": "novapag-servicos",
+    "status": "ATIVO",
+    "criado_em": "2026-02-10T08:00:00Z",
+    "email_admin": "fernanda.lima@novapag.com.br",
+    "primeiro_nome_admin": "Fernanda",
+    "sobrenome_admin": "Lima",
+    "telefones_admin": ["+55 47988776655", "+55 4733221100"],
+    "membros_ativos": 6
+  },
+  {
+    "tenant_id": "01HXYZ6F7G8H9J0KLMNPQ",
+    "nome": "WealthTech Gestão",
+    "slug": "wealthtech-gestao",
+    "status": "ATIVO",
+    "criado_em": "2026-02-15T13:30:00Z",
+    "email_admin": "lucas.mendes@wealthtech.com.br",
+    "primeiro_nome_admin": "Lucas",
+    "sobrenome_admin": "Mendes",
+    "telefones_admin": ["+55 61999001122"],
+    "membros_ativos": 4
+  },
+  {
+    "tenant_id": "01HXYZ7G8H9J0KLMNPQR",
+    "nome": "BankFlow Systems",
+    "slug": "bankflow-systems",
+    "status": "ATIVO",
+    "criado_em": "2026-02-20T16:00:00Z",
+    "email_admin": "patricia.souza@bankflow.io",
+    "primeiro_nome_admin": "Patrícia",
+    "sobrenome_admin": "Souza",
+    "telefones_admin": ["+55 11977665544"],
+    "membros_ativos": 10
+  },
+  {
+    "tenant_id": "01HXYZ8H9J0KLMNPQRS",
+    "nome": "CréditoJá Express",
+    "slug": "creditoja-express",
+    "status": "INATIVO",
+    "criado_em": "2026-02-25T10:00:00Z",
+    "email_admin": "joao.ferreira@creditoja.com.br",
+    "primeiro_nome_admin": "João",
+    "sobrenome_admin": "Ferreira",
+    "telefones_admin": ["+55 85988112233"],
+    "membros_ativos": 0
+  },
+  {
+    "tenant_id": "01HXYZ9J0KLMNPQRST",
+    "nome": "PixPay Brasil",
+    "slug": "pixpay-brasil",
+    "status": "ATIVO",
+    "criado_em": "2026-03-01T07:45:00Z",
+    "email_admin": "juliana.rocha@pixpay.com.br",
+    "primeiro_nome_admin": "Juliana",
+    "sobrenome_admin": "Rocha",
+    "telefones_admin": ["+55 41987654321", "+55 41332211000"],
+    "membros_ativos": 9
+  },
+  {
+    "tenant_id": "01HXYZA0KLMNPQRSTU",
+    "nome": "OpenFin Tecnologia",
+    "slug": "openfin-tecnologia",
+    "status": "ATIVO",
+    "criado_em": "2026-03-02T15:20:00Z",
+    "email_admin": "ricardo.almeida@openfin.com.br",
+    "primeiro_nome_admin": "Ricardo",
+    "sobrenome_admin": "Almeida",
+    "telefones_admin": ["+55 19999887766"],
+    "membros_ativos": 3
+  }
+]

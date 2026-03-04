@@ -10,6 +10,12 @@ const DashboardPage = lazy(() =>
 const TenantsPage = lazy(() =>
   import('@presentation/pages/TenantsPage').then((m) => ({ default: m.TenantsPage })),
 )
+const TenantCreatePage = lazy(() =>
+  import('@presentation/pages/TenantCreatePage').then((m) => ({ default: m.TenantCreatePage })),
+)
+const TenantDetailPage = lazy(() =>
+  import('@presentation/pages/TenantDetailPage').then((m) => ({ default: m.TenantDetailPage })),
+)
 const ProjectsPage = lazy(() =>
   import('@presentation/pages/ProjectsPage').then((m) => ({ default: m.ProjectsPage })),
 )
@@ -112,6 +118,22 @@ const router = createBrowserRouter([
         element: (
           <Suspense fallback={<LoadingFallback />}>
             <TenantsPage />
+          </Suspense>
+        ),
+      },
+      {
+        path: ROUTES.TENANTS_NEW,
+        element: (
+          <Suspense fallback={<LoadingFallback />}>
+            <TenantCreatePage />
+          </Suspense>
+        ),
+      },
+      {
+        path: ROUTES.TENANT_DETAIL,
+        element: (
+          <Suspense fallback={<LoadingFallback />}>
+            <TenantDetailPage />
           </Suspense>
         ),
       },
