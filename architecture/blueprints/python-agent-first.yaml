@@ -1,0 +1,669 @@
+blueprintName: python-agent-first
+version: "1.1.0"
+
+description: >
+  Agent-oriented Python architecture for autonomous pipeline skills.
+  Process-isolated scripts, AI-provider-agnostic LLM integration,
+  and GitHub as the single message bus between skills.
+  Mirrors the modulith-api-first blueprint conventions adapted to Python 3.12+.
+
+variables:
+  basePackage: deep_ion
+  pythonVersion: "3.12"
+
+llm_behavior:
+  default_mode: execution_only
+  explanation_mode: opt_in
+  strict_conformance: true  # LLM must not deviate from rules below
+
+# ─────────────────────────────────────────────────────────────────────────────
+# ARCHITECTURE
+# ─────────────────────────────────────────────────────────────────────────────
+
+architecture:
+
+  conventions:
+
+    language:
+      mandatory: true
+      rules:
+        - All code must be written in English.
+        - Class names must be in PascalCase.
+        - Function and variable names must be in snake_case.
+        - Constants must be in SCREAMING_SNAKE_CASE.
+        - Module and package names must be lowercase with underscores.
+        - Business documentation may be multilingual, but code must remain English.
+
+    type_annotations:
+      mandatory: true
+      rules:
+        - All function parameters must be type-annotated.
+        - All function return types must be declared.
+        - Use `from __future__ import annotations` for forward references.
+        - "'Any' is forbidden except at explicit adapter boundaries."
+        - Use `TypeAlias` for complex compound types.
+        - Return types must never be implicit (missing return type = lint error).
+        - Prefer `typing.Protocol` over ABC for dependency injection boundaries.
+        - Use `typing.assert_never` for exhaustive match statements.
+        - Prefer `TypedDict` for read-only structured dicts; prefer Pydantic models for validated mutable data.
+        - Use `Self` (typing.Self) instead of string-quoted class name in return types.
+
+    type_checker:
+      mandatory: true
+      tool: mypy
+      mode: strict
+      config_section: pyproject.toml ([tool.mypy])
+      rules:
+        - mypy must run in strict mode (`--strict`) — no implicit Any allowed.
+        - All third-party stubs must be installed (e.g. types-requests, types-PyYAML).
+        - CI must fail if mypy reports any error.
+        - Per-file ignores are allowed only at provider adapter boundaries; must be commented.
+        - pyright may be used as an alternative but mypy is the canonical CI check.
+
+    style:
+      formatter: ruff
+      linter: ruff
+      config_section: pyproject.toml ([tool.ruff])
+      rules:
+        - Line length must not exceed 120 characters.
+        - Imports must be sorted (isort rules enforced via ruff, rule-set I).
+        - No unused imports allowed (rule F401).
+        - No wildcard imports (from x import *) — rule F403/F401.
+        - Prefer f-strings over .format() or %-formatting (rule UP032).
+        - All public symbols must have docstrings (Google style).
+        - Prefer `pathlib.Path` over `os.path` for all filesystem operations (rule PTH).
+        - Use `logging` only through `structlog` — never import stdlib `logging` directly.
+        - All public packages must declare `__all__` to define their exported surface.
+        - No mutable default arguments (rule B006).
+        - No `print()` in production code — use structured logger (rule T201).
+
+      ruff_select:
+        - E       # pycodestyle errors
+        - F       # pyflakes
+        - I       # isort
+        - N       # pep8-naming
+        - B       # flake8-bugbear
+        - UP      # pyupgrade
+        - PTH     # pathlib-over-os
+        - T20     # flake8-print
+        - TID252  # ban relative imports
+        - SIM     # flake8-simplify
+        - C90     # mccabe complexity (max-complexity = 10)
+        - ANN     # flake8-annotations (enforces type hints)
+        - S       # flake8-bandit (basic security checks in ruff)
+
+    exceptions:
+      rules:
+        - Define a base exception class per agent/module (e.g. `DeepIonError`).
+        - Never raise bare `Exception` or `BaseException` in production code.
+        - Exception messages must be in English and descriptive.
+        - Catch specific exception types — never bare `except:` or `except Exception:`.
+        - Use `raise ... from err` to preserve exception chain context.
+        - Agent-level errors (confidenceError, GitHubAPIError, LLMProviderError) must
+          be typed exceptions in the domain or infrastructure layer.
+
+  project_structure:
+
+    layout:
+      pyproject.toml: Dependency and tool configuration (single source of truth)
+      uv.lock: Pinned dependency lockfile — must be committed
+      .python-version: Pins the exact Python version for uv and pyenv (e.g. "3.12.9")
+      README.md: Project description and quickstart
+      justfile: Task runner (or Makefile) — canonical dev commands (lint, test, run)
+      .pre-commit-config.yaml: Pre-commit hook definitions
+      .github/: GitHub Actions workflows
+      src/{package}/: All production source — src-layout mandatory
+      tests/: Test suite mirroring src layout
+      docs/: Skill and module documentation
+
+    src_layout:
+      mandatory: true
+      reason: >
+        Prevents accidental imports from the project root instead of the
+        installed package. Required for all non-trivial Python projects.
+
+    entry_points:
+      declaration: pyproject.toml [project.scripts]
+      reason: >
+        Skill scripts must be registered as CLI entry points so they can be
+        invoked via `uv run skill-req-00 --issue N` without hardcoded paths.
+      rules:
+        - Each skill exposes exactly one entry point.
+        - Entry point name follows pattern: `skill-{agentId}-{NN}` (kebab-case).
+        - Entry point target: `{basePackage}.{agentName}.skill_{agentId}_{NN}:main`.
+        - The `main()` function must use `typer` (or `argparse`) for CLI parsing.
+
+    package_structure:
+      rootPackage: "{basePackage}"
+      agentPackage: "{basePackage}.{agentName}"
+      layout: |
+        src/{basePackage}/
+          {agentName}/
+            skill_{agentId}_{N:02d}.py    # entry point per skill
+            providers/                    # AI provider abstraction
+            domain/                       # pure business logic
+            infrastructure/              # GitHub API adapter
+            audit/                       # DecisionRecord / Audit Ledger
+
+  dependency_management:
+    tool: uv
+    file: pyproject.toml
+    lockfile: uv.lock
+    rules:
+      - No requirements.txt as primary dependency source.
+      - All runtime dependencies declared in [project.dependencies].
+      - Dev and test dependencies declared in [dependency-groups.dev] — NOT in
+        [project.optional-dependencies] (uv convention since uv 0.4+).
+      - Pin exact versions via uv.lock; the lock file must be committed.
+      - No transitive dependency overrides without documented justification.
+      - Avoid heavy frameworks (LangChain, CrewAI) — use provider SDKs directly.
+      - Use `uv venv` to create the virtual environment (.venv in project root).
+      - Use `uv sync` to install all dependencies including dev group.
+      - Use `uv run <command>` to execute any tool in the managed environment.
+      - Use `uv add <pkg>` / `uv remove <pkg>` to manage dependencies (never edit
+        [project.dependencies] manually without running `uv lock` afterwards).
+      - Pydantic v2 is a mandatory runtime dependency for all agents with structured data.
+      - typer is the mandatory library for CLI argument parsing in skill entry points.
+      - httpx is the preferred HTTP client — use it instead of `requests`.
+        Exception: PyGitHub SDK may use requests internally (acceptable, not exposed).
+
+    core_runtime_deps:
+      - pydantic>=2.0          # data validation and serialisation
+      - structlog               # structured JSON logging
+      - httpx                   # HTTP client (sync + async)
+      - typer                   # CLI argument parsing
+      # provider SDKs added as extras or optional groups:
+      # anthropic, openai, azure-ai-inference (Copilot)
+
+    core_dev_deps:
+      - pytest>=8
+      - pytest-cov
+      - pytest-mock
+      - mypy
+      - ruff
+      - pre-commit
+      - bandit[toml]
+
+# ─────────────────────────────────────────────────────────────────────────────
+# MODULE / LAYER CONVENTIONS
+# ─────────────────────────────────────────────────────────────────────────────
+
+  modules:
+    description: >
+      Each skill is an independent Python script. Skills within an agent run
+      sequentially; inter-skill communication happens exclusively through
+      GitHub API reads (Issue / PR comments).
+
+    layers:
+
+      skill:
+        purpose: Entry point — reads input, orchestrates, publishes output
+        filePattern: "skill_{agentId}_{N:02d}.py"
+        rules:
+          - Must be invocable via `uv run skill-{agentId}-{NN} --issue N` (entry point)
+            OR directly as `python -m {basePackage}.{agentName}.skill_{agentId}_{NN}`.
+            The entry-point form is canonical; raw python path is fallback only.
+          - Must read ALL inputs from GitHub API — never from local files or
+            environment state beyond secrets.
+          - Must publish output as a single GitHub comment with a structured
+            prefix (e.g. "## BAR-", "## TestPlan-").
+          - Must emit a DecisionRecord to the Audit Ledger before exit.
+          - Must not import or call other skill modules directly.
+          - Exit code 0 = success; non-zero = unhandled failure (caught by CI).
+
+      providers:
+        purpose: AI provider abstraction layer
+        package: "{agentPackage}.providers"
+        classes:
+          - LLMProvider (typing.Protocol — not ABC)
+          - CopilotProvider
+          - OpenAIProvider
+          - AnthropicProvider
+          - ProviderFactory
+        rules:
+          - Must expose a single interface: complete(prompt, model) -> str
+          - Provider selected at runtime from AI_PROVIDER env var.
+          - Fallback order: copilot → openai → anthropic → local-deterministic.
+          - No provider SDK imported unconditionally — use factory/dynamic import.
+          - LLM calls must be wrapped with retry logic (3 attempts, exponential backoff).
+          - All prompts must be versioned alongside the skill that uses them.
+          - Raw LLM output must never be forwarded to GitHub without validation.
+
+      domain:
+        purpose: Pure business logic — no I/O, no external dependencies
+        package: "{agentPackage}.domain"
+        rules:
+          - Deterministic for all RN-catalog decisions (rn_catalog.py).
+          - Must not import GitHub client, AI provider, or any I/O module.
+          - Must have 100% unit test coverage.
+          - All RN → FE mappings are hardcoded here, not inferred by LLM.
+          - Domain entities and value objects must be Pydantic BaseModel (v2) or
+            frozen dataclasses — never plain dicts.
+          - Pydantic models must use `model_config = ConfigDict(frozen=True)` for
+            value objects and events.
+          - Business rule functions must be pure (no side effects, no global state).
+          - Use `typing.Protocol` to define interfaces consumed by the skill layer.
+
+      infrastructure:
+        purpose: GitHub API adapter
+        package: "{agentPackage}.infrastructure"
+        classes:
+          - GitHubClient
+          - IssueReader
+          - CommentPublisher
+          - LabelManager
+        rules:
+          - Preferred HTTP client is `httpx` (sync mode for scripts, async optional).
+          - PyGitHub SDK is acceptable as a higher-level wrapper over httpx/requests.
+            If using PyGitHub, do not additionally import httpx/requests for the same
+            resource — one HTTP layer per boundary.
+          - GITHUB_TOKEN must be loaded from environment (via `os.environ` or a
+            dedicated settings Pydantic model), never hardcoded.
+          - All writes are append-only (add comments, add labels).
+          - Retry with exponential backoff on 5xx and 429 responses.
+            Use `tenacity` library for retry logic (consistent with provider layer).
+          - Must not contain business logic.
+          - Infrastructure classes must implement a `typing.Protocol` defined in the
+            domain layer — enabling unit tests without network calls.
+          - Settings (tokens, URLs) must be loaded via a Pydantic BaseSettings model
+            (pydantic-settings) — never via raw `os.getenv()` scattered in code.
+
+      cli:
+        purpose: Entry point — argument parsing and orchestration wiring
+        package: "(skill script at package root)"
+        library: typer
+        rules:
+          - Each skill's `main()` function uses `typer.Typer()` for argument parsing.
+          - Required arguments: `--issue` (int) or `--pr` (int) depending on trigger.
+          - Must call `typer.run(main)` or `app()` at `if __name__ == '__main__':` guard.
+          - No business logic in the CLI layer — delegate to domain immediately.
+          - Validate argument types at CLI boundary; raise `typer.BadParameter` on error.
+
+      audit:
+        purpose: Audit Ledger writer (append-only)
+        package: "{agentPackage}.audit"
+        classes:
+          - DecisionRecord (Pydantic BaseModel, frozen=True)
+          - AuditLedger
+        required_fields:
+          - skill_id
+          - timestamp_utc   # ISO 8601 UTC — use datetime.now(tz=timezone.utc)
+          - decision        # Literal["approve", "block", "escalar", "alert"]
+          - confidence_score  # float, 0.0–1.0
+          - justification
+          - rn_triggered
+          - model_used      # LLM model identifier or "deterministic"
+        rules:
+          - Append-only — no update or delete operations.
+          - Every skill emits at least one DecisionRecord before exiting.
+          - decision=block or decision=escalar requires justification and rn_triggered.
+          - Ledger published as a GitHub comment — never written to disk in CI.
+          - DecisionRecord must be a Pydantic v2 model — serialise via `.model_dump_json()`.
+          - Schema backward-compatibility: add fields with default values; never remove.
+          - `decision` field must be a `Literal` type — no freeform strings.
+
+# ─────────────────────────────────────────────────────────────────────────────
+# PROCESS ISOLATION
+# ─────────────────────────────────────────────────────────────────────────────
+
+  process_isolation:
+    mandatory: true
+    rules:
+      - Each skill is a standalone OS process — no shared state or global singletons.
+      - Skills communicate only via GitHub comments (structured prefix pattern).
+      - No skill may call another skill's functions or import from another skill module.
+      - Skills are triggered by GitHub Actions events, not by other Python processes.
+      - Downstream skills search for upstream output by comment prefix at runtime.
+
+# ─────────────────────────────────────────────────────────────────────────────
+# CONFIDENCE & ESCALATION
+# ─────────────────────────────────────────────────────────────────────────────
+
+  confidence:
+    threshold: 0.65
+    rules:
+      - confidence_score < 0.65 must set decision=escalar — never resolve silently.
+      - confidence_score must be included in every DecisionRecord.
+      - LLM-based decisions must expose reasoning alongside confidence_score.
+      - LGPD-sensitive demands force confidence_score = 0.0 unconditionally.
+
+# ─────────────────────────────────────────────────────────────────────────────
+# TESTING
+# ─────────────────────────────────────────────────────────────────────────────
+
+  testing:
+    framework: pytest
+    config_section: pyproject.toml ([tool.pytest.ini_options])
+
+    coverage:
+      tool: pytest-cov
+      minimum: 80
+      domain_minimum: 100
+      rules:
+        - Domain layer must achieve 100% branch coverage.
+        - CI must run with `--cov-fail-under=80`.
+        - Coverage report published as GitHub Actions summary artifact.
+        - Exclude provider adapters from coverage minimum (I/O boundary).
+        - Use `--cov-branch` to measure branch coverage, not just line coverage.
+        - Omit `tests/` and `conftest.py` from coverage report.
+
+    markers:
+      declaration: pyproject.toml ([tool.pytest.ini_options] markers)
+      defined:
+        - unit: "Fast unit tests, no I/O"
+        - integration: "Integration tests with mocked external services"
+        - e2e: "End-to-end tests requiring live GitHub token"
+      rules:
+        - All tests must be tagged with exactly one of the markers above.
+        - CI default run: `uv run pytest -m 'not e2e'`.
+        - E2E run: `uv run pytest -m e2e` (separate workflow, manual trigger).
+
+    async_tests:
+      plugin: pytest-asyncio
+      mode: auto  # asyncio_mode = "auto" in pyproject.toml
+      rules:
+        - async test functions must be marked or configured via asyncio_mode=auto.
+        - Do not mix sync and async fixtures in the same test class.
+
+    types:
+
+      unit:
+        location: tests/unit/
+        rules:
+          - No I/O (no network, no filesystem, no GitHub API calls).
+          - Use pytest-mock (`mocker` fixture) for all external dependencies.
+          - Each domain function must have at least one test per RN it enforces.
+          - Tests must be deterministic and order-independent.
+          - Pydantic model validation must be tested with both valid and invalid inputs.
+          - Use `pytest.raises` with `match=` parameter for exception assertions.
+
+      integration:
+        location: tests/integration/
+        rules:
+          - GitHub API calls must be mocked via `respx` (httpx) or `responses` (requests).
+          - AI provider calls must be mocked — no live LLM in CI.
+          - Must not depend on external services during default CI run.
+          - Use `pytest-httpx` or `respx` to intercept httpx calls.
+
+      e2e:
+        location: tests/e2e/
+        marker: "e2e"
+        rules:
+          - Requires GITHUB_TOKEN with test repository access.
+          - Excluded from default `pytest` run (use `pytest -m e2e` explicitly).
+          - Must clean up all created issues/comments/labels after each run.
+          - Must use a dedicated test GitHub repository — never production repo.
+
+    conventions:
+      fileNaming: "test_{module_name}.py"
+      classNaming: "Test{ClassName}"
+      methodNaming: "test_{behavior}_{scenario}_{expected_outcome}"
+      fixtures:
+        location: tests/conftest.py
+        rules:
+          - Reusable fixtures must live in conftest.py, not inside test files.
+          - Fixture scope must be explicitly declared (`scope="function"` is default).
+          - Factory fixtures (returning callables) preferred over parameterized fixtures
+            for constructing multiple similar objects.
+          - Use `tmp_path` (built-in) for any fixture needing a temporary directory.
+
+# ─────────────────────────────────────────────────────────────────────────────
+# ASYNC POLICY
+# ─────────────────────────────────────────────────────────────────────────────
+
+  async_policy:
+    stance: sync_preferred
+    reason: >
+      Skills run as short-lived CLI processes triggered by GitHub Actions.
+      Synchronous code is simpler to reason about, debug, and trace. Async is
+      introduced only when concurrency provides a measurable benefit.
+    rules:
+      - Default to synchronous code for all skill scripts.
+      - Async (`asyncio`) is allowed in the providers layer when parallel LLM
+        calls are needed (e.g. multiple independent analyses in one skill).
+      - Never mix sync and async code paths within the same function.
+      - If async is used, use `anyio.run()` as the entry point — not `asyncio.run()`
+        directly (enables backend portability).
+      - `httpx.AsyncClient` is the async HTTP client — pair with `anyio`.
+
+# ─────────────────────────────────────────────────────────────────────────────
+# TOOLING
+# ─────────────────────────────────────────────────────────────────────────────
+
+  tooling:
+
+    pre_commit:
+      mandatory: true
+      config_file: .pre-commit-config.yaml
+      hooks:
+        - id: ruff            # lint + autofix
+          stages: [pre-commit]
+        - id: ruff-format     # format check
+          stages: [pre-commit]
+        - id: mypy            # type check
+          stages: [pre-commit]
+        - id: bandit          # security scan
+          stages: [pre-commit]
+        - id: check-added-large-files
+          stages: [pre-commit]
+        - id: check-yaml
+          stages: [pre-commit]
+        - id: end-of-file-fixer
+          stages: [pre-commit]
+        - id: trailing-whitespace
+          stages: [pre-commit]
+      rules:
+        - All hooks must pass before a commit is accepted.
+        - Pin each hook to a specific tag (not `rev: latest`).
+        - CI must run `pre-commit run --all-files` to catch bypassed commits.
+
+    security_scanning:
+      tool: bandit
+      config_section: pyproject.toml ([tool.bandit])
+      rules:
+        - Run `bandit -r src/ -ll` (medium and high severity) — CI must fail on findings.
+        - Suppress false positives with `# nosec B<rule>` inline, with a comment justifying.
+        - Never use `subprocess` with `shell=True` — bandit rule B602/B603.
+        - Never use `eval()` or `exec()` — bandit rule B307/B322.
+        - LLM-generated code must be reviewed for injection risks before commit.
+
+    task_runner:
+      tool: just  # justfile (https://just.systems)
+      fallback: make
+      required_recipes:
+        - lint:  "uv run ruff check src/ tests/"
+        - format: "uv run ruff format src/ tests/"
+        - typecheck: "uv run mypy src/"
+        - test: "uv run pytest -m 'not e2e'"
+        - test-e2e: "uv run pytest -m e2e"
+        - security: "uv run bandit -r src/ -ll"
+        - ci: "just lint && just typecheck && just security && just test"
+        - install: "uv sync"
+
+# ─────────────────────────────────────────────────────────────────────────────
+# AI PROVIDER
+# ─────────────────────────────────────────────────────────────────────────────
+
+  ai_provider:
+    default: copilot
+    env_var: AI_PROVIDER
+
+    authentication:
+      copilot:
+        secret: GITHUB_TOKEN
+        note: Auto-injected by GitHub Actions — no additional secret required.
+      openai:
+        secret: AI_PROVIDER_API_KEY
+        fallback_secret: OPENAI_API_KEY
+      anthropic:
+        secret: AI_PROVIDER_API_KEY
+        fallback_secret: ANTHROPIC_API_KEY
+
+    endpoints:
+      copilot: https://models.inference.ai.azure.com
+
+    fallback_order:
+      - copilot (GITHUB_TOKEN)
+      - openai (AI_PROVIDER_API_KEY / OPENAI_API_KEY)
+      - anthropic (AI_PROVIDER_API_KEY / ANTHROPIC_API_KEY)
+      - local-deterministic (no LLM, rule-based only)
+
+    settings:
+      model: pydantic-settings BaseSettings
+      fields:
+        - ai_provider: str  # matches AI_PROVIDER env var
+        - ai_provider_api_key: SecretStr  # pydantic SecretStr — never logs value
+        - github_token: SecretStr
+      rules:
+        - All credentials must be typed as `pydantic.SecretStr` — prevents accidental
+          logging of secret values.
+        - Settings class instantiated once per skill run — passed as dependency.
+
+    rules:
+      - Provider must be selectable at runtime via AI_PROVIDER env var.
+      - No provider SDK imported unconditionally — use factory/dynamic import pattern.
+      - LLM calls wrapped with retry via `tenacity`: 3 attempts, exponential backoff
+        with jitter (wait_random_exponential), retry on 429 and 5xx.
+      - All prompts versioned alongside the skill that uses them.
+        Prompt file naming: `prompts/{skill_id}/v{N}.txt` or inline as module constant.
+      - Raw LLM output must never be posted to GitHub without post-processing.
+      - Model selection documented in DecisionRecord (field: model_used).
+      - Provider adapter classes must implement the `LLMProvider` Protocol —
+        enabling unit tests with mock providers (no live LLM in unit tests).
+
+# ─────────────────────────────────────────────────────────────────────────────
+# OBSERVABILITY
+# ─────────────────────────────────────────────────────────────────────────────
+
+  observability:
+
+    logging:
+      format: structured JSON
+      library: structlog
+      configuration: >-
+        Configure structlog with `structlog.configure()` once at skill entry point.
+        Use `structlog.get_logger()` — never stdlib `logging.getLogger()`.
+      rules:
+        - All log entries must include skill_id, issue_number, timestamp_utc, level.
+        - No personal data (LGPD) in logs — mask CPF, email, full name, phone.
+        - Log level configurable via LOG_LEVEL env var (default INFO).
+        - Do not log raw LLM responses at INFO level — use DEBUG.
+        - Bind context at skill start (`log = logger.bind(skill_id=..., issue=...)`);
+          pass the bound logger as a dependency — do not use global logger state.
+        - structlog processors chain must include `TimeStamper(fmt="iso", utc=True)`,
+          `add_log_level`, and `JSONRenderer` for CI output.
+
+    audit_ledger:
+      format: JSON (append-only)
+      required_fields:
+        always:
+          - skill_id
+          - timestamp_utc
+          - decision
+          - confidence_score
+        when_decision_is_block_or_escalar:
+          - justification
+          - rn_triggered
+          - model_used
+      rules:
+        - Every skill emits a DecisionRecord before exit — no exceptions.
+        - Ledger published as a GitHub comment — never written to local disk in CI.
+        - Schema must be backward-compatible; add fields, never remove.
+
+# ─────────────────────────────────────────────────────────────────────────────
+# GITHUB ACTIONS
+# ─────────────────────────────────────────────────────────────────────────────
+
+  github_actions:
+
+    rules:
+      - GITHUB_TOKEN auto-injected — no additional secret for GitHub API calls.
+      - AI_PROVIDER_API_KEY stored as a repository secret.
+      - All action versions pinned to a full commit SHA — never @latest or @vN.
+      - Each skill step must declare timeout-minutes (recommended: 10).
+      - Skill failure must apply the appropriate error label to the issue.
+      - Workflows must set minimal permissions explicitly:
+          permissions: { issues: write, pull-requests: write, contents: read }
+      - Use `uv` for Python setup in CI — replace actions/setup-python + pip with
+        `astral-sh/setup-uv` action + `uv sync`.
+      - Cache uv package downloads using the `cache` input of setup-uv action.
+      - Never run `uv sync --no-dev` in skill steps — tests not invoked in skill steps
+        anyway; keeping dev deps avoids config duplication.
+
+    ci_setup_pattern: |
+      - uses: astral-sh/setup-uv@<SHA>
+        with:
+          python-version-file: .python-version
+          enable-cache: true
+      - run: uv sync
+
+    triggers:
+      issue_events:
+        - issues.opened
+        - issues.edited
+        - issue_comment.created
+      pr_events:
+        - pull_request.opened
+        - pull_request.synchronize
+
+    labels:
+      gate_pattern: "gate/{N}-aguardando | gate/{N}-aprovado"
+      error_pattern: "qa/bloqueado | req/conflict | agent/error"
+
+    skill_invocation:
+      pattern: "uv run skill-{agentId}-{NN} --issue ${{ github.event.issue.number }}"
+      note: >
+        Invocation via uv run + pyproject.toml entry point (not a raw python path).
+        This decouples CI from internal file layout.
+      env:
+        GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+        AI_PROVIDER: "${{ vars.AI_PROVIDER }}"
+        AI_PROVIDER_API_KEY: "${{ secrets.AI_PROVIDER_API_KEY }}"
+
+# ─────────────────────────────────────────────────────────────────────────────
+# SECURITY
+# ─────────────────────────────────────────────────────────────────────────────
+
+  security:
+    rules:
+      - No secrets hardcoded in source code, YAML, or configuration files.
+      - All credentials loaded via Pydantic BaseSettings (pydantic-settings) as
+        `SecretStr` — prevents accidental logging of sensitive values.
+      - GITHUB_TOKEN scope must be minimum required (issues=write, pull-requests=write,
+        contents=read). Request no other scopes.
+      - LGPD: any skill handling personal data must escalate to human gate unconditionally.
+      - LLM responses must be sanitized (strip executable content, validate schema)
+        before being posted as GitHub comments.
+      - Input from GitHub issues must be treated as untrusted user input —
+        validate length, encoding, and content before passing to LLM.
+      - Use `bandit` in CI to catch common security anti-patterns (B-rules).
+      - Dependency audit: run `uv audit` (or `pip-audit`) in CI to detect known CVEs
+        in the dependency tree.
+      - No `subprocess.run(..., shell=True)` — compose command as list.
+      - Pin all GitHub Actions to full commit SHA to prevent supply-chain attacks.
+
+  lgpd:
+    mandatory: true
+    rules:
+      - Skills must never log or persist personal data (CPF, email, full name, phone, etc.).
+      - Any demand involving personal data forces confidence_score = 0.0 (human gate).
+      - Data minimization — only fetch the GitHub fields strictly required for the task.
+      - LGPD classification check is mandatory in every skill that processes issue content.
+
+# ─────────────────────────────────────────────────────────────────────────────
+# DOCUMENTATION
+# ─────────────────────────────────────────────────────────────────────────────
+
+documentation:
+  required: true
+  location: "docs/skills/{agentName}/{skillId}.md"
+  required_sections:
+    - Input Contract (where the skill reads from: issue comment prefix, labels)
+    - Output Contract (comment prefix published, labels applied)
+    - DecisionRecord Schema (fields emitted for this specific skill)
+    - RNs Evaluated (which business rules are checked)
+    - Escalation Conditions (when confidence or risk triggers human gate)
+  rules:
+    - Comment prefixes must be stable across versions — treat them as public API.
+    - Any breaking change to a comment prefix requires a migration note in the spec.
+    - Prompt versions must be documented and linked from the skill documentation.

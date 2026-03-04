@@ -1,0 +1,979 @@
+<!DOCTYPE html>
+<!--
+  ╔══════════════════════════════════════════════════════════════════════╗
+  ║  TEMPLATE PADRÃO — Protótipo de Tela (fintech-pessoal)              ║
+  ║  Uso: copiar este arquivo, renomear conforme convenção do modo       ║
+  ║    DRAFT : DRAFT-NN-<slug>.html                                      ║
+  ║    FINAL : NN-<slug>.html                                            ║
+  ║  Substituir TODO: pelos valores reais de cada tela.                 ║
+  ╚══════════════════════════════════════════════════════════════════════╝
+
+  CHECKLIST obrigatório ao usar este template:
+  [ ] Atualizar <title> com modo + número + nome da tela
+  [ ] Atualizar data-screen-id, data-mode e data-feature no <html>
+  [ ] Preencher o bloco .screen-meta no topo do <body>
+  [ ] Remover componentes não usados (manter apenas o necessário)
+  [ ] Marcar suposições com class="ux-note" e prefixo [SUPOSIÇÃO]
+  [ ] Remover este bloco de comentário antes de entregar
+-->
+<html lang="pt-BR"
+      data-screen-id="TODO:NN"
+      data-mode="TODO:DRAFT|FINAL"
+      data-feature="TODO:nome-do-tema">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TODO:[DRAFT|FINAL] Tela NN – Nome da Tela</title>
+  <style>
+    /* ================================================================
+       DESIGN TOKENS — alterar apenas aqui para mudar toda a tela
+       ================================================================ */
+    :root {
+      /* Cores primárias */
+      --color-primary:        #1e40af;
+      --color-primary-dark:   #1e3a8a;
+      --color-primary-light:  #eff6ff;
+      --color-primary-border: #dbeafe;
+
+      /* Cores de status */
+      --color-success:        #16a34a;
+      --color-success-light:  #f0fdf4;
+      --color-success-border: #bbf7d0;
+      --color-success-dark:   #14532d;
+
+      --color-error:          #dc2626;
+      --color-error-light:    #fff5f5;
+      --color-error-border:   #fecaca;
+      --color-error-dark:     #7f1d1d;
+
+      --color-warning:        #f59e0b;
+      --color-warning-light:  #fff7ed;
+      --color-warning-border: #fed7aa;
+      --color-warning-dark:   #78350f;
+
+      --color-info:           #0ea5e9;
+      --color-info-light:     #eff6ff;
+      --color-info-border:    #bfdbfe;
+
+      /* Neutros */
+      --color-bg:             #f1f5f9;
+      --color-surface:        #ffffff;
+      --color-surface-2:      #f8fafc;
+      --color-border:         #e2e8f0;
+      --color-border-strong:  #cbd5e1;
+
+      --color-text:           #1e293b;
+      --color-text-secondary: #475569;
+      --color-text-muted:     #64748b;
+      --color-text-disabled:  #94a3b8;
+
+      /* Tipografia */
+      --font-family:  'Segoe UI', system-ui, -apple-system, sans-serif;
+      --font-mono:    'Courier New', monospace;
+
+      /* Bordas e sombras */
+      --radius-sm:    6px;
+      --radius-md:    8px;
+      --radius-lg:    10px;
+      --radius-xl:    12px;
+      --radius-full:  9999px;
+      --shadow-card:  0 1px 3px rgba(0,0,0,.05), 0 1px 2px rgba(0,0,0,.03);
+      --shadow-shell: 0 0 40px rgba(0,0,0,.12);
+      --shadow-modal: 0 -4px 24px rgba(0,0,0,.12);
+      --shadow-toast: 0 4px 12px rgba(0,0,0,.12);
+
+      /* Layout */
+      --shell-width:  430px;
+      --top-bar-bg:   var(--color-primary);
+      --nav-height:   60px;
+    }
+
+    /* ================================================================
+       RESET & BASE
+       ================================================================ */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: var(--font-family);
+      background: var(--color-bg);
+      color: var(--color-text);
+      min-height: 100vh;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    /* ================================================================
+       BANNER DE MODO (DRAFT / FINAL)
+       ================================================================ */
+    .mode-banner {
+      padding: 6px 16px;
+      text-align: center;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.4px;
+      position: sticky;
+      top: 0;
+      z-index: 200;
+    }
+    .mode-banner.draft {
+      background: #fef3c7;
+      border-bottom: 2px dashed var(--color-warning);
+      color: #92400e;
+    }
+    .mode-banner.final {
+      background: var(--color-primary-light);
+      border-bottom: 2px solid var(--color-primary);
+      color: var(--color-primary);
+    }
+
+    /* ================================================================
+       APP SHELL (invólucro mobile 430px)
+       ================================================================ */
+    .app-shell {
+      max-width: var(--shell-width);
+      margin: 0 auto;
+      min-height: 100vh;
+      background: var(--color-surface);
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      box-shadow: var(--shadow-shell);
+    }
+
+    /* ================================================================
+       TOP BAR
+       ================================================================ */
+    .top-bar {
+      background: var(--top-bar-bg);
+      color: #fff;
+      padding: 16px 16px 12px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-shrink: 0;
+    }
+    .top-bar__back {
+      background: none; border: none; color: #fff;
+      cursor: pointer; font-size: 20px; padding: 4px;
+      line-height: 1;
+    }
+    .top-bar__title { font-size: 18px; font-weight: 600; flex: 1; }
+    .top-bar__action {
+      background: none; border: none; color: #fff;
+      cursor: pointer; font-size: 18px; padding: 4px;
+      line-height: 1;
+    }
+    .top-bar__badge {
+      background: rgba(255,255,255,.2);
+      padding: 4px 10px;
+      border-radius: var(--radius-full);
+      font-size: 11px;
+      font-weight: 600;
+    }
+
+    /* ================================================================
+       SCROLLABLE BODY
+       ================================================================ */
+    .screen-body {
+      flex: 1;
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    /* ================================================================
+       BOTTOM NAVIGATION
+       ================================================================ */
+    .bottom-nav {
+      background: var(--color-surface);
+      border-top: 1px solid var(--color-border);
+      display: flex;
+      justify-content: space-around;
+      padding: 8px 0 12px;
+      flex-shrink: 0;
+    }
+    .nav-item {
+      display: flex; flex-direction: column; align-items: center;
+      gap: 3px; font-size: 10px; color: var(--color-text-disabled);
+      cursor: pointer; padding: 4px 12px;
+      transition: color .15s;
+    }
+    .nav-item.active { color: var(--color-primary); }
+    .nav-item__icon { font-size: 20px; line-height: 1; }
+
+    /* ================================================================
+       FAB (Floating Action Button)
+       ================================================================ */
+    .fab {
+      position: absolute;
+      bottom: calc(var(--nav-height) + 16px);
+      right: 16px;
+      width: 56px; height: 56px;
+      border-radius: 28px;
+      background: var(--color-primary);
+      color: #fff; border: none;
+      cursor: pointer; font-size: 28px;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 4px 12px rgba(30,64,175,.4);
+      transition: transform .15s;
+      z-index: 10;
+    }
+    .fab:hover { transform: scale(1.05); }
+
+    /* ================================================================
+       LISTA / CARDS
+       ================================================================ */
+    .list-area {
+      padding: 12px 16px;
+      display: flex; flex-direction: column; gap: 10px;
+    }
+
+    .card {
+      background: var(--color-surface);
+      border: 1.5px solid var(--color-border);
+      border-radius: var(--radius-xl);
+      padding: 14px;
+      box-shadow: var(--shadow-card);
+      transition: box-shadow .15s;
+    }
+    .card:hover { box-shadow: 0 4px 12px rgba(0,0,0,.1); }
+    .card.inactive { opacity: .7; border-style: dashed; }
+
+    .card__header { display: flex; align-items: flex-start; gap: 12px; }
+    .card__body { margin-top: 10px; }
+    .card__divider { height: 1px; background: var(--color-surface-2); margin: 10px 0; }
+    .card__footer { display: flex; justify-content: space-between; align-items: center; }
+    .card__title  { font-size: 14px; font-weight: 600; color: var(--color-text); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .card__subtitle { font-size: 12px; color: var(--color-text-muted); margin-top: 1px; }
+    .card__detail { font-size: 12px; color: var(--color-text-secondary); margin-top: 3px; font-family: var(--font-mono); }
+
+    /* ================================================================
+       ENTITY AVATAR / LOGO
+       ================================================================ */
+    .avatar {
+      width: 40px; height: 40px; border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 700; font-size: 13px; color: #fff; flex-shrink: 0;
+    }
+    .avatar--sm { width: 32px; height: 32px; font-size: 11px; border-radius: 8px; }
+    .avatar--lg { width: 48px; height: 48px; font-size: 16px; border-radius: 12px; }
+    /* Cores de banco — adicionar conforme necessário */
+    .avatar--itau    { background: #ef7d00; }
+    .avatar--bradesco { background: #cc2228; }
+    .avatar--nubank  { background: #820ad1; }
+    .avatar--inter   { background: #ea5200; }
+    .avatar--bb      { background: #ffd000; color: #1a1a1a; }
+    .avatar--cef     { background: #00609c; }
+    .avatar--sicoob  { background: #006b3f; }
+    .avatar--santander { background: #ec0000; }
+    .avatar--c6bank    { background: #1a1a1a; }
+
+    /* ================================================================
+       BADGES
+       ================================================================ */
+    .badge {
+      display: inline-flex; align-items: center;
+      padding: 2px 8px; border-radius: 4px;
+      font-size: 11px; font-weight: 500; line-height: 1.5;
+    }
+    .badge--type    { background: var(--color-primary-light); color: var(--color-primary); border: 1px solid var(--color-primary-border); }
+    .badge--primary { background: #fef9c3; color: #92400e; border: 1px solid #fde68a; }
+    .badge--active  { background: var(--color-success-light); color: var(--color-success); border: 1px solid var(--color-success-border); }
+    .badge--inactive{ background: var(--color-surface-2); color: var(--color-text-muted); border: 1px solid var(--color-border); }
+    .badge--error   { background: var(--color-error-light); color: var(--color-error); border: 1px solid var(--color-error-border); }
+
+    .badge-group { display: flex; gap: 6px; align-items: center; flex-wrap: wrap; }
+
+    /* ================================================================
+       AÇÕES DE CARD (ICON BUTTONS)
+       ================================================================ */
+    .icon-btn {
+      background: none; border: none; cursor: pointer;
+      width: 32px; height: 32px; border-radius: var(--radius-md);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--color-text-muted); font-size: 16px;
+      transition: background .15s, color .15s;
+    }
+    .icon-btn:hover          { background: var(--color-surface-2); color: var(--color-primary); }
+    .icon-btn.danger:hover   { background: var(--color-error-light); color: var(--color-error); }
+    .icon-btn-group { display: flex; gap: 4px; }
+
+    /* ================================================================
+       BARRA DE BUSCA
+       ================================================================ */
+    .search-area { padding: 12px 16px; background: var(--color-surface); border-bottom: 1px solid var(--color-border); }
+    .search-wrap { position: relative; }
+    .search-wrap__input {
+      width: 100%; padding: 10px 36px 10px 36px;
+      border: 1.5px solid var(--color-border-strong);
+      border-radius: var(--radius-md);
+      font-size: 14px; color: var(--color-text);
+      background: var(--color-surface-2);
+      outline: none; transition: border-color .15s;
+    }
+    .search-wrap__input:focus { border-color: var(--color-primary); background: var(--color-surface); }
+    .search-wrap__icon-left  { position: absolute; left: 10px; top: 50%; transform: translateY(-50%); color: var(--color-text-disabled); font-size: 16px; pointer-events: none; }
+    .search-wrap__icon-right { position: absolute; right: 10px; top: 50%; transform: translateY(-50%); color: var(--color-text-disabled); cursor: pointer; font-size: 14px; }
+
+    /* ================================================================
+       FILTROS (CHIPS)
+       ================================================================ */
+    .filter-area {
+      padding: 10px 16px; display: flex; gap: 8px;
+      overflow-x: auto; border-bottom: 1px solid var(--color-border);
+      scrollbar-width: none;
+    }
+    .filter-area::-webkit-scrollbar { display: none; }
+
+    .chip {
+      padding: 5px 12px; border-radius: var(--radius-full);
+      font-size: 12px; font-weight: 500;
+      border: 1.5px solid var(--color-border-strong);
+      color: var(--color-text-muted); background: var(--color-surface-2);
+      cursor: pointer; white-space: nowrap; transition: all .15s;
+    }
+    .chip.active          { background: var(--color-primary-light); border-color: var(--color-primary); color: var(--color-primary); }
+    .chip.chip--success   { background: var(--color-success-light); border-color: var(--color-success); color: var(--color-success); }
+    .chip.chip--muted     { background: var(--color-surface-2); border-color: var(--color-border-strong); color: var(--color-text-muted); }
+
+    /* ================================================================
+       BARRA DE RESUMO
+       ================================================================ */
+    .summary-bar {
+      padding: 8px 16px; font-size: 12px; color: var(--color-text-muted);
+      background: var(--color-surface-2); border-bottom: 1px solid var(--color-border);
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .summary-bar strong { color: var(--color-text); }
+
+    /* ================================================================
+       FORMULÁRIOS
+       ================================================================ */
+    .form-body { padding: 20px 16px; }
+
+    .form-section {
+      margin-bottom: 24px;
+    }
+    .form-section__header {
+      font-size: 12px; font-weight: 700;
+      color: var(--color-primary); text-transform: uppercase;
+      letter-spacing: 0.5px; margin-bottom: 14px;
+      display: flex; align-items: center; gap: 6px;
+    }
+    .form-section__header::before {
+      content: ''; display: inline-block;
+      width: 3px; height: 14px;
+      background: var(--color-primary); border-radius: 2px;
+    }
+    .form-section__divider { height: 1px; background: var(--color-border); margin: 20px 0; }
+
+    .field         { display: flex; flex-direction: column; gap: 5px; margin-bottom: 14px; }
+    .field:last-child { margin-bottom: 0; }
+    .field-row     { display: flex; gap: 10px; margin-bottom: 14px; }
+    .field-row .field { flex: 1; margin-bottom: 0; }
+    .field-row .field--sm { flex: 0 0 90px; }
+
+    label {
+      font-size: 13px; font-weight: 500; color: #374151;
+      display: flex; align-items: center; gap: 4px;
+    }
+    label .required { color: var(--color-error); font-size: 12px; }
+    label .optional { color: var(--color-text-disabled); font-size: 11px; font-weight: 400; }
+
+    .input, input[type="text"], input[type="email"], input[type="number"], select, textarea {
+      width: 100%; padding: 10px 12px;
+      border: 1.5px solid var(--color-border-strong);
+      border-radius: var(--radius-md);
+      font-size: 14px; font-family: var(--font-family);
+      color: var(--color-text); background: var(--color-surface);
+      outline: none; transition: border-color .15s;
+    }
+    .input:focus,
+    input[type="text"]:focus, input[type="email"]:focus,
+    input[type="number"]:focus, select:focus, textarea:focus {
+      border-color: var(--color-primary);
+    }
+    .input:disabled,
+    input:disabled, select:disabled { background: var(--color-surface-2); color: var(--color-text-disabled); cursor: not-allowed; }
+    .input.has-error  { border-color: var(--color-error);   background: var(--color-error-light); }
+    .input.has-success{ border-color: var(--color-success); background: var(--color-success-light); }
+    .input.has-warning{ border-color: var(--color-warning); }
+
+    .field__helper  { font-size: 11px; color: var(--color-text-disabled); }
+    .field__error   { font-size: 11px; color: var(--color-error);   display: flex; align-items: center; gap: 4px; }
+    .field__success { font-size: 11px; color: var(--color-success); }
+    .field__warning { font-size: 11px; color: var(--color-warning); display: flex; align-items: center; gap: 4px; }
+    .field__readonly-note { font-size: 11px; color: var(--color-warning); display: flex; align-items: center; gap: 4px; }
+
+    /* ================================================================
+       SELETOR VISUAL (RADIO CARDS)
+       ================================================================ */
+    .radio-card-group { display: flex; gap: 8px; flex-wrap: wrap; }
+    .radio-card {
+      flex: 1; min-width: 80px;
+      border: 1.5px solid var(--color-border-strong);
+      border-radius: var(--radius-md); padding: 10px 8px;
+      cursor: pointer; text-align: center; transition: all .15s;
+    }
+    .radio-card.selected { border-color: var(--color-primary); background: var(--color-primary-light); }
+    .radio-card.disabled { opacity: .5; cursor: not-allowed; }
+    .radio-card__icon  { font-size: 20px; display: block; margin-bottom: 4px; }
+    .radio-card__label { font-size: 12px; font-weight: 500; color: #374151; }
+    .radio-card.selected .radio-card__label { color: var(--color-primary); }
+
+    /* ================================================================
+       TOGGLE SWITCH
+       ================================================================ */
+    .toggle-field {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 14px; background: var(--color-surface-2);
+      border: 1.5px solid var(--color-border); border-radius: var(--radius-lg);
+    }
+    .toggle-field__info h4 { font-size: 14px; font-weight: 500; color: var(--color-text); }
+    .toggle-field__info p  { font-size: 12px; color: var(--color-text-muted); margin-top: 3px; }
+
+    .toggle { position: relative; display: inline-block; width: 44px; height: 24px; }
+    .toggle__input { opacity: 0; width: 0; height: 0; position: absolute; }
+    .toggle__slider {
+      display: block; width: 100%; height: 100%;
+      background: var(--color-border-strong); border-radius: 12px;
+      cursor: pointer; transition: background .2s; position: relative;
+    }
+    .toggle__slider::after {
+      content: ''; position: absolute; top: 3px; left: 3px;
+      width: 18px; height: 18px; background: #fff; border-radius: 9px;
+      transition: transform .2s; box-shadow: 0 1px 3px rgba(0,0,0,.2);
+    }
+    .toggle__input:checked ~ .toggle__slider { background: var(--color-primary); }
+    .toggle__input:checked ~ .toggle__slider::after { transform: translateX(20px); }
+
+    /* ================================================================
+       AUTOCOMPLETE / SUGESTÃO
+       ================================================================ */
+    .autocomplete-item {
+      padding: 10px 12px;
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      background: var(--color-success-light);
+      display: flex; align-items: center; gap: 10px;
+      margin-top: 4px; cursor: pointer;
+    }
+    .autocomplete-item__pill {
+      font-size: 11px; font-weight: 700; color: #fff;
+      padding: 3px 8px; border-radius: 4px;
+    }
+    .autocomplete-item__label { font-size: 13px; color: var(--color-text); }
+
+    /* ================================================================
+       BANNERS INLINE (INFO, WARNING, DANGER)
+       ================================================================ */
+    .inline-banner {
+      border-radius: var(--radius-md); padding: 12px;
+      display: flex; gap: 10px; align-items: flex-start;
+      margin-bottom: 14px;
+    }
+    .inline-banner__icon { font-size: 18px; flex-shrink: 0; margin-top: 1px; }
+    .inline-banner__body h4 { font-size: 13px; font-weight: 600; }
+    .inline-banner__body p  { font-size: 12px; margin-top: 2px; line-height: 1.5; }
+
+    .inline-banner.info    { background: var(--color-info-light);    border: 1.5px solid var(--color-info-border); }
+    .inline-banner.info    .inline-banner__body h4 { color: #1e3a8a; }
+    .inline-banner.info    .inline-banner__body p  { color: #1e40af; }
+
+    .inline-banner.warning { background: var(--color-warning-light); border: 1.5px solid var(--color-warning-border); }
+    .inline-banner.warning .inline-banner__body h4 { color: #92400e; }
+    .inline-banner.warning .inline-banner__body p  { color: var(--color-warning-dark); }
+
+    .inline-banner.danger  { background: var(--color-error-light);   border: 1.5px solid var(--color-error-border); }
+    .inline-banner.danger  .inline-banner__body h4 { color: #7f1d1d; }
+    .inline-banner.danger  .inline-banner__body p  { color: var(--color-error-dark); }
+
+    .inline-banner.success { background: var(--color-success-light); border: 1.5px solid var(--color-success-border); }
+    .inline-banner.success .inline-banner__body h4 { color: var(--color-success-dark); }
+    .inline-banner.success .inline-banner__body p  { color: var(--color-success); }
+
+    /* ================================================================
+       ZONA DE RISCO (DANGER ZONE)
+       ================================================================ */
+    .danger-zone {
+      background: var(--color-error-light);
+      border: 1.5px solid var(--color-error-border);
+      border-radius: var(--radius-lg); padding: 14px;
+    }
+    .danger-zone__title { font-size: 13px; font-weight: 700; color: var(--color-error); margin-bottom: 6px; }
+    .danger-zone__desc  { font-size: 12px; color: #7f1d1d; margin-bottom: 12px; line-height: 1.5; }
+
+    /* ================================================================
+       BOTÕES
+       ================================================================ */
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center;
+      gap: 8px; font-family: var(--font-family);
+      border-radius: var(--radius-lg); cursor: pointer;
+      font-size: 15px; font-weight: 600;
+      transition: background .15s, border-color .15s, opacity .15s;
+      border: none; padding: 13px 20px; width: 100%;
+    }
+    .btn:disabled { opacity: .5; cursor: not-allowed; }
+
+    .btn--primary  { background: var(--color-primary); color: #fff; }
+    .btn--primary:hover:not(:disabled) { background: var(--color-primary-dark); }
+
+    .btn--secondary { background: transparent; color: var(--color-text-muted); border: 1.5px solid var(--color-border); }
+    .btn--secondary:hover:not(:disabled) { background: var(--color-surface-2); }
+
+    .btn--danger   { background: var(--color-error); color: #fff; }
+    .btn--danger:hover:not(:disabled) { background: #b91c1c; }
+
+    .btn--danger-outline { background: transparent; border: 1.5px solid var(--color-error); color: var(--color-error); }
+    .btn--danger-outline:hover:not(:disabled) { background: var(--color-error-light); }
+
+    .btn--sm { font-size: 13px; padding: 9px 14px; }
+    .btn--xs { font-size: 11px; padding: 5px 10px; }
+    .btn--inline { width: auto; }
+
+    .btn-group { display: flex; flex-direction: column; gap: 10px; }
+
+    /* Link button */
+    .link-btn {
+      background: none; border: none; cursor: pointer;
+      font-size: 12px; color: var(--color-primary);
+      text-decoration: underline; padding: 0; font-family: var(--font-family);
+    }
+    .link-btn:disabled { color: var(--color-text-disabled); text-decoration: none; cursor: default; }
+
+    /* Spinner */
+    .spinner {
+      display: inline-block; width: 16px; height: 16px;
+      border: 2px solid rgba(255,255,255,.3);
+      border-top-color: #fff; border-radius: 50%;
+      animation: spin .7s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* ================================================================
+       FOOTER DE FORMULÁRIO
+       ================================================================ */
+    .form-footer {
+      padding: 16px; border-top: 1px solid var(--color-border);
+      background: var(--color-surface); flex-shrink: 0;
+    }
+
+    /* ================================================================
+       MODAL (BOTTOM SHEET) + OVERLAY
+       ================================================================ */
+    /* Contexto: o .modal-host deve envolver o .app-shell e ter position:relative */
+    .modal-overlay {
+      position: absolute; inset: 0;
+      background: rgba(15,23,42,.55);
+      display: flex; align-items: flex-end;
+      animation: fadeIn .2s ease; z-index: 100;
+    }
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+    .modal-sheet {
+      background: var(--color-surface); width: 100%;
+      border-radius: 20px 20px 0 0;
+      padding: 24px 20px 32px;
+      box-shadow: var(--shadow-modal);
+      animation: slideUp .3s ease;
+    }
+    @keyframes slideUp { from { transform: translateY(40px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+
+    .modal-sheet__handle {
+      width: 36px; height: 4px;
+      background: var(--color-border); border-radius: 2px;
+      margin: 0 auto 20px;
+    }
+    .modal-sheet__icon   { text-align: center; font-size: 48px; margin-bottom: 12px; }
+    .modal-sheet__title  { font-size: 18px; font-weight: 700; color: var(--color-text); text-align: center; margin-bottom: 8px; }
+    .modal-sheet__desc   { font-size: 14px; color: var(--color-text-muted); text-align: center; line-height: 1.6; margin-bottom: 20px; }
+
+    /* Conteúdo contextual blurred atrás do modal */
+    .blurred-content { filter: blur(2px); pointer-events: none; opacity: .7; padding: 16px; }
+
+    /* ================================================================
+       TOAST NOTIFICATIONS
+       ================================================================ */
+    .toast-container {
+      position: fixed; top: 12px; left: 50%; transform: translateX(-50%);
+      width: calc(var(--shell-width) - 32px); max-width: calc(100vw - 32px);
+      z-index: 300; display: flex; flex-direction: column; gap: 8px;
+    }
+    .toast {
+      display: flex; align-items: flex-start; gap: 12px;
+      padding: 14px 16px; border-radius: var(--radius-xl);
+      box-shadow: var(--shadow-toast);
+      animation: toastIn .3s ease;
+    }
+    @keyframes toastIn { from { transform: translateY(-20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+
+    .toast__icon    { font-size: 20px; flex-shrink: 0; margin-top: 1px; }
+    .toast__body    { flex: 1; }
+    .toast__title   { font-size: 14px; font-weight: 700; margin-bottom: 2px; }
+    .toast__message { font-size: 13px; color: var(--color-text-secondary); line-height: 1.4; }
+    .toast__close   { background: none; border: none; cursor: pointer; color: var(--color-text-disabled); font-size: 16px; padding: 0; }
+
+    .toast.toast--success { background: var(--color-success-light); border: 1.5px solid var(--color-success-border); }
+    .toast.toast--success .toast__title  { color: var(--color-success-dark); }
+
+    .toast.toast--error   { background: var(--color-error-light);   border: 1.5px solid var(--color-error-border); }
+    .toast.toast--error   .toast__title  { color: var(--color-error-dark); }
+
+    .toast.toast--info    { background: var(--color-info-light);    border: 1.5px solid var(--color-info-border); }
+    .toast.toast--info    .toast__title  { color: #1e3a8a; }
+
+    .toast.toast--warning { background: var(--color-warning-light); border: 1.5px solid var(--color-warning-border); }
+    .toast.toast--warning .toast__title  { color: #92400e; }
+
+    /* ================================================================
+       EMPTY STATE
+       ================================================================ */
+    .empty-state {
+      text-align: center; padding: 60px 32px;
+      color: var(--color-text-disabled);
+      display: flex; flex-direction: column; align-items: center; gap: 12px;
+    }
+    .empty-state__icon  { font-size: 48px; }
+    .empty-state__title { font-size: 16px; font-weight: 600; color: var(--color-text-muted); }
+    .empty-state__desc  { font-size: 14px; line-height: 1.5; max-width: 260px; }
+
+    /* ================================================================
+       SKELETON LOADER
+       ================================================================ */
+    @keyframes shimmer {
+      0%   { background-position: -400px 0; }
+      100% { background-position: 400px 0; }
+    }
+    .skeleton {
+      background: linear-gradient(90deg, #e2e8f0 25%, #f1f5f9 50%, #e2e8f0 75%);
+      background-size: 800px 100%;
+      animation: shimmer 1.4s infinite;
+      border-radius: var(--radius-md);
+    }
+    .skeleton--text  { height: 14px; border-radius: 4px; }
+    .skeleton--title { height: 18px; border-radius: 4px; }
+    .skeleton--card  { height: 84px; border-radius: var(--radius-xl); }
+
+    /* ================================================================
+       NOTA DE UX / SUPOSIÇÃO (visível apenas em DRAFT)
+       ================================================================ */
+    .ux-note {
+      background: #fef3c7; border: 1px dashed var(--color-warning);
+      border-radius: var(--radius-sm); padding: 6px 10px;
+      font-size: 11px; color: #78350f; margin-top: 8px; margin-bottom: 8px;
+    }
+    .ux-note strong { display: block; margin-bottom: 2px; }
+
+    /* ================================================================
+       METADADOS DE TELA (visível apenas em DRAFT — para documentação)
+       ================================================================ */
+    .screen-meta {
+      background: var(--color-primary-light);
+      border-bottom: 1px solid var(--color-primary-border);
+      padding: 10px 16px; font-size: 11px;
+    }
+    .screen-meta__row { display: flex; gap: 16px; flex-wrap: wrap; }
+    .screen-meta__item { color: var(--color-primary); }
+    .screen-meta__item strong { color: var(--color-primary-dark); }
+
+    /* ================================================================
+       UTILITIES
+       ================================================================ */
+    .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); border: 0; }
+    .text-muted    { color: var(--color-text-muted); }
+    .text-disabled { color: var(--color-text-disabled); }
+    .text-mono     { font-family: var(--font-mono); }
+    .text-center   { text-align: center; }
+    .mt-4  { margin-top: 4px; }
+    .mt-8  { margin-top: 8px; }
+    .mt-12 { margin-top: 12px; }
+    .mt-16 { margin-top: 16px; }
+    .mb-8  { margin-bottom: 8px; }
+    .mb-12 { margin-bottom: 12px; }
+    .mb-16 { margin-bottom: 16px; }
+    .px-16 { padding-left: 16px; padding-right: 16px; }
+    .py-8  { padding-top: 8px; padding-bottom: 8px; }
+  </style>
+</head>
+<body>
+
+  <!--
+    BANNER DE MODO
+    • DRAFT: class="mode-banner draft"
+    • FINAL: remover este elemento ou usar class="mode-banner final"
+  -->
+  <div class="mode-banner draft" role="status">
+    ⚠ DRAFT — Protótipo baseado somente no brief. Suposições marcadas com [SUPOSIÇÃO].
+  </div>
+
+  <!--
+    METADADOS DE TELA (somente DRAFT — remove em FINAL)
+    Preencher os atributos data-* no <html> acima.
+  -->
+  <div class="screen-meta" aria-hidden="true">
+    <div class="screen-meta__row">
+      <span class="screen-meta__item"><strong>Tela:</strong> TODO:NN — TODO:Nome da Tela</span>
+      <span class="screen-meta__item"><strong>Modo:</strong> TODO:DRAFT|FINAL</span>
+      <span class="screen-meta__item"><strong>Feature:</strong> TODO:nome-do-tema</span>
+      <span class="screen-meta__item"><strong>UC:</strong> TODO:UC-XXX ou N/A</span>
+    </div>
+  </div>
+
+  <!-- ====== APP SHELL ====== -->
+  <div class="app-shell" role="main">
+
+    <!-- TOP BAR -->
+    <header class="top-bar">
+      <button class="top-bar__back" aria-label="Voltar">←</button>
+      <h1 class="top-bar__title">TODO: Título da Tela</h1>
+      <!-- Opcional: ação secundária -->
+      <!-- <button class="top-bar__action" aria-label="TODO">⚙</button> -->
+      <!-- Opcional: badge de status -->
+      <!-- <span class="top-bar__badge">● Ativa</span> -->
+    </header>
+
+    <!-- CORPO SCROLLÁVEL -->
+    <div class="screen-body">
+
+      <!--
+        ZONA DE COMPONENTES — usar os blocos abaixo como referência.
+        REMOVER os que não forem necessários para esta tela.
+      -->
+
+      <!-- ── Busca ── -->
+      <!--
+      <section class="search-area" aria-label="Busca">
+        <div class="search-wrap">
+          <span class="search-wrap__icon-left" aria-hidden="true">🔍</span>
+          <input class="search-wrap__input" type="search" placeholder="Buscar…" aria-label="Buscar" />
+          <button class="search-wrap__icon-right" aria-label="Limpar busca">✕</button>
+        </div>
+      </section>
+      -->
+
+      <!-- ── Filtros ── -->
+      <!--
+      <div class="filter-area" role="group" aria-label="Filtros">
+        <button class="chip active">Todos</button>
+        <button class="chip">TODO: Opção 1</button>
+        <button class="chip">TODO: Opção 2</button>
+      </div>
+      -->
+
+      <!-- ── Barra de resumo ── -->
+      <!--
+      <div class="summary-bar">
+        <span><strong>N</strong> itens</span>
+        <span>TODO: info secundária</span>
+      </div>
+      -->
+
+      <!-- ── Lista de cards ── -->
+      <!--
+      <div class="list-area">
+        <article class="card">
+          <div class="card__header">
+            <div class="avatar avatar--itau" aria-hidden="true">It</div>
+            <div style="flex:1;min-width:0">
+              <div class="card__title">TODO: Nome</div>
+              <div class="card__subtitle">TODO: Subtítulo</div>
+              <div class="card__detail">TODO: 0000 0000-0</div>
+            </div>
+            <div class="icon-btn-group">
+              <button class="icon-btn" aria-label="Editar">✏️</button>
+              <button class="icon-btn danger" aria-label="Inativar">🔒</button>
+            </div>
+          </div>
+          <div class="card__divider"></div>
+          <div class="card__body">
+            <div class="badge-group">
+              <span class="badge badge--type">TODO: Tipo</span>
+              <span class="badge badge--active">● Ativa</span>
+            </div>
+          </div>
+          <div class="card__footer mt-8">
+            <span class="text-muted" style="font-size:11px">Ag: 0000</span>
+            <button class="link-btn">Definir como principal</button>
+          </div>
+        </article>
+
+        <div class="ux-note"><strong>[SUPOSIÇÃO]</strong> TODO: descrever a suposição.</div>
+      </div>
+      -->
+
+      <!-- ── Estado vazio ── -->
+      <!--
+      <div class="empty-state" role="status">
+        <span class="empty-state__icon" aria-hidden="true">TODO:🏦</span>
+        <h2 class="empty-state__title">TODO: Título</h2>
+        <p class="empty-state__desc">TODO: Mensagem orientativa em pt-BR.</p>
+        <button class="btn btn--primary btn--inline btn--sm mt-12">TODO: CTA</button>
+      </div>
+      -->
+
+      <!-- ── Skeleton (estado carregando) ── -->
+      <!--
+      <div class="list-area" aria-busy="true" aria-label="Carregando…">
+        <div class="skeleton skeleton--card"></div>
+        <div class="skeleton skeleton--card"></div>
+        <div class="skeleton skeleton--card"></div>
+      </div>
+      -->
+
+      <!-- ── Formulário ── -->
+      <!--
+      <div class="form-body">
+        <div class="form-section">
+          <div class="form-section__header">TODO: Seção</div>
+
+          <div class="field">
+            <label for="f-example">TODO: Label <span class="required" aria-hidden="true">*</span></label>
+            <input id="f-example" class="input" type="text" placeholder="TODO…"
+                   aria-required="true" autocomplete="off" />
+            <span class="field__helper">TODO: Dica de preenchimento</span>
+            <span class="field__error" role="alert" hidden>⚠ TODO: Mensagem de erro</span>
+          </div>
+
+          <div class="field">
+            <label>TODO: Seleção visual <span class="required" aria-hidden="true">*</span></label>
+            <div class="radio-card-group" role="radiogroup" aria-label="TODO">
+              <div class="radio-card selected" tabindex="0" role="radio" aria-checked="true">
+                <span class="radio-card__icon" aria-hidden="true">TODO</span>
+                <span class="radio-card__label">TODO: Opção A</span>
+              </div>
+              <div class="radio-card" tabindex="0" role="radio" aria-checked="false">
+                <span class="radio-card__icon" aria-hidden="true">TODO</span>
+                <span class="radio-card__label">TODO: Opção B</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="toggle-field">
+            <div class="toggle-field__info">
+              <h4>TODO: Label do toggle</h4>
+              <p>TODO: Descrição do impacto</p>
+            </div>
+            <label class="toggle" aria-label="TODO">
+              <input class="toggle__input" type="checkbox" />
+              <span class="toggle__slider" aria-hidden="true"></span>
+            </label>
+          </div>
+        </div>
+
+        <div class="ux-note"><strong>[SUPOSIÇÃO]</strong> TODO: descrever suposição.</div>
+      </div>
+      -->
+
+      <!-- ── Banner inline ── -->
+      <!--
+      <div class="px-16 mt-8">
+        <div class="inline-banner warning" role="alert">
+          <span class="inline-banner__icon" aria-hidden="true">⚠️</span>
+          <div class="inline-banner__body">
+            <h4>TODO: Título do aviso</h4>
+            <p>TODO: Descrição.</p>
+          </div>
+        </div>
+      </div>
+      -->
+
+      <!-- ── Zona de risco ── -->
+      <!--
+      <div class="px-16 mt-12">
+        <div class="danger-zone">
+          <div class="danger-zone__title">⚠ Zona de risco</div>
+          <p class="danger-zone__desc">TODO: Explique o impacto da ação destrutiva.</p>
+          <button class="btn btn--danger-outline btn--sm">TODO: Ação destrutiva</button>
+        </div>
+      </div>
+      -->
+
+    </div>
+    <!-- /screen-body -->
+
+    <!-- RODAPÉ DO FORMULÁRIO (fixo) -->
+    <!--
+    <footer class="form-footer">
+      <div class="btn-group">
+        <button class="btn btn--primary" type="submit">TODO: Salvar</button>
+        <button class="btn btn--secondary" type="button">Cancelar</button>
+      </div>
+    </footer>
+    -->
+
+    <!-- FAB -->
+    <!--
+    <button class="fab" aria-label="TODO: Adicionar">+</button>
+    -->
+
+    <!-- BOTTOM NAVIGATION -->
+    <!--
+    <nav class="bottom-nav" aria-label="Navegação principal">
+      <div class="nav-item">
+        <span class="nav-item__icon" aria-hidden="true">🏠</span>Início
+      </div>
+      <div class="nav-item">
+        <span class="nav-item__icon" aria-hidden="true">📊</span>Orçamento
+      </div>
+      <div class="nav-item active" aria-current="page">
+        <span class="nav-item__icon" aria-hidden="true">🏦</span>Contas
+      </div>
+      <div class="nav-item">
+        <span class="nav-item__icon" aria-hidden="true">💳</span>Cartões
+      </div>
+      <div class="nav-item">
+        <span class="nav-item__icon" aria-hidden="true">👤</span>Perfil
+      </div>
+    </nav>
+    -->
+
+  </div>
+  <!-- /app-shell -->
+
+  <!--
+    MODAL (BOTTOM SHEET) — colocar fora do app-shell quando necessário,
+    ou dentro com position:absolute no pai.
+    O bloco abaixo mostra a estrutura completa; remover se não houver modal.
+  -->
+  <!--
+  <div class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    <div class="modal-sheet">
+      <div class="modal-sheet__handle" aria-hidden="true"></div>
+      <div class="modal-sheet__icon" aria-hidden="true">TODO:🔒</div>
+      <h2 class="modal-sheet__title" id="modal-title">TODO: Título do modal</h2>
+      <p class="modal-sheet__desc">TODO: Descrição da ação e suas consequências.</p>
+
+      <div class="inline-banner danger mb-12" role="alert">
+        <span class="inline-banner__icon" aria-hidden="true">⚠️</span>
+        <div class="inline-banner__body">
+          <h4>TODO: Item de impacto</h4>
+          <p>TODO: Detalhe do impacto.</p>
+        </div>
+      </div>
+
+      <div class="btn-group">
+        <button class="btn btn--danger">TODO: Confirmar ação</button>
+        <button class="btn btn--secondary">Cancelar</button>
+      </div>
+    </div>
+  </div>
+  -->
+
+  <!--
+    TOAST (exemplo de uso — normalmente injetado via JS ou mostrado estaticamente)
+  -->
+  <!--
+  <div class="toast-container" role="status" aria-live="polite">
+    <div class="toast toast--success">
+      <span class="toast__icon" aria-hidden="true">✅</span>
+      <div class="toast__body">
+        <div class="toast__title">TODO: Título do toast</div>
+        <div class="toast__message">TODO: Mensagem detalhada.</div>
+      </div>
+      <button class="toast__close" aria-label="Fechar">✕</button>
+    </div>
+  </div>
+  -->
+
+</body>
+</html>

@@ -1,0 +1,1434 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>PLAN-20260303-001_tenants-module-design-patterns.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h1 id="plano-de-execu%C3%A7%C3%A3o--design-e-padr%C3%B5es-de-projeto-m%C3%B3dulo-tenants-uc-001-a-uc-005">Plano de Execução — Design e Padrões de Projeto: Módulo <code>tenants</code> (UC-001 a UC-005)</h1>
+<p><strong>Data:</strong> 2026-03-03<br>
+<strong>Classificação de Impacto Geral:</strong> T2 (UC-002 e UC-003 dominam — integração Keycloak + banco)<br>
+<strong>Blueprint de referência:</strong> <code>architecture/blueprints/modulith-api-first.yaml</code><br>
+<strong>Fonte de requisitos:</strong> <code>docs/business/tenants/use-cases/</code> (UC-001..UC-005) + <code>docs/business/tenants/tenants-regras.md</code> (RN-001..RN-012)<br>
+<strong>Questões em aberto que BLOQUEIAM implementação:</strong> QA-02 (rollback Keycloak/banco), QA-03 (colisão de slug)</p>
+<hr>
+<h2 id="1-vis%C3%A3o-arquitetural-do-m%C3%B3dulo">1. Visão Arquitetural do Módulo</h2>
+<h3 id="11-posicionamento-no-spring-modulith">1.1 Posicionamento no Spring Modulith</h3>
+<pre class="hljs"><code><div>net.deepion
+├── config/                          ← configuração global (multitenancy, security)
+│   └── properties/
+├── tenants/                         ← módulo principal
+│   ├── api/                         ← interface gerada pelo openapi-generator
+│   ├── application/                 ← serviços de aplicação (única camada com lógica)
+│   ├── domain/                      ← entidades, value objects, eventos
+│   ├── dto/                         ← Request/Response gerados via contrato OpenAPI
+│   ├── infrastructure/              ← repositórios JPA, client Keycloak, client e-mail
+│   └── TenantModuleConfig.java      ← @Configuration pública do módulo
+└── shared/                          ← tipos compartilhados entre módulos (TenantId VO)
+</div></code></pre>
+<p><strong>Regra de fronteira (Spring Modulith):</strong></p>
+<ul>
+<li>Apenas classes no pacote raiz <code>net.deepion.tenants</code> são acessíveis a outros módulos</li>
+<li>A interface <code>TenantQueryPort</code> (para RM-F02, RM-F03 consumirem) é exposta como API pública do módulo</li>
+<li>Comunicação de saída via <code>ApplicationEventPublisher</code> — nunca via importação direta de outros módulos</li>
+</ul>
+<h3 id="12-contratos-openapi-api-first">1.2 Contratos OpenAPI (API-First)</h3>
+<p>Seguindo o blueprint <code>modulith-api-first</code>, o módulo <code>tenants</code> exige:</p>
+<pre class="hljs"><code><div>contracts/
+└── tenants-api/
+    ├── pom.xml                         ← openapi-generator configurado
+    └── src/main/resources/openapi/
+        └── tenants.yaml                ← contrato único do módulo
+</div></code></pre>
+<p>Endpoints a especificar no contrato:</p>
+<table>
+<thead>
+<tr>
+<th>Método</th>
+<th>Path</th>
+<th>UC</th>
+<th>Payload</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>GET</code></td>
+<td><code>/tenants</code></td>
+<td>UC-001</td>
+<td>query: <code>q</code>, <code>status</code>, <code>page</code>, <code>size</code></td>
+</tr>
+<tr>
+<td><code>POST</code></td>
+<td><code>/tenants</code></td>
+<td>UC-002</td>
+<td><code>TenantProvisionRequest</code></td>
+</tr>
+<tr>
+<td><code>GET</code></td>
+<td><code>/tenants/{tenantId}</code></td>
+<td>UC-005</td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>PATCH</code></td>
+<td><code>/tenants/{tenantId}</code></td>
+<td>UC-003, UC-004, UC-005</td>
+<td><code>TenantPatchRequest</code></td>
+</tr>
+</tbody>
+</table>
+<p>O <code>PATCH</code> é polimórfico: backend discrimina pela combinação dos campos presentes (<code>nome</code> vs. <code>status</code>).</p>
+<hr>
+<h3 id="13-diagramas-c4">1.3 Diagramas C4</h3>
+<h4 id="c4-level-1--system-context">C4 Level 1 — System Context</h4>
+<pre><code class="language-mermaid"><div class="mermaid">C4Context
+    title System Context — deep-ion Platform (módulo tenants em foco)
+
+    Person(adminPlataforma, "Admin da Plataforma", "Equipe interna deep-ion que provisiona e gerencia tenants")
+    Person(adminTenant, "Admin de Tenant", "Representante do cliente — realiza login e gerencia seu squad")
+
+    System(deepion, "deep-ion Platform", "Fábrica de software autônoma SaaS. Módulo tenants: provisionamento, listagem, ativação e desativação de organizações clientes.")
+
+    System_Ext(keycloak, "Keycloak", "Identity Provider — autenticação SSO, emissão de JWT com claims tenant_id + papel")
+    System_Ext(smtp, "SMTP / Email Service", "Envio de convites de acesso iniciais aos Admins de Tenant")
+
+    Rel(adminPlataforma, deepion, "Provisiona, lista, edita e desativa tenants", "HTTPS / React SPA")
+    Rel(adminTenant, deepion, "Acessa painel do tenant após primeiro login SSO", "HTTPS / React SPA")
+    BiRel(adminTenant, keycloak, "Autentica via SSO (OIDC)", "HTTPS")
+    Rel(deepion, keycloak, "Cria usuários, configura JWT mapper, invalida sessões", "Keycloak Admin REST API / HTTPS")
+    Rel(deepion, smtp, "Envia convites de acesso (tolerante a falha)", "SMTP")
+</div></code></pre>
+<h4 id="c4-level-2--container">C4 Level 2 — Container</h4>
+<pre><code class="language-mermaid"><div class="mermaid">C4Container
+    title Container Diagram — deep-ion Platform (módulo tenants)
+
+    Person(adminPlataforma, "Admin da Plataforma", "Gerencia tenants via painel web")
+
+    System_Boundary(deepion, "deep-ion Platform") {
+        Container(spa, "React SPA", "React 18 + TypeScript + Vite + TailwindCSS", "Painel do Admin da Plataforma — listagem, detalhe, formulário de provisionamento, toggle de status")
+        Container(api, "Spring Boot API", "Java 21 + Spring Boot 3 + Spring Modulith", "Módulo tenants: orquestração de provisionamento, autorização fina via JWT claims, saga Keycloak + banco")
+        ContainerDb(db, "PostgreSQL 16", "Shared database / shared schema", "Tabela tenants com discriminador tenant_id. Todas as tabelas de entidades de tenant devem incluir tenant_id indexado (RN-005)")
+    }
+
+    System_Ext(keycloak, "Keycloak", "Realm único da plataforma — SSO, emissão de JWT com claims tenant_id + papel")
+    System_Ext(smtp, "SMTP Service", "Serviço de e-mail para convites de acesso")
+
+    Rel(adminPlataforma, spa, "Gerencia tenants", "HTTPS")
+    Rel(spa, api, "Chamadas REST autenticadas", "HTTPS / JSON — Authorization: Bearer JWT")
+    Rel(api, db, "Persiste e consulta dados de tenant", "JDBC / Spring Data JPA / Flyway migrations")
+    Rel(api, keycloak, "Cria usuários, configura mapper JWT, invalida sessões", "Keycloak Admin REST API / HTTPS")
+    Rel(api, smtp, "Envia convite de acesso ao Admin de Tenant (FE-05 tolerante)", "SMTP")
+</div></code></pre>
+<h4 id="c4-level-3--component-spring-boot-api--m%C3%B3dulo-tenants">C4 Level 3 — Component (Spring Boot API — módulo <code>tenants</code>)</h4>
+<pre><code class="language-mermaid"><div class="mermaid">
+C4Component
+    title Component Diagram — módulo tenants (Spring Boot API)
+
+    Container_Ext(spa, "React SPA", "React 18", "Interface do Admin da Plataforma")
+    ContainerDb_Ext(db, "PostgreSQL 16", "Database", "Tabela tenants + índices")
+    Container_Ext(keycloak, "Keycloak", "IdP", "Usuários, JWT mapper, sessões")
+    Container_Ext(smtp, "SMTP Service", "Email", "Envio de convites")
+
+    Container_Boundary(api, "Spring Boot API — módulo tenants (net.deepion.tenants)") {
+
+        Component(filter, "JwtClaimsFilter", "OncePerRequestFilter / config/", "Extrai tenant_id e papel do JWT. Popula TenantContextHolder (ThreadLocal) antes de cada request.")
+
+        Component(controller, "TenantController", "REST Controller / api/\nimplements TenantsApi (gerado via OpenAPI)", "GET /tenants · POST /tenants\nGET /tenants/{id} · PATCH /tenants/{id}\n@PreAuthorize ADMIN_PLATAFORMA em todos os métodos")
+
+        Component(queryService, "TenantQueryService", "Application Service / application/", "UC-001: listagem paginada (20/pág) com filtros q + status\nUC-005 leitura: busca por ID + membros ativos via MemberCountPort")
+
+        Component(provisioningService, "TenantProvisioningService", "Application Service (Saga) / application/", "UC-002: valida slug único → gera ULID → persiste PENDENTE\n→ cria usuário Keycloak → configura mapper JWT\n→ atualiza ATIVO → publica evento → envia convite (tolerante)")
+
+        Component(lifecycleService, "TenantLifecycleService", "Application Service / application/", "UC-003: status→INATIVO + invalida sessões Keycloak (RN-006)\nUC-004: remove bloqueio Keycloak + status→ATIVO (RN-007)")
+
+        Component(updateService, "TenantUpdateService", "Application Service / application/", "UC-005 edição: atualiza nome (máx 100 chars)\nRejeita PATCH com campo slug (RN-002 — imutável)")
+
+        Component(slugGen, "SlugGeneratorService", "Utility / application/", "RN-003: lowercase → hífens → remove especiais\n→ colapsa hífens → valida ≥ 1 char alfanumérico")
+
+        Component(eventPublisher, "ApplicationEventPublisher", "Spring Framework — shared/", "Publica TenantProvisionedEvent (→RM-F02, RM-F03)\nPublica TenantStatusChangedEvent (→ módulos downstream)")
+
+        Component(tenantRepo, "TenantJpaRepository", "Spring Data JPA / infrastructure/", "findByFilters(q, status, Pageable)\nexistsBySlug · findByTenantId\n→ tabela tenants no PostgreSQL")
+
+        Component(keycloakAdapter, "KeycloakTenantAdapter", "Port Adapter / infrastructure/\nimplements KeycloakTenantPort", "createAdminUser · configureJwtMapper\ninvalidateAllSessions · removeSessionBlock\ndeleteUser (rollback compensatório da saga)")
+
+        Component(emailAdapter, "SmtpEmailAdapter", "Port Adapter / infrastructure/\nimplements EmailNotificationPort", "sendTenantInvite — Spring Mail + Thymeleaf\nFalha não propaga exceção (FE-05 UC-002)\nFlag convite_pendente definida no banco")
+
+        Component(memberCountAdapter, "MemberCountAdapter", "Port Adapter / infrastructure/\nimplements MemberCountPort", "Retorna 0 até módulo RM-F03 existir\nFutura integração: conta membros com status_convite=ATIVO (RN-012)")
+    }
+
+    Rel(spa, filter, "HTTP request com JWT Bearer", "HTTPS")
+    Rel(filter, controller, "Repassa request com TenantContextHolder populado")
+    Rel(controller, queryService, "lista / busca detalhe")
+    Rel(controller, provisioningService, "POST — provisiona tenant")
+    Rel(controller, lifecycleService, "PATCH status INATIVO / ATIVO")
+    Rel(controller, updateService, "PATCH nome")
+    Rel(provisioningService, slugGen, "normaliza e valida slug (RN-003)")
+    Rel(provisioningService, tenantRepo, "persiste TenantEntity (PENDENTE → ATIVO)")
+    Rel(provisioningService, keycloakAdapter, "cria usuário + configura mapper JWT (RN-004)")
+    Rel(provisioningService, emailAdapter, "envia convite — tolerante a falha")
+    Rel(provisioningService, eventPublisher, "publica TenantProvisionedEvent")
+    Rel(lifecycleService, tenantRepo, "atualiza status no banco")
+    Rel(lifecycleService, keycloakAdapter, "invalida sessões / remove bloqueio (RN-006)")
+    Rel(lifecycleService, eventPublisher, "publica TenantStatusChangedEvent")
+    Rel(updateService, tenantRepo, "UPDATE nome WHERE tenant_id")
+    Rel(queryService, tenantRepo, "SELECT paginado com filtros")
+    Rel(queryService, memberCountAdapter, "conta membros ativos (RN-012)")
+    Rel(tenantRepo, db, "SQL via JPA / Flyway", "JDBC")
+    Rel(keycloakAdapter, keycloak, "Admin REST API", "HTTPS")
+    Rel(emailAdapter, smtp, "envia e-mail de convite", "SMTP")
+</div></code></pre>
+<hr>
+<h2 id="2-padr%C3%B5es-de-projeto-por-camada">2. Padrões de Projeto por Camada</h2>
+<h3 id="21-camada-de-dom%C3%ADnio-domain">2.1 Camada de Domínio (<code>domain/</code>)</h3>
+<p><strong>Entidade JPA — <code>TenantEntity</code></strong></p>
+<p>Convenção obrigatória do blueprint:</p>
+<ul>
+<li>Anotação <code>@Getter @Setter @NoArgsConstructor</code> — NUNCA <code>@Data</code> em entidades JPA</li>
+<li>Sem lógica de negócio dentro da entidade</li>
+<li><code>tenant_id</code> como <code>@Id</code> do tipo <code>String</code> (ULID armazenado como <code>VARCHAR(26)</code>)</li>
+<li><code>@Column(updatable = false)</code> em <code>tenant_id</code>, <code>slug</code> e <code>criado_em</code> — respeita RN-001 e RN-002</li>
+<li><code>status</code> como <code>@Enumerated(EnumType.STRING)</code> com enum <code>TenantStatus { ATIVO, INATIVO }</code></li>
+</ul>
+<pre class="hljs"><code><div>// Pseudocódigo orientativo (não implementar aqui)
+TenantEntity {
+  @Id String tenantId          // ULID — @Column(updatable=false)
+  String nome                  // máx 100 chars
+  String slug                  // máx 50 chars, @Column(updatable=false), @Column(unique=true)
+  TenantStatus status          // enum ATIVO/INATIVO
+  Instant criadoEm             // @Column(updatable=false)
+}
+</div></code></pre>
+<p><strong>Value Object — <code>TenantId</code></strong></p>
+<p>Definido no pacote <code>shared/</code> para reutilização por RM-F02 e RM-F03:</p>
+<ul>
+<li>Wrapper imutável sobre <code>String</code> (ULID)</li>
+<li>Geração via <code>UlidCreator.getUlid().toString()</code> (biblioteca <code>com.github.f4b6a3:ulid-creator</code>)</li>
+<li>Validação de formato no construtor (regex <code>[0-9A-Z]{26}</code>)</li>
+</ul>
+<p><strong>Enum de Papéis — <code>TenantRole</code></strong></p>
+<pre class="hljs"><code><div>TenantRole { PO, ARQUITETO, DEV, QA, GATE_KEEPER, ADMIN_TENANT, ADMIN_PLATAFORMA }
+</div></code></pre>
+<p>Localizado em <code>shared/</code> — referenciado pelo módulo <code>tenants</code> e futuramente por <code>auth</code>.</p>
+<p><strong>Evento de Domínio — <code>TenantProvisionedEvent</code></strong></p>
+<p>Publicado após provisionamento bem-sucedido (UC-002). Consumido por:</p>
+<ul>
+<li>RM-F02 (quando implementado): para criar workspace inicial do tenant</li>
+<li>RM-F03 (quando implementado): para registrar o ADMIN_TENANT como primeiro membro</li>
+</ul>
+<pre class="hljs"><code><div>TenantProvisionedEvent {
+  String tenantId
+  String slug
+  String adminEmail
+  Instant occurredAt
+}
+</div></code></pre>
+<p><strong>Evento de Domínio — <code>TenantStatusChangedEvent</code></strong></p>
+<p>Publicado após UC-003 (desativação) e UC-004 (reativação):</p>
+<pre class="hljs"><code><div>TenantStatusChangedEvent {
+  String tenantId
+  TenantStatus previousStatus
+  TenantStatus newStatus
+  Instant occurredAt
+}
+</div></code></pre>
+<h3 id="22-camada-de-aplica%C3%A7%C3%A3o-application">2.2 Camada de Aplicação (<code>application/</code>)</h3>
+<p><strong>Padrão: Command / Query Segregation (simplificado)</strong></p>
+<p>Não se usa CQRS completo, mas os serviços são segregados por responsabilidade:</p>
+<table>
+<thead>
+<tr>
+<th>Classe</th>
+<th>Responsabilidade</th>
+<th>UCs atendidos</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>TenantQueryService</code></td>
+<td>Leitura com paginação, busca, detalhe</td>
+<td>UC-001, UC-005 (leitura)</td>
+</tr>
+<tr>
+<td><code>TenantProvisioningService</code></td>
+<td>Orquestra criação atômica banco + Keycloak + e-mail</td>
+<td>UC-002</td>
+</tr>
+<tr>
+<td><code>TenantLifecycleService</code></td>
+<td>Ações de status (desativação, reativação)</td>
+<td>UC-003, UC-004</td>
+</tr>
+<tr>
+<td><code>TenantUpdateService</code></td>
+<td>Edição de <code>nome</code></td>
+<td>UC-005 (edição)</td>
+</tr>
+</tbody>
+</table>
+<p>Convenção obrigatória do blueprint:</p>
+<ul>
+<li><code>@RequiredArgsConstructor</code> — injeção por construtor, todas as dependências <code>final</code></li>
+<li>Nenhuma anotação JPA nos serviços — apenas ports/interfaces de repositório</li>
+<li>Toda lógica de orquestração aqui, nunca em controllers ou entidades</li>
+</ul>
+<p><strong>Padrão de Rollback para UC-002 — Saga Coreografada (orientação para ADR)</strong></p>
+<blockquote>
+<p>⚠ QA-02 em aberto — o ADR deve definir antes da implementação. Orientação arquitetural:</p>
+</blockquote>
+<p>Sequência recomendada com rollback compensatório:</p>
+<pre class="hljs"><code><div>1. Valida slug único no banco         → FE-01 se duplicado
+2. Persiste TenantEntity (PENDENTE)   → FE-04 se falhar → abort
+3. Cria usuário no Keycloak           → FE-03 se falhar → delete TenantEntity (compensação)
+4. Configura mapper JWT no Keycloak   → FE-03 se falhar → delete user Keycloak + delete TenantEntity
+5. Atualiza status → ATIVO            → publishes TenantProvisionedEvent
+6. Envia e-mail (assíncrono)          → FE-05: mantém tenant criado, sinaliza via flag &quot;convite_pendente&quot;
+</div></code></pre>
+<p>A persistência em dois estados (<code>PENDENTE</code> → <code>ATIVO</code>) torna o rollback rastreável e idempotente. Adicionar campo <code>status_provisionamento</code> na entidade (ver seção de DB).</p>
+<h3 id="23-camada-de-infraestrutura-infrastructure">2.3 Camada de Infraestrutura (<code>infrastructure/</code>)</h3>
+<p><strong>Repositório JPA — <code>TenantJpaRepository</code></strong></p>
+<pre class="hljs"><code><div>TenantJpaRepository extends JpaRepository&lt;TenantEntity, String&gt;
+  + Page&lt;TenantEntity&gt; findByFilters(String q, TenantStatus status, Pageable pageable)
+  + boolean existsBySlug(String slug)
+  + Optional&lt;TenantEntity&gt; findByTenantId(String tenantId)
+</div></code></pre>
+<p>Query derivada + <code>@Query</code> onde necessário. Paginação com <code>Pageable</code> do Spring Data.</p>
+<p><strong>Port de saída — <code>KeycloakTenantPort</code> (interface)</strong></p>
+<p>Define o contrato sem acoplar a implementação Keycloak ao domínio:</p>
+<pre class="hljs"><code><div>KeycloakTenantPort {
+  void createAdminUser(String tenantId, String email, String firstName, String lastName, TenantRole role)
+  void configureJwtMapper(String tenantId)
+  void invalidateAllSessions(String tenantId)
+  void removeSessionBlock(String tenantId)
+  void deleteUser(String email)           // compensação de rollback
+}
+</div></code></pre>
+<p><strong>Implementação — <code>KeycloakTenantAdapter</code></strong></p>
+<p>Usa <code>org.keycloak:keycloak-admin-client</code> para operações no Admin REST API do Keycloak:</p>
+<ul>
+<li>Realm único: configurado via <code>application.yml</code> (<code>keycloak.realm</code>, <code>keycloak.server-url</code>, <code>keycloak.client-id</code>, <code>keycloak.client-secret</code>)</li>
+<li>Mapper de claim: <code>ProtocolMapperRepresentation</code> do tipo <code>oidc-usermodel-attribute-mapper</code></li>
+<li>Invalidação de sessões: <code>DELETE /admin/realms/{realm}/users/{userId}/sessions</code></li>
+<li>Bloqueio/desbloqueio: <code>PUT /admin/realms/{realm}/users/{userId}</code> com <code>enabled=false/true</code></li>
+</ul>
+<p><strong>Port de saída — <code>EmailNotificationPort</code> (interface)</strong></p>
+<pre class="hljs"><code><div>EmailNotificationPort {
+  void sendTenantInvite(String email, String tenantName, String loginUrl, String temporaryPassword)
+}
+</div></code></pre>
+<p>Implementação inicial pode ser via Spring Mail + template Thymeleaf. Falha deve ser tolerada (FE-05 do UC-002).</p>
+<p><strong>Slug Generator — <code>SlugGeneratorService</code></strong></p>
+<p>Utilitário puro (sem estado, sem dependências de infraestrutura):</p>
+<pre class="hljs"><code><div>normalize(String nome): String
+  → toLowerCase()
+  → replaceAll(&quot;[^a-z0-9\\s-]&quot;, &quot;&quot;)
+  → replaceAll(&quot;[\\s]+&quot;, &quot;-&quot;)
+  → replaceAll(&quot;-{2,}&quot;, &quot;-&quot;)
+  → strip(&quot;-&quot;)
+  → validateNonEmpty()   // garante ao menos 1 char alfanumérico
+</div></code></pre>
+<h3 id="24-camada-de-api-controllers">2.4 Camada de API (Controllers)</h3>
+<p>Gerados via OpenAPI contract (<code>tenants.yaml</code>) — apenas a interface é gerada.
+O controller implementa a interface gerada:</p>
+<pre class="hljs"><code><div>TenantController implements TenantsApi {
+  @RequiredArgsConstructor
+  // injeta: TenantQueryService, TenantProvisioningService, TenantLifecycleService, TenantUpdateService
+}
+</div></code></pre>
+<p><strong>Autorização:</strong> <code>@PreAuthorize(&quot;hasAuthority('ADMIN_PLATAFORMA')&quot;)</code> em todos os endpoints — validação via JWT claim <code>papel</code>. Configuração do <code>SecurityFilterChain</code> em <code>config/SecurityConfig.java</code>.</p>
+<p><strong>Extração de claims:</strong> <code>TenantContextHolder</code> (ThreadLocal) populado por <code>JwtClaimsFilter</code> antes de cada request — expõe <code>getCurrentTenantId()</code> e <code>getCurrentRole()</code> para os serviços.</p>
+<blockquote>
+<p>⚠ Nota: Para os UCs deste módulo, <code>ADMIN_PLATAFORMA</code> opera sobre todos os tenants (não está vinculado a um <code>tenant_id</code> específico). O <code>TenantContextHolder</code> é relevante para outros módulos (RM-F02, RM-F03) onde usuários operam dentro de seu próprio tenant.</p>
+</blockquote>
+<hr>
+<h2 id="3-esquema-de-banco-de-dados">3. Esquema de Banco de Dados</h2>
+<h3 id="31-tabela-principal-tenants">3.1 Tabela principal: <code>tenants</code></h3>
+<pre class="hljs"><code><div><span class="hljs-comment">-- Pseudocódigo para Flyway V{N}__create_tenants_table.sql</span>
+<span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TABLE</span> tenants (
+    tenant_id          <span class="hljs-built_in">VARCHAR</span>(<span class="hljs-number">26</span>)  <span class="hljs-keyword">NOT</span> <span class="hljs-literal">NULL</span>,          <span class="hljs-comment">-- ULID</span>
+    nome               <span class="hljs-built_in">VARCHAR</span>(<span class="hljs-number">100</span>) <span class="hljs-keyword">NOT</span> <span class="hljs-literal">NULL</span>,
+    slug               <span class="hljs-built_in">VARCHAR</span>(<span class="hljs-number">50</span>)  <span class="hljs-keyword">NOT</span> <span class="hljs-literal">NULL</span>,
+    <span class="hljs-keyword">status</span>             <span class="hljs-built_in">VARCHAR</span>(<span class="hljs-number">10</span>)  <span class="hljs-keyword">NOT</span> <span class="hljs-literal">NULL</span>,          <span class="hljs-comment">-- ATIVO | INATIVO</span>
+    status_provisioning <span class="hljs-built_in">VARCHAR</span>(<span class="hljs-number">20</span>) <span class="hljs-keyword">NOT</span> <span class="hljs-literal">NULL</span> <span class="hljs-keyword">DEFAULT</span> <span class="hljs-string">'PENDENTE'</span>, <span class="hljs-comment">-- PENDENTE | ATIVO | FALHA</span>
+    criado_em          TIMESTAMPTZ  <span class="hljs-keyword">NOT</span> <span class="hljs-literal">NULL</span> <span class="hljs-keyword">DEFAULT</span> <span class="hljs-keyword">NOW</span>(),
+    atualizado_em      TIMESTAMPTZ  <span class="hljs-keyword">NOT</span> <span class="hljs-literal">NULL</span> <span class="hljs-keyword">DEFAULT</span> <span class="hljs-keyword">NOW</span>(),
+    convite_pendente   <span class="hljs-built_in">BOOLEAN</span>      <span class="hljs-keyword">NOT</span> <span class="hljs-literal">NULL</span> <span class="hljs-keyword">DEFAULT</span> <span class="hljs-literal">FALSE</span>,
+
+    <span class="hljs-keyword">CONSTRAINT</span> tenants_pkey         PRIMARY <span class="hljs-keyword">KEY</span> (tenant_id),
+    <span class="hljs-keyword">CONSTRAINT</span> tenants_slug_unique  <span class="hljs-keyword">UNIQUE</span>      (slug),
+    <span class="hljs-keyword">CONSTRAINT</span> tenants_status_check <span class="hljs-keyword">CHECK</span>       (<span class="hljs-keyword">status</span> <span class="hljs-keyword">IN</span> (<span class="hljs-string">'ATIVO'</span>, <span class="hljs-string">'INATIVO'</span>))
+);
+
+<span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">INDEX</span> idx_tenants_status   <span class="hljs-keyword">ON</span> tenants (<span class="hljs-keyword">status</span>);
+<span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">INDEX</span> idx_tenants_slug     <span class="hljs-keyword">ON</span> tenants (slug);
+<span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">INDEX</span> idx_tenants_criado_em <span class="hljs-keyword">ON</span> tenants (criado_em <span class="hljs-keyword">DESC</span>);
+</div></code></pre>
+<p><strong>Campos adicionais justificados:</strong></p>
+<ul>
+<li><code>status_provisioning</code>: suporte ao fluxo saga de UC-002 (PENDENTE → ATIVO | FALHA)</li>
+<li><code>atualizado_em</code>: auditoria básica de última modificação</li>
+<li><code>convite_pendente</code>: sinalização da FE-05 do UC-002 para reenvio manual na tela de detalhe</li>
+</ul>
+<h3 id="32-view-calculada-membrosativos">3.2 View calculada: <code>membros_ativos</code></h3>
+<p>O campo <code>membros_ativos</code> é calculado e não armazenado na tabela <code>tenants</code>. Será uma view ou query derivada do módulo RM-F03 (fora do escopo deste módulo). Para o MVP:</p>
+<p><strong>Opção A (preferida para MVP):</strong> Query inline no <code>TenantQueryService</code>, chamando uma porta de saída <code>MemberCountPort</code> que será implementada quando RM-F03 existir. Retorna <code>0</code> até o módulo existir.</p>
+<p><strong>Opção B:</strong> View materializada <code>tenant_member_counts</code> criada quando RM-F03 for implementado.</p>
+<blockquote>
+<p>A opção A preserva o isolamento de módulos — MemberCountPort é uma interface em <code>tenants</code>, implementada por RM-F03 via evento ou chamada de API pública.</p>
+</blockquote>
+<h3 id="33-discriminador-tenantid-em-todas-as-tabelas-rn-005">3.3 Discriminador <code>tenant_id</code> em todas as tabelas (RN-005)</h3>
+<p>Convenção obrigatória para <strong>todas</strong> as tabelas de entidades de negócio criadas pelo pipeline de outros módulos (RM-F02, RM-F03, etc.):</p>
+<pre class="hljs"><code><div><span class="hljs-comment">-- Template obrigatório para toda tabela de entidade de tenant</span>
+<span class="hljs-keyword">ALTER</span> <span class="hljs-keyword">TABLE</span> {nome_tabela} <span class="hljs-keyword">ADD</span> <span class="hljs-keyword">COLUMN</span> tenant_id <span class="hljs-built_in">VARCHAR</span>(<span class="hljs-number">26</span>) <span class="hljs-keyword">NOT</span> <span class="hljs-literal">NULL</span>;
+<span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">INDEX</span> idx_{nome_tabela}_tenant_id <span class="hljs-keyword">ON</span> {nome_tabela} (tenant_id);
+<span class="hljs-keyword">ALTER</span> <span class="hljs-keyword">TABLE</span> {nome_tabela}
+    <span class="hljs-keyword">ADD</span> <span class="hljs-keyword">CONSTRAINT</span> fk_{nome_tabela}_tenant
+    <span class="hljs-keyword">FOREIGN</span> <span class="hljs-keyword">KEY</span> (tenant_id) <span class="hljs-keyword">REFERENCES</span> tenants(tenant_id);
+</div></code></pre>
+<blockquote>
+<p>⚠ Esta convenção deve ser verificada pelo DOM-05b (SKILL-QAT-01) em cada PR que crie novas tabelas. R2/A2 no checklist de bloqueio.</p>
+</blockquote>
+<hr>
+<h2 id="4-lista-de-tarefas-de-desenvolvimento">4. Lista de Tarefas de Desenvolvimento</h2>
+<h3 id="fase-0--pr%C3%A9-implementa%C3%A7%C3%A3o-bloqueantes">FASE 0 — Pré-implementação (bloqueantes)</h3>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Tarefa</th>
+<th>Responsável sugerido</th>
+<th>Classificação</th>
+<th>Bloqueante para</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>T-00a</td>
+<td>Resolver QA-02: definir mecanismo de rollback Keycloak/banco (saga compensatória vs. 2PC) → ADR</td>
+<td>Arquiteto</td>
+<td>T2</td>
+<td>UC-002, UC-003</td>
+</tr>
+<tr>
+<td>T-00b</td>
+<td>Resolver QA-03: definir comportamento de colisão de slug → sufixo numérico ou rejeição manual</td>
+<td>PO + Arquiteto</td>
+<td>T1</td>
+<td>UC-002</td>
+</tr>
+<tr>
+<td>T-00c</td>
+<td>Definir contrato JWT: nomenclatura exata dos claims <code>tenant_id</code> e <code>papel</code> → ADR <code>auth-jwt-claims</code></td>
+<td>Arquiteto</td>
+<td>T2</td>
+<td>UC-002, UC-003, UC-004</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3 id="fase-1--infraestrutura-e-contrato-paralelas-com-fase-2-db">FASE 1 — Infraestrutura e Contrato (paralelas com Fase 2-DB)</h3>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Tarefa</th>
+<th>Detalhes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>T-01</td>
+<td><strong>Criar contrato OpenAPI</strong> <code>contracts/tenants-api/src/main/resources/openapi/tenants.yaml</code></td>
+<td>Endpoints: GET /tenants, POST /tenants, GET /tenants/{id}, PATCH /tenants/{id}. Incluir schemas TenantProvisionRequest, TenantPatchRequest, TenantListResponse, TenantDetailResponse, PagedTenantsResponse</td>
+</tr>
+<tr>
+<td>T-02</td>
+<td><strong>Configurar pom.xml do módulo contrato</strong> <code>contracts/tenants-api/pom.xml</code></td>
+<td>openapi-generator-maven-plugin, apiPackage, modelPackage, interfaceOnly=true, useSpringBoot3=true</td>
+</tr>
+<tr>
+<td>T-03</td>
+<td><strong>Configurar pom.xml do módulo core</strong> para depender de <code>tenants-api</code></td>
+<td>Adicionar dependência do contrato gerado</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3 id="fase-2--banco-de-dados--flyway">FASE 2 — Banco de Dados / Flyway</h3>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Tarefa</th>
+<th>Detalhes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>T-04</td>
+<td><strong>Migration Flyway</strong>: criar tabela <code>tenants</code></td>
+<td><code>V{N}__create_tenants_table.sql</code> com todos os campos, constraints e índices definidos na seção 3.1</td>
+</tr>
+<tr>
+<td>T-05</td>
+<td><strong>Migration Flyway</strong>: adicionar <code>status_provisioning</code> e <code>convite_pendente</code></td>
+<td>Incluir no mesmo V{N} se for a primeira migration, ou separado se iterativo</td>
+</tr>
+<tr>
+<td>T-06</td>
+<td><strong>Verificar índice em <code>tenant_id</code></strong> em todas as tabelas existentes que já referenciam tenant</td>
+<td>Audit de tabelas existentes — se existirem — para conformidade com RN-005</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3 id="fase-3--dom%C3%ADnio-e-shared">FASE 3 — Domínio e Shared</h3>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Tarefa</th>
+<th>Detalhes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>T-07</td>
+<td><strong><code>TenantEntity</code></strong> em <code>tenants/domain/</code></td>
+<td><code>@Getter @Setter @NoArgsConstructor</code>, campos com constraints <code>@Column(updatable=false)</code> para <code>tenantId</code>, <code>slug</code>, <code>criadoEm</code>. Status como <code>@Enumerated(STRING)</code></td>
+</tr>
+<tr>
+<td>T-08</td>
+<td><strong><code>TenantStatus</code> enum</strong> em <code>tenants/domain/</code></td>
+<td><code>ATIVO</code>, <code>INATIVO</code></td>
+</tr>
+<tr>
+<td>T-09</td>
+<td><strong><code>ProvisioningStatus</code> enum</strong> em <code>tenants/domain/</code></td>
+<td><code>PENDENTE</code>, <code>ATIVO</code>, <code>FALHA</code></td>
+</tr>
+<tr>
+<td>T-10</td>
+<td><strong><code>TenantId</code> value object</strong> em <code>shared/</code></td>
+<td>Wrapper imutável de ULID, validação de formato, factory method <code>generate()</code></td>
+</tr>
+<tr>
+<td>T-11</td>
+<td><strong><code>TenantRole</code> enum</strong> em <code>shared/</code></td>
+<td><code>PO</code>, <code>ARQUITETO</code>, <code>DEV</code>, <code>QA</code>, <code>GATE_KEEPER</code>, <code>ADMIN_TENANT</code>, <code>ADMIN_PLATAFORMA</code></td>
+</tr>
+<tr>
+<td>T-12</td>
+<td><strong><code>TenantProvisionedEvent</code></strong> em <code>tenants/domain/</code></td>
+<td><code>record</code> com <code>tenantId</code>, <code>slug</code>, <code>adminEmail</code>, <code>occurredAt</code></td>
+</tr>
+<tr>
+<td>T-13</td>
+<td><strong><code>TenantStatusChangedEvent</code></strong> em <code>tenants/domain/</code></td>
+<td><code>record</code> com <code>tenantId</code>, <code>previousStatus</code>, <code>newStatus</code>, <code>occurredAt</code></td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3 id="fase-4--infraestrutura-adapters">FASE 4 — Infraestrutura (Adapters)</h3>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Tarefa</th>
+<th>Detalhes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>T-14</td>
+<td><strong><code>TenantJpaRepository</code></strong> em <code>tenants/infrastructure/</code></td>
+<td><code>JpaRepository&lt;TenantEntity, String&gt;</code>, método <code>findByFilters</code> com <code>@Query</code> + <code>Pageable</code>, <code>existsBySlug</code>, <code>findByTenantId</code></td>
+</tr>
+<tr>
+<td>T-15</td>
+<td><strong><code>KeycloakTenantPort</code> interface</strong> em <code>tenants/infrastructure/</code></td>
+<td>Definir contrato conforme seção 2.3</td>
+</tr>
+<tr>
+<td>T-16</td>
+<td><strong><code>KeycloakTenantAdapter</code></strong> implementando <code>KeycloakTenantPort</code></td>
+<td><code>keycloak-admin-client</code>, configuração de realm via <code>@ConfigurationProperties</code>. Métodos: <code>createAdminUser</code>, <code>configureJwtMapper</code>, <code>invalidateAllSessions</code>, <code>removeSessionBlock</code>, <code>deleteUser</code></td>
+</tr>
+<tr>
+<td>T-17</td>
+<td><strong><code>KeycloakProperties</code></strong> em <code>config/properties/</code></td>
+<td><code>@ConfigurationProperties(&quot;keycloak&quot;)</code>, campos: <code>serverUrl</code>, <code>realm</code>, <code>clientId</code>, <code>clientSecret</code></td>
+</tr>
+<tr>
+<td>T-18</td>
+<td><strong><code>EmailNotificationPort</code> interface</strong> em <code>tenants/infrastructure/</code></td>
+<td>Método <code>sendTenantInvite</code></td>
+</tr>
+<tr>
+<td>T-19</td>
+<td><strong><code>SmtpEmailAdapter</code></strong> implementando <code>EmailNotificationPort</code></td>
+<td>Spring Mail + template Thymeleaf. Falha deve ser tolerada (não propagar exceção para UC-002)</td>
+</tr>
+<tr>
+<td>T-20</td>
+<td><strong><code>SlugGeneratorService</code></strong> em <code>tenants/application/</code></td>
+<td>Lógica pura de normalização conforme RN-003; método <code>normalize(String nome): String</code>; validação de resultado não vazio</td>
+</tr>
+<tr>
+<td>T-21</td>
+<td><strong><code>MemberCountPort</code> interface</strong> em <code>tenants/application/</code></td>
+<td><code>int countActiveMembers(String tenantId)</code> — implementação dummy retorna 0 até RM-F03 existir</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3 id="fase-5--servi%C3%A7os-de-aplica%C3%A7%C3%A3o">FASE 5 — Serviços de Aplicação</h3>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Tarefa</th>
+<th>UC</th>
+<th>Detalhes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>T-22</td>
+<td><strong><code>TenantQueryService</code></strong></td>
+<td>UC-001, UC-005</td>
+<td>Listar com filtros e paginação (20/pág — RN-012); buscar por ID; calcular <code>membrosAtivos</code> via <code>MemberCountPort</code></td>
+</tr>
+<tr>
+<td>T-23</td>
+<td><strong><code>TenantProvisioningService</code></strong></td>
+<td>UC-002</td>
+<td>Orquestrar saga: validar slug único → gerar ULID → persistir PENDENTE → criar Keycloak → configurar mapper → atualizar ATIVO → publicar evento → enviar convite (tolerante a falha). Implementar rollback compensatório conforme ADR (T-00a)</td>
+</tr>
+<tr>
+<td>T-24</td>
+<td><strong><code>TenantLifecycleService</code></strong></td>
+<td>UC-003, UC-004</td>
+<td>Desativar: atualizar status → invalidar sessões Keycloak → publicar evento. Reativar: remover bloqueio Keycloak → atualizar status → publicar evento</td>
+</tr>
+<tr>
+<td>T-25</td>
+<td><strong><code>TenantUpdateService</code></strong></td>
+<td>UC-005</td>
+<td>Atualizar <code>nome</code> com validação (obrigatório, máx 100 chars) — <code>slug</code> imutável (RN-002), nunca aceitar <code>slug</code> em PATCH</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3 id="fase-6--controller-e-seguran%C3%A7a">FASE 6 — Controller e Segurança</h3>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Tarefa</th>
+<th>Detalhes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>T-26</td>
+<td><strong><code>TenantController</code></strong> implementando <code>TenantsApi</code></td>
+<td><code>@RestController</code>, <code>@RequiredArgsConstructor</code>. Mapeia chamadas de API para os serviços. <code>@PreAuthorize(&quot;hasAuthority('ADMIN_PLATAFORMA')&quot;)</code> em todos os métodos</td>
+</tr>
+<tr>
+<td>T-27</td>
+<td><strong><code>JwtClaimsFilter</code></strong> em <code>config/</code></td>
+<td><code>OncePerRequestFilter</code> que extrai <code>tenant_id</code> e <code>papel</code> do JWT e popula <code>TenantContextHolder</code> (ThreadLocal)</td>
+</tr>
+<tr>
+<td>T-28</td>
+<td><strong><code>TenantContextHolder</code></strong> em <code>shared/</code></td>
+<td>ThreadLocal para <code>tenantId</code> e <code>role</code>; métodos <code>get</code>, <code>set</code>, <code>clear</code></td>
+</tr>
+<tr>
+<td>T-29</td>
+<td><strong><code>SecurityConfig</code></strong> em <code>config/</code></td>
+<td><code>SecurityFilterChain</code> com JWT resource server, registro do <code>JwtClaimsFilter</code>, <code>@EnableMethodSecurity</code> para <code>@PreAuthorize</code></td>
+</tr>
+<tr>
+<td>T-30</td>
+<td><strong><code>TenantModuleConfig</code></strong> em <code>tenants/</code></td>
+<td><code>@Configuration</code> pública do módulo — expõe apenas as interfaces públicas (<code>TenantQueryService</code> como bean público para outros módulos consumirem via <code>TenantQueryPort</code>)</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3 id="fase-7--testes">FASE 7 — Testes</h3>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Tarefa</th>
+<th>Tipo</th>
+<th>Cobertura</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>T-31</td>
+<td><strong>Testes unitários de <code>SlugGeneratorService</code></strong></td>
+<td>Unitário</td>
+<td>Normalização, colisão, slug inválido pós-normalização (RN-003, QA-03)</td>
+</tr>
+<tr>
+<td>T-32</td>
+<td><strong>Testes unitários de <code>TenantProvisioningService</code></strong></td>
+<td>Unitário (mockado)</td>
+<td>Saga caminho feliz, rollback em falha Keycloak, rollback em falha banco, tolerância a falha de e-mail (UC-002 FP + FE-01..FE-05)</td>
+</tr>
+<tr>
+<td>T-33</td>
+<td><strong>Testes unitários de <code>TenantLifecycleService</code></strong></td>
+<td>Unitário (mockado)</td>
+<td>Desativação + invalidação, falha Keycloak, reativação (UC-003, UC-004)</td>
+</tr>
+<tr>
+<td>T-34</td>
+<td><strong>Testes unitários de <code>TenantUpdateService</code></strong></td>
+<td>Unitário</td>
+<td>Edição de nome, validação de comprimento, rejeição de edição de slug (UC-005)</td>
+</tr>
+<tr>
+<td>T-35</td>
+<td><strong>Testes unitários de <code>TenantQueryService</code></strong></td>
+<td>Unitário (mockado)</td>
+<td>Paginação, filtro, busca, empty state (UC-001)</td>
+</tr>
+<tr>
+<td>T-36</td>
+<td><strong>Testes de integração: <code>TenantJpaRepository</code></strong></td>
+<td>Integração (Testcontainers PostgreSQL)</td>
+<td>CRUD, busca por filtros, paginação, unicidade de slug, índices</td>
+</tr>
+<tr>
+<td>T-37</td>
+<td><strong>Testes de integração: <code>KeycloakTenantAdapter</code></strong></td>
+<td>Integração (Testcontainers Keycloak)</td>
+<td>Criação de usuário, mapper JWT, invalidação de sessão, rollback</td>
+</tr>
+<tr>
+<td>T-38</td>
+<td><strong>Testes de contrato: <code>TenantController</code></strong></td>
+<td>Integração (<code>@SpringBootTest</code> + MockMVC)</td>
+<td>Todos os endpoints, autenticação JWT, erros 400/401/403/404/500</td>
+</tr>
+<tr>
+<td>T-39</td>
+<td><strong><code>ModulithArchitectureTest</code></strong></td>
+<td>Arquitetural</td>
+<td>Spring Modulith — fronteiras do módulo <code>tenants</code>, sem importações cruzadas diretas</td>
+</tr>
+<tr>
+<td>T-40</td>
+<td><strong>Cobertura ≥ 80%</strong></td>
+<td>Meta geral</td>
+<td>Verificado por SKILL-QAT-00</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3 id="fase-8--frontend-react">FASE 8 — Frontend (React)</h3>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Tarefa</th>
+<th>Tela/Componente</th>
+<th>UC</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>T-41</td>
+<td><strong>Página <code>/tenants</code></strong> — listagem paginada</td>
+<td><code>TenantsListPage</code></td>
+<td>UC-001</td>
+</tr>
+<tr>
+<td>T-42</td>
+<td><strong>Componente <code>TenantTable</code></strong> com badge de status e ações por linha</td>
+<td><code>TenantTable</code></td>
+<td>UC-001</td>
+</tr>
+<tr>
+<td>T-43</td>
+<td><strong>Componentes de filtro</strong>: busca textual + seletor de status</td>
+<td><code>TenantFilters</code></td>
+<td>UC-001 FA-01, FA-02</td>
+</tr>
+<tr>
+<td>T-44</td>
+<td><strong>Estado vazio</strong> com CTA &quot;Provisionar Tenant&quot;</td>
+<td><code>EmptyState</code></td>
+<td>UC-001 FA-03</td>
+</tr>
+<tr>
+<td>T-45</td>
+<td><strong>Formulário de provisionamento</strong> com geração de slug em tempo real</td>
+<td><code>TenantProvisionForm</code></td>
+<td>UC-002</td>
+</tr>
+<tr>
+<td>T-46</td>
+<td><strong>Campo de telefones dinâmico</strong> (add/remove)</td>
+<td><code>PhoneFieldArray</code></td>
+<td>UC-002 FA-02</td>
+</tr>
+<tr>
+<td>T-47</td>
+<td><strong>Modal de confirmação de desativação</strong> com contagem de membros impactados</td>
+<td><code>DeactivationModal</code></td>
+<td>UC-003</td>
+</tr>
+<tr>
+<td>T-48</td>
+<td><strong>Página de detalhe <code>/tenants/:id</code></strong> com toggle de status e edição inline de <code>nome</code></td>
+<td><code>TenantDetailPage</code></td>
+<td>UC-004, UC-005</td>
+</tr>
+<tr>
+<td>T-49</td>
+<td><strong>Toggle controlado</strong> por estado de status — visual sync com backend</td>
+<td><code>TenantStatusToggle</code></td>
+<td>UC-003, UC-004</td>
+</tr>
+<tr>
+<td>T-50</td>
+<td><strong>Hook <code>useTenants</code></strong> — abstração de queries e mutations</td>
+<td><code>useTenants.ts</code></td>
+<td>todos</td>
+</tr>
+<tr>
+<td>T-51</td>
+<td><strong>Hook <code>useTenantDetail</code></strong> — GET + PATCH + invalidação de cache</td>
+<td><code>useTenantDetail.ts</code></td>
+<td>UC-005</td>
+</tr>
+<tr>
+<td>T-52</td>
+<td><strong>Autorização frontend</strong>: ocultar módulo para roles != ADMIN_PLATAFORMA</td>
+<td><code>ProtectedRoute</code></td>
+<td>todos</td>
+</tr>
+<tr>
+<td>T-53</td>
+<td><strong>Testes unitários frontend</strong> (Vitest + Testing Library)</td>
+<td>Componentes críticos</td>
+<td>≥ 80%</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2 id="5-depend%C3%AAncias-entre-tarefas">5. Dependências entre Tarefas</h2>
+<pre class="hljs"><code><div>T-00a, T-00b, T-00c  (ADRs) ──────────────────── bloqueiam: T-23, T-24, T-29
+T-01 (OpenAPI contract) ──────────────────────── bloqueia: T-02, T-03, T-26
+T-02, T-03 ──────────────────────────────────── bloqueiam: T-26
+T-04, T-05 (Flyway) ─────────────────────────── bloqueiam: T-07, T-36
+T-07..T-13 (domínio) ────────────────────────── bloqueiam: T-14..T-25
+T-14..T-21 (infra) ──────────────────────────── bloqueiam: T-22..T-25 (serviços)
+T-22..T-25 (serviços) ───────────────────────── bloqueiam: T-26 (controller), T-31..T-35 (unit tests)
+T-26..T-29 (controller/security) ────────────── bloqueiam: T-38 (integration tests)
+T-36, T-37 ──────────────────────────────────── sem bloqueante de fase (paralelo a T-22..T-25)
+T-39 (Modulith arch test) ───────────────────── pode rodar a qualquer momento após T-30
+</div></code></pre>
+<p><strong>Tarefas que podem ser executadas em paralelo:</strong></p>
+<ul>
+<li>T-01..T-03 (contrato) || T-04..T-06 (banco) || T-41..T-53 (frontend)</li>
+<li>T-07..T-13 (domínio) || T-17 (config Keycloak) || T-18..T-19 (email)</li>
+<li>T-31..T-35 (unit tests) || T-36..T-37 (integration tests infra)</li>
+</ul>
+<hr>
+<h2 id="6-riscos-e-condi%C3%A7%C3%B5es-de-bloqueio">6. Riscos e Condições de Bloqueio</h2>
+<table>
+<thead>
+<tr>
+<th>Risk ID</th>
+<th>Risco</th>
+<th>Impacto</th>
+<th>Mitigação</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>R1</td>
+<td>QA-02 não resolvido antes de T-23: implementação de rollback sem ADR gera retrabalho</td>
+<td>Alto</td>
+<td>T-00a deve preceder UC-002 — BLOQUEANTE</td>
+</tr>
+<tr>
+<td>R2</td>
+<td>QA-03 sem resolução: FE-01 do UC-002 incompleto em produção</td>
+<td>Médio</td>
+<td>Implementar rejeição com edição manual como comportamento padrão até ADR aprovar sufixo</td>
+</tr>
+<tr>
+<td>R3</td>
+<td><code>tenant_id</code> ausente no JWT Keycloak: toda autorização do backend falha silenciosamente</td>
+<td>Crítico</td>
+<td>T-37 (teste Keycloak) deve validar claims antes do PR ser aprovado — bloqueante por RN-001/RN-004</td>
+</tr>
+<tr>
+<td>R4</td>
+<td>Fronteira de módulo violada: outro módulo importando <code>TenantEntity</code> diretamente</td>
+<td>Alto</td>
+<td>T-39 (ModulithArchitectureTest) é gate de CI obrigatório</td>
+</tr>
+<tr>
+<td>R5</td>
+<td><code>slug</code> editável após persistência: viola RN-002</td>
+<td>Alto</td>
+<td><code>@Column(updatable=false)</code> na entidade + validação no <code>TenantUpdateService</code> (rejeitar PATCH com campo <code>slug</code>)</td>
+</tr>
+<tr>
+<td>R6</td>
+<td>Tabelas de RM-F02/F03 sem <code>tenant_id</code> indexado</td>
+<td>Crítico</td>
+<td>DOM-05b SKILL-QAT-01 deve verificar RN-005 em cada PR — bloqueante universal</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2 id="7-gates-necess%C3%A1rios">7. Gates Necessários</h2>
+<table>
+<thead>
+<tr>
+<th>Gate</th>
+<th>Descrição</th>
+<th>Condição</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Gate T-00</td>
+<td>ADRs de rollback (QA-02), slug (QA-03) e JWT claims (T-00c) aprovados pelo Tech Lead</td>
+<td><strong>Pré-requisito</strong> para UC-002 e UC-003</td>
+</tr>
+<tr>
+<td>Gate 1</td>
+<td>Contrato OpenAPI <code>tenants.yaml</code> revisado pelo Tech Lead antes da geração</td>
+<td>Antes de T-02</td>
+</tr>
+<tr>
+<td>Gate 2</td>
+<td>Migration Flyway revisada pelo DBA/Tech Lead antes de aplicar em staging</td>
+<td>Antes de T-04 rodar em ambientes não-local</td>
+</tr>
+<tr>
+<td>Gate 3</td>
+<td>PR da Fase 3+4+5 aprovado com <code>ModulithArchitectureTest</code> passando</td>
+<td>Antes de merge</td>
+</tr>
+<tr>
+<td>Gate 4</td>
+<td>Cobertura ≥ 80% verificada pelo DOM-05b</td>
+<td>Antes de Gate 4 do pipeline</td>
+</tr>
+<tr>
+<td>Gate 5</td>
+<td>Homologação funcional com Keycloak real em ambiente staging</td>
+<td>UC-002 + UC-003 mandatórios</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2 id="8-tabela-de-tarefas--vis%C3%A3o-para-dom-04">8. Tabela de Tarefas — Visão para DOM-04</h2>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Tarefa</th>
+<th>Agente</th>
+<th>Depende de</th>
+<th>Paralelo com</th>
+<th>Modelo sugerido</th>
+<th>Justificativa</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>T-00a</td>
+<td>ADR rollback UC-002</td>
+<td>DOM-03</td>
+<td>—</td>
+<td>T-00b, T-00c</td>
+<td>Claude Opus 4.6</td>
+<td>Raciocínio arquitetural multi-etapa (saga vs. 2PC)</td>
+</tr>
+<tr>
+<td>T-00b</td>
+<td>Decisão QA-03 slug colisão</td>
+<td>DOM-03</td>
+<td>—</td>
+<td>T-00a, T-00c</td>
+<td>GPT-4o</td>
+<td>Análise de impacto pontual, decisão negocial simples</td>
+</tr>
+<tr>
+<td>T-00c</td>
+<td>ADR JWT claims contract</td>
+<td>DOM-03</td>
+<td>—</td>
+<td>T-00a, T-00b</td>
+<td>Claude Opus 4.6</td>
+<td>Impacto de segurança transversal</td>
+</tr>
+<tr>
+<td>T-01</td>
+<td>Contrato OpenAPI tenants.yaml</td>
+<td>DOM-04</td>
+<td>T-00c</td>
+<td>T-04</td>
+<td>GPT-5.1-Codex</td>
+<td>Geração de YAML estruturado, multi-endpoint</td>
+</tr>
+<tr>
+<td>T-02..T-03</td>
+<td>pom.xml contrato + core</td>
+<td>DOM-04</td>
+<td>T-01</td>
+<td>T-04..T-06</td>
+<td>GPT-4o</td>
+<td>Configuração de build, tarefa simples</td>
+</tr>
+<tr>
+<td>T-04..T-06</td>
+<td>Migrations Flyway</td>
+<td>DOM-04</td>
+<td>—</td>
+<td>T-01..T-03</td>
+<td>GPT-4o</td>
+<td>SQL simples com checklist de índices</td>
+</tr>
+<tr>
+<td>T-07..T-13</td>
+<td>Entidade, enums, VOs, eventos</td>
+<td>DOM-04</td>
+<td>T-04</td>
+<td>T-17..T-19</td>
+<td>GPT-5.1-Codex</td>
+<td>Geração de código Java, múltiplos arquivos</td>
+</tr>
+<tr>
+<td>T-14..T-21</td>
+<td>Repositório, ports, adapters</td>
+<td>DOM-04</td>
+<td>T-07..T-13</td>
+<td>T-31..T-35</td>
+<td>GPT-5.1-Codex</td>
+<td>Integração Keycloak + JPA, código complexo</td>
+</tr>
+<tr>
+<td>T-22..T-25</td>
+<td>Serviços de aplicação</td>
+<td>DOM-04</td>
+<td>T-14..T-21, T-00a</td>
+<td>—</td>
+<td>GPT-5.1-Codex</td>
+<td>Lógica de saga + orquestração</td>
+</tr>
+<tr>
+<td>T-26..T-30</td>
+<td>Controller + segurança</td>
+<td>DOM-04</td>
+<td>T-22..T-25</td>
+<td>T-36..T-37</td>
+<td>GPT-5.1-Codex</td>
+<td>JWT filter + Spring Security config</td>
+</tr>
+<tr>
+<td>T-31..T-38</td>
+<td>Testes (unit + integração)</td>
+<td>DOM-04</td>
+<td>T-22..T-30</td>
+<td>T-41..T-53</td>
+<td>GPT-5.1-Codex</td>
+<td>Testcontainers + MockMVC — código complexo</td>
+</tr>
+<tr>
+<td>T-39..T-40</td>
+<td>Modulith arch test + cobertura</td>
+<td>DOM-05b</td>
+<td>T-31..T-38</td>
+<td>—</td>
+<td>GPT-4o</td>
+<td>Verificação, não geração</td>
+</tr>
+<tr>
+<td>T-41..T-53</td>
+<td>Frontend React</td>
+<td>DOM-04 (fe)</td>
+<td>T-01 (tipos gerados)</td>
+<td>T-07..T-38</td>
+<td>GPT-5.1-Codex</td>
+<td>Múltiplos componentes + hooks</td>
+</tr>
+</tbody>
+</table>
+
+</body>
+</html>

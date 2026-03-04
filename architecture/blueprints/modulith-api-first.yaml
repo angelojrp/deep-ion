@@ -1,0 +1,359 @@
+blueprintName: modulith-api-first
+
+description: >
+  API First architecture using OpenAPI contracts,
+  Spring Modulith for domain modularization,
+  MapStruct for DTO/domain mapping.
+
+variables:
+  basePackage: net.deepion
+
+llm_behavior:
+  default_mode: execution_only
+  explanation_mode: opt_in
+
+architecture:
+
+  conventions:
+    configuration:
+      package: "{basePackage}.config"
+      rules:
+        - All configuration classes must be inside the config package.
+        - No business logic allowed inside configuration classes.
+        - Configuration must not depend on feature modules.
+        - Global configurations only.
+      properties:
+        subPackage: "{basePackage}.config.properties"
+        rules:
+          - All @ConfigurationProperties classes must live in config.properties.
+          - Must use @ConfigurationProperties + @Validated.
+          - Must use @Data (not @Getter/@Setter manually).
+          - Must not inject services.
+          - Must not contain business logic.
+          - Must be enabled via @EnableConfigurationProperties if required.
+      file:
+        default: application.yml
+        rules:
+          - No hardcoded configuration values inside classes.
+          - All configurable values must be externalized.
+
+    language:
+      mandatory: true
+      rules:
+        - All code must be written in English.
+        - Class names must be in English.
+        - Variable names must be in English.
+        - Method names must be in English.
+        - Package names must be in English.
+        - Translation keys may contain locale prefix only.
+        - Business documentation may be multilingual, but code must remain English.
+
+    lombok:
+      javaBeans:
+        domain:
+          annotation: "@Data"
+          rules:
+            - Pure domain models must use @Data
+            - No manual getters/setters
+            - No JPA annotations allowed
+        dto:
+          annotation: "@Data"
+          rules:
+            - DTOs must use @Data
+            - No business logic inside DTOs
+      jpaEntity:
+        annotations:
+          - "@Getter"
+          - "@Setter"
+          - "@NoArgsConstructor"
+        rules:
+          - Must NOT use @Data
+          - Must NOT generate equals/hashCode automatically
+          - Must NOT include business logic
+          - equals/hashCode should be defined only if explicitly required
+          - Must avoid including lazy collections in toString
+      springComponents:
+        requiredAnnotation: "@RequiredArgsConstructor"
+        rules:
+          - Constructor injection only
+          - All dependencies must be final
+          - No field injection
+          - No @Autowired on fields
+
+  contracts:
+    structure:
+      rootModule: contracts
+      modulePattern: "{moduleName}-api"
+      layout:
+        contracts/
+          pom.xml
+          {moduleName}-api/
+            pom.xml
+            src/main/resources/openapi/{moduleName}.yaml
+    description: >
+      Each business module must have its own Maven contract module.
+      Contracts generate API interfaces and DTOs via openapi-generator.
+    generation:
+      apiPackage: "{basePackage}.{moduleName}.api"
+      modelPackage: "{basePackage}.{moduleName}.model"
+      invokerPackage: "{basePackage}.{moduleName}.invoker"
+      output: "target/generated-sources/openapi"
+      options:
+        interfaceOnly: true
+        useSpringBoot3: true
+        generateApiTests: false
+        generateSupportingFiles: false
+    rules:
+      mustContain:
+        - One OpenAPI YAML file per module
+        - openapi-generator configuration in module pom.xml
+        - Generated API interfaces
+        - Generated DTOs (Request/Response)
+      mustNotContain:
+        - Business logic
+        - JPA annotations
+        - Domain rules
+        - Spring configuration
+        - Security configuration
+      dependencyRules:
+        - contracts must not depend on core
+        - contracts must not depend on other modules
+        - core depends on contracts
+        - app depends on core
+    versioning:
+      independent: true
+      strategy: semantic
+
+  core:
+    description: >
+      Spring Modulith implementation module.
+
+    moduleStructure:
+      rootPackage: "{basePackage}.{moduleName}"
+      layers:
+        api:
+          purpose: Controller implementation
+          rules:
+            mustImplementGeneratedInterface: true
+            mustUse:
+              - "@RestController"
+              - "@RequiredArgsConstructor"
+
+        application:
+          purpose: UseCases
+          rules:
+            mustUse:
+              - "@Service"
+              - "@RequiredArgsConstructor"
+
+        domain:
+          purpose: Pure domain model
+          classes:
+            - "{ModuleName}"
+          rules:
+            mustNotDependOn:
+              - infrastructure
+              - generated
+            mustNotContain:
+              - JPA annotations
+
+        infrastructure:
+          purpose: Persistence implementation
+          classes:
+            - "{ModuleName}JpaEntity"
+            - "Jpa{ModuleName}Repository"
+          rules:
+            mustContain:
+              - "@Entity"
+              - "@Repository"
+            mustImplementDomainRepository: true
+
+        mapper:
+          purpose: Mapping layer using MapStruct
+          classes:
+            - "{ModuleName}Mapper"
+          rules:
+            mustUse:
+              - "@Mapper(componentModel = \"spring\")"
+            mustMap:
+              - API DTO ↔ Domain
+              - Domain ↔ JpaEntity
+
+  modulith:
+    enabled: true
+    rules:
+      - Each module must have @ApplicationModule
+      - No direct cross-module dependency
+      - Prefer event-based communication
+
+  mapping:
+    tool: MapStruct
+    rules:
+      - No manual mapping logic
+      - No domain exposure in API
+      - No JPA exposure in domain
+
+  frontend:
+
+    description: >
+      Frontend module consuming the API, can be React, etc.
+
+    architecture: clean
+
+    layers:
+      presentation:
+        purpose: UI only
+        mustNotCallApiDirectly: true
+
+      application:
+        purpose: use cases
+        mustNotImportReact: true
+
+      domain:
+        purpose: business models
+        mustNotImportApiClient: true
+
+      infrastructure:
+        purpose: OpenAPI adapters
+        mustUseGeneratedClient: true  
+      rules:
+        - No API calls from presentation layer
+        - All API calls must go through application layer
+        - Domain models must not depend on API client
+        - Presentation must not depend on application or domain directly
+        - Use dependency inversion for API client
+        - Use heroui for UI components
+        - Use react-query for data fetching
+        - Use react-i18next for internationalization
+  internationalization:
+
+    enabled: true
+
+    supportedLocales:
+      - pt_BR
+      - en
+
+    backend:
+      rules:
+        - Must use Spring MessageSource
+        - Must externalize validation messages
+        - Must not hardcode user-facing messages
+        - Must use message keys instead of literal strings
+        - Exception messages exposed to API must be localized
+
+      structure:
+        messagesFolder: "src/main/resources/i18n"
+        files:
+          - messages_pt_BR.properties
+          - messages_en.properties
+
+    frontend:
+      rules:
+        - Must use i18n library (react-i18next)
+        - Must not hardcode user-facing text
+        - Must use translation keys
+        - Must support runtime locale switching
+
+      structure:
+        translationFolder: "frontend/src/shared/i18n"
+        files:
+          - pt-BR.json
+          - en.json
+
+    api:
+      rules:
+        - Error responses must contain localized message
+        - Accept-Language header must be supported
+        - Default locale must be pt_BR
+
+  security:
+
+    oauth2:
+      flow: authorization-code
+      pkce:
+        required: true
+        method: S256
+      rules:
+        - OAuth2 Authorization Code with PKCE (S256) is mandatory for browser clients.
+        - Implicit flow is forbidden.
+        - Resource Owner Password flow is forbidden.
+        - Backend must validate JWT access tokens via JWKs.
+        - Backend must validate issuer (iss) and audience (aud).
+
+    keycloak:
+      required: true
+      realm: deepion
+      clients:
+        spa:
+          id: deepion-spa
+          type: public
+          pkceRequired: true
+        api:
+          id: deepion-api
+          type: bearer-only
+      rules:
+        - Local development must provide a Keycloak docker-compose setup.
+        - A bootstrap script must configure realm, clients, roles, and a dev user.
+        - Roles must be assigned in Keycloak, not hardcoded in application config.
+
+    roles:
+      required: true
+      baseline:
+        - ROLE_ROOT
+        - ROLE_ADMIN
+        - ROLE_USER
+      rules:
+        - ROLE_ROOT must never be assigned to real users.
+        - Every endpoint must declare required authority explicitly.
+        - If no role is declared, ROLE_ROOT must be applied.
+        - ROLE_ROOT must not be assigned to any real user.
+        - ROLE_ROOT must not exist in domain role definitions.
+        - This ensures endpoint is inaccessible if authorization is missing.
+
+
+    defaultPolicy: secured
+
+    rules:
+      - All endpoints must require authentication.
+      - No public endpoints allowed.
+      - Security must be enforced at controller level.
+      - Security configuration must be centralized in config package.
+      - Feature modules must not define their own SecurityFilterChain.
+
+    authorization:
+      strategy: role-based
+      required: true
+      defaultRole: ROLE_ROOT
+      rules:
+        - Every endpoint must declare required authority.
+        - No endpoint without explicit authorization rule.
+        - Avoid permitAll() usage.
+
+    springSecurity:
+
+      configuration:
+        location: "{basePackage}.config"
+        rules:
+          - Must define a single SecurityFilterChain.
+          - CSRF policy must be defined explicitly.
+          - Stateless API preferred.
+          - JWT resource server must be configured (JWKs, issuer, audience).
+          - Role mapping must use token claims (realm or resource roles).
+
+    frontend:
+      rules:
+        - Must use PKCE Authorization Code flow in the browser.
+        - Must not store access tokens in localStorage.
+        - Must support refresh via silent re-auth or refresh token rotation.
+        - Must attach bearer token via application layer, not presentation.
+
+    openapi:
+      rules:
+        - All endpoints must define security requirement.
+        - Security scheme must be defined globally.
+        - No operation without security definition.
+
+
+documentation:
+  required: true
+  location: "docs/modules/{moduleName}.md"

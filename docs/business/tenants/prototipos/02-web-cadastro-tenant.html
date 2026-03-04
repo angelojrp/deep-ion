@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="pt-BR"
+      data-screen-id="02"
+      data-mode="FINAL"
+      data-feature="tenants"
+      data-platform="web">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tela 02 – Cadastro de Tenant (Web)</title>
+  <style>
+    :root {
+      --color-primary:        #1e40af;
+      --color-primary-dark:   #1e3a8a;
+      --color-primary-light:  #eff6ff;
+      --color-primary-border: #dbeafe;
+      --color-success:        #16a34a;
+      --color-success-light:  #f0fdf4;
+      --color-success-border: #bbf7d0;
+      --color-error:          #dc2626;
+      --color-error-light:    #fff5f5;
+      --color-error-border:   #fecaca;
+      --color-warning:        #f59e0b;
+      --color-warning-light:  #fff7ed;
+      --color-warning-border: #fed7aa;
+      --color-warning-dark:   #78350f;
+      --color-info:           #0ea5e9;
+      --color-info-light:     #eff6ff;
+      --color-info-border:    #bfdbfe;
+      --color-bg:             #f1f5f9;
+      --color-surface:        #ffffff;
+      --color-surface-2:      #f8fafc;
+      --color-border:         #e2e8f0;
+      --color-border-strong:  #cbd5e1;
+      --color-text:           #1e293b;
+      --color-text-secondary: #475569;
+      --color-text-muted:     #64748b;
+      --color-text-disabled:  #94a3b8;
+      --font-family:  'Segoe UI', system-ui, -apple-system, sans-serif;
+      --font-mono:    'Courier New', monospace;
+      --radius-sm:    6px;
+      --radius-md:    8px;
+      --radius-lg:    10px;
+      --radius-xl:    12px;
+      --shadow-card:  0 1px 3px rgba(0,0,0,.06);
+      --sidebar-width: 220px;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: var(--font-family); background: var(--color-bg); color: var(--color-text); min-height: 100vh; font-size: 14px; line-height: 1.5; }
+    .mode-banner { padding: 6px 16px; text-align: center; font-size: 11px; font-weight: 600; letter-spacing: 0.4px; position: sticky; top: 0; z-index: 300; }
+    .mode-banner.draft { background: #fef3c7; border-bottom: 2px dashed var(--color-warning); color: #92400e; }
+    .screen-meta { background: var(--color-primary-light); border-bottom: 1px solid var(--color-primary-border); padding: 8px 20px; font-size: 11px; }
+    .screen-meta__row { display: flex; gap: 20px; flex-wrap: wrap; }
+    .screen-meta__item { color: var(--color-primary); }
+    .screen-meta__item strong { color: #1e3a8a; }
+    .layout { display: flex; min-height: calc(100vh - 44px); }
+    .sidebar { width: var(--sidebar-width); background: var(--color-primary-dark); color: #fff; flex-shrink: 0; }
+    .sidebar__logo { padding: 20px 16px 16px; font-size: 16px; font-weight: 700; border-bottom: 1px solid rgba(255,255,255,.1); display: flex; align-items: center; gap: 8px; }
+    .sidebar__nav { padding: 12px 0; }
+    .sidebar__item { display: flex; align-items: center; gap: 10px; padding: 10px 16px; font-size: 13px; cursor: pointer; transition: background .15s; color: rgba(255,255,255,.7); }
+    .sidebar__item:hover { background: rgba(255,255,255,.08); color: #fff; }
+    .sidebar__item.active { background: rgba(255,255,255,.15); color: #fff; font-weight: 600; border-right: 3px solid #fff; }
+    .sidebar__item__icon { font-size: 16px; }
+    .sidebar__footer { padding: 14px 16px; border-top: 1px solid rgba(255,255,255,.1); font-size: 11px; color: rgba(255,255,255,.5); }
+    .main { flex: 1; min-width: 0; display: flex; flex-direction: column; }
+    .page-header { background: var(--color-surface); border-bottom: 1px solid var(--color-border); padding: 20px 28px; display: flex; align-items: center; gap: 12px; }
+    .page-header__back { background: none; border: none; cursor: pointer; font-size: 18px; color: var(--color-text-muted); padding: 4px; transition: color .15s; }
+    .page-header__back:hover { color: var(--color-primary); }
+    .page-header h1 { font-size: 20px; font-weight: 700; }
+    .page-header .breadcrumb { font-size: 12px; color: var(--color-text-muted); }
+    .page-header .breadcrumb a { color: var(--color-primary); text-decoration: none; }
+    .content-area { padding: 28px; max-width: 860px; }
+    .form-card { background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius-xl); overflow: hidden; box-shadow: var(--shadow-card); margin-bottom: 20px; }
+    .form-card__header { padding: 16px 22px; border-bottom: 1px solid var(--color-border); display: flex; align-items: center; gap: 8px; }
+    .form-card__header h2 { font-size: 14px; font-weight: 700; color: var(--color-primary); text-transform: uppercase; letter-spacing: 0.4px; }
+    .form-card__header::before { content: ''; display: inline-block; width: 3px; height: 16px; background: var(--color-primary); border-radius: 2px; flex-shrink: 0; }
+    .form-card__body { padding: 22px; }
+    /* 2-column grid for form */
+    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    .form-grid .col-full { grid-column: 1 / -1; }
+    .field { display: flex; flex-direction: column; gap: 6px; }
+    label { font-size: 13px; font-weight: 500; color: #374151; display: flex; align-items: center; gap: 4px; }
+    label .required { color: var(--color-error); }
+    .input { width: 100%; padding: 9px 12px; border: 1.5px solid var(--color-border-strong); border-radius: var(--radius-md); font-size: 14px; font-family: var(--font-family); color: var(--color-text); background: var(--color-surface); outline: none; transition: border-color .15s; }
+    .input:focus { border-color: var(--color-primary); }
+    .input--mono { font-family: var(--font-mono); font-size: 13px; }
+    .field__helper { font-size: 11px; color: var(--color-text-disabled); }
+    .field__error { font-size: 11px; color: var(--color-error); display: flex; align-items: center; gap: 4px; }
+    .slug-preview { font-family: var(--font-mono); font-size: 12px; color: var(--color-text-secondary); background: var(--color-surface-2); padding: 5px 10px; border-radius: var(--radius-sm); margin-top: 4px; display: flex; align-items: center; gap: 6px; border: 1px solid var(--color-border); }
+    .slug-preview__label { font-size: 10px; color: var(--color-text-disabled); }
+    .inline-banner { border-radius: var(--radius-md); padding: 12px; display: flex; gap: 10px; align-items: flex-start; margin-bottom: 20px; }
+    .inline-banner__icon { font-size: 18px; flex-shrink: 0; }
+    .inline-banner__body h4 { font-size: 13px; font-weight: 600; }
+    .inline-banner__body p { font-size: 12px; margin-top: 3px; line-height: 1.5; }
+    .inline-banner.info { background: var(--color-info-light); border: 1.5px solid var(--color-info-border); }
+    .inline-banner.info .inline-banner__body h4 { color: #1e3a8a; }
+    .inline-banner.info .inline-banner__body p { color: #1e40af; }
+    .inline-banner.warning { background: var(--color-warning-light); border: 1.5px solid var(--color-warning-border); }
+    .inline-banner.warning .inline-banner__body h4 { color: #92400e; }
+    .inline-banner.warning .inline-banner__body p { color: var(--color-warning-dark); }
+    .form-actions { display: flex; gap: 10px; align-items: center; justify-content: flex-end; padding-top: 20px; }
+    .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; font-family: var(--font-family); border-radius: var(--radius-lg); cursor: pointer; font-size: 14px; font-weight: 600; transition: background .15s; border: none; padding: 10px 20px; }
+    .btn--primary { background: var(--color-primary); color: #fff; }
+    .btn--primary:hover:not(:disabled) { background: var(--color-primary-dark); }
+    .btn--primary:disabled { opacity: .5; cursor: not-allowed; }
+    .btn--secondary { background: var(--color-surface); color: var(--color-text-muted); border: 1.5px solid var(--color-border); }
+    .btn--secondary:hover { background: var(--color-surface-2); }
+    .ux-note { background: #fef3c7; border: 1px dashed var(--color-warning); border-radius: var(--radius-sm); padding: 6px 10px; font-size: 11px; color: #78350f; margin-top: 10px; }
+    .ux-note strong { display: block; margin-bottom: 2px; }
+    /* Multi-phone component */
+    .phone-list { display: flex; flex-direction: column; gap: 8px; }
+    .phone-entry { display: flex; align-items: center; gap: 6px; }
+    .select-country { padding: 8px 6px; border: 1.5px solid var(--color-border-strong); border-radius: var(--radius-md); font-size: 13px; color: var(--color-text); background: var(--color-surface); outline: none; flex-shrink: 0; cursor: pointer; max-width: 96px; }
+    .select-country:focus { border-color: var(--color-primary); }
+    .btn--remove-phone { background: none; border: 1.5px solid var(--color-error-border); border-radius: var(--radius-md); color: var(--color-error); cursor: pointer; width: 34px; height: 36px; display: flex; align-items: center; justify-content: center; font-size: 15px; flex-shrink: 0; transition: background .15s; }
+    .btn--remove-phone:hover { background: var(--color-error-light); }
+    .btn--add-phone { background: none; border: none; color: var(--color-primary); font-size: 12px; font-weight: 600; cursor: pointer; padding: 4px 0; text-align: left; text-decoration: underline; margin-top: 4px; }
+    .btn--add-phone:hover { color: var(--color-primary-dark); }
+  </style>
+</head>
+<body>
+
+  <div class="layout" role="main">
+    <nav class="sidebar" aria-label="Navegação principal">
+      <div class="sidebar__logo">⚡ deep-ion <span style="font-size:10px;font-weight:400;opacity:.6">admin</span></div>
+      <div class="sidebar__nav">
+        <div class="sidebar__item"><span class="sidebar__item__icon">📊</span> Dashboard</div>
+        <div class="sidebar__item active" aria-current="page"><span class="sidebar__item__icon">🏢</span> Tenants</div>
+        <div class="sidebar__item"><span class="sidebar__item__icon">👥</span> Usuários</div>
+        <div class="sidebar__item"><span class="sidebar__item__icon">⚙️</span> Config</div>
+      </div>
+      <div class="sidebar__footer">Admin da Plataforma</div>
+    </nav>
+
+    <div class="main">
+      <div class="page-header">
+        <button class="page-header__back" aria-label="Voltar para listagem de tenants">←</button>
+        <div>
+          <div class="breadcrumb"><a href="#">Painel</a> / <a href="#">Tenants</a> / Novo</div>
+          <h1>Provisionar Novo Tenant</h1>
+        </div>
+      </div>
+
+      <div class="content-area">
+        <div class="inline-banner info" role="note">
+          <span class="inline-banner__icon" aria-hidden="true">ℹ️</span>
+          <div class="inline-banner__body">
+            <h4>Infraestrutura compartilhada (MVP)</h4>
+            <p>Todos os tenants no MVP operam em infraestrutura compartilhada. A separação de dados é garantida pelo <code>tenant_id</code> como discriminador em todas as tabelas. Infraestrutura dedicada é pós-MVP.</p>
+          </div>
+        </div>
+
+        <form novalidate aria-label="Formulário de cadastro de tenant">
+
+          <!-- Card Identificação -->
+          <div class="form-card">
+            <div class="form-card__header"><h2>Identificação</h2></div>
+            <div class="form-card__body">
+              <div class="form-grid">
+                <div class="field">
+                  <label for="w-nome">Nome do tenant <span class="required" aria-hidden="true">*</span></label>
+                  <input id="w-nome" class="input" type="text"
+                         placeholder="Ex.: Acme Corp"
+                         aria-required="true"
+                         autocomplete="organization"
+                         maxlength="100" />
+                  <span class="field__helper">Nome completo da organização. Máx. 100 caracteres.</span>
+                  <span class="field__error" role="alert" hidden>⚠ Nome é obrigatório.</span>
+                </div>
+
+                <div class="field">
+                  <label for="w-slug">Slug único <span class="required" aria-hidden="true">*</span></label>
+                  <input id="w-slug" class="input input--mono" type="text"
+                         placeholder="acme-corp"
+                         aria-required="true"
+                         aria-describedby="w-slug-helper"
+                         autocomplete="off"
+                         maxlength="50"
+                         pattern="[a-z0-9\-]+" />
+                  <span id="w-slug-helper" class="field__helper">Minúsculas, números e hífens apenas. Gerado automaticamente — editável.</span>
+                  <div class="slug-preview" aria-live="polite">
+                    <span class="slug-preview__label">URL:</span>
+                    <span>app.deepion.net/<strong>acme-corp</strong></span>
+                  </div>
+                  <span class="field__error" role="alert" hidden>⚠ Slug inválido ou já em uso.</span>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+          <!-- Card Admin Inicial -->
+          <div class="form-card">
+            <div class="form-card__header"><h2>Administrador Inicial</h2></div>
+            <div class="form-card__body">
+              <div class="inline-banner warning" role="note">
+                <span class="inline-banner__icon" aria-hidden="true">⚠️</span>
+                <div class="inline-banner__body">
+                  <h4>Envio automático de convite</h4>
+                  <p>Após o cadastro, o sistema enviará um e-mail com URL de acesso e credenciais iniciais para o administrador do tenant. O administrador deverá redefinir a senha no primeiro login via SSO.</p>
+                </div>
+              </div>
+              <div class="form-grid">
+                <div class="field">
+                  <label for="w-primeiro-nome-admin">Primeiro nome <span class="required" aria-hidden="true">*</span></label>
+                  <input id="w-primeiro-nome-admin" class="input" type="text"
+                         placeholder="Ex.: João"
+                         aria-required="true"
+                         autocomplete="given-name"
+                         maxlength="80" />
+                  <span class="field__error" role="alert" hidden>⚠ Primeiro nome é obrigatório.</span>
+                </div>
+
+                <div class="field">
+                  <label for="w-sobrenome-admin">Sobrenome <span class="required" aria-hidden="true">*</span></label>
+                  <input id="w-sobrenome-admin" class="input" type="text"
+                         placeholder="Ex.: da Silva"
+                         aria-required="true"
+                         autocomplete="family-name"
+                         maxlength="80" />
+                  <span class="field__helper">Armazenado como <code>firstName</code> + <code>lastName</code> no Keycloak e no banco de dados.</span>
+                  <span class="field__error" role="alert" hidden>⚠ Sobrenome é obrigatório.</span>
+                </div>
+
+                <div class="field">
+                  <label for="w-email-admin">E-mail do administrador <span class="required" aria-hidden="true">*</span></label>
+                  <input id="w-email-admin" class="input" type="email"
+                         placeholder="admin@acmecorp.com"
+                         aria-required="true"
+                         autocomplete="email" />
+                  <span class="field__helper">Receberá o convite com URL de acesso e credenciais iniciais.</span>
+                  <span class="field__error" role="alert" hidden>⚠ E-mail inválido.</span>
+                </div>
+
+                <div class="field col-full">
+                  <label>Telefones <span style="font-size:11px;font-weight:400;color:var(--color-text-disabled);">(opcional)</span></label>
+                  <div class="phone-list" id="w-phone-list" role="list">
+                    <div class="phone-entry" role="listitem">
+                      <select class="select-country" aria-label="Código de país 1">
+                        <option value="+55" selected>🇧🇷 +55</option>
+                        <option value="+1">🇺🇸 +1</option>
+                        <option value="+44">🇬🇧 +44</option>
+                        <option value="+351">🇵🇹 +351</option>
+                        <option value="+49">🇩🇪 +49</option>
+                        <option value="+34">🇪🇸 +34</option>
+                      </select>
+                      <input class="input" type="tel"
+                             placeholder="(11) 99999-0000"
+                             aria-label="Telefone 1"
+                             aria-required="false"
+                             autocomplete="tel" />
+                      <button type="button" class="btn--remove-phone" aria-label="Remover telefone 1" hidden>×</button>
+                    </div>
+                  </div>
+                  <button type="button" class="btn--add-phone" aria-label="Adicionar outro telefone">+ Adicionar telefone</button>
+                  <span class="field__helper">Múltiplos números aceitos. Código +55 (Brasil) pré-selecionado.</span>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+          <div class="form-actions">
+            <button class="btn btn--secondary" type="button" aria-label="Cancelar cadastro">Cancelar</button>
+            <button class="btn btn--primary" type="submit" aria-label="Provisionar tenant">
+              ⚡ Provisionar Tenant
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="pt-BR"
+      data-screen-id="02"
+      data-mode="FINAL"
+      data-feature="tenants"
+      data-platform="mobile">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tela 02 – Cadastro de Tenant (Mobile)</title>
+  <style>
+    :root {
+      --color-primary:        #1e40af;
+      --color-primary-dark:   #1e3a8a;
+      --color-primary-light:  #eff6ff;
+      --color-primary-border: #dbeafe;
+      --color-success:        #16a34a;
+      --color-success-light:  #f0fdf4;
+      --color-success-border: #bbf7d0;
+      --color-error:          #dc2626;
+      --color-error-light:    #fff5f5;
+      --color-error-border:   #fecaca;
+      --color-warning:        #f59e0b;
+      --color-warning-light:  #fff7ed;
+      --color-warning-border: #fed7aa;
+      --color-warning-dark:   #78350f;
+      --color-info:           #0ea5e9;
+      --color-info-light:     #eff6ff;
+      --color-info-border:    #bfdbfe;
+      --color-bg:             #f1f5f9;
+      --color-surface:        #ffffff;
+      --color-surface-2:      #f8fafc;
+      --color-border:         #e2e8f0;
+      --color-border-strong:  #cbd5e1;
+      --color-text:           #1e293b;
+      --color-text-secondary: #475569;
+      --color-text-muted:     #64748b;
+      --color-text-disabled:  #94a3b8;
+      --font-family:  'Segoe UI', system-ui, -apple-system, sans-serif;
+      --font-mono:    'Courier New', monospace;
+      --radius-sm:    6px;
+      --radius-md:    8px;
+      --radius-lg:    10px;
+      --radius-xl:    12px;
+      --radius-full:  9999px;
+      --shadow-card:  0 1px 3px rgba(0,0,0,.05);
+      --shadow-shell: 0 0 40px rgba(0,0,0,.12);
+      --shell-width:  430px;
+      --top-bar-bg:   var(--color-primary);
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: var(--font-family); background: var(--color-bg); color: var(--color-text); min-height: 100vh; font-size: 14px; line-height: 1.5; }
+    .mode-banner { padding: 6px 16px; text-align: center; font-size: 11px; font-weight: 600; letter-spacing: 0.4px; position: sticky; top: 0; z-index: 200; }
+    .mode-banner.draft { background: #fef3c7; border-bottom: 2px dashed var(--color-warning); color: #92400e; }
+    .app-shell { max-width: var(--shell-width); margin: 0 auto; min-height: 100vh; background: var(--color-surface); display: flex; flex-direction: column; box-shadow: var(--shadow-shell); }
+    .top-bar { background: var(--top-bar-bg); color: #fff; padding: 16px 16px 12px; display: flex; align-items: center; gap: 12px; flex-shrink: 0; }
+    .top-bar__back { background: none; border: none; color: #fff; cursor: pointer; font-size: 20px; padding: 4px; line-height: 1; }
+    .top-bar__title { font-size: 18px; font-weight: 600; flex: 1; }
+    .screen-body { flex: 1; overflow-y: auto; -webkit-overflow-scrolling: touch; }
+    .form-body { padding: 20px 16px; }
+    .form-section { margin-bottom: 24px; }
+    .form-section__header { font-size: 12px; font-weight: 700; color: var(--color-primary); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 14px; display: flex; align-items: center; gap: 6px; }
+    .form-section__header::before { content: ''; display: inline-block; width: 3px; height: 14px; background: var(--color-primary); border-radius: 2px; }
+    .field { display: flex; flex-direction: column; gap: 5px; margin-bottom: 14px; }
+    .field:last-child { margin-bottom: 0; }
+    label { font-size: 13px; font-weight: 500; color: #374151; display: flex; align-items: center; gap: 4px; }
+    label .required { color: var(--color-error); font-size: 12px; }
+    label .optional { color: var(--color-text-disabled); font-size: 11px; font-weight: 400; }
+    .input { width: 100%; padding: 10px 12px; border: 1.5px solid var(--color-border-strong); border-radius: var(--radius-md); font-size: 14px; font-family: var(--font-family); color: var(--color-text); background: var(--color-surface); outline: none; transition: border-color .15s; }
+    .input:focus { border-color: var(--color-primary); }
+    .input:disabled { background: var(--color-surface-2); color: var(--color-text-disabled); cursor: not-allowed; }
+    .input.has-error { border-color: var(--color-error); background: var(--color-error-light); }
+    .input--mono { font-family: var(--font-mono); font-size: 13px; }
+    .field__helper { font-size: 11px; color: var(--color-text-disabled); }
+    .field__error { font-size: 11px; color: var(--color-error); display: flex; align-items: center; gap: 4px; }
+    .field__warning { font-size: 11px; color: var(--color-warning); display: flex; align-items: center; gap: 4px; }
+    .inline-banner { border-radius: var(--radius-md); padding: 12px; display: flex; gap: 10px; align-items: flex-start; margin-bottom: 14px; }
+    .inline-banner__icon { font-size: 18px; flex-shrink: 0; margin-top: 1px; }
+    .inline-banner__body h4 { font-size: 13px; font-weight: 600; }
+    .inline-banner__body p { font-size: 12px; margin-top: 2px; line-height: 1.5; }
+    .inline-banner.info { background: var(--color-info-light); border: 1.5px solid var(--color-info-border); }
+    .inline-banner.info .inline-banner__body h4 { color: #1e3a8a; }
+    .inline-banner.info .inline-banner__body p { color: #1e40af; }
+    .inline-banner.warning { background: var(--color-warning-light); border: 1.5px solid var(--color-warning-border); }
+    .inline-banner.warning .inline-banner__body h4 { color: #92400e; }
+    .inline-banner.warning .inline-banner__body p { color: var(--color-warning-dark); }
+    .form-footer { padding: 16px; border-top: 1px solid var(--color-border); background: var(--color-surface); flex-shrink: 0; }
+    .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; font-family: var(--font-family); border-radius: var(--radius-lg); cursor: pointer; font-size: 15px; font-weight: 600; transition: background .15s, border-color .15s; border: none; padding: 13px 20px; width: 100%; }
+    .btn--primary { background: var(--color-primary); color: #fff; }
+    .btn--primary:hover:not(:disabled) { background: var(--color-primary-dark); }
+    .btn--primary:disabled { opacity: .5; cursor: not-allowed; }
+    .btn--secondary { background: transparent; color: var(--color-text-muted); border: 1.5px solid var(--color-border); }
+    .btn--secondary:hover { background: var(--color-surface-2); }
+    .btn-group { display: flex; flex-direction: column; gap: 10px; }
+    .ux-note { background: #fef3c7; border: 1px dashed var(--color-warning); border-radius: var(--radius-sm); padding: 6px 10px; font-size: 11px; color: #78350f; margin-top: 8px; margin-bottom: 8px; }
+    .ux-note strong { display: block; margin-bottom: 2px; }
+    .screen-meta { background: var(--color-primary-light); border-bottom: 1px solid var(--color-primary-border); padding: 10px 16px; font-size: 11px; }
+    .screen-meta__row { display: flex; gap: 16px; flex-wrap: wrap; }
+    .screen-meta__item { color: var(--color-primary); }
+    .screen-meta__item strong { color: var(--color-primary-dark); }
+    .slug-preview { font-family: var(--font-mono); font-size: 12px; color: var(--color-text-secondary); background: var(--color-surface-2); padding: 4px 8px; border-radius: var(--radius-sm); margin-top: 4px; display: flex; align-items: center; gap: 6px; }
+    .slug-preview__label { font-size: 10px; color: var(--color-text-disabled); }
+    /* Multi-phone component */
+    .phone-list { display: flex; flex-direction: column; gap: 8px; }
+    .phone-entry { display: flex; align-items: center; gap: 6px; }
+    .select-country { padding: 9px 6px; border: 1.5px solid var(--color-border-strong); border-radius: var(--radius-md); font-size: 13px; color: var(--color-text); background: var(--color-surface); outline: none; flex-shrink: 0; cursor: pointer; max-width: 94px; }
+    .select-country:focus { border-color: var(--color-primary); }
+    .btn--remove-phone { background: none; border: 1.5px solid var(--color-error-border); border-radius: var(--radius-md); color: var(--color-error); cursor: pointer; width: 34px; height: 38px; display: flex; align-items: center; justify-content: center; font-size: 16px; flex-shrink: 0; transition: background .15s; }
+    .btn--remove-phone:hover { background: var(--color-error-light); }
+    .btn--add-phone { background: none; border: none; color: var(--color-primary); font-size: 12px; font-weight: 600; cursor: pointer; padding: 4px 0; text-align: left; text-decoration: underline; margin-top: 4px; }
+    .btn--add-phone:hover { color: var(--color-primary-dark); }
+  </style>
+</head>
+<body>
+
+  <div class="app-shell" role="main">
+    <header class="top-bar">
+      <button class="top-bar__back" aria-label="Voltar para listagem">←</button>
+      <h1 class="top-bar__title">Novo Tenant</h1>
+    </header>
+
+    <div class="screen-body">
+      <form class="form-body" novalidate aria-label="Formulário de cadastro de tenant">
+
+        <div class="inline-banner info" role="note">
+          <span class="inline-banner__icon" aria-hidden="true">ℹ️</span>
+          <div class="inline-banner__body">
+            <h4>Infraestrutura compartilhada</h4>
+            <p>No MVP, todos os tenants operam em infraestrutura compartilhada. A separação de dados é garantida pelo <code>tenant_id</code> em todas as tabelas.</p>
+          </div>
+        </div>
+
+        <!-- Seção: Identificação -->
+        <div class="form-section">
+          <div class="form-section__header">Identificação</div>
+
+          <div class="field">
+            <label for="f-nome">Nome do tenant <span class="required" aria-hidden="true">*</span></label>
+            <input id="f-nome" class="input" type="text"
+                   placeholder="Ex.: Acme Corp"
+                   aria-required="true"
+                   autocomplete="organization"
+                   maxlength="100" />
+            <span class="field__helper">Nome completo da organização cliente. Máx. 100 caracteres.</span>
+            <span class="field__error" role="alert" hidden>⚠ Nome é obrigatório.</span>
+          </div>
+
+          <div class="field">
+            <label for="f-slug">Slug único <span class="required" aria-hidden="true">*</span></label>
+            <input id="f-slug" class="input input--mono" type="text"
+                   placeholder="acme-corp"
+                   aria-required="true"
+                   aria-describedby="f-slug-helper f-slug-preview"
+                   autocomplete="off"
+                   maxlength="50"
+                   pattern="[a-z0-9\-]+" />
+            <span id="f-slug-helper" class="field__helper">Apenas letras minúsculas, números e hífens. Máx. 50 chars. Gerado automaticamente a partir do nome — editável.</span>
+            <div class="slug-preview" id="f-slug-preview" aria-live="polite">
+              <span class="slug-preview__label">URL:</span>
+              <span>app.deepion.net/<strong>acme-corp</strong></span>
+            </div>
+            <span class="field__error" role="alert" hidden>⚠ Slug inválido ou já em uso.</span>
+          </div>
+
+        </div>
+
+        <!-- Seção: Administrador do Tenant -->
+        <div class="form-section">
+          <div class="form-section__header">Administrador Inicial</div>
+
+          <div class="inline-banner warning" role="note">
+            <span class="inline-banner__icon" aria-hidden="true">⚠️</span>
+            <div class="inline-banner__body">
+              <h4>Convite por e-mail</h4>
+              <p>Após o cadastro, o sistema enviará um e-mail de convite ao administrador do tenant com as credenciais de primeiro acesso.</p>
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="f-primeiro-nome-admin">Primeiro nome <span class="required" aria-hidden="true">*</span></label>
+            <input id="f-primeiro-nome-admin" class="input" type="text"
+                   placeholder="Ex.: João"
+                   aria-required="true"
+                   autocomplete="given-name"
+                   maxlength="80" />
+            <span class="field__error" role="alert" hidden>⚠ Primeiro nome é obrigatório.</span>
+          </div>
+
+          <div class="field">
+            <label for="f-sobrenome-admin">Sobrenome <span class="required" aria-hidden="true">*</span></label>
+            <input id="f-sobrenome-admin" class="input" type="text"
+                   placeholder="Ex.: da Silva"
+                   aria-required="true"
+                   autocomplete="family-name"
+                   maxlength="80" />
+            <span class="field__helper">Armazenado como <code>firstName</code> + <code>lastName</code> no Keycloak e no banco de dados.</span>
+            <span class="field__error" role="alert" hidden>⚠ Sobrenome é obrigatório.</span>
+          </div>
+
+          <div class="field">
+            <label for="f-email-admin">E-mail do administrador <span class="required" aria-hidden="true">*</span></label>
+            <input id="f-email-admin" class="input" type="email"
+                   placeholder="admin@acmecorp.com"
+                   aria-required="true"
+                   autocomplete="email" />
+            <span class="field__helper">Receberá o convite com URL de acesso e credenciais iniciais.</span>
+            <span class="field__error" role="alert" hidden>⚠ E-mail inválido.</span>
+          </div>
+
+          <div class="field">
+            <label>Telefones <span class="optional">(opcional)</span></label>
+            <div class="phone-list" id="f-phone-list" role="list">
+              <div class="phone-entry" role="listitem">
+                <select class="select-country" aria-label="Código de país 1">
+                  <option value="+55" selected>🇧🇷 +55</option>
+                  <option value="+1">🇺🇸 +1</option>
+                  <option value="+44">🇬🇧 +44</option>
+                  <option value="+351">🇵🇹 +351</option>
+                  <option value="+49">🇩🇪 +49</option>
+                  <option value="+34">🇪🇸 +34</option>
+                </select>
+                <input class="input" type="tel"
+                       placeholder="(11) 99999-0000"
+                       aria-label="Telefone 1"
+                       aria-required="false"
+                       autocomplete="tel" />
+                <button type="button" class="btn--remove-phone" aria-label="Remover telefone 1" hidden>×</button>
+              </div>
+            </div>
+            <button type="button" class="btn--add-phone" aria-label="Adicionar outro telefone">+ Adicionar telefone</button>
+            <span class="field__helper">Múltiplos números aceitos. Código +55 (Brasil) pré-selecionado.</span>
+          </div>
+
+        </form>
+    </div>
+
+    <footer class="form-footer">
+      <div class="btn-group">
+        <button class="btn btn--primary" type="submit" aria-label="Salvar novo tenant">
+          Provisionar Tenant
+        </button>
+        <button class="btn btn--secondary" type="button" aria-label="Cancelar cadastro">
+          Cancelar
+        </button>
+      </div>
+    </footer>
+  </div>
+</body>
+</html>

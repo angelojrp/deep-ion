@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="pt-BR"
+      data-screen-id="04"
+      data-mode="FINAL"
+      data-feature="tenants"
+      data-platform="web">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tela 04 – Detalhe / Edição de Tenant (Web)</title>
+  <style>
+    :root {
+      --color-primary:        #1e40af;
+      --color-primary-dark:   #1e3a8a;
+      --color-primary-light:  #eff6ff;
+      --color-primary-border: #dbeafe;
+      --color-success:        #16a34a;
+      --color-success-light:  #f0fdf4;
+      --color-success-border: #bbf7d0;
+      --color-error:          #dc2626;
+      --color-error-light:    #fff5f5;
+      --color-error-border:   #fecaca;
+      --color-warning:        #f59e0b;
+      --color-warning-light:  #fff7ed;
+      --color-warning-border: #fed7aa;
+      --color-warning-dark:   #78350f;
+      --color-bg:             #f1f5f9;
+      --color-surface:        #ffffff;
+      --color-surface-2:      #f8fafc;
+      --color-border:         #e2e8f0;
+      --color-border-strong:  #cbd5e1;
+      --color-text:           #1e293b;
+      --color-text-secondary: #475569;
+      --color-text-muted:     #64748b;
+      --color-text-disabled:  #94a3b8;
+      --font-family:  'Segoe UI', system-ui, -apple-system, sans-serif;
+      --font-mono:    'Courier New', monospace;
+      --radius-sm:    6px;
+      --radius-md:    8px;
+      --radius-lg:    10px;
+      --radius-xl:    12px;
+      --shadow-card:  0 1px 3px rgba(0,0,0,.06);
+      --sidebar-width: 220px;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: var(--font-family); background: var(--color-bg); color: var(--color-text); min-height: 100vh; font-size: 14px; line-height: 1.5; }
+    .mode-banner { padding: 6px 16px; text-align: center; font-size: 11px; font-weight: 600; letter-spacing: 0.4px; position: sticky; top: 0; z-index: 300; }
+    .mode-banner.draft { background: #fef3c7; border-bottom: 2px dashed var(--color-warning); color: #92400e; }
+    .screen-meta { background: var(--color-primary-light); border-bottom: 1px solid var(--color-primary-border); padding: 8px 20px; font-size: 11px; }
+    .screen-meta__row { display: flex; gap: 20px; flex-wrap: wrap; }
+    .screen-meta__item { color: var(--color-primary); }
+    .screen-meta__item strong { color: #1e3a8a; }
+    .layout { display: flex; min-height: calc(100vh - 44px); }
+    .sidebar { width: var(--sidebar-width); background: var(--color-primary-dark); color: #fff; flex-shrink: 0; }
+    .sidebar__logo { padding: 20px 16px 16px; font-size: 16px; font-weight: 700; border-bottom: 1px solid rgba(255,255,255,.1); }
+    .sidebar__nav { padding: 12px 0; }
+    .sidebar__item { display: flex; align-items: center; gap: 10px; padding: 10px 16px; font-size: 13px; cursor: pointer; transition: background .15s; color: rgba(255,255,255,.7); }
+    .sidebar__item:hover { background: rgba(255,255,255,.08); color: #fff; }
+    .sidebar__item.active { background: rgba(255,255,255,.15); color: #fff; font-weight: 600; border-right: 3px solid #fff; }
+    .sidebar__item__icon { font-size: 16px; }
+    .sidebar__footer { padding: 14px 16px; border-top: 1px solid rgba(255,255,255,.1); font-size: 11px; color: rgba(255,255,255,.5); }
+    .main { flex: 1; min-width: 0; display: flex; flex-direction: column; overflow: auto; }
+    .page-header { background: var(--color-surface); border-bottom: 1px solid var(--color-border); padding: 18px 28px; display: flex; align-items: center; justify-content: space-between; flex-shrink: 0; }
+    .page-header__left { display: flex; align-items: center; gap: 12px; }
+    .page-header__back { background: none; border: none; cursor: pointer; font-size: 18px; color: var(--color-text-muted); padding: 4px; transition: color .15s; }
+    .page-header__back:hover { color: var(--color-primary); }
+    .page-header h1 { font-size: 20px; font-weight: 700; display: flex; align-items: center; gap: 8px; }
+    .breadcrumb { font-size: 12px; color: var(--color-text-muted); }
+    .breadcrumb a { color: var(--color-primary); text-decoration: none; }
+    .badge { display: inline-flex; align-items: center; padding: 3px 10px; border-radius: 9999px; font-size: 12px; font-weight: 500; }
+    .badge--active   { background: var(--color-success-light); color: var(--color-success); border: 1px solid var(--color-success-border); }
+    .badge--inactive { background: var(--color-surface-2); color: var(--color-text-muted); border: 1px solid var(--color-border); }
+    .badge--role     { background: var(--color-primary-light); color: var(--color-primary); border: 1px solid var(--color-primary-border); font-size: 11px; }
+    .badge--pending  { background: #fef3c7; color: #92400e; border: 1px solid #fde68a; font-size: 11px; }
+    .content-area { padding: 24px 28px; display: grid; grid-template-columns: 1fr 400px; gap: 20px; align-items: start; }
+    .form-card { background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius-xl); overflow: hidden; box-shadow: var(--shadow-card); }
+    .form-card__header { padding: 14px 20px; border-bottom: 1px solid var(--color-border); display: flex; align-items: center; gap: 8px; }
+    .form-card__header h2 { font-size: 13px; font-weight: 700; color: var(--color-primary); text-transform: uppercase; letter-spacing: 0.4px; }
+    .form-card__header::before { content: ''; display: inline-block; width: 3px; height: 14px; background: var(--color-primary); border-radius: 2px; flex-shrink: 0; }
+    .form-card__body { padding: 20px; }
+    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .col-full { grid-column: 1 / -1; }
+    .field { display: flex; flex-direction: column; gap: 5px; }
+    label { font-size: 13px; font-weight: 500; color: #374151; display: flex; align-items: center; gap: 4px; }
+    label .required { color: var(--color-error); }
+    .input { width: 100%; padding: 9px 12px; border: 1.5px solid var(--color-border-strong); border-radius: var(--radius-md); font-size: 14px; font-family: var(--font-family); color: var(--color-text); background: var(--color-surface); outline: none; transition: border-color .15s; }
+    .input:focus { border-color: var(--color-primary); }
+    .input:disabled { background: var(--color-surface-2); color: var(--color-text-disabled); cursor: not-allowed; }
+    .input--mono { font-family: var(--font-mono); font-size: 12px; }
+    .field__helper { font-size: 11px; color: var(--color-text-disabled); }
+    .field__readonly-note { font-size: 11px; color: var(--color-warning-dark); }
+    .toggle-field { display: flex; align-items: center; justify-content: space-between; padding: 12px 14px; background: var(--color-surface-2); border: 1.5px solid var(--color-border); border-radius: var(--radius-lg); }
+    .toggle-field__info h4 { font-size: 13px; font-weight: 500; color: var(--color-text); }
+    .toggle-field__info p { font-size: 11px; color: var(--color-text-muted); margin-top: 2px; }
+    .toggle { position: relative; display: inline-block; width: 44px; height: 24px; }
+    .toggle__input { opacity: 0; width: 0; height: 0; position: absolute; }
+    .toggle__slider { display: block; width: 100%; height: 100%; background: var(--color-border-strong); border-radius: 12px; cursor: pointer; transition: background .2s; position: relative; }
+    .toggle__slider::after { content: ''; position: absolute; top: 3px; left: 3px; width: 18px; height: 18px; background: #fff; border-radius: 9px; transition: transform .2s; box-shadow: 0 1px 3px rgba(0,0,0,.2); }
+    .toggle__input:checked ~ .toggle__slider { background: var(--color-primary); }
+    .toggle__input:checked ~ .toggle__slider::after { transform: translateX(20px); }
+    .members-table { width: 100%; border-collapse: collapse; }
+    .members-table th { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.4px; color: var(--color-text-muted); padding: 8px 12px; text-align: left; background: var(--color-surface-2); border-bottom: 1px solid var(--color-border); }
+    .members-table td { padding: 10px 12px; font-size: 13px; border-bottom: 1px solid var(--color-border); vertical-align: middle; }
+    .members-table tr:last-child td { border-bottom: none; }
+    .member-avatar { width: 30px; height: 30px; border-radius: 50%; background: var(--color-primary-light); display: inline-flex; align-items: center; justify-content: center; font-weight: 700; font-size: 11px; color: var(--color-primary); }
+    .icon-btn { background: none; border: none; cursor: pointer; padding: 5px 7px; border-radius: var(--radius-md); font-size: 14px; color: var(--color-text-muted); transition: background .15s, color .15s; }
+    .icon-btn:hover { background: var(--color-primary-light); color: var(--color-primary); }
+    .icon-btn.danger:hover { background: var(--color-error-light); color: var(--color-error); }
+    .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; font-family: var(--font-family); border-radius: var(--radius-lg); cursor: pointer; font-size: 13px; font-weight: 600; transition: background .15s; border: none; padding: 8px 16px; }
+    .btn--primary { background: var(--color-primary); color: #fff; }
+    .btn--primary:hover { background: var(--color-primary-dark); }
+    .btn--secondary { background: var(--color-surface); color: var(--color-text-muted); border: 1.5px solid var(--color-border); }
+    .btn--secondary:hover { background: var(--color-surface-2); }
+    .btn--danger-outline { background: transparent; border: 1.5px solid var(--color-error); color: var(--color-error); }
+    .btn--danger-outline:hover { background: var(--color-error-light); }
+    .btn--sm { font-size: 12px; padding: 6px 12px; }
+    .btn-row { display: flex; gap: 8px; align-items: center; justify-content: flex-end; margin-top: 16px; }
+    .danger-zone { background: var(--color-error-light); border: 1.5px solid var(--color-error-border); border-radius: var(--radius-lg); padding: 16px; }
+    .danger-zone__title { font-size: 13px; font-weight: 700; color: var(--color-error); margin-bottom: 6px; }
+    .danger-zone__desc { font-size: 12px; color: #7f1d1d; margin-bottom: 12px; line-height: 1.5; }
+    .ux-note { background: #fef3c7; border: 1px dashed var(--color-warning); border-radius: var(--radius-sm); padding: 6px 10px; font-size: 11px; color: #78350f; margin-top: 10px; }
+    .ux-note strong { display: block; margin-bottom: 2px; }
+    .mt-12 { margin-top: 12px; }
+    .mt-16 { margin-top: 16px; }
+    .mb-12 { margin-bottom: 12px; }
+    .left-col { display: flex; flex-direction: column; gap: 20px; }
+    .right-col { display: flex; flex-direction: column; gap: 20px; }
+  </style>
+</head>
+<body>
+
+  <div class="layout" role="main">
+    <nav class="sidebar" aria-label="Navegação principal">
+      <div class="sidebar__logo">⚡ deep-ion</div>
+      <div class="sidebar__nav">
+        <div class="sidebar__item"><span class="sidebar__item__icon">📊</span> Dashboard</div>
+        <div class="sidebar__item active" aria-current="page"><span class="sidebar__item__icon">🏢</span> Tenants</div>
+        <div class="sidebar__item"><span class="sidebar__item__icon">👥</span> Usuários</div>
+        <div class="sidebar__item"><span class="sidebar__item__icon">⚙️</span> Config</div>
+      </div>
+      <div class="sidebar__footer">Admin da Plataforma</div>
+    </nav>
+
+    <div class="main">
+      <div class="page-header">
+        <div class="page-header__left">
+          <button class="page-header__back" aria-label="Voltar para listagem">←</button>
+          <div>
+            <div class="breadcrumb"><a href="#">Painel</a> / <a href="#">Tenants</a> / Acme Corp</div>
+            <h1>Acme Corp <span class="badge badge--active" aria-label="Status: Ativo">● Ativo</span></h1>
+          </div>
+        </div>
+        <div style="display:flex;gap:8px;">
+          <button class="btn btn--secondary" type="button" aria-label="Cancelar edição">Cancelar</button>
+          <button class="btn btn--primary" type="button" aria-label="Salvar alterações">Salvar Alterações</button>
+        </div>
+      </div>
+
+      <form class="content-area" novalidate aria-label="Detalhes do tenant Acme Corp">
+
+        <!-- Coluna esquerda: Identificação + Status -->
+        <div class="left-col">
+          <!-- Card Identificação -->
+          <div class="form-card">
+            <div class="form-card__header"><h2>Identificação</h2></div>
+            <div class="form-card__body">
+              <div class="form-grid">
+                <div class="field">
+                  <label for="w-nome">Nome do tenant <span class="required" aria-hidden="true">*</span></label>
+                  <input id="w-nome" class="input" type="text"
+                         value="Acme Corp"
+                         aria-required="true"
+                         maxlength="100" />
+                  <span class="field__helper">Nome completo da organização cliente.</span>
+                </div>
+
+                <div class="field">
+                  <label for="w-slug">Slug único</label>
+                  <input id="w-slug" class="input input--mono" type="text"
+                         value="acme-corp"
+                         disabled
+                         aria-readonly="true"
+                         aria-describedby="w-slug-note" />
+                  <span id="w-slug-note" class="field__readonly-note">🔒 Imutável após cadastro.</span>
+                </div>
+
+                <div class="field col-full">
+                  <label for="w-tenant-id">Tenant ID</label>
+                  <input id="w-tenant-id" class="input input--mono" type="text"
+                         value="t_01HXYZABCDEF1234567890"
+                         disabled
+                         aria-readonly="true"
+                         aria-describedby="w-tenant-id-helper" />
+                  <span id="w-tenant-id-helper" class="field__helper">Gerado automaticamente. Propagado como claim <code>tenant_id</code> no JWT via Keycloak.</span>
+                </div>
+
+                <div class="col-full">
+                  <span id="w-slug-note" class="field__readonly-note">🔒 Imutável após cadastro.</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card Status -->
+          <div class="form-card">
+            <div class="form-card__header"><h2>Status</h2></div>
+            <div class="form-card__body">
+              <div class="toggle-field" role="group" aria-labelledby="status-label">
+                <div class="toggle-field__info">
+                  <h4 id="status-label">Status do tenant</h4>
+                  <p>LIGADO = Ativo. DESLIGADO = Inativo. Ao desligar o toggle, o Modal de Confirmação é exibido antes de executar a desativação. Para reativar um tenant inativo, ligue o toggle (reativação imediata, sem confirmação).</p>
+                </div>
+                <label class="toggle" aria-label="Ativar ou desativar tenant">
+                  <input class="toggle__input" type="checkbox" checked aria-checked="true" />
+                  <span class="toggle__slider" aria-hidden="true"></span>
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Coluna direita: Membros + Danger Zone -->
+        <div class="right-col">
+            <div class="form-card">
+              <div class="form-card__header"><h2>Membros do Squad</h2></div>
+              <div class="form-card__body">
+                <div style="display:flex;align-items:center;gap:16px;padding:8px 0;">
+                  <div style="font-size:40px;font-weight:800;color:var(--color-primary);line-height:1;">3</div>
+                  <div>
+                    <div style="font-size:14px;font-weight:600;color:var(--color-text);">membros ativos</div>
+                    <div style="font-size:12px;color:var(--color-text-muted);margin-top:4px;line-height:1.5;">Apenas o Administrador do Tenant pode visualizar, convidar ou remover membros do squad. Este painel exibe apenas a contagem de membros ativos.</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          <!-- Danger Zone -->
+          <div class="danger-zone" role="region" aria-label="Zona de risco">
+            <div class="danger-zone__title">⚠ Zona de risco</div>
+            <p class="danger-zone__desc">
+              Desativar o tenant invalida imediatamente todas as sessões ativas dos membros. O tenant e seus dados são preservados e a operação é reversível pelo admin da plataforma.
+            </p>
+            <button class="btn btn--danger-outline btn--sm" type="button"
+                    aria-label="Desativar tenant Acme Corp">
+              🔒 Desativar Tenant
+            </button>
+          </div>
+        </div>
+
+      </form>
+    </div>
+  </div>
+</body>
+</html>

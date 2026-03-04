@@ -1,0 +1,588 @@
+blueprintName: frontend-react-spa
+
+description: >
+  Frontend Single Page Application blueprint using React 18 + TypeScript 5 + Tailwind CSS v4,
+  clean architecture in layers (presentation / application / domain / infrastructure),
+  react-i18next for full i18n support, react-query for server-state management,
+  and OAuth2 Authorization Code + PKCE for authentication.
+  Evolved from the reference already validated in modulith-api-first.yaml.
+
+variables:
+  srcDir: "src"
+  i18nDir: "src/shared/i18n"
+  componentsDir: "src/presentation/components"
+  pagesDir: "src/presentation/pages"
+  hooksDir: "src/application/hooks"
+  useCasesDir: "src/application/use-cases"
+  domainDir: "src/domain"
+  infraDir: "src/infrastructure"
+  assetsDir: "src/assets"
+  routesDir: "src/presentation/routes"
+
+llm_behavior:
+  default_mode: execution_only
+  explanation_mode: opt_in
+  blueprint_scope: frontend-only
+  notes:
+    - >
+      This blueprint governs exclusively the frontend SPA codebase.
+      For the API contract and backend rules, refer to modulith-api-first.yaml.
+    - >
+      Every code generation or review must verify layer isolation BEFORE producing
+      any file. Cross-layer violations (e.g. API calls from presentation) are blockers.
+
+# ─────────────────────────────────────────────────────────────────────────────
+# ARCHITECTURE
+# ─────────────────────────────────────────────────────────────────────────────
+architecture:
+
+  # ─── CONVENTIONS ────────────────────────────────────────────────────────────
+  conventions:
+
+    language:
+      mandatory: true
+      rules:
+        - All code must be written in TypeScript 5 (strict mode).
+        - No plain JavaScript (.js) files allowed — only .ts and .tsx.
+        - All identifiers (variables, functions, types, interfaces) must be in English.
+        - User-facing text must NEVER be hardcoded — always use i18n translation keys.
+        - Comments in code may be in Portuguese for business context annotations.
+
+    typescript:
+      strict: true
+      rules:
+        - Enable strict, noImplicitAny, strictNullChecks in tsconfig.json.
+        - Prefer interfaces over type aliases for object shapes.
+        - Use type aliases for union types and utility types.
+        - No use of `any` type — use `unknown` with type guards when necessary.
+        - Prefer explicit return types on all exported functions.
+        - Use enums only for domain status/state values; prefer string unions otherwise.
+        - No non-null assertions (!) unless there is a justification comment.
+
+    naming:
+      files:
+        components: "PascalCase.tsx"
+        hooks: "useCamelCase.ts"
+        useCases: "camelCaseUseCase.ts"
+        domain_models: "camelCase.ts"
+        api_clients: "camelCaseApiClient.ts"
+        stores: "camelCaseStore.ts"
+        types: "camelCase.types.ts"
+        constants: "SCREAMING_SNAKE_CASE.ts"
+        test: "{filename}.test.tsx or {filename}.test.ts"
+        storybook: "{filename}.stories.tsx"
+      classes:
+        rule: PascalCase
+      functions:
+        rule: camelCase
+      constants:
+        rule: SCREAMING_SNAKE_CASE
+      cssClasses:
+        rule: Use Tailwind utility classes only — no custom class names except for truly unavoidable cases.
+
+    imports:
+      rules:
+        - Use absolute imports via path aliases defined in tsconfig paths.
+        - Alias @presentation → src/presentation
+        - Alias @application → src/application
+        - Alias @domain → src/domain
+        - Alias @infrastructure → src/infrastructure
+        - Alias @shared → src/shared
+        - Alias @assets → src/assets
+        - No relative imports that cross layer boundaries (e.g. ../../infrastructure).
+        - Barrel exports (index.ts) are permitted only at the layer root — not per sub-folder.
+
+  # ─── PROJECT STRUCTURE ──────────────────────────────────────────────────────
+  project_structure:
+    root: "frontend/"
+    layout: |
+      frontend/
+        package.json
+        tsconfig.json
+        vite.config.ts
+        tailwind.config.ts
+        index.html
+        public/
+          favicon.ico
+          robots.txt
+        src/
+          main.tsx                  # entry point — providers only, no logic
+          App.tsx                   # router outlet + top-level error boundary
+          presentation/
+            routes/
+              AppRouter.tsx         # react-router-dom route definitions
+              ProtectedRoute.tsx    # auth guard
+            pages/                  # one folder per domain page
+              {FeatureName}/
+                {FeatureName}Page.tsx
+                components/         # page-scoped components
+            components/             # globally reusable UI components
+              ui/                   # atomic/primitive components (Button, Input, Modal…)
+              layout/               # Layout, Sidebar, Navbar, Footer
+          application/
+            hooks/                  # custom React hooks (useXxx.ts)
+            use-cases/              # orchestration of domain + infra, framework-free
+            stores/                 # Zustand stores — global UI/session state only
+          domain/
+            models/                 # pure TypeScript interfaces and types
+            errors/                 # domain error classes
+            validators/             # pure validation functions (no React/API deps)
+          infrastructure/
+            api/
+              generated/            # OpenAPI-generated TypeScript client (read-only)
+              adapters/             # wrap generated client, map to domain models
+            auth/
+              authProvider.ts       # Keycloak / PKCE SDK wrapper
+              tokenService.ts       # silent renew, token storage (memory only)
+            http/
+              httpClient.ts         # Axios / fetch instance with interceptors
+          shared/
+            i18n/
+              index.ts              # i18next initialization
+              pt-BR.json
+              en.json
+            constants/
+            utils/
+            types/
+          assets/
+            images/
+            fonts/
+
+    rules:
+      - No business logic inside main.tsx or App.tsx.
+      - main.tsx must only mount providers (QueryClientProvider, AuthProvider, I18nextProvider, StrictMode).
+      - App.tsx must only render AppRouter inside an ErrorBoundary.
+      - Do not create feature sub-directories inside src/ root — everything must belong to a layer.
+      - The generated/ folder under infrastructure/api must never be edited by hand.
+      - Page components must import only from @application and @shared — never from @infrastructure directly.
+
+  # ─── LAYERS ─────────────────────────────────────────────────────────────────
+  layers:
+
+    presentation:
+      purpose: >
+        Render UI, handle user interaction, and translate UI events into application
+        layer calls. Must remain stateless regarding server data.
+      allowedDependencies:
+        - application (hooks and use-cases)
+        - shared (i18n, constants, utils)
+        - domain (models and error types — read-only)
+      forbiddenDependencies:
+        - infrastructure (must never import API clients directly)
+      rules:
+        - Components must receive data via props or custom hooks — no direct API calls.
+        - No business logic inside JSX or event handlers — delegate to hooks/use-cases.
+        - Use react-i18next useTranslation hook for ALL user-visible text.
+        - Every interactive component must have aria-label or accessible equivalent.
+        - Page components are the only ones allowed to instantiate application hooks.
+        - Sub-components of a page receive data only via props.
+        - No useState for server data — use react-query via application hooks.
+        - No direct import of tokenService or httpClient inside presentation.
+        - Components should be pure and side-effect free when possible.
+        - Index files in components/ must only re-export — no logic.
+
+    application:
+      purpose: >
+        Orchestrate domain logic, coordinate API calls via infrastructure adapters,
+        and expose the result as React hooks or plain use-case functions.
+        No React-specific imports inside use-cases (only inside hooks).
+      allowedDependencies:
+        - domain (models, validators, errors)
+        - infrastructure (adapters only — never generated client directly)
+        - shared
+      forbiddenDependencies:
+        - presentation (no JSX, no React components)
+      rules:
+        - Hooks (useXxx) are the boundary between application and presentation.
+        - Use-case files must be framework-free — no useState, useEffect, or JSX.
+        - Use react-query (useQuery / useMutation) inside hooks, NOT in use-cases.
+        - Application layer is responsible for error normalization into domain errors.
+        - Stores (Zustand) live here and are restricted to UI or session state — not server state.
+        - Server state is always managed via react-query, never duplicated in Zustand.
+
+    domain:
+      purpose: >
+        Pure TypeScript models, interfaces, domain errors, and validation logic.
+        Completely framework-agnostic and API-agnostic.
+      allowedDependencies:
+        - shared/constants
+        - shared/types
+      forbiddenDependencies:
+        - presentation
+        - application
+        - infrastructure
+        - Any external library (React, Axios, react-query, etc.)
+      rules:
+        - Domain models must mirror the backend domain model, not the OpenAPI DTO.
+        - Adapters in infrastructure are responsible for the mapping between DTO and domain.
+        - Validation functions in domain must return a Result type — never throw.
+        - Domain errors extend a base DomainError class and carry a code and message key.
+
+    infrastructure:
+      purpose: >
+        Integrate with external systems: REST API (via generated OpenAPI client),
+        authentication (Keycloak / PKCE), and browser APIs.
+      allowedDependencies:
+        - domain (models — for adapter output types)
+        - shared
+      forbiddenDependencies:
+        - presentation
+        - application
+      rules:
+        - The generated/ folder must only be consumed through adapters — never imported directly by hooks.
+        - Adapters translate API DTOs to domain models and vice versa.
+        - httpClient must attach the bearer token via an Axios request interceptor.
+        - httpClient must handle 401 (token expiry) by triggering silent re-auth before retrying.
+        - tokenService must store tokens exclusively in memory (no localStorage, no sessionStorage).
+        - tokenService must expose getAccessToken() and must handle refresh transparently.
+        - Browser-specific APIs (localStorage, navigator, etc.) must be wrapped in a service — never called inline.
+
+  # ─── STYLING ────────────────────────────────────────────────────────────────
+  styling:
+
+    framework: tailwindcss
+    version: "4.x"
+
+    tokens:
+      source: tailwind.config.ts
+      rules:
+        - All colors, spacing, fonts, and breakpoints must be declared as design tokens in tailwind.config.ts.
+        - No magic numbers or raw hex values inside component className strings.
+        - Use CSS custom properties (var(--token)) only when Tailwind utilities are insufficient.
+
+    rules:
+      - Use Tailwind utility classes exclusively — no custom CSS files unless for global resets or @keyframes.
+      - Do not use inline style attribute for visual properties (use Tailwind or CSS variables).
+      - Responsive design with Tailwind's sm/md/lg/xl/2xl breakpoints — mobile-first.
+      - Dark mode support via Tailwind class strategy (darkMode='class')
+      - Use the cn() / clsx() + tailwind-merge pattern for conditional class merging.
+      - Avoid arbitrary values ([value]) unless strictly necessary; prefer tokens.
+      - Accessibility contrast ratios must meet WCAG 2.1 AA minimum.
+
+    components:
+      ui_library: shadcn-ui
+      rules:
+        - shadcn/ui is the preferred component source — copy components via `npx shadcn@latest add`.
+        - Components live in src/presentation/components/ui/ and are owned by this codebase.
+        - Custom components must follow the same API surface conventions as shadcn/ui (variant, size, disabled props).
+        - Use the cn() utility (clsx + tailwind-merge) for all conditional class merging.
+        - Radix UI primitives may be used directly when a shadcn/ui component does not exist for the use case.
+
+  # ─── ROUTING ────────────────────────────────────────────────────────────────
+  routing:
+
+    library: react-router-dom
+    version: "6.x"
+
+    rules:
+      - All routes must be declared in AppRouter.tsx — no inline route definitions in pages.
+      - Use lazy() + Suspense for ALL page-level components (code splitting mandatory).
+      - Protected routes must be wrapped in ProtectedRoute which checks authentication state.
+      - Route params and query strings must be typed via a central ROUTES constant.
+      - Navigation (navigate, Link) is allowed only in presentation layer.
+      - No programmatic navigation inside use-cases or domain layer.
+
+    structure:
+      ROUTES:
+        location: "src/shared/constants/ROUTES.ts"
+        rule: All path strings must be defined here — no magic strings in components.
+
+  # ─── STATE MANAGEMENT ───────────────────────────────────────────────────────
+  state_management:
+
+    server_state:
+      library: react-query
+      version: "5.x"
+      rules:
+        - All async data fetching must use useQuery or useMutation.
+        - Query keys must be typed and defined in a central queryKeys factory.
+        - Cache invalidation must happen in onSuccess of mutations — never via manual store updates.
+        - Optimistic updates are allowed but must include rollback on error.
+        - Infinite queries must use useInfiniteQuery — no manual pagination state.
+        - Do not use react-query inside use-case files — only inside hooks.
+
+    client_state:
+      library: zustand
+      version: "5.x"
+      rules:
+        - Zustand stores are restricted to UI state (sidebar open/close, theme) and session state (auth user info).
+        - No server data (API responses) must be duplicated in Zustand — use react-query cache.
+        - Each store must be defined in a single file under application/stores/.
+        - Stores must use persist middleware only for non-sensitive UI preferences.
+        - Sensitive data (tokens, personal info) must never be persisted to localStorage via Zustand.
+        - Stores must export typed selectors — no direct store object access from components.
+
+  # ─── INTERNATIONALIZATION ────────────────────────────────────────────────────
+  internationalization:
+
+    enabled: true
+    library: react-i18next
+    version: "15.x"
+    defaultLocale: pt-BR
+    supportedLocales:
+      - pt-BR
+      - en
+
+    initialization:
+      location: "src/shared/i18n/index.ts"
+      rules:
+        - i18next must be initialized before ReactDOM.render / createRoot.
+        - Use i18next-http-backend or bundled JSON for translation loading.
+        - Enable language detection from browser Accept-Language / navigator.language.
+        - Fallback to pt-BR when a key is missing in the active locale.
+        - Interpolation must use {{ variable }} syntax for dynamic values.
+
+    translations:
+      structure:
+        folder: "src/shared/i18n/"
+        files:
+          - pt-BR.json
+          - en.json
+      namespaces:
+        - common       # shared labels, buttons, validation messages
+        - errors       # all error messages (domain + HTTP)
+        - auth         # login, logout, session expired
+        - "{feature}"  # one namespace per domain feature page
+      rules:
+        - Every namespace must exist in ALL supported locale files.
+        - Missing keys must fail CI (use i18next-parser or equivalent).
+        - Translation keys must follow dot-notation: feature.section.element.
+        - No dynamic key construction at runtime (e.g. `t('status.' + value)`) —
+          use explicit key maps instead.
+        - Date, time, number, and currency formatting must use i18next formatters
+          or Intl.NumberFormat / Intl.DateTimeFormat — never raw concatenation.
+
+    components:
+      rules:
+        - Use useTranslation(namespace) hook — do not use the global `t` function directly.
+        - Trans component is allowed for rich-text translations (links inside text).
+        - Pluralization must use i18next plural suffixes (_one, _other) — no manual ternary.
+
+  # ─── TESTING ────────────────────────────────────────────────────────────────
+  testing:
+
+    framework: vitest
+    dom: "@testing-library/react"
+    coverage:
+      minimum_global: 80
+      minimum_domain: 100
+      minimum_application: 80
+      tool: istanbul / v8
+
+    types:
+      unit:
+        target:
+          - domain/validators
+          - domain/models (type guards)
+          - shared/utils
+        rules:
+          - Pure functions only — no React rendering.
+          - No mocking of domain logic in unit tests.
+
+      component:
+        target:
+          - presentation/components/ui/**
+          - presentation/components/layout/**
+        rules:
+          - Use @testing-library/react render + userEvent.
+          - Assert on accessible roles and labels, not on CSS classes.
+          - Every component with conditional rendering must have tests for each branch.
+          - No snapshot tests — prefer assertion-based tests.
+
+      integration:
+        target:
+          - presentation/pages/**
+          - application/hooks/**
+        rules:
+          - Mock infrastructure adapters via MSW (Mock Service Worker).
+          - Test the full hook→component chain for each use case.
+          - Must cover the happy path and at least one error/empty state per use case.
+
+      e2e:
+        tool: playwright
+        rules:
+          - E2E tests must cover all critical user journeys (login, main CRUD per feature).
+          - Must run against a real backend via docker-compose in CI.
+          - No brittle selectors — use data-testid or accessible roles only.
+
+    conventions:
+      - Test files co-located with source files (same folder, .test.ts(x) suffix).
+      - Describe block names must match the component or function under test.
+      - Arrange-Act-Assert structure is mandatory.
+      - All mocks must be cleared in afterEach.
+      - Never import from @infrastructure inside component or hook tests — always mock via MSW.
+
+  # ─── SECURITY ────────────────────────────────────────────────────────────────
+  security:
+
+    authentication:
+      flow: authorization-code-pkce
+      pkce:
+        required: true
+        method: S256
+      provider: keycloak
+      rules:
+        - OAuth2 Authorization Code with PKCE (S256) is the only allowed auth flow.
+        - Implicit flow is absolutely forbidden.
+        - Resource Owner Password flow is absolutely forbidden.
+        - The PKCE code_verifier must be stored in sessionStorage only for the duration of the flow.
+
+    token_handling:
+      rules:
+        - Access tokens must be stored exclusively in memory (JavaScript variable / closure).
+        - Refresh tokens must never be accessed by application code—handled by the PKCE SDK only.
+        - No token of any kind may be stored in localStorage or cookies without HttpOnly + Secure flags.
+        - Bearer token must be injected into API requests only via httpClient interceptor in infrastructure.
+        - On 401 response, the httpClient must attempt silent re-auth once before failing.
+        - Session expiry must display a localized message to the user via the errors i18n namespace.
+
+    xss:
+      rules:
+        - Never use dangerouslySetInnerHTML — if HTML rendering is required, sanitize with DOMPurify first.
+        - Never construct URLs from user input without validation.
+        - Content Security Policy headers must be configured on the web server / CDN.
+
+    dependency_hygiene:
+      rules:
+        - Run npm audit --audit-level=high in CI — fail build on high/critical vulnerabilities.
+        - Use exact version pinning for direct dependencies (no ^ or ~ in package.json dependencies).
+        - Devdependencies may use semver ranges.
+
+  # ─── PERFORMANCE ─────────────────────────────────────────────────────────────
+  performance:
+
+    code_splitting:
+      rules:
+        - All page-level components must use React.lazy() and be wrapped in Suspense.
+        - Vendor chunks must be explicitly split in vite.config.ts (manualChunks).
+        - Do not import an entire library when only a sub-module is used (tree-shaking).
+
+    rendering:
+      rules:
+        - Lists of 50+ items must use virtualization (react-virtual or tanstack-virtual).
+        - Avoid unnecessary re-renders — use React.memo for pure presentational components.
+        - useMemo and useCallback only when the optimization cost is justified by profiling.
+        - Avoid deriving expensive values inside render — compute in use-case or hook.
+
+    assets:
+      rules:
+        - Images must be served in WebP or AVIF format where browser support allows.
+        - SVG icons must be inlined as React components (vite-plugin-svgr) — no <img> for icons.
+        - Fonts must use font-display: swap and be self-hosted (no Google Fonts CDN).
+        - First Contentful Paint target < 1.5 s on 4G — validated in CI via Lighthouse CI.
+
+  # ─── ACCESSIBILITY ────────────────────────────────────────────────────────────
+  accessibility:
+
+    standard: WCAG 2.1 AA
+
+    rules:
+      - Every interactive element must be keyboard-navigable (Tab order, Enter/Space activation).
+      - Focus management must be explicit on route changes (announce new page to screen readers).
+      - All images must have meaningful alt text or alt="" for decorative images.
+      - Color must not be the sole conveyor of information (use icons or text alongside color).
+      - Form fields must have associated <label> or aria-label.
+      - Modals must trap focus and return focus to the trigger on close.
+      - Use semantic HTML elements before resorting to role="…" overrides.
+
+    tooling:
+      - Run axe-core (via @axe-core/react in dev, via jest-axe in tests) on all page components.
+      - Lighthouse accessibility score must be ≥ 90 in CI.
+
+  # ─── OBSERVABILITY ───────────────────────────────────────────────────────────
+  observability:
+
+    error_boundaries:
+      rules:
+        - App.tsx must have a top-level ErrorBoundary that renders a localized fallback UI.
+        - Each feature page must have its own ErrorBoundary to prevent full-app crashes.
+        - Error boundaries must log to the monitoring service (see error_monitoring).
+
+    error_monitoring:
+      tool: sentry
+      rules:
+        - Sentry DSN must be injected via environment variable — never hardcoded.
+        - Capture unhandled promise rejections and React error boundary errors.
+        - Sanitize PII from error payloads before sending — user IDs OK, names/emails NOT.
+        - Attach release version and environment (staging/production) to every event.
+
+    logging:
+      rules:
+        - No console.log in production code — remove or replace with a logger utility before merge.
+        - The logger utility must be no-op in production unless an error level is triggered.
+        - Structured log entries must include { level, message, context, timestamp }.
+
+  # ─── BUILD & TOOLING ─────────────────────────────────────────────────────────
+  build:
+
+    bundler: vite
+    version: "6.x"
+
+    environment:
+      rules:
+        - All environment variables must be prefixed with VITE_ to be exposed to the client.
+        - Sensitive backend URLs and client IDs go in .env.local (gitignored).
+        - .env.example must document every required variable with placeholder values.
+        - No secrets of any kind must be embedded in the JS bundle.
+
+    ci:
+      checks:
+        - tsc --noEmit (type check)
+        - eslint with typescript-eslint, react-hooks, jsx-a11y plugins
+        - vitest --coverage --coverage.thresholds.lines=80
+        - npm audit --audit-level=high
+        - i18next-parser to detect missing translation keys
+        - Lighthouse CI (performance ≥ 85, accessibility ≥ 90, best-practices ≥ 90)
+      rules:
+        - All CI checks must pass before a PR can be merged.
+        - ESLint must run with --max-warnings 0 — warnings are treated as errors.
+
+    linting:
+      eslint:
+        extends:
+          - plugin:@typescript-eslint/recommended-type-checked
+          - plugin:react-hooks/recommended
+          - plugin:jsx-a11y/recommended
+        rules:
+          - No unused variables (error).
+          - No explicit `any` (error).
+          - Exhaustive deps for useEffect and useCallback (error).
+      prettier:
+        required: true
+        rules:
+          - Prettier must format all .ts, .tsx, .json, .css files.
+          - No conflicting ESLint formatting rules — use eslint-config-prettier.
+
+# ─────────────────────────────────────────────────────────────────────────────
+# DOCUMENTATION
+# ─────────────────────────────────────────────────────────────────────────────
+documentation:
+
+  required: true
+
+  locations:
+    component: "docs/frontend/components/{ComponentName}.md"
+    feature: "docs/frontend/features/{FeatureName}.md"
+    architecture: "docs/frontend/architecture.md"
+    i18n: "docs/frontend/i18n.md"
+
+  mandatory_sections:
+    component_doc:
+      - Purpose and usage
+      - Props contract (TypeScript interface referenced)
+      - Accessibility notes
+      - i18n keys used
+
+    feature_doc:
+      - User journey (steps)
+      - Use cases covered
+      - i18n namespaces used
+      - Business rules referenced (RN-XX)
+      - Known limitations
+
+  storybook:
+    required: true
+    rules:
+      - Every component in presentation/components/ui/ must have a .stories.tsx file.
+      - Stories must cover default, disabled, and error/loading states.
+      - Storybook must run in CI and fail if any story errors on render.
