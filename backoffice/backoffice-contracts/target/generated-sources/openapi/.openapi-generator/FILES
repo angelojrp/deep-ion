@@ -1,0 +1,8 @@
+README.md
+pom.xml
+src/main/java/net/deepion/backoffice/api/contract/ApiUtil.java
+src/main/java/net/deepion/backoffice/api/contract/BackofficeApi.java
+src/main/java/net/deepion/backoffice/model/BackofficePageResponse.java
+src/main/java/net/deepion/backoffice/model/BackofficeRequest.java
+src/main/java/net/deepion/backoffice/model/BackofficeResponse.java
+src/main/java/net/deepion/backoffice/model/ProblemDetails.java

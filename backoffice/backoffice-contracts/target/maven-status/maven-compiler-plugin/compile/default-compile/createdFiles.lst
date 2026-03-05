@@ -1,0 +1,6 @@
+net/deepion/backoffice/model/BackofficeResponse.class
+net/deepion/backoffice/model/BackofficeRequest.class
+net/deepion/backoffice/api/contract/ApiUtil.class
+net/deepion/backoffice/model/ProblemDetails.class
+net/deepion/backoffice/api/contract/BackofficeApi.class
+net/deepion/backoffice/model/BackofficePageResponse.class

@@ -1,0 +1,12 @@
+/home/angelo/ai-projects/deep-ion/backoffice/backoffice-core/src/main/java/net/deepion/BackofficeCoreApplication.java
+/home/angelo/ai-projects/deep-ion/backoffice/backoffice-core/src/main/java/net/deepion/backoffice/api/BackofficeController.java
+/home/angelo/ai-projects/deep-ion/backoffice/backoffice-core/src/main/java/net/deepion/backoffice/application/BackofficeService.java
+/home/angelo/ai-projects/deep-ion/backoffice/backoffice-core/src/main/java/net/deepion/backoffice/domain/Backoffice.java
+/home/angelo/ai-projects/deep-ion/backoffice/backoffice-core/src/main/java/net/deepion/backoffice/domain/BackofficeRepository.java
+/home/angelo/ai-projects/deep-ion/backoffice/backoffice-core/src/main/java/net/deepion/backoffice/infrastructure/BackofficeJpaEntity.java
+/home/angelo/ai-projects/deep-ion/backoffice/backoffice-core/src/main/java/net/deepion/backoffice/infrastructure/JpaBackofficeRepository.java
+/home/angelo/ai-projects/deep-ion/backoffice/backoffice-core/src/main/java/net/deepion/backoffice/infrastructure/SpringDataBackofficeRepository.java
+/home/angelo/ai-projects/deep-ion/backoffice/backoffice-core/src/main/java/net/deepion/backoffice/mapper/BackofficeMapper.java
+/home/angelo/ai-projects/deep-ion/backoffice/backoffice-core/src/main/java/net/deepion/backoffice/package-info.java
+/home/angelo/ai-projects/deep-ion/backoffice/backoffice-core/src/main/java/net/deepion/config/SecurityConfig.java
+/home/angelo/ai-projects/deep-ion/backoffice/backoffice-core/src/main/java/net/deepion/config/properties/BackofficeProperties.java

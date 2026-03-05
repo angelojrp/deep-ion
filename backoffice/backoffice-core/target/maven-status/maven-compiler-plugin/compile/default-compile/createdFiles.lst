@@ -1,0 +1,14 @@
+net/deepion/backoffice/package-info.class
+net/deepion/backoffice/domain/BackofficeRepository.class
+net/deepion/backoffice/api/BackofficeController.class
+net/deepion/backoffice/mapper/BackofficeMapper.class
+net/deepion/backoffice/application/BackofficeService.class
+net/deepion/backoffice/domain/Backoffice.class
+net/deepion/BackofficeCoreApplication.class
+net/deepion/backoffice/infrastructure/JpaBackofficeRepository.class
+net/deepion/backoffice/infrastructure/SpringDataBackofficeRepository.class
+net/deepion/config/properties/BackofficeProperties.class
+net/deepion/config/SecurityConfig.class
+net/deepion/config/properties/BackofficeProperties$Security.class
+net/deepion/backoffice/mapper/BackofficeMapperImpl.class
+net/deepion/backoffice/infrastructure/BackofficeJpaEntity.class

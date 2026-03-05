@@ -1,0 +1,30 @@
+spring:
+  application:
+    name: backoffice-core
+  datasource:
+    url: ${BACKOFFICE_DATASOURCE_URL:jdbc:h2:mem:backoffice;DB_CLOSE_DELAY=-1;MODE=PostgreSQL}
+    username: ${BACKOFFICE_DATASOURCE_USERNAME:sa}
+    password: ${BACKOFFICE_DATASOURCE_PASSWORD:}
+    driver-class-name: ${BACKOFFICE_DATASOURCE_DRIVER:org.h2.Driver}
+  jpa:
+    hibernate:
+      ddl-auto: ${BACKOFFICE_JPA_DDL_AUTO:update}
+    show-sql: ${BACKOFFICE_JPA_SHOW_SQL:false}
+  messages:
+    basename: i18n/messages
+    encoding: UTF-8
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          jwk-set-uri: ${BACKOFFICE_SECURITY_JWK_SET_URI:}
+          issuer-uri: ${BACKOFFICE_SECURITY_ISSUER_URI:}
+
+backoffice:
+  security:
+    expected-audience: ${BACKOFFICE_SECURITY_AUDIENCE:}
+
+springdoc:
+  oauth2:
+    authorization-url: ${KEYCLOAK_URL}/realms/deepion/protocol/openid-connect/auth
+    token-url: ${KEYCLOAK_URL}/realms/deepion/protocol/openid-connect/token
