@@ -138,8 +138,8 @@ fi
 scope_for_file() {
   local f="$1"
   case "$f" in
-    .github/workflows/*) echo "workflows" ;;
     agents_specs/*|agents_skills/*|.github/requirements/*|.github/qa_negocial/*|.github/qa_tecnico/*) echo "agents" ;;
+    .github/workflows/*) echo "workflows" ;;
     docs/*|*.md|*.adoc|*.rst|*.txt|.github/prompts/*|plans/*|specs/*) echo "docs" ;;
     pom.xml|.gitignore|README*|Makefile|mvnw|mvnw.cmd|package.json|pyproject.toml|requirements.txt|setup.py) echo "root" ;;
     *conta*|*account*) echo "conta" ;;
@@ -154,13 +154,14 @@ scope_for_file() {
 
 type_for_file() {
   local f="$1"
+
   # Regras explícitas
-  if [[ "$f" == .github/workflows/* ]]; then
-    echo "ci"
-    return
-  fi
   if [[ "$f" == *.sql ]]; then
     echo "chore"
+    return
+  fi
+  if [[ "$f" == .github/workflows/* ]]; then
+    echo "ci"
     return
   fi
   if [[ "$f" == .github/prompts/* || "$f" == agents_specs/* || "$f" == docs/* || "$f" == *.md || "$f" == *.adoc || "$f" == *.rst ]]; then
@@ -188,6 +189,83 @@ type_for_file() {
   fi
 }
 
+slug_from_file() {
+  local file="$1"
+  local base
+  base="$(basename "$file")"
+  base="${base%.*}"
+  base="${base//_/ }"
+  base="${base//-/ }"
+  base="${base//./ }"
+  printf "%s" "$base" | awk '{$1=$1; print tolower($0)}'
+}
+
+operation_for_group() {
+  local csv="$1"
+  local f status x y
+  local added=0 modified=0 deleted=0 renamed=0 untracked=0
+
+  while IFS= read -r f; do
+    [[ -z "$f" ]] && continue
+    status="$(git status --porcelain -- "$f" | head -n1 || true)"
+    x="${status:0:1}"
+    y="${status:1:1}"
+
+    if [[ "$x$y" == "??" ]]; then
+      untracked=$((untracked + 1))
+    elif [[ "$x" == "D" || "$y" == "D" ]]; then
+      deleted=$((deleted + 1))
+    elif [[ "$x" == "A" || "$y" == "A" ]]; then
+      added=$((added + 1))
+    elif [[ "$x" == "R" || "$y" == "R" ]]; then
+      renamed=$((renamed + 1))
+    elif [[ "$x" == "M" || "$y" == "M" ]]; then
+      modified=$((modified + 1))
+    else
+      modified=$((modified + 1))
+    fi
+  done < <(tr ',' '\n' <<<"$csv")
+
+  if (( deleted > 0 && added == 0 && modified == 0 && renamed == 0 && untracked == 0 )); then
+    echo "remover"
+  elif (( added + untracked > 0 && deleted == 0 && modified == 0 && renamed == 0 )); then
+    echo "adicionar"
+  elif (( renamed > 0 && added == 0 && deleted == 0 && modified == 0 )); then
+    echo "renomear"
+  elif (( modified > 0 && added == 0 && deleted == 0 && renamed == 0 && untracked == 0 )); then
+    echo "ajustar"
+  elif (( deleted > (added + modified + renamed + untracked) )); then
+    echo "remover"
+  else
+    echo "atualizar"
+  fi
+}
+
+topic_for_group() {
+  local scope="$1"
+  local csv="$2"
+  local first_file
+
+  first_file="$(tr ',' '\n' <<<"$csv" | head -n1)"
+
+  case "$scope" in
+    agents) echo "agentes" ;;
+    workflows) echo "$(slug_from_file "$first_file")" ;;
+    docs)
+      if [[ "$first_file" == .github/prompts/* ]]; then
+        echo "prompts"
+      elif [[ "$first_file" == architecture/plans/* ]]; then
+        echo "planos de arquitetura"
+      else
+        echo "$(slug_from_file "$first_file")"
+      fi
+      ;;
+    root) echo "arquivos raiz" ;;
+    shared) echo "$(slug_from_file "$first_file")" ;;
+    *) echo "$scope" ;;
+  esac
+}
+
 description_for_group() {
   local type="$1"
   local scope="$2"
@@ -206,17 +284,22 @@ description_for_group() {
     return
   fi
 
+  local action topic
+  action="$(operation_for_group "$files_csv")"
+  topic="$(topic_for_group "$scope" "$files_csv")"
+  [[ -z "$topic" ]] && topic="$scope"
+
   case "$type" in
-    ci) echo "atualizar pipeline de integração contínua" ;;
-    chore) echo "ajustar manutenção do projeto" ;;
-    feat) echo "adicionar melhorias no módulo" ;;
-    fix) echo "corrigir comportamento no módulo" ;;
-    refactor) echo "refatorar estrutura interna do módulo" ;;
-    test) echo "ampliar cobertura de testes do módulo" ;;
-    docs) echo "atualizar documentação do projeto" ;;
-    perf) echo "otimizar desempenho do módulo" ;;
-    style) echo "padronizar formatação do código" ;;
-    *) echo "atualizar arquivos do módulo" ;;
+    ci) echo "${action} workflow ${topic}" ;;
+    chore) echo "${action} manutenção de ${topic}" ;;
+    feat) echo "adicionar ${topic}" ;;
+    fix) echo "corrigir ${topic}" ;;
+    refactor) echo "refatorar ${topic}" ;;
+    test) echo "${action} testes de ${topic}" ;;
+    docs) echo "${action} documentação de ${topic}" ;;
+    perf) echo "otimizar ${topic}" ;;
+    style) echo "padronizar estilo de ${topic}" ;;
+    *) echo "${action} ${topic}" ;;
   esac
 }
 
@@ -289,8 +372,10 @@ while IFS=$'\t' read -r _rank type scope files_csv; do
 
   IFS=',' read -r -a files_arr <<< "$files_csv"
 
-  # add
-  git add -- "${files_arr[@]}"
+  # add (resiliente para deletes/renames)
+  for f in "${files_arr[@]}"; do
+    git add -- "$f" 2>/dev/null || git add -u -- "$f" 2>/dev/null || true
+  done
 
   # mensagem
   desc="$(description_for_group "$type" "$scope" "$files_csv")"
