@@ -11,10 +11,89 @@ import {
   User,
   Settings,
   LogOut,
+  Check,
 } from 'lucide-react'
 import { cn } from '@shared/utils/cn'
 import { useLayoutStore } from '@application/stores/useLayoutStore'
 import { ROUTES } from '@shared/constants/routes'
+import { SUPPORTED_LANGUAGES, normalizeLanguageTag, type SupportedLanguage } from '@shared/i18n/index'
+
+function FlagBR({ className }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 640 480" xmlns="http://www.w3.org/2000/svg">
+      <rect width="640" height="480" fill="#009b3a" />
+      <polygon points="320,39.6 588,240 320,440.4 52,240" fill="#fedf00" />
+      <circle cx="320" cy="240" r="115" fill="#002776" />
+      <path d="M195,240 Q320,160 445,240 Q320,200 195,240Z" fill="#fff" />
+    </svg>
+  )
+}
+
+function FlagUS({ className }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 640 480" xmlns="http://www.w3.org/2000/svg">
+      <rect width="640" height="480" fill="#fff" />
+      <g fill="#b22234">
+        {[0, 2, 4, 6, 8, 10, 12].map((i) => (
+          <rect key={i} y={i * 36.92} width="640" height="36.92" />
+        ))}
+      </g>
+      <rect width="256" height="258.5" fill="#3c3b6e" />
+      <g fill="#fff" fontSize="20" fontFamily="serif">
+        {[
+          [20,20],[60,20],[100,20],[140,20],[180,20],[220,20],
+          [40,42],[80,42],[120,42],[160,42],[200,42],
+          [20,64],[60,64],[100,64],[140,64],[180,64],[220,64],
+          [40,86],[80,86],[120,86],[160,86],[200,86],
+          [20,108],[60,108],[100,108],[140,108],[180,108],[220,108],
+          [40,130],[80,130],[120,130],[160,130],[200,130],
+          [20,152],[60,152],[100,152],[140,152],[180,152],[220,152],
+          [40,174],[80,174],[120,174],[160,174],[200,174],
+          [20,196],[60,196],[100,196],[140,196],[180,196],[220,196],
+        ].map(([x, y], i) => (
+          <circle key={i} cx={x} cy={y} r="6" />
+        ))}
+      </g>
+    </svg>
+  )
+}
+
+function FlagDE({ className }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 640 480" xmlns="http://www.w3.org/2000/svg">
+      <rect width="640" height="160" fill="#000" />
+      <rect y="160" width="640" height="160" fill="#d00" />
+      <rect y="320" width="640" height="160" fill="#ffce00" />
+    </svg>
+  )
+}
+
+function FlagES({ className }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 640 480" xmlns="http://www.w3.org/2000/svg">
+      <rect width="640" height="480" fill="#c60b1e" />
+      <rect y="120" width="640" height="240" fill="#ffc400" />
+    </svg>
+  )
+}
+
+function FlagFR({ className }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 640 480" xmlns="http://www.w3.org/2000/svg">
+      <rect width="213.3" height="480" fill="#002395" />
+      <rect x="213.3" width="213.4" height="480" fill="#fff" />
+      <rect x="426.7" width="213.3" height="480" fill="#ed2939" />
+    </svg>
+  )
+}
+
+const LANGUAGE_FLAGS: Record<SupportedLanguage, ({ className }: { className?: string }) => JSX.Element> = {
+  'pt-BR': FlagBR,
+  en: FlagUS,
+  de: FlagDE,
+  es: FlagES,
+  fr: FlagFR,
+}
 
 interface HeaderProps {
   title?: string
@@ -22,20 +101,26 @@ interface HeaderProps {
 }
 
 function Header({ title, subtitle }: HeaderProps) {
-  const { t } = useTranslation()
+  const { t, i18n } = useTranslation()
   const darkMode = useLayoutStore((s) => s.darkMode)
   const toggleDarkMode = useLayoutStore((s) => s.toggleDarkMode)
   const setMobileSidebarOpen = useLayoutStore((s) => s.setMobileSidebarOpen)
 
   const [searchOpen, setSearchOpen] = useState(false)
   const [profileOpen, setProfileOpen] = useState(false)
+  const [langOpen, setLangOpen] = useState(false)
   const profileRef = useRef<HTMLDivElement>(null)
+  const langRef = useRef<HTMLDivElement>(null)
+  const currentLanguage = normalizeLanguageTag(i18n.resolvedLanguage ?? i18n.language)
 
-  // Close profile dropdown on outside click
+  // Close dropdowns on outside click
   useEffect(() => {
     function handleClickOutside(e: MouseEvent) {
       if (profileRef.current && !profileRef.current.contains(e.target as Node)) {
         setProfileOpen(false)
+      }
+      if (langRef.current && !langRef.current.contains(e.target as Node)) {
+        setLangOpen(false)
       }
     }
     document.addEventListener('mousedown', handleClickOutside)
@@ -52,6 +137,7 @@ function Header({ title, subtitle }: HeaderProps) {
       if (e.key === 'Escape') {
         setSearchOpen(false)
         setProfileOpen(false)
+        setLangOpen(false)
       }
     }
     document.addEventListener('keydown', handleKeyDown)
@@ -167,6 +253,64 @@ function Header({ title, subtitle }: HeaderProps) {
               <Moon className="w-5 h-5 text-text-secondary" />
             )}
           </button>
+
+          {/* Language switcher */}
+          <div ref={langRef} className="relative">
+            <button
+              type="button"
+              onClick={() => setLangOpen(!langOpen)}
+              className={cn(
+                'flex items-center justify-center',
+                'w-9 h-9 rounded-lg',
+                'hover:bg-bg transition-colors',
+              )}
+              aria-label={t('header.changeLanguage')}
+              aria-expanded={langOpen}
+              aria-haspopup="true"
+            >
+              {(() => { const Flag = LANGUAGE_FLAGS[currentLanguage]; return <Flag className="w-5 h-5 rounded-sm" />; })()}
+            </button>
+
+            {langOpen && (
+              <div
+                className={cn(
+                  'absolute right-0 mt-2 w-48',
+                  'bg-surface border border-border rounded-xl',
+                  'shadow-[var(--shadow-dropdown)]',
+                  'py-1.5 z-50',
+                  'animate-in fade-in slide-in-from-top-2 duration-150',
+                )}
+                role="menu"
+              >
+                {SUPPORTED_LANGUAGES.map((lng) => (
+                  <button
+                    key={lng}
+                    type="button"
+                    role="menuitem"
+                    onClick={() => {
+                      i18n.changeLanguage(lng)
+                      setLangOpen(false)
+                    }}
+                    className={cn(
+                      'flex items-center justify-between w-full px-4 py-2 text-sm',
+                      'hover:bg-bg transition-colors',
+                      currentLanguage === lng
+                        ? 'text-primary font-medium'
+                        : 'text-text-secondary',
+                    )}
+                  >
+                    <span className="flex items-center gap-2">
+                      {(() => { const Flag = LANGUAGE_FLAGS[lng]; return <Flag className="w-5 h-5 rounded-sm" />; })()}
+                      {t(`header.languages.${lng}`)}
+                    </span>
+                    {currentLanguage === lng && (
+                      <Check className="w-4 h-4" aria-hidden="true" />
+                    )}
+                  </button>
+                ))}
+              </div>
+            )}
+          </div>
 
           {/* Notifications */}
           <button

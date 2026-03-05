@@ -21,7 +21,11 @@
         "bio": "Product Owner com 8 anos de experiência em fintechs e plataformas digitais. Especialista em discovery e validação de hipóteses de negócio.",
         "location": "São Paulo, SP",
         "timezone": "America/Sao_Paulo",
-        "languages": ["Português", "Inglês", "Espanhol"],
+        "languages": [
+          { "id": "lang-001", "name": "Português", "proficiency": "native", "certifications": [] },
+          { "id": "lang-002", "name": "Inglês", "proficiency": "fluent", "certifications": ["TOEFL iBT 105", "Cambridge CAE"] },
+          { "id": "lang-003", "name": "Espanhol", "proficiency": "intermediate", "certifications": ["DELE B2"] }
+        ],
         "skills": ["Product Discovery", "Lean Startup", "OKRs", "Scrum", "Kanban", "SQL", "Data Analytics", "User Research"],
         "certifications": [
           {
@@ -110,7 +114,10 @@
         "bio": "Arquiteto de software com 12 anos de experiência. Especialista em microsserviços, cloud-native e arquitetura hexagonal.",
         "location": "Rio de Janeiro, RJ",
         "timezone": "America/Sao_Paulo",
-        "languages": ["Português", "Inglês"],
+        "languages": [
+          { "id": "lang-004", "name": "Português", "proficiency": "native", "certifications": [] },
+          { "id": "lang-005", "name": "Inglês", "proficiency": "advanced", "certifications": ["IELTS 7.5"] }
+        ],
         "skills": ["Java", "Spring Boot", "Kubernetes", "AWS", "Terraform", "Domain-Driven Design", "Event Sourcing", "CQRS", "PostgreSQL", "Redis"],
         "certifications": [
           {
@@ -182,7 +189,10 @@
         "bio": "Desenvolvedora full-stack com foco em qualidade e testes automatizados. Apaixonada por clean code e boas práticas.",
         "location": "Belo Horizonte, MG",
         "timezone": "America/Sao_Paulo",
-        "languages": ["Português", "Inglês"],
+        "languages": [
+          { "id": "lang-006", "name": "Português", "proficiency": "native", "certifications": [] },
+          { "id": "lang-007", "name": "Inglês", "proficiency": "advanced", "certifications": ["TOEIC 900"] }
+        ],
         "skills": ["TypeScript", "React", "Node.js", "Jest", "Cypress", "Docker", "CI/CD", "TDD"],
         "certifications": [
           {
@@ -271,7 +281,10 @@
         "bio": "Engenheiro DevOps com experiência em automação de infraestrutura, observabilidade e pipelines CI/CD seguros.",
         "location": "Curitiba, PR",
         "timezone": "America/Sao_Paulo",
-        "languages": ["Português", "Inglês"],
+        "languages": [
+          { "id": "lang-008", "name": "Português", "proficiency": "native", "certifications": [] },
+          { "id": "lang-009", "name": "Inglês", "proficiency": "intermediate", "certifications": [] }
+        ],
         "skills": ["Kubernetes", "Terraform", "ArgoCD", "Prometheus", "Grafana", "AWS", "GCP", "GitHub Actions", "Vault"],
         "certifications": [
           {

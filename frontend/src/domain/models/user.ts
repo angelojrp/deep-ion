@@ -71,6 +71,17 @@ export interface SocialLink {
   label: string
 }
 
+/** Nível de proficiência em idioma */
+export type LanguageProficiency = 'basic' | 'intermediate' | 'advanced' | 'fluent' | 'native'
+
+/** Idioma do perfil profissional */
+export interface Language {
+  id: string
+  name: string
+  proficiency: LanguageProficiency
+  certifications: string[]
+}
+
 /** Perfil profissional completo do usuário */
 export interface UserProfile {
   userId: string
@@ -79,7 +90,7 @@ export interface UserProfile {
   bio: string | null
   location: string | null
   timezone: string | null
-  languages: string[]
+  languages: Language[]
   skills: string[]
   certifications: Certification[]
   experience: ProfessionalExperience[]
@@ -131,7 +142,7 @@ export interface UpdateProfilePayload {
   bio: string | null
   location: string | null
   timezone: string | null
-  languages: string[]
+  languages: Omit<Language, 'id'>[]
   skills: string[]
   certifications: Omit<Certification, 'id'>[]
   experience: Omit<ProfessionalExperience, 'id'>[]

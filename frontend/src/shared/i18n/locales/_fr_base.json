@@ -1,36 +1,36 @@
 {
   "app": {
     "name": "deep-ion",
-    "description": "AI agents platform for software development lifecycle"
+    "description": "Plateforme d'agents IA pour le cycle de vie logiciel"
   },
   "nav": {
     "dashboard": "Dashboard",
-    "baDashboard": "Business Analyst",
-    "raDashboard": "Requirements Analyst",
-    "uxDashboard": "UX Analyst",
+    "baDashboard": "Analyste Métier",
+    "raDashboard": "Analyste Exigences",
+    "uxDashboard": "Analyste UX",
     "tenants": "Tenants",
-    "projects": "Projects",
-    "kickoff": "Start Project",
+    "projects": "Projets",
+    "kickoff": "Lancer un Projet",
     "blueprints": "Blueprints",
-    "users": "Users",
-    "agents": "AI Agents",
+    "users": "Utilisateurs",
+    "agents": "Agents IA",
     "pipelines": "Pipelines",
-    "settings": "Settings",
-    "chatbot": "AI Assistant",
-    "sidebar": "Sidebar navigation",
+    "settings": "Paramètres",
+    "chatbot": "Assistant IA",
+    "sidebar": "Menu latéral",
     "menu": "Menu"
   },
   "header": {
-    "toggleSidebar": "Toggle sidebar",
-    "toggleDarkMode": "Toggle dark mode",
-    "searchPlaceholder": "Search or type a command...",
+    "toggleSidebar": "Afficher/masquer le menu latéral",
+    "toggleDarkMode": "Basculer le mode sombre",
+    "searchPlaceholder": "Rechercher ou saisir une commande...",
     "notifications": "Notifications",
-    "newNotifications": "New notifications",
-    "userMenu": "User menu",
-    "profile": "My Profile",
-    "logout": "Log Out",
-    "role": "Administrator",
-    "changeLanguage": "Change language",
+    "newNotifications": "Nouvelles notifications",
+    "userMenu": "Menu utilisateur",
+    "profile": "Mon Profil",
+    "logout": "Déconnexion",
+    "role": "Administrateur",
+    "changeLanguage": "Changer de langue",
     "languages": {
       "pt-BR": "Português (BR)",
       "en": "English",
@@ -41,534 +41,534 @@
   "pages": {
     "dashboard": {
       "title": "Dashboard",
-      "subtitle": "Platform overview"
+      "subtitle": "Vue d'ensemble de la plateforme"
     },
     "tenants": {
       "title": "Tenants",
-      "subtitle": "Organization management"
+      "subtitle": "Gestion des organisations"
     },
     "projects": {
-      "title": "Projects",
-      "subtitle": "Project management"
+      "title": "Projets",
+      "subtitle": "Gestion des projets"
     },
     "settings": {
-      "title": "Settings",
-      "subtitle": "Platform settings"
+      "title": "Paramètres",
+      "subtitle": "Paramètres de la plateforme"
     },
     "notFound": {
-      "title": "Page not found",
-      "description": "The page you are looking for does not exist or has been removed.",
-      "backHome": "Back to home"
+      "title": "Page introuvable",
+      "description": "La page que vous recherchez n'existe pas ou a été supprimée.",
+      "backHome": "Retour à l'accueil"
     }
   },
   "common": {
-    "loading": "Loading...",
-    "error": "An error occurred",
-    "retry": "Try again",
-    "save": "Save",
-    "cancel": "Cancel",
-    "delete": "Delete",
-    "edit": "Edit",
-    "create": "Create",
-    "search": "Search",
-    "filter": "Filter",
-    "noResults": "No results found",
-    "confirm": "Confirm",
-    "close": "Close"
+    "loading": "Chargement...",
+    "error": "Une erreur est survenue",
+    "retry": "Réessayer",
+    "save": "Enregistrer",
+    "cancel": "Annuler",
+    "delete": "Supprimer",
+    "edit": "Modifier",
+    "create": "Créer",
+    "search": "Rechercher",
+    "filter": "Filtrer",
+    "noResults": "Aucun résultat trouvé",
+    "confirm": "Confirmer",
+    "close": "Fermer"
   },
   "poDashboard": {
-    "pageTitle": "Product Owner Dashboard",
-    "pageSubtitle": "Market View — Real-time value flow and risk",
-    "lastUpdated": "Last updated",
+    "pageTitle": "Dashboard du Product Owner",
+    "pageSubtitle": "Vision Marché — Flux de valeur et risque en temps réel",
+    "lastUpdated": "Mis à jour le",
     "kpi": {
-      "activeDemands": "Active Demands",
-      "blocked": "Blocked",
+      "activeDemands": "Demandes Actives",
+      "blocked": "Bloquées",
       "flowEfficiency": "Flow Efficiency",
       "leadTime": "Lead Time",
-      "predictability": "Predictability",
+      "predictability": "Prévisibilité",
       "compliance": "Audit"
     },
     "pipeline": {
-      "title": "Value Pipeline",
-      "blocked": "{{count}} blocked",
-      "more": "more",
+      "title": "Pipeline de Valeur",
+      "blocked": "{{count}} bloquée(s)",
+      "more": "plus",
       "stages": {
-        "discovery": "Discovery",
-        "analysis": "Analysis",
+        "discovery": "Découverte",
+        "analysis": "Analyse",
         "gate-1": "Gate 1",
         "gate-2": "Gate 2",
-        "development": "Development",
+        "development": "Développement",
         "gate-3": "Gate 3",
         "gate-4": "Gate 4",
-        "done": "Done"
+        "done": "Terminé"
       }
     },
     "delivery": {
-      "title": "Delivery Velocity",
-      "cycleTime": "Cycle Time by Tier",
-      "target": "Target",
+      "title": "Vélocité de Livraison",
+      "cycleTime": "Cycle Time par Tier",
+      "target": "Objectif",
       "leadTime": "Lead Time",
-      "leadTimeBench": "Market: 5–12d",
+      "leadTimeBench": "Marché : 5–12j",
       "flowEfficiency": "Flow Efficiency",
-      "aboveTarget": "Above target (>40%)",
-      "belowTarget": "Below target (<40%)",
-      "predictability": "Predictability",
+      "aboveTarget": "Au-dessus de l'objectif (>40%)",
+      "belowTarget": "En-dessous de l'objectif (<40%)",
+      "predictability": "Prévisibilité",
       "throughput": "Throughput",
-      "perWeek": "demands/week",
-      "throughputTrend": "Weekly Trend",
-      "started": "Started",
-      "completed": "Completed"
+      "perWeek": "demandes/semaine",
+      "throughputTrend": "Tendance Hebdomadaire",
+      "started": "Démarrées",
+      "completed": "Terminées"
     },
     "backlog": {
-      "title": "Backlog Health",
-      "active": "Active",
-      "blocked": "Blocked",
-      "tierDistribution": "Tier Distribution",
+      "title": "Santé du Backlog",
+      "active": "Actives",
+      "blocked": "Bloquées",
+      "tierDistribution": "Distribution par Tier",
       "wip": "WIP",
-      "moscowDistribution": "MoSCoW Distribution",
+      "moscowDistribution": "Distribution MoSCoW",
       "moscow": {
         "must": "Must",
         "should": "Should",
         "could": "Could",
         "wont": "Won't"
       },
-      "ageByStage": "Average Age by Stage"
+      "ageByStage": "Âge Moyen par Étape"
     },
     "quality": {
-      "title": "Business Quality",
-      "briefPassRate": "Briefs → Gate 2 without block",
+      "title": "Qualité Métier",
+      "briefPassRate": "Briefs → Gate 2 sans blocage",
       "confidenceScore": "Confidence Score (CAL)",
-      "gherkinComplete": "Gherkin Criteria complete",
-      "traceability": "Traceability Coverage",
-      "reworkRate": "Rework Rate",
-      "target": "Target",
-      "openQuestions": "{{count}} open questions (QA-NN) unanswered"
+      "gherkinComplete": "Critères Gherkin complets",
+      "traceability": "Couverture de Traçabilité",
+      "reworkRate": "Taux de Retravail",
+      "target": "Objectif",
+      "openQuestions": "{{count}} questions ouvertes (QA-NN) sans réponse"
     },
     "valueEffort": {
-      "title": "Value vs. Effort (WSJF)",
-      "description": "Relative position: size = tier complexity, position = value × effort",
-      "highValue": "↑ High Value",
-      "lowValue": "↓ Low Value",
-      "highEffort": "High Effort →",
-      "lowEffort": "← Low Effort",
+      "title": "Valeur vs. Effort (WSJF)",
+      "description": "Position relative : taille = complexité du tier, position = valeur × effort",
+      "highValue": "↑ Haute Valeur",
+      "lowValue": "↓ Basse Valeur",
+      "highEffort": "Effort Élevé →",
+      "lowEffort": "← Faible Effort",
       "quickWins": "Quick Wins",
-      "strategic": "Strategic",
-      "fillIns": "Fill-ins",
-      "avoid": "Avoid",
-      "blocked": "Blocked"
+      "strategic": "Stratégique",
+      "fillIns": "Compléments",
+      "avoid": "À Éviter",
+      "blocked": "Bloquée"
     },
     "compliance": {
-      "title": "Compliance & Risks",
-      "lgpdFlags": "Active LGPD Flags",
-      "auditedRecords": "Audited DecisionRecords",
-      "rnViolations": "Undetected RN Violations",
-      "t3Pending": "T3 human gate > 48h",
-      "archViolations": "Architectural Violations",
-      "businessRisks": "Business Risks",
+      "title": "Conformité et Risques",
+      "lgpdFlags": "Drapeaux LGPD actifs",
+      "auditedRecords": "DecisionRecords audités",
+      "rnViolations": "Violations RN non détectées",
+      "t3Pending": "T3 porte humaine > 48h",
+      "archViolations": "Violations architecturales",
+      "businessRisks": "Risques Métier",
       "probability": "Prob.",
       "status": {
-        "active": "Active",
-        "mitigated": "Mitigated",
-        "monitoring": "Monitoring"
+        "active": "Actif",
+        "mitigated": "Atténué",
+        "monitoring": "En surveillance"
       },
-      "dependencies": "External Dependencies"
+      "dependencies": "Dépendances Externes"
     },
     "roadmap": {
-      "title": "Roadmap Progress",
-      "target": "Target",
-      "onTrack": "On track",
-      "atRisk": "At risk",
-      "weeksRemaining": "Weeks remaining",
-      "avgThroughput": "Avg throughput/week",
-      "businessDebt": "Business debt"
+      "title": "Progression du Roadmap",
+      "target": "Objectif",
+      "onTrack": "Dans les temps",
+      "atRisk": "À risque",
+      "weeksRemaining": "Semaines restantes",
+      "avgThroughput": "Débit moyen/sem",
+      "businessDebt": "Dette métier"
     }
   },
   "baDashboard": {
-    "pageTitle": "Business Analyst Dashboard",
-    "pageSubtitle": "USR-07 — Business artifacts, discovery and backlog health",
-    "lastUpdated": "Last updated",
+    "pageTitle": "Dashboard de l'Analyste Métier",
+    "pageSubtitle": "USR-07 — Artefacts métier, découverte et santé du backlog",
+    "lastUpdated": "Mis à jour le",
     "kpi": {
-      "totalBriefs": "Total Briefs",
-      "briefsFinal": "FINAL Briefs",
-      "inDiscovery": "In Discovery",
-      "stuckDemands": "Stuck",
-      "pendingEscalations": "Escalations",
-      "backlogAge": "Backlog Age"
+      "totalBriefs": "Total des Briefs",
+      "briefsFinal": "Briefs FINAL",
+      "inDiscovery": "En Découverte",
+      "stuckDemands": "Bloquées",
+      "pendingEscalations": "Escalades",
+      "backlogAge": "Âge du Backlog"
     },
     "alerts": {
-      "title": "Alerts"
+      "title": "Alertes"
     },
     "filters": {
-      "title": "Filters",
-      "toggle": "Show/hide filters",
-      "project": "Project",
+      "title": "Filtres",
+      "toggle": "Afficher/masquer les filtres",
+      "project": "Projet",
       "tier": "Classification",
-      "briefStatus": "Brief Status",
-      "allProjects": "All projects",
-      "allTiers": "All classifications",
-      "allStatuses": "All statuses"
+      "briefStatus": "Statut du Brief",
+      "allProjects": "Tous les projets",
+      "allTiers": "Toutes les classifications",
+      "allStatuses": "Tous les statuts"
     },
     "briefs": {
-      "title": "Briefs & Vision",
-      "distribution": "Briefs distribution",
+      "title": "Briefs et Vision",
+      "distribution": "Distribution des briefs",
       "status": {
-        "draft": "Draft",
+        "draft": "Brouillon",
         "final": "Final",
-        "refining": "Refining"
+        "refining": "En affinage"
       },
-      "avgRefinementCycles": "Avg refinement cycles",
-      "avgDaysInDraft": "Avg days in DRAFT",
-      "openQuestions": "Briefs with open questions",
-      "completeness": "Completeness",
+      "avgRefinementCycles": "Cycles d'affinage moyens",
+      "avgDaysInDraft": "Jours moyens en BROUILLON",
+      "openQuestions": "Briefs avec questions ouvertes",
+      "completeness": "Complétude",
       "cycles": "Cycles",
-      "rejected": "Gate 2 Rejected",
-      "pendingVisionDocs": "Pending Vision Documents"
+      "rejected": "Rejetés au Gate 2",
+      "pendingVisionDocs": "Documents de Vision en attente"
     },
     "pipeline": {
-      "title": "Discovery Pipeline",
-      "stuckAlert": "{{count}} demand(s) stuck > 5 business days",
-      "avgTimeByPhase": "Average time by phase",
-      "throughput": "Discovery Throughput",
-      "entered": "Entered",
-      "exited": "Exited"
+      "title": "Pipeline de Découverte",
+      "stuckAlert": "{{count}} demande(s) bloquée(s) > 5 jours ouvrés",
+      "avgTimeByPhase": "Temps moyen par phase",
+      "throughput": "Débit de Découverte",
+      "entered": "Entrées",
+      "exited": "Sorties"
     },
     "quality": {
-      "title": "Artifact Quality",
-      "avgCompleteness": "Average brief completeness",
-      "reworkRate": "Rework rate",
-      "target": "Target",
-      "gate2Rejected": "Gate 2 Rejected",
-      "lastAudit": "DOM-05a Audit Results",
-      "completenessLabel": "Completeness",
-      "consistencyLabel": "Consistency"
+      "title": "Qualité des Artefacts",
+      "avgCompleteness": "Complétude moyenne des briefs",
+      "reworkRate": "Taux de retravail",
+      "target": "Objectif",
+      "gate2Rejected": "Rejetés au Gate 2",
+      "lastAudit": "Résultats Audit DOM-05a",
+      "completenessLabel": "Complétude",
+      "consistencyLabel": "Cohérence"
     },
     "impact": {
-      "title": "Impact Classification (T0–T3)",
-      "distribution": "Distribution by classification",
-      "trend": "Trend over time",
-      "month": "Month",
-      "activeT3": "Active T3 Demands"
+      "title": "Classification d'Impact (T0–T3)",
+      "distribution": "Distribution par classification",
+      "trend": "Tendance dans le temps",
+      "month": "Mois",
+      "activeT3": "Demandes T3 Actives"
     },
     "escalations": {
-      "title": "Escalations & Confidence Score",
-      "pending": "Pending",
-      "resolved": "Resolved",
-      "avgTime": "Avg time",
-      "lowConfidence": "Confidence < 0.65",
-      "byProject": "Escalations by project"
+      "title": "Escalades et Confidence Score",
+      "pending": "En attente",
+      "resolved": "Résolues",
+      "avgTime": "Temps moyen",
+      "lowConfidence": "Confiance < 0.65",
+      "byProject": "Escalades par projet"
     },
     "backlog": {
-      "title": "Backlog Health",
-      "avgAge": "Average age",
-      "stale": "No movement",
-      "staleDemands": "Demands without movement > 2 sprints",
-      "duplicates": "Duplicates detected",
-      "duplicateOf": "Duplicate of",
-      "inactiveStakeholders": "Inactive stakeholders"
+      "title": "Santé du Backlog",
+      "avgAge": "Âge moyen",
+      "stale": "Sans mouvement",
+      "staleDemands": "Demandes sans mouvement > 2 sprints",
+      "duplicates": "Doublons détectés",
+      "duplicateOf": "Doublon de",
+      "inactiveStakeholders": "Parties prenantes inactives"
     },
     "quickActions": {
-      "title": "Quick Actions",
-      "newBrief": "Create new brief",
-      "refineBrief": "Refine DRAFT brief",
-      "createVision": "Create project vision",
-      "viewQuestions": "View open questions",
-      "escalate": "Escalate demand"
+      "title": "Actions Rapides",
+      "newBrief": "Créer un nouveau brief",
+      "refineBrief": "Affiner brief BROUILLON",
+      "createVision": "Créer la vision du projet",
+      "viewQuestions": "Voir les questions ouvertes",
+      "escalate": "Escalader la demande"
     }
   },
   "raDashboard": {
-    "pageTitle": "Requirements Analyst Dashboard",
-    "pageSubtitle": "USR-08 — Traceability, specification quality and requirements debt",
-    "lastUpdated": "Last updated",
+    "pageTitle": "Dashboard de l'Analyste Exigences",
+    "pageSubtitle": "USR-08 — Traçabilité, qualité des spécifications et dette d'exigences",
+    "lastUpdated": "Mis à jour le",
     "kpi": {
-      "totalUCs": "Use Cases",
-      "totalRNs": "Business Rules",
-      "traceability": "Traceability",
+      "totalUCs": "Cas d'Utilisation",
+      "totalRNs": "Règles Métier",
+      "traceability": "Traçabilité",
       "investScore": "INVEST Score",
       "gate2Approval": "Gate 2",
-      "debtIndex": "Debt"
+      "debtIndex": "Dette"
     },
     "alerts": {
-      "title": "Alerts"
+      "title": "Alertes"
     },
     "filters": {
-      "title": "Filters",
-      "toggle": "Show/hide filters",
-      "project": "Project",
+      "title": "Filtres",
+      "toggle": "Afficher/masquer les filtres",
+      "project": "Projet",
       "module": "Module",
       "ucStatus": "UC Status",
-      "allProjects": "All projects",
-      "allModules": "All modules",
-      "allStatuses": "All statuses"
+      "allProjects": "Tous les projets",
+      "allModules": "Tous les modules",
+      "allStatuses": "Tous les statuts"
     },
     "useCases": {
-      "title": "Use Cases",
-      "distribution": "UC distribution by status",
+      "title": "Cas d'Utilisation",
+      "distribution": "Distribution des UC par statut",
       "status": {
-        "draft": "Draft",
-        "validated": "Validated",
-        "implemented": "Implemented",
-        "archived": "Archived"
+        "draft": "Brouillon",
+        "validated": "Validé",
+        "implemented": "Implémenté",
+        "archived": "Archivé"
       },
-      "avgModelingDays": "Avg modeling time",
+      "avgModelingDays": "Temps moyen de modélisation",
       "modules": "Modules",
       "byModule": "UCs by module",
-      "withoutRN": "{{count}} UCs without business rule",
-      "withoutGherkin": "UCs without Gherkin criteria",
-      "recentlyModified": "Recently modified"
+      "withoutRN": "{{count}} UC sans règle métier",
+      "withoutGherkin": "UC sans critères Gherkin",
+      "recentlyModified": "Récemment modifiés"
     },
     "businessRules": {
-      "title": "Business Rules",
+      "title": "Règles Métier",
       "total": "Total",
       "status": {
         "active": "Active",
-        "deprecated": "Deprecated",
-        "inReview": "In Review"
+        "deprecated": "Obsolète",
+        "inReview": "En Révision"
       },
       "byModule": "BRs by module",
-      "withoutFE": "{{count}} BRs without exception flow",
-      "orphaned": "{{count}} orphaned BRs (no UC)",
+      "withoutFE": "{{count}} RM sans flux d'exception",
+      "orphaned": "{{count}} RM orphelines (sans UC)",
       "contradictions": "{{count}} contradiction(s)"
     },
     "traceability": {
-      "title": "Traceability",
-      "coverage": "Traceability coverage",
-      "brokenLinks": "Broken links",
-      "brokenLinksTitle": "Broken traceability links",
-      "byModule": "Coverage by module",
-      "matrix": "Traceability Matrix",
+      "title": "Traçabilité",
+      "coverage": "Couverture de traçabilité",
+      "brokenLinks": "Liens brisés",
+      "brokenLinksTitle": "Liens de traçabilité brisés",
+      "byModule": "Couverture par module",
+      "matrix": "Matrice de Traçabilité",
       "uc": "UC",
       "rn": "BR",
-      "criteria": "Criteria",
+      "criteria": "Critères",
       "code": "Code",
-      "statusLabel": "Status"
+      "statusLabel": "Statut"
     },
     "specQuality": {
-      "title": "Specification Quality",
+      "title": "Qualité des Spécifications",
       "investScore": "INVEST",
-      "refined": "Refined",
+      "refined": "Affinées",
       "belowThreshold": "Score < 7",
-      "refinementProgress": "Refinement progress",
-      "gherkinCoverage": "Gherkin coverage by module",
-      "storiesBelowTitle": "Stories below threshold score",
-      "vagueCriteria": "Vague acceptance criteria"
+      "refinementProgress": "Progression de l'affinage",
+      "gherkinCoverage": "Couverture Gherkin par module",
+      "storiesBelowTitle": "Stories en-dessous du seuil",
+      "vagueCriteria": "Critères d'acceptation vagues"
     },
     "audit": {
-      "title": "DOM-05a Audit",
-      "gate2Approval": "Gate 2 approval rate",
-      "lastResult": "Last audit result",
-      "completeness": "Completeness",
-      "consistency": "Consistency",
-      "complianceTrend": "Compliance trend",
-      "failedItems": "{{count}} failed item(s)"
+      "title": "Audit DOM-05a",
+      "gate2Approval": "Taux d'approbation Gate 2",
+      "lastResult": "Dernier résultat d'audit",
+      "completeness": "Complétude",
+      "consistency": "Cohérence",
+      "complianceTrend": "Tendance de conformité",
+      "failedItems": "{{count}} élément(s) en échec"
     },
     "conflicts": {
-      "title": "Conflicts & Duplicates",
-      "conflictCount": "{{count}} requirement conflict(s)",
-      "duplicateCount": "{{count}} duplicate(s) detected",
-      "duplicateOf": "Duplicate of"
+      "title": "Conflits et Doublons",
+      "conflictCount": "{{count}} conflit(s) d'exigences",
+      "duplicateCount": "{{count}} doublon(s) détecté(s)",
+      "duplicateOf": "Doublon de"
     },
     "changeImpact": {
-      "title": "Change Impact",
-      "unreviewed": "{{count}} unreviewed",
-      "reviewed": "Reviewed",
-      "notReviewed": "Not reviewed",
-      "screens": "screens"
+      "title": "Impact des Changements",
+      "unreviewed": "{{count}} non révisé(s)",
+      "reviewed": "Révisé",
+      "notReviewed": "Non révisé",
+      "screens": "écrans"
     },
     "debt": {
-      "title": "Requirements Debt",
-      "debtIndex": "Index",
-      "toDetail": "To Detail",
-      "placeholders": "Placeholders",
-      "toDetailTitle": "Requirements to detail",
-      "placeholderRules": "BRs with placeholder text",
-      "incompleteOverDays": "Incomplete > 7 days"
+      "title": "Dette d'Exigences",
+      "debtIndex": "Indice",
+      "toDetail": "À Détailler",
+      "placeholders": "Marqueurs",
+      "toDetailTitle": "Exigences à détailler",
+      "placeholderRules": "RM avec texte de remplacement",
+      "incompleteOverDays": "Incomplets > 7 jours"
     },
     "quickActions": {
-      "title": "Quick Actions",
-      "newUC": "Create new UC",
-      "updateUC": "Update UC",
-      "critiqueStories": "Critique stories",
-      "refineStories": "Refine stories",
-      "sliceEpic": "Slice epic",
-      "viewTraceability": "View traceability",
-      "analyzeImpact": "Analyze impact"
+      "title": "Actions Rapides",
+      "newUC": "Créer un nouveau UC",
+      "updateUC": "Mettre à jour UC",
+      "critiqueStories": "Critiquer les stories",
+      "refineStories": "Affiner les stories",
+      "sliceEpic": "Découper l'épique",
+      "viewTraceability": "Voir la traçabilité",
+      "analyzeImpact": "Analyser l'impact"
     }
   },
   "uxDashboard": {
-    "pageTitle": "UX Analyst Dashboard",
-    "pageSubtitle": "Prototypes, accessibility and design consistency",
-    "lastUpdated": "Updated at",
+    "pageTitle": "Dashboard de l'Analyste UX",
+    "pageSubtitle": "Prototypes, accessibilité et cohérence de design",
+    "lastUpdated": "Mis à jour le",
     "alerts": {
-      "title": "Alerts"
+      "title": "Alertes"
     },
     "filters": {
-      "title": "Filters",
-      "toggle": "Toggle filters",
-      "project": "Project",
-      "allProjects": "All projects",
-      "status": "Prototype status",
-      "allStatuses": "All statuses",
-      "platform": "Platform",
-      "allPlatforms": "All platforms",
-      "accessibility": "Accessibility",
-      "allA11y": "All scores",
-      "aboveThreshold": "Above WCAG threshold",
-      "belowThreshold": "Below WCAG threshold"
+      "title": "Filtres",
+      "toggle": "Afficher/masquer les filtres",
+      "project": "Projet",
+      "allProjects": "Tous les projets",
+      "status": "Statut du prototype",
+      "allStatuses": "Tous les statuts",
+      "platform": "Plateforme",
+      "allPlatforms": "Toutes les plateformes",
+      "accessibility": "Accessibilité",
+      "allA11y": "Tous les scores",
+      "aboveThreshold": "Au-dessus du seuil WCAG",
+      "belowThreshold": "En-dessous du seuil WCAG"
     },
     "kpi": {
       "totalPrototypes": "Total Prototypes",
-      "pendingGateUx": "Pending Gate UX",
-      "ucCoverage": "UC Coverage",
+      "pendingGateUx": "Gate UX en attente",
+      "ucCoverage": "Couverture UC",
       "wcagScore": "WCAG Score",
-      "a11yViolations": "A11Y Violations",
-      "firstApprovalRate": "1st Review Approval"
+      "a11yViolations": "Violations A11Y",
+      "firstApprovalRate": "Approbation en 1ère Révision"
     },
     "prototypes": {
       "title": "Prototypes",
-      "distribution": "Prototype distribution by status",
-      "throughput": "Weekly Throughput",
+      "distribution": "Distribution des prototypes par statut",
+      "throughput": "Débit Hebdomadaire",
       "status": {
-        "draft": "Draft",
+        "draft": "Brouillon",
         "final": "Final",
-        "approved": "Approved",
-        "rejected": "Rejected"
+        "approved": "Approuvé",
+        "rejected": "Rejeté"
       }
     },
     "gateUx": {
       "title": "Gate UX",
-      "pending": "Pending",
-      "avgTime": "Avg time",
-      "firstApproval": "1st approval",
-      "openQuestions": "Open questions",
-      "avgResolution": "Avg resolution time"
+      "pending": "En attente",
+      "avgTime": "Temps moyen",
+      "firstApproval": "1ère approbation",
+      "openQuestions": "Questions ouvertes",
+      "avgResolution": "Temps moyen de résolution"
     },
     "coverage": {
-      "title": "Screen Coverage",
-      "ucCoverage": "UCs with prototype",
-      "withPrototype": "With prototype",
-      "withoutPrototype": "Without prototype",
-      "screenProgress": "Screens generated",
-      "withoutMobile": "{{count}} screen(s) without mobile version",
+      "title": "Couverture des Écrans",
+      "ucCoverage": "UC avec prototype",
+      "withPrototype": "Avec prototype",
+      "withoutPrototype": "Sans prototype",
+      "screenProgress": "Écrans générés",
+      "withoutMobile": "{{count}} écran(s) sans version mobile",
       "breakpoints": "Breakpoints",
       "prototype": "Prototype"
     },
     "consistency": {
-      "title": "Design Consistency",
-      "reuseRate": "Reuse rate",
-      "colorPalette": "Color palette",
-      "typography": "Typography",
-      "icons": "Standardized icons",
-      "navInconsistencies": "{{count}} navigation inconsistency(ies)",
-      "deviations": "Design System Deviations"
+      "title": "Cohérence du Design",
+      "reuseRate": "Taux de réutilisation",
+      "colorPalette": "Palette de couleurs",
+      "typography": "Typographie",
+      "icons": "Icônes standardisées",
+      "navInconsistencies": "{{count}} incohérence(s) de navigation",
+      "deviations": "Écarts du Design System"
     },
     "accessibility": {
-      "title": "Accessibility",
+      "title": "Accessibilité",
       "wcagScore": "WCAG AA",
-      "keyboardNav": "Keyboard navigation",
+      "keyboardNav": "Navigation clavier",
       "ariaLandmarks": "ARIA landmarks",
-      "withoutCheck": "{{count}} screen(s) without a11y check",
+      "withoutCheck": "{{count}} écran(s) sans vérification a11y",
       "violations": "Violations"
     },
     "usability": {
-      "title": "Usability",
-      "heuristicScore": "Nielsen Score",
-      "clickDepth": "Click depth",
-      "feedbackCoverage": "Feedback covered",
-      "statesCoverage": "States coverage",
-      "emptyState": "Empty state",
-      "errorState": "Error state",
-      "loadingState": "Loading state",
-      "deadEnds": "Dead ends",
-      "noDeadEnds": "No dead ends detected"
+      "title": "Utilisabilité",
+      "heuristicScore": "Score de Nielsen",
+      "clickDepth": "Profondeur de clic",
+      "feedbackCoverage": "Feedback couvert",
+      "statesCoverage": "Couverture des états",
+      "emptyState": "État vide",
+      "errorState": "État d'erreur",
+      "loadingState": "État de chargement",
+      "deadEnds": "Impasses",
+      "noDeadEnds": "Aucune impasse détectée"
     },
     "feedbackLoop": {
       "title": "Feedback Loop",
-      "draftToFinal": "Draft → Final",
-      "roundTrips": "Round trips",
-      "firstApproval": "1st approval",
-      "aiQuality": "AI Quality",
-      "rejectionPatterns": "Rejection Patterns"
+      "draftToFinal": "Brouillon → Final",
+      "roundTrips": "Allers-retours",
+      "firstApproval": "1ère approbation",
+      "aiQuality": "Qualité IA",
+      "rejectionPatterns": "Motifs de Rejet"
     },
     "designDebt": {
-      "title": "Design Debt",
-      "debtIndex": "Debt index",
-      "screensWithTags": "Screens w/ tags",
-      "approvedWithCaveats": "Approved with caveats",
-      "backlog": "Improvement backlog"
+      "title": "Dette de Design",
+      "debtIndex": "Indice de dette",
+      "screensWithTags": "Écrans avec tags",
+      "approvedWithCaveats": "Approuvés avec réserves",
+      "backlog": "Backlog d'améliorations"
     },
     "pendingPrototypes": {
-      "title": "Prototypes Pending Action",
+      "title": "Prototypes en Attente d'Action",
       "prototype": "Prototype",
       "uc": "UC",
-      "status": "Status",
+      "status": "Statut",
       "cycle": "Cycle",
       "platform": "Platform",
       "action": "Action",
-      "review": "Review",
-      "approve": "Approve",
-      "escalate": "Escalate",
-      "viewFeedback": "View feedback",
-      "lastCycle": "Last refinement cycle"
+      "review": "Réviser",
+      "approve": "Approuver",
+      "escalate": "Escalader",
+      "viewFeedback": "Voir le feedback",
+      "lastCycle": "Dernier cycle d'affinage"
     },
     "quickActions": {
-      "title": "Quick Actions",
-      "approve": "Approve prototype",
-      "reject": "Reject prototype",
-      "refine": "Refine prototype",
-      "generate": "Generate new prototype",
-      "compare": "Compare versions",
-      "checkA11y": "Check accessibility",
-      "viewMapping": "View UC → Screen"
+      "title": "Actions Rapides",
+      "approve": "Approuver le prototype",
+      "reject": "Rejeter le prototype",
+      "refine": "Affiner le prototype",
+      "generate": "Générer un nouveau prototype",
+      "compare": "Comparer les versions",
+      "checkA11y": "Vérifier l'accessibilité",
+      "viewMapping": "Voir UC → Écran"
     }
   },
   "chatbot": {
     "fab": {
-      "open": "Open AI assistant",
-      "close": "Close AI assistant"
+      "open": "Ouvrir l'assistant IA",
+      "close": "Fermer l'assistant IA"
     },
     "widget": {
-      "title": "deep-ion Assistant",
-      "subtitle": "AI for project management",
-      "welcomeTitle": "How can I help?",
-      "welcomeMessage": "Ask about metrics, pipelines, demand status, AI agents, or any platform information. You can type or use voice commands.",
-      "newConversation": "New conversation",
-      "openFullPage": "Open full page"
+      "title": "Assistant deep-ion",
+      "subtitle": "IA pour la gestion de projets",
+      "welcomeTitle": "Comment puis-je vous aider ?",
+      "welcomeMessage": "Posez des questions sur les métriques, pipelines, statut des demandes, agents IA ou toute information de la plateforme. Vous pouvez écrire ou utiliser les commandes vocales.",
+      "newConversation": "Nouvelle conversation",
+      "openFullPage": "Ouvrir en pleine page"
     },
     "input": {
-      "placeholder": "Type your message...",
-      "send": "Send message",
-      "startRecording": "Start voice recording",
-      "stopRecording": "Stop voice recording",
-      "listening": "Listening..."
+      "placeholder": "Saisissez votre message...",
+      "send": "Envoyer le message",
+      "startRecording": "Démarrer l'enregistrement vocal",
+      "stopRecording": "Arrêter l'enregistrement vocal",
+      "listening": "Écoute en cours..."
     },
     "message": {
-      "userLabel": "User message",
-      "assistantLabel": "Assistant message",
-      "voiceInput": "Voice input"
+      "userLabel": "Message de l'utilisateur",
+      "assistantLabel": "Message de l'assistant",
+      "voiceInput": "Entrée vocale"
     },
     "page": {
-      "title": "AI Assistant",
-      "subtitle": "Chat with AI and browse conversation history",
-      "conversationList": "Conversation list",
-      "searchPlaceholder": "Search conversations...",
-      "newConversation": "New conversation",
-      "backToList": "Back to conversations",
-      "archived": "Archived",
+      "title": "Assistant IA",
+      "subtitle": "Discutez avec l'IA et consultez l'historique des conversations",
+      "conversationList": "Liste des conversations",
+      "searchPlaceholder": "Rechercher des conversations...",
+      "newConversation": "Nouvelle conversation",
+      "backToList": "Retour aux conversations",
+      "archived": "Archivées",
       "messages": "msgs",
-      "suggestion1": "Which demands are blocked?",
-      "suggestion2": "What's the sprint velocity?",
-      "suggestion3": "AI agents status",
-      "voiceHint": "You can also use voice commands"
+      "suggestion1": "Quelles demandes sont bloquées ?",
+      "suggestion2": "Quelle est la vélocité du sprint ?",
+      "suggestion3": "Statut des agents IA",
+      "voiceHint": "Vous pouvez aussi utiliser les commandes vocales"
     }
   },
   "blueprintsPage": {
-    "title": "Blueprint Management",
-    "subtitle": "Create, clone, edit and version architectural blueprints",
+    "title": "Gestion des Blueprints",
+    "subtitle": "Créer, cloner, modifier et versionner les blueprints architecturaux",
     "list": {
-      "title": "Registered blueprints",
-      "newBlueprint": "New",
-      "selectBlueprint": "Select blueprint {{name}}",
-      "cloneBlueprint": "Clone"
+      "title": "Blueprints enregistrés",
+      "newBlueprint": "Nouveau",
+      "selectBlueprint": "Sélectionner le blueprint {{name}}",
+      "cloneBlueprint": "Cloner"
     },
     "categories": {
       "backend": "Backend",
@@ -577,77 +577,77 @@
       "fullstack": "Fullstack"
     },
     "form": {
-      "createTitle": "Create blueprint",
-      "editTitle": "Edit blueprint",
-      "subtitle": "Required fields: name, description and category.",
-      "cloneFromLabel": "Clone from existing blueprint (optional)",
-      "cloneFromPlaceholder": "Select a blueprint to use as baseline",
-      "name": "Name",
+      "createTitle": "Créer un blueprint",
+      "editTitle": "Modifier le blueprint",
+      "subtitle": "Champs obligatoires : nom, description et catégorie.",
+      "cloneFromLabel": "Cloner depuis un blueprint existant (optionnel)",
+      "cloneFromPlaceholder": "Sélectionnez un blueprint comme base",
+      "name": "Nom",
       "namePlaceholder": "E.g.: Frontend React SPA",
       "description": "Description",
-      "descriptionPlaceholder": "Describe this blueprint objectives and standards...",
-      "category": "Category",
-      "creationType": "Creation/editing method",
+      "descriptionPlaceholder": "Décrivez les objectifs et standards de ce blueprint...",
+      "category": "Catégorie",
+      "creationType": "Méthode de création/édition",
       "modeManual": "Manual",
-      "modeAssisted": "AI-assisted",
-      "editModeInfo": "In edit mode, you can switch freely between manual and AI-assisted methods, regardless of how the blueprint was initially created.",
-      "manualEditor": "Manual YAML editor",
-      "uploadYaml": "Upload file",
-      "assistantChatTitle": "Assisted creation chatbot",
-      "publishNewVersion": "Publish a new version on save",
+      "modeAssisted": "Assisté par IA",
+      "editModeInfo": "En mode édition, vous pouvez alterner entre les méthodes manuelle et assistée par IA.",
+      "manualEditor": "Éditeur YAML manuel",
+      "uploadYaml": "Télécharger un fichier",
+      "assistantChatTitle": "Chatbot de création assistée",
+      "publishNewVersion": "Publier une nouvelle version à l'enregistrement",
       "errors": {
-        "nameRequired": "Name is required",
-        "descriptionRequired": "Description is required",
-        "categoryRequired": "Category is required"
+        "nameRequired": "Le nom est obligatoire",
+        "descriptionRequired": "La description est obligatoire",
+        "categoryRequired": "La catégorie est obligatoire"
       }
     },
     "assistant": {
-      "welcome": "Hi! I can help you build your blueprint. Start by describing your target architecture.",
-      "editWelcome": "You are in assisted edit mode. I can suggest updates for the next version.",
-      "placeholder": "Describe the blueprint or ask the agent for guidance...",
-      "send": "Send",
-      "helpCategory": "Suggestion: pick the category based on the blueprint primary focus (backend, frontend, batch or fullstack).",
-      "helpVersioning": "Best practice: publish a new version for structural changes and keep in-use versions active until projects are manually migrated.",
-      "defaultReply": "Understood. I can turn this into YAML structure and suggest quality criteria for the blueprint."
+      "welcome": "Bonjour ! Je peux vous aider à construire votre blueprint. Commencez par décrire votre architecture cible.",
+      "editWelcome": "Vous êtes en mode édition assistée. Je peux suggérer des mises à jour pour la prochaine version.",
+      "placeholder": "Décrivez le blueprint ou demandez conseil à l'agent...",
+      "send": "Envoyer",
+      "helpCategory": "Suggestion : choisissez la catégorie selon l'objectif principal du blueprint.",
+      "helpVersioning": "Publiez une nouvelle version pour les changements structurels et gardez les versions en usage actives.",
+      "defaultReply": "Compris. Je peux convertir cela en structure YAML et suggérer des critères de qualité."
     },
     "linkedProjects": {
-      "title": "Blueprint linked to projects",
-      "description": "This blueprint is already in use. All in-use versions must remain active. Each project must be manually updated by an architect to adopt a new blueprint version."
+      "title": "Blueprint lié à des projets",
+      "description": "Ce blueprint est déjà utilisé. Toutes les versions en usage doivent rester actives."
     },
     "versions": {
       "title": "Versions",
       "status": {
         "active": "active",
-        "in-use": "in use",
-        "superseded": "superseded"
+        "in-use": "en usage",
+        "superseded": "remplacée"
       }
     },
     "history": {
-      "title": "Change history"
+      "title": "Historique des modifications"
     }
   },
   "projectsPage": {
-    "title": "Projects",
-    "subtitle": "Manage your tenant's projects",
-    "searchPlaceholder": "Search projects...",
-    "filterByStatus": "Filter by status",
-    "newProject": "New Project",
-    "emptyState": "No projects found. Create the first project to get started.",
-    "showing": "Showing {{count}} of {{total}} projects",
-    "updatedAt": "Updated at",
-    "viewDetails": "View details",
+    "title": "Projets",
+    "subtitle": "Gérer les projets de votre tenant",
+    "searchPlaceholder": "Rechercher des projets...",
+    "filterByStatus": "Filtrer par statut",
+    "newProject": "Nouveau Projet",
+    "emptyState": "Aucun projet trouvé. Créez le premier projet pour commencer.",
+    "showing": "Affichage de {{count}} sur {{total}} projets",
+    "updatedAt": "Mis à jour le",
+    "viewDetails": "Voir les détails",
     "status": {
-      "pending": "Pending",
-      "active": "Active",
-      "configuring": "Configuring",
-      "archived": "Archived"
+      "pending": "En attente",
+      "active": "Actif",
+      "configuring": "En configuration",
+      "archived": "Archivé"
     },
     "filters": {
-      "all": "All statuses"
+      "all": "Tous les statuts"
     },
     "stats": {
-      "members": "members",
-      "aiProviders": "AI providers"
+      "members": "membres",
+      "aiProviders": "fournisseurs IA"
     },
     "providers": {
       "github": "GitHub",
@@ -656,9 +656,9 @@
       "azure-devops": "Azure DevOps"
     },
     "multiModule": {
-      "none": "Single module",
-      "subfolder": "Monorepo (subfolders)",
-      "independent": "Independent repositories"
+      "none": "Module unique",
+      "subfolder": "Monorepo (sous-dossiers)",
+      "independent": "Dépôts indépendants"
     },
     "aiProviders": {
       "openai": "OpenAI",
@@ -668,104 +668,104 @@
       "aws-bedrock": "AWS Bedrock"
     },
     "actions": {
-      "menu": "Project actions"
+      "menu": "Actions du projet"
     },
     "deleteDialog": {
-      "title": "Delete project",
-      "subtitle": "This action cannot be undone",
-      "message": "Are you sure you want to delete the project \"{{name}}\"? All associated data will be permanently removed."
+      "title": "Supprimer le projet",
+      "subtitle": "Cette action est irréversible",
+      "message": "Êtes-vous sûr de vouloir supprimer le projet \"{{name}}\" ? Toutes les données associées seront définitivement supprimées."
     },
     "form": {
-      "createTitle": "New Project",
-      "createSubtitle": "Fill in the details to create a new project",
-      "backToList": "Back to projects",
-      "basicData": "Basic Information",
-      "name": "Project name",
-      "namePlaceholder": "E.g.: ACME Financial Portal",
-      "slug": "Identifier (slug)",
+      "createTitle": "Nouveau Projet",
+      "createSubtitle": "Remplissez les informations pour créer un nouveau projet",
+      "backToList": "Retour aux projets",
+      "basicData": "Informations de Base",
+      "name": "Nom du projet",
+      "namePlaceholder": "Ex. : Portail Financier ACME",
+      "slug": "Identifiant (slug)",
       "slugPlaceholder": "e.g.: acme-financial-portal",
-      "slugHelp": "Unique project identifier. Used in URLs and internal references.",
+      "slugHelp": "Identifiant unique du projet. Utilisé dans les URLs et références internes.",
       "description": "Description",
-      "descriptionPlaceholder": "Briefly describe the project's purpose...",
-      "createButton": "Create Project",
-      "teamSection": "Project Team",
-      "teamHelp": "Select tenant members and assign one or more roles to each. At least one member with the PO role is required.",
-      "addMember": "Add member",
-      "selectMember": "Select a member to add...",
-      "noMembers": "No members added. Select tenant members to compose the team.",
-      "memberRole": "Member roles",
-      "removeMember": "Remove member",
+      "descriptionPlaceholder": "Décrivez brièvement l'objectif du projet...",
+      "createButton": "Créer le Projet",
+      "teamSection": "Équipe du Projet",
+      "teamHelp": "Sélectionnez des membres du tenant et attribuez un ou plusieurs rôles à chacun.",
+      "addMember": "Ajouter un membre",
+      "selectMember": "Sélectionnez un membre à ajouter...",
+      "noMembers": "Aucun membre ajouté. Sélectionnez des membres du tenant.",
+      "memberRole": "Rôles du membre",
+      "removeMember": "Supprimer le membre",
       "repoSection": "Repository",
-      "repoProvider": "Provider",
-      "repoUseGlobal": "Use tenant global configuration",
-      "repoGlobalInfo": "Tenant global configuration active:",
-      "repoServerUrl": "Server URL",
+      "repoProvider": "Fournisseur",
+      "repoUseGlobal": "Utiliser la configuration globale du tenant",
+      "repoGlobalInfo": "Configuration globale du tenant active :",
+      "repoServerUrl": "URL du serveur",
       "repoServerUrlPlaceholder": "https://gitlab.company.com (for self-hosted)",
-      "repoAccessToken": "Access token",
-      "repoAccessTokenPlaceholder": "Repository access token",
-      "repoPath": "Repository path",
+      "repoAccessToken": "Jeton d'accès",
+      "repoAccessTokenPlaceholder": "Jeton d'accès au dépôt",
+      "repoPath": "Chemin du dépôt",
       "repoPathPlaceholder": "org/repo (e.g.: acme-corp/financial-portal)",
-      "multiModuleLabel": "Multi-module project?",
+      "multiModuleLabel": "Projet multi-module ?",
       "multiModuleHelp": {
-        "none": "The project has a single repository.",
-        "subfolder": "Monorepo — all modules in subfolders within the same repository.",
-        "independent": "Each module has its own repository. Individual configuration will be done in the Architecture section."
+        "none": "Le projet a un seul dépôt.",
+        "subfolder": "Monorepo — tous les modules dans des sous-dossiers du même dépôt.",
+        "independent": "Chaque module a son propre dépôt."
       },
       "repoIndependentInfo": "For projects with independent repositories per module, each repository will be configured individually in the Architecture section of the respective module.",
       "docSection": "Documentation",
-      "docTypeLabel": "Documentation type",
+      "docTypeLabel": "Type de documentation",
       "docTypes": {
-        "embedded": "Embedded in repository",
-        "independent": "Separate repository"
+        "embedded": "Intégrée au dépôt",
+        "independent": "Dépôt séparé"
       },
       "docRepoPath": "Documentation repository",
       "docRepoPathPlaceholder": "org/repo-docs (e.g.: acme-corp/portal-docs)",
-      "docSecurityWarning": "With embedded documentation, any developer with repository access can view and modify the documentation. If it contains sensitive information, use a separate repository.",
+      "docSecurityWarning": "Avec la documentation intégrée, tout développeur ayant accès au dépôt peut la consulter et la modifier.",
       "docEmbedDisabled": "Embedded documentation is not available for projects with independent repositories per module.",
-      "aiSection": "AI API Providers",
-      "aiHelp": "Configure the AI model providers used by the agent pipeline. You can select multiple providers.",
-      "aiAddProvider": "Add Provider",
-      "aiRemoveProvider": "Remove provider",
-      "aiNoProviders": "No AI providers configured. Add providers for the agent pipeline.",
+      "aiSection": "Fournisseurs d'IA",
+      "aiHelp": "Configurez les fournisseurs de modèles IA utilisés par le pipeline d'agents.",
+      "aiAddProvider": "Ajouter un Fournisseur",
+      "aiRemoveProvider": "Supprimer le fournisseur",
+      "aiNoProviders": "Aucun fournisseur IA configuré.",
       "aiProviderIndex": "Provider #{{index}}",
-      "aiProviderName": "Provider",
-      "aiDefaultModel": "Default model",
+      "aiProviderName": "Fournisseur",
+      "aiDefaultModel": "Modèle par défaut",
       "aiDefaultModelPlaceholder": "e.g.: gpt-4o, claude-sonnet-4",
       "aiApiKey": "API Key",
-      "aiApiKeyPlaceholder": "API access key",
+      "aiApiKeyPlaceholder": "Clé d'accès API",
       "aiEndpointUrl": "Endpoint URL",
       "aiEndpointUrlPlaceholder": "Only when needed (e.g.: Azure OpenAI)",
-      "aiRateTokens": "Token limit/min",
+      "aiRateTokens": "Limite tokens/min",
       "aiRateTokensPlaceholder": "Optional",
-      "aiRateRequests": "Request limit/day",
+      "aiRateRequests": "Limite requêtes/jour",
       "aiRateRequestsPlaceholder": "Optional",
-      "aiGlobalInfo": "Tenant globally configured providers:",
-      "aiCostWarning": "The deep-ion platform does not control AI provider budgets. Cost monitoring and control should be done directly on the provider's dashboard.",
+      "aiGlobalInfo": "Fournisseurs configurés globalement dans le tenant :",
+      "aiCostWarning": "La plateforme deep-ion ne contrôle pas les budgets des fournisseurs IA.",
       "archSection": "Architecture",
-      "archHelp": "Define the project modules and the architectural blueprint for each one.",
+      "archHelp": "Définissez les modules du projet et le blueprint pour chacun.",
       "archSingleHelp": "The project has a single module. Select the architectural blueprint.",
       "archMonorepoHelp": "Monorepo — provide the folder and blueprint for each module.",
       "archIndependentHelp": "Independent repositories — provide the blueprint and repository for each module.",
-      "archModuleName": "Module name",
+      "archModuleName": "Nom du module",
       "archModuleNamePlaceholder": "E.g.: Frontend Web",
-      "archBlueprint": "Architectural Blueprint",
-      "archSelectBlueprint": "Select a blueprint...",
-      "archFolderPath": "Repository folder",
+      "archBlueprint": "Blueprint Architectural",
+      "archSelectBlueprint": "Sélectionnez un blueprint...",
+      "archFolderPath": "Dossier du dépôt",
       "archFolderPathPlaceholder": "E.g.: frontend",
-      "archRepoPath": "Module repository",
+      "archRepoPath": "Dépôt du module",
       "archRepoPathPlaceholder": "org/repo (e.g.: acme-corp/frontend)",
-      "archAddModule": "Add Module",
-      "archRemoveModule": "Remove module",
+      "archAddModule": "Ajouter un Module",
+      "archRemoveModule": "Supprimer le module",
       "archModuleIndex": "Module #{{index}}",
-      "archNoModules": "No modules configured. Add modules to define the project architecture.",
+      "archNoModules": "Aucun module configuré.",
       "archSingleModuleLimit": "Single-module projects allow only one module.",
       "errors": {
-        "nameRequired": "Project name is required",
-        "slugRequired": "Identifier is required",
-        "slugInvalid": "Identifier must contain only lowercase letters, numbers and hyphens",
-        "descriptionRequired": "Description is required",
-        "poRequired": "The team must have at least one member with the Product Owner (PO) role",
-        "apiKeyRequired": "API Key is required",
+        "nameRequired": "Le nom du projet est obligatoire",
+        "slugRequired": "L'identifiant est obligatoire",
+        "slugInvalid": "Uniquement des lettres minuscules, chiffres et tirets",
+        "descriptionRequired": "La description est obligatoire",
+        "poRequired": "L'équipe doit avoir au moins un membre avec le rôle Product Owner (PO)",
+        "apiKeyRequired": "La clé API est obligatoire",
         "moduleBlueprintRequired": "Blueprint is required for each module",
         "moduleNameRequired": "Module name is required",
         "moduleFolderRequired": "Module folder is required in monorepo",
@@ -773,14 +773,14 @@
       }
     },
     "detail": {
-      "loading": "Loading project...",
+      "loading": "Chargement du projet...",
       "repository": {
         "title": "Repository",
-        "provider": "Provider",
-        "globalConfig": "Using tenant global configuration",
+        "provider": "Fournisseur",
+        "globalConfig": "Configuration globale du tenant utilisée",
         "serverUrl": "Server",
         "path": "Repository",
-        "notConfigured": "Repository not yet configured",
+        "notConfigured": "Dépôt non encore configuré",
         "multiModule": "Multi-module"
       },
       "documentation": {
@@ -791,8 +791,8 @@
       },
       "aiProviders": {
         "title": "AI Providers",
-        "count": "providers",
-        "empty": "No AI providers configured.",
+        "count": "fournisseurs",
+        "empty": "Aucun fournisseur IA configuré.",
         "model": "Model",
         "endpoint": "Endpoint",
         "costWarning": "AI provider cost control is the tenant's responsibility. Monitor usage directly on the provider's dashboard."
@@ -801,29 +801,29 @@
         "title": "Architecture",
         "modules": "modules",
         "blueprint": "Blueprint",
-        "folder": "Folder",
+        "folder": "Dossier",
         "repository": "Repository",
-        "empty": "No architecture modules configured."
+        "empty": "Aucun module d'architecture configuré."
       },
       "team": {
-        "title": "Team",
-        "members": "members",
+        "title": "Équipe",
+        "members": "membres",
         "roles": {
           "po": "Product Owner",
-          "architect": "Architect",
+          "architect": "Architecte",
           "tech-lead": "Tech Lead",
-          "developer": "Developer",
+          "developer": "Développeur",
           "qa": "QA",
           "devops": "DevOps",
-          "business-analyst": "Business Analyst"
+          "business-analyst": "Analyste Métier"
         }
       },
       "meta": {
-        "title": "Project Information",
+        "title": "Informations du Projet",
         "id": "ID",
         "slug": "Slug",
         "tenant": "Tenant",
-        "createdAt": "Created at"
+        "createdAt": "Créé le"
       }
     }
   },
@@ -1398,7 +1398,7 @@
       "tenantIdHelp": "Auto-generated (ULID). Propagated as tenant_id claim in the JWT.",
       "nome": "Organization name",
       "slug": "Slug",
-      "slugReadonly": "\uD83D\uDD12 The slug cannot be changed after creation.",
+      "slugReadonly": "🔒 The slug cannot be changed after creation.",
       "statusLabel": "Tenant status",
       "statusActive": "Active",
       "statusInactive": "Inactive",

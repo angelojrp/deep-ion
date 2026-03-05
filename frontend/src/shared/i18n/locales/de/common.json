@@ -1,0 +1,1439 @@
+{
+  "app": {
+    "name": "deep-ion",
+    "description": "KI-Agenten-Plattform für den Software-Entwicklungslebenszyklus"
+  },
+  "nav": {
+    "dashboard": "Übersicht",
+    "baDashboard": "Business Analyst",
+    "raDashboard": "Anforderungsanalyst",
+    "uxDashboard": "UX-Analyst",
+    "tenants": "Mandanten",
+    "projects": "Projekte",
+    "kickoff": "Projekt starten",
+    "blueprints": "Blaupausen",
+    "users": "Benutzer",
+    "agents": "KI-Agenten",
+    "pipelines": "Pipelines",
+    "settings": "Einstellungen",
+    "chatbot": "KI-Assistent",
+    "sidebar": "Seitennavigation",
+    "menu": "Menü"
+  },
+  "header": {
+    "toggleSidebar": "Seitenleiste ein-/ausblenden",
+    "toggleDarkMode": "Dunkelmodus umschalten",
+    "searchPlaceholder": "Suchen oder Befehl eingeben...",
+    "notifications": "Benachrichtigungen",
+    "newNotifications": "Neue Benachrichtigungen",
+    "userMenu": "Benutzermenü",
+    "profile": "Mein Profil",
+    "logout": "Abmelden",
+    "role": "Administrator",
+    "changeLanguage": "Sprache ändern",
+    "languages": {
+      "pt-BR": "Português (BR)",
+      "en": "English",
+      "de": "Deutsch",
+      "es": "Español",
+      "fr": "Français"
+    }
+  },
+  "pages": {
+    "dashboard": {
+      "title": "Übersicht",
+      "subtitle": "Plattformübersicht"
+    },
+    "tenants": {
+      "title": "Mandanten",
+      "subtitle": "Organisationsverwaltung"
+    },
+    "projects": {
+      "title": "Projekte",
+      "subtitle": "Projektverwaltung"
+    },
+    "settings": {
+      "title": "Einstellungen",
+      "subtitle": "Plattformeinstellungen"
+    },
+    "notFound": {
+      "title": "Seite nicht gefunden",
+      "description": "Die gesuchte Seite existiert nicht oder wurde entfernt.",
+      "backHome": "Zurück zur Startseite"
+    }
+  },
+  "common": {
+    "loading": "Laden...",
+    "error": "Ein Fehler ist aufgetreten",
+    "retry": "Erneut versuchen",
+    "save": "Speichern",
+    "cancel": "Abbrechen",
+    "delete": "Löschen",
+    "edit": "Bearbeiten",
+    "create": "Erstellen",
+    "search": "Suchen",
+    "filter": "Filtern",
+    "noResults": "Keine Ergebnisse gefunden",
+    "confirm": "Bestätigen",
+    "close": "Schließen"
+  },
+  "poDashboard": {
+    "pageTitle": "Product Owner Dashboard",
+    "pageSubtitle": "Marktansicht — Echtzeit-Wertefluss und Risiken",
+    "lastUpdated": "Zuletzt aktualisiert",
+    "kpi": {
+      "activeDemands": "Aktive Anforderungen",
+      "blocked": "Blockiert",
+      "flowEfficiency": "Flusseffizienz",
+      "leadTime": "Durchlaufzeit",
+      "predictability": "Vorhersagbarkeit",
+      "compliance": "Prüfung"
+    },
+    "pipeline": {
+      "title": "Wert-Pipeline",
+      "blocked": "{{count}} blockiert",
+      "more": "mehr",
+      "stages": {
+        "discovery": "Entdeckung",
+        "analysis": "Analyse",
+        "gate-1": "Gate 1",
+        "gate-2": "Gate 2",
+        "development": "Entwicklung",
+        "gate-3": "Gate 3",
+        "gate-4": "Gate 4",
+        "done": "Fertig"
+      }
+    },
+    "delivery": {
+      "title": "Liefergeschwindigkeit",
+      "cycleTime": "Zykluszeit nach Tier",
+      "target": "Zielwert",
+      "leadTime": "Durchlaufzeit",
+      "leadTimeBench": "Markt: 5–12T",
+      "flowEfficiency": "Flusseffizienz",
+      "aboveTarget": "Über Ziel (>40%)",
+      "belowTarget": "Unter Ziel (<40%)",
+      "predictability": "Vorhersagbarkeit",
+      "throughput": "Durchsatz",
+      "perWeek": "Anforderungen/Woche",
+      "throughputTrend": "Wöchentlicher Trend",
+      "started": "Gestartet",
+      "completed": "Abgeschlossen"
+    },
+    "backlog": {
+      "title": "Backlog-Gesundheit",
+      "active": "Aktiv",
+      "blocked": "Blockiert",
+      "tierDistribution": "Tier-Verteilung",
+      "wip": "In Arbeit",
+      "moscowDistribution": "MoSCoW-Verteilung",
+      "moscow": {
+        "must": "Muss",
+        "should": "Sollte",
+        "could": "Könnte",
+        "wont": "Wird nicht"
+      },
+      "ageByStage": "Durchschnittliches Alter nach Phase"
+    },
+    "quality": {
+      "title": "Geschäftsqualität",
+      "briefPassRate": "Briefs → Gate 2 ohne Blockierung",
+      "confidenceScore": "Konfidenz-Score (CAL)",
+      "gherkinComplete": "Vollständige Gherkin-Kriterien",
+      "traceability": "Rückverfolgbarkeitsabdeckung",
+      "reworkRate": "Nacharbeitsrate",
+      "target": "Ziel",
+      "openQuestions": "{{count}} offene Fragen (QA-NN) unbeantwortet"
+    },
+    "valueEffort": {
+      "title": "Wert vs. Aufwand (WSJF)",
+      "description": "Relative Position: Größe = Tier-Komplexität, Position = Wert × Aufwand",
+      "highValue": "↑ Hoher Wert",
+      "lowValue": "↓ Niedriger Wert",
+      "highEffort": "Hoher Aufwand →",
+      "lowEffort": "← Geringer Aufwand",
+      "quickWins": "Schnelle Erfolge",
+      "strategic": "Strategisch",
+      "fillIns": "Füller",
+      "avoid": "Vermeiden",
+      "blocked": "Blockiert"
+    },
+    "compliance": {
+      "title": "Compliance & Risiken",
+      "lgpdFlags": "Aktive LGPD-Kennzeichnungen",
+      "auditedRecords": "Geprüfte Entscheidungseinträge",
+      "rnViolations": "Unerkannte RN-Verstöße",
+      "t3Pending": "T3 Human Gate > 48h",
+      "archViolations": "Architekturverletzungen",
+      "businessRisks": "Geschäftsrisiken",
+      "probability": "Wahrschl.",
+      "status": {
+        "active": "Aktiv",
+        "mitigated": "Gemindert",
+        "monitoring": "Überwachung"
+      },
+      "dependencies": "Externe Abhängigkeiten"
+    },
+    "roadmap": {
+      "title": "Roadmap-Fortschritt",
+      "target": "Ziel",
+      "onTrack": "Im Plan",
+      "atRisk": "Gefährdet",
+      "weeksRemaining": "Verbleibende Wochen",
+      "avgThroughput": "Ø Durchsatz/Woche",
+      "businessDebt": "Geschäftsschulden"
+    }
+  },
+  "baDashboard": {
+    "pageTitle": "Business Analyst Dashboard",
+    "pageSubtitle": "USR-07 — Geschäftsartefakte, Entdeckung und Backlog-Gesundheit",
+    "lastUpdated": "Zuletzt aktualisiert",
+    "kpi": {
+      "totalBriefs": "Gesamt Briefs",
+      "briefsFinal": "Finale Briefs",
+      "inDiscovery": "In Entdeckung",
+      "stuckDemands": "Blockiert",
+      "pendingEscalations": "Eskalationen",
+      "backlogAge": "Backlog-Alter"
+    },
+    "alerts": {
+      "title": "Warnmeldungen"
+    },
+    "filters": {
+      "title": "Filter",
+      "toggle": "Filter ein-/ausblenden",
+      "project": "Projekt",
+      "tier": "Klassifizierung",
+      "briefStatus": "Brief-Status",
+      "allProjects": "Alle Projekte",
+      "allTiers": "Alle Klassifizierungen",
+      "allStatuses": "Alle Status"
+    },
+    "briefs": {
+      "title": "Briefs & Vision",
+      "distribution": "Brief-Verteilung",
+      "status": {
+        "draft": "Entwurf",
+        "final": "Final",
+        "refining": "In Überarbeitung"
+      },
+      "avgRefinementCycles": "Ø Überarbeitungszyklen",
+      "avgDaysInDraft": "Ø Tage im ENTWURF",
+      "openQuestions": "Briefs mit offenen Fragen",
+      "completeness": "Vollständigkeit",
+      "cycles": "Zyklen",
+      "rejected": "Gate 2 Abgelehnt",
+      "pendingVisionDocs": "Ausstehende Vision-Dokumente"
+    },
+    "pipeline": {
+      "title": "Entdeckungs-Pipeline",
+      "stuckAlert": "{{count}} Anforderung(en) blockiert > 5 Arbeitstage",
+      "avgTimeByPhase": "Durchschnittliche Zeit nach Phase",
+      "throughput": "Entdeckungs-Durchsatz",
+      "entered": "Eingetreten",
+      "exited": "Ausgetreten"
+    },
+    "quality": {
+      "title": "Artefakt-Qualität",
+      "avgCompleteness": "Durchschnittliche Brief-Vollständigkeit",
+      "reworkRate": "Nacharbeitsrate",
+      "target": "Ziel",
+      "gate2Rejected": "Gate 2 Abgelehnt",
+      "lastAudit": "DOM-05a Prüfergebnisse",
+      "completenessLabel": "Vollständigkeit",
+      "consistencyLabel": "Konsistenz"
+    },
+    "impact": {
+      "title": "Auswirkungsklassifizierung (T0–T3)",
+      "distribution": "Verteilung nach Klassifizierung",
+      "trend": "Trend im Zeitverlauf",
+      "month": "Monat",
+      "activeT3": "Aktive T3-Anforderungen"
+    },
+    "escalations": {
+      "title": "Eskalationen & Konfidenz-Score",
+      "pending": "Ausstehend",
+      "resolved": "Gelöst",
+      "avgTime": "Ø Zeit",
+      "lowConfidence": "Konfidenz < 0.65",
+      "byProject": "Eskalationen nach Projekt"
+    },
+    "backlog": {
+      "title": "Backlog-Gesundheit",
+      "avgAge": "Durchschnittliches Alter",
+      "stale": "Keine Bewegung",
+      "staleDemands": "Anforderungen ohne Bewegung > 2 Sprints",
+      "duplicates": "Duplikate erkannt",
+      "duplicateOf": "Duplikat von",
+      "inactiveStakeholders": "Inaktive Stakeholder"
+    },
+    "quickActions": {
+      "title": "Schnellaktionen",
+      "newBrief": "Neuen Brief erstellen",
+      "refineBrief": "ENTWURF-Brief verfeinern",
+      "createVision": "Projektvision erstellen",
+      "viewQuestions": "Offene Fragen anzeigen",
+      "escalate": "Anforderung eskalieren"
+    }
+  },
+  "raDashboard": {
+    "pageTitle": "Anforderungsanalyst Dashboard",
+    "pageSubtitle": "USR-08 — Rückverfolgbarkeit, Spezifikationsqualität und Anforderungsschulden",
+    "lastUpdated": "Zuletzt aktualisiert",
+    "kpi": {
+      "totalUCs": "Anwendungsfälle",
+      "totalRNs": "Geschäftsregeln",
+      "traceability": "Rückverfolgbarkeit",
+      "investScore": "INVEST-Score",
+      "gate2Approval": "Gate 2",
+      "debtIndex": "Schulden"
+    },
+    "alerts": {
+      "title": "Warnmeldungen"
+    },
+    "filters": {
+      "title": "Filter",
+      "toggle": "Filter ein-/ausblenden",
+      "project": "Projekt",
+      "module": "Modul",
+      "ucStatus": "AF-Status",
+      "allProjects": "Alle Projekte",
+      "allModules": "Alle Module",
+      "allStatuses": "Alle Status"
+    },
+    "useCases": {
+      "title": "Anwendungsfälle",
+      "distribution": "AF-Verteilung nach Status",
+      "status": {
+        "draft": "Entwurf",
+        "validated": "Validiert",
+        "implemented": "Implementiert",
+        "archived": "Archiviert"
+      },
+      "avgModelingDays": "Ø Modellierungszeit",
+      "modules": "Module",
+      "byModule": "AFs nach Modul",
+      "withoutRN": "{{count}} AFs ohne Geschäftsregel",
+      "withoutGherkin": "AFs ohne Gherkin-Kriterien",
+      "recentlyModified": "Kürzlich geändert"
+    },
+    "businessRules": {
+      "title": "Geschäftsregeln",
+      "total": "Gesamt",
+      "status": {
+        "active": "Aktiv",
+        "deprecated": "Veraltet",
+        "inReview": "In Überprüfung"
+      },
+      "byModule": "GRs nach Modul",
+      "withoutFE": "{{count}} GRs ohne Ausnahmefluss",
+      "orphaned": "{{count}} verwaiste GRs (kein AF)",
+      "contradictions": "{{count}} Widerspruch/Widersprüche"
+    },
+    "traceability": {
+      "title": "Rückverfolgbarkeit",
+      "coverage": "Rückverfolgbarkeitsabdeckung",
+      "brokenLinks": "Defekte Links",
+      "brokenLinksTitle": "Defekte Rückverfolgbarkeitslinks",
+      "byModule": "Abdeckung nach Modul",
+      "matrix": "Rückverfolgbarkeitsmatrix",
+      "uc": "AF",
+      "rn": "GR",
+      "criteria": "Kriterien",
+      "code": "Code",
+      "statusLabel": "Status"
+    },
+    "specQuality": {
+      "title": "Spezifikationsqualität",
+      "investScore": "INVEST",
+      "refined": "Verfeinert",
+      "belowThreshold": "Score < 7",
+      "refinementProgress": "Verfeinerungsfortschritt",
+      "gherkinCoverage": "Gherkin-Abdeckung nach Modul",
+      "storiesBelowTitle": "Stories unter Schwellenwert",
+      "vagueCriteria": "Unklare Akzeptanzkriterien"
+    },
+    "audit": {
+      "title": "DOM-05a Prüfung",
+      "gate2Approval": "Gate 2 Genehmigungsrate",
+      "lastResult": "Letztes Prüfergebnis",
+      "completeness": "Vollständigkeit",
+      "consistency": "Konsistenz",
+      "complianceTrend": "Compliance-Trend",
+      "failedItems": "{{count}} fehlgeschlagenes/fehlgeschlagene Element(e)"
+    },
+    "conflicts": {
+      "title": "Konflikte & Duplikate",
+      "conflictCount": "{{count}} Anforderungskonflikt(e)",
+      "duplicateCount": "{{count}} Duplikat(e) erkannt",
+      "duplicateOf": "Duplikat von"
+    },
+    "changeImpact": {
+      "title": "Änderungsauswirkung",
+      "unreviewed": "{{count}} nicht überprüft",
+      "reviewed": "Überprüft",
+      "notReviewed": "Nicht überprüft",
+      "screens": "Bildschirme"
+    },
+    "debt": {
+      "title": "Anforderungsschulden",
+      "debtIndex": "Index",
+      "toDetail": "Zu detaillieren",
+      "placeholders": "Platzhalter",
+      "toDetailTitle": "Zu detaillierende Anforderungen",
+      "placeholderRules": "GRs mit Platzhaltertext",
+      "incompleteOverDays": "Unvollständig > 7 Tage"
+    },
+    "quickActions": {
+      "title": "Schnellaktionen",
+      "newUC": "Neuen AF erstellen",
+      "updateUC": "AF aktualisieren",
+      "critiqueStories": "Stories kritisieren",
+      "refineStories": "Stories verfeinern",
+      "sliceEpic": "Epic aufteilen",
+      "viewTraceability": "Rückverfolgbarkeit anzeigen",
+      "analyzeImpact": "Auswirkung analysieren"
+    }
+  },
+  "uxDashboard": {
+    "pageTitle": "UX-Analyst Dashboard",
+    "pageSubtitle": "Prototypen, Barrierefreiheit und Designkonsistenz",
+    "lastUpdated": "Aktualisiert um",
+    "alerts": {
+      "title": "Warnmeldungen"
+    },
+    "filters": {
+      "title": "Filter",
+      "toggle": "Filter umschalten",
+      "project": "Projekt",
+      "allProjects": "Alle Projekte",
+      "status": "Prototyp-Status",
+      "allStatuses": "Alle Status",
+      "platform": "Plattform",
+      "allPlatforms": "Alle Plattformen",
+      "accessibility": "Barrierefreiheit",
+      "allA11y": "Alle Scores",
+      "aboveThreshold": "Über WCAG-Schwellenwert",
+      "belowThreshold": "Unter WCAG-Schwellenwert"
+    },
+    "kpi": {
+      "totalPrototypes": "Gesamt Prototypen",
+      "pendingGateUx": "Ausstehend Gate UX",
+      "ucCoverage": "AF-Abdeckung",
+      "wcagScore": "WCAG-Score",
+      "a11yViolations": "A11Y-Verstöße",
+      "firstApprovalRate": "1. Prüfgenehmigung"
+    },
+    "prototypes": {
+      "title": "Prototypen",
+      "distribution": "Prototyp-Verteilung nach Status",
+      "throughput": "Wöchentlicher Durchsatz",
+      "status": {
+        "draft": "Entwurf",
+        "final": "Final",
+        "approved": "Genehmigt",
+        "rejected": "Abgelehnt"
+      }
+    },
+    "gateUx": {
+      "title": "Gate UX",
+      "pending": "Ausstehend",
+      "avgTime": "Ø Zeit",
+      "firstApproval": "1. Genehmigung",
+      "openQuestions": "Offene Fragen",
+      "avgResolution": "Ø Lösungszeit"
+    },
+    "coverage": {
+      "title": "Bildschirmabdeckung",
+      "ucCoverage": "AFs mit Prototyp",
+      "withPrototype": "Mit Prototyp",
+      "withoutPrototype": "Ohne Prototyp",
+      "screenProgress": "Generierte Bildschirme",
+      "withoutMobile": "{{count}} Bildschirm(e) ohne mobile Version",
+      "breakpoints": "Haltepunkte",
+      "prototype": "Prototyp"
+    },
+    "consistency": {
+      "title": "Designkonsistenz",
+      "reuseRate": "Wiederverwendungsrate",
+      "colorPalette": "Farbpalette",
+      "typography": "Typografie",
+      "icons": "Standardisierte Icons",
+      "navInconsistencies": "{{count}} Navigationsinkonsi­stenz(en)",
+      "deviations": "Design-System-Abweichungen"
+    },
+    "accessibility": {
+      "title": "Barrierefreiheit",
+      "wcagScore": "WCAG AA",
+      "keyboardNav": "Tastaturnavigation",
+      "ariaLandmarks": "ARIA-Orientierungspunkte",
+      "withoutCheck": "{{count}} Bildschirm(e) ohne A11Y-Prüfung",
+      "violations": "Verstöße"
+    },
+    "usability": {
+      "title": "Benutzerfreundlichkeit",
+      "heuristicScore": "Nielsen-Score",
+      "clickDepth": "Klicktiefe",
+      "feedbackCoverage": "Feedback abgedeckt",
+      "statesCoverage": "Zustandsabdeckung",
+      "emptyState": "Leerer Zustand",
+      "errorState": "Fehlerzustand",
+      "loadingState": "Ladezustand",
+      "deadEnds": "Sackgassen",
+      "noDeadEnds": "Keine Sackgassen erkannt"
+    },
+    "feedbackLoop": {
+      "title": "Feedback-Zyklus",
+      "draftToFinal": "Entwurf → Final",
+      "roundTrips": "Hin- und Rückfahrten",
+      "firstApproval": "1. Genehmigung",
+      "aiQuality": "KI-Qualität",
+      "rejectionPatterns": "Ablehnungsmuster"
+    },
+    "designDebt": {
+      "title": "Design-Schulden",
+      "debtIndex": "Schulden-Index",
+      "screensWithTags": "Bildschirme mit Tags",
+      "approvedWithCaveats": "Genehmigt mit Vorbehalten",
+      "backlog": "Verbesserungs-Backlog"
+    },
+    "pendingPrototypes": {
+      "title": "Prototypen mit ausstehenden Aktionen",
+      "prototype": "Prototyp",
+      "uc": "AF",
+      "status": "Status",
+      "cycle": "Zyklus",
+      "platform": "Plattform",
+      "action": "Aktion",
+      "review": "Überprüfen",
+      "approve": "Genehmigen",
+      "escalate": "Eskalieren",
+      "viewFeedback": "Feedback anzeigen",
+      "lastCycle": "Letzter Überarbeitungszyklus"
+    },
+    "quickActions": {
+      "title": "Schnellaktionen",
+      "approve": "Prototyp genehmigen",
+      "reject": "Prototyp ablehnen",
+      "refine": "Prototyp verfeinern",
+      "generate": "Neuen Prototyp generieren",
+      "compare": "Versionen vergleichen",
+      "checkA11y": "Barrierefreiheit prüfen",
+      "viewMapping": "AF → Bildschirm anzeigen"
+    }
+  },
+  "chatbot": {
+    "fab": {
+      "open": "KI-Assistent öffnen",
+      "close": "KI-Assistent schließen"
+    },
+    "widget": {
+      "title": "deep-ion Assistent",
+      "subtitle": "KI für Projektmanagement",
+      "welcomeTitle": "Wie kann ich helfen?",
+      "welcomeMessage": "Fragen Sie nach Metriken, Pipelines, Anforderungsstatus, KI-Agenten oder Plattforminformationen. Sie können tippen oder Sprachbefehle verwenden.",
+      "newConversation": "Neues Gespräch",
+      "openFullPage": "Vollseite öffnen"
+    },
+    "input": {
+      "placeholder": "Nachricht eingeben...",
+      "send": "Nachricht senden",
+      "startRecording": "Sprachaufnahme starten",
+      "stopRecording": "Sprachaufnahme stoppen",
+      "listening": "Zuhören..."
+    },
+    "message": {
+      "userLabel": "Benutzernachricht",
+      "assistantLabel": "Assistentennachricht",
+      "voiceInput": "Spracheingabe"
+    },
+    "page": {
+      "title": "KI-Assistent",
+      "subtitle": "Mit KI chatten und Gesprächsverlauf durchsuchen",
+      "conversationList": "Gesprächsliste",
+      "searchPlaceholder": "Gespräche suchen...",
+      "newConversation": "Neues Gespräch",
+      "backToList": "Zurück zu Gesprächen",
+      "archived": "Archiviert",
+      "messages": "Nachr.",
+      "suggestion1": "Welche Anforderungen sind blockiert?",
+      "suggestion2": "Wie ist die Sprint-Geschwindigkeit?",
+      "suggestion3": "Status der KI-Agenten",
+      "voiceHint": "Sie können auch Sprachbefehle verwenden"
+    }
+  },
+  "blueprintsPage": {
+    "title": "Blaupausen-Verwaltung",
+    "subtitle": "Architektonische Blaupausen erstellen, klonen, bearbeiten und versionieren",
+    "list": {
+      "title": "Registrierte Blaupausen",
+      "newBlueprint": "Neu",
+      "selectBlueprint": "Blaupause {{name}} auswählen",
+      "cloneBlueprint": "Klonen"
+    },
+    "categories": {
+      "backend": "Backend",
+      "frontend": "Frontend",
+      "batch": "Batch",
+      "fullstack": "Fullstack"
+    },
+    "form": {
+      "createTitle": "Blaupause erstellen",
+      "editTitle": "Blaupause bearbeiten",
+      "subtitle": "Pflichtfelder: Name, Beschreibung und Kategorie.",
+      "cloneFromLabel": "Von vorhandener Blaupause klonen (optional)",
+      "cloneFromPlaceholder": "Blaupause als Basis auswählen",
+      "name": "Name",
+      "namePlaceholder": "Z.B.: Frontend React SPA",
+      "description": "Beschreibung",
+      "descriptionPlaceholder": "Beschreiben Sie Ziele und Standards dieser Blaupause...",
+      "category": "Kategorie",
+      "creationType": "Erstellungs-/Bearbeitungsmethode",
+      "modeManual": "Manuell",
+      "modeAssisted": "KI-unterstützt",
+      "editModeInfo": "Im Bearbeitungsmodus können Sie frei zwischen manueller und KI-unterstützter Methode wechseln, unabhängig davon, wie die Blaupause ursprünglich erstellt wurde.",
+      "manualEditor": "Manueller YAML-Editor",
+      "uploadYaml": "Datei hochladen",
+      "assistantChatTitle": "Unterstützter Erstellungs-Chatbot",
+      "publishNewVersion": "Beim Speichern neue Version veröffentlichen",
+      "errors": {
+        "nameRequired": "Name ist erforderlich",
+        "descriptionRequired": "Beschreibung ist erforderlich",
+        "categoryRequired": "Kategorie ist erforderlich"
+      }
+    },
+    "assistant": {
+      "welcome": "Hallo! Ich helfe Ihnen beim Aufbau Ihrer Blaupause. Beginnen Sie mit der Beschreibung Ihrer Zielarchitektur.",
+      "editWelcome": "Sie befinden sich im unterstützten Bearbeitungsmodus. Ich kann Aktualisierungen für die nächste Version vorschlagen.",
+      "placeholder": "Blaupause beschreiben oder Agenten um Anleitung bitten...",
+      "send": "Senden",
+      "helpCategory": "Empfehlung: Wählen Sie die Kategorie basierend auf dem Hauptfokus der Blaupause (backend, frontend, batch oder fullstack).",
+      "helpVersioning": "Best Practice: Veröffentlichen Sie eine neue Version für strukturelle Änderungen und halten Sie genutzte Versionen aktiv, bis Projekte manuell migriert werden.",
+      "defaultReply": "Verstanden. Ich kann dies in YAML-Struktur umwandeln und Qualitätskriterien für die Blaupause vorschlagen."
+    },
+    "linkedProjects": {
+      "title": "Mit Projekten verknüpfte Blaupause",
+      "description": "Diese Blaupause wird bereits verwendet. Alle genutzten Versionen müssen aktiv bleiben. Jedes Projekt muss manuell von einem Architekten aktualisiert werden, um eine neue Blaupausenversion zu übernehmen."
+    },
+    "versions": {
+      "title": "Versionen",
+      "status": {
+        "active": "aktiv",
+        "in-use": "in Verwendung",
+        "superseded": "abgelöst"
+      }
+    },
+    "history": {
+      "title": "Änderungshistorie"
+    }
+  },
+  "projectsPage": {
+    "title": "Projekte",
+    "subtitle": "Projekte Ihres Mandanten verwalten",
+    "searchPlaceholder": "Projekte suchen...",
+    "filterByStatus": "Nach Status filtern",
+    "newProject": "Neues Projekt",
+    "emptyState": "Keine Projekte gefunden. Erstellen Sie das erste Projekt, um loszulegen.",
+    "showing": "{{count}} von {{total}} Projekten angezeigt",
+    "updatedAt": "Aktualisiert am",
+    "viewDetails": "Details anzeigen",
+    "status": {
+      "pending": "Ausstehend",
+      "active": "Aktiv",
+      "configuring": "Wird konfiguriert",
+      "archived": "Archiviert"
+    },
+    "filters": {
+      "all": "Alle Status"
+    },
+    "stats": {
+      "members": "Mitglieder",
+      "aiProviders": "KI-Anbieter"
+    },
+    "providers": {
+      "github": "GitHub",
+      "gitlab": "GitLab",
+      "bitbucket": "Bitbucket",
+      "azure-devops": "Azure DevOps"
+    },
+    "multiModule": {
+      "none": "Einzelmodul",
+      "subfolder": "Monorepo (Unterordner)",
+      "independent": "Unabhängige Repositories"
+    },
+    "aiProviders": {
+      "openai": "OpenAI",
+      "anthropic": "Anthropic",
+      "google-ai": "Google AI",
+      "azure-openai": "Azure OpenAI",
+      "aws-bedrock": "AWS Bedrock"
+    },
+    "actions": {
+      "menu": "Projektaktionen"
+    },
+    "deleteDialog": {
+      "title": "Projekt löschen",
+      "subtitle": "Diese Aktion kann nicht rückgängig gemacht werden",
+      "message": "Möchten Sie das Projekt \"{{name}}\" wirklich löschen? Alle zugehörigen Daten werden dauerhaft entfernt."
+    },
+    "form": {
+      "createTitle": "Neues Projekt",
+      "createSubtitle": "Füllen Sie die Details aus, um ein neues Projekt zu erstellen",
+      "backToList": "Zurück zu Projekten",
+      "basicData": "Grundlegende Informationen",
+      "name": "Projektname",
+      "namePlaceholder": "Z.B.: ACME Finanzportal",
+      "slug": "Bezeichner (Slug)",
+      "slugPlaceholder": "z.B.: acme-finanzportal",
+      "slugHelp": "Eindeutiger Projektbezeichner. Wird in URLs und internen Referenzen verwendet.",
+      "description": "Beschreibung",
+      "descriptionPlaceholder": "Beschreiben Sie kurz den Zweck des Projekts...",
+      "createButton": "Projekt erstellen",
+      "teamSection": "Projektteam",
+      "teamHelp": "Mandantenmitglieder auswählen und jedem eine oder mehrere Rollen zuweisen. Mindestens ein Mitglied mit der PO-Rolle ist erforderlich.",
+      "addMember": "Mitglied hinzufügen",
+      "selectMember": "Mitglied zum Hinzufügen auswählen...",
+      "noMembers": "Keine Mitglieder hinzugefügt. Wählen Sie Mandantenmitglieder aus, um das Team zusammenzustellen.",
+      "memberRole": "Mitgliederrollen",
+      "removeMember": "Mitglied entfernen",
+      "repoSection": "Repository",
+      "repoProvider": "Anbieter",
+      "repoUseGlobal": "Globale Mandantenkonfiguration verwenden",
+      "repoGlobalInfo": "Globale Mandantenkonfiguration aktiv:",
+      "repoServerUrl": "Server-URL",
+      "repoServerUrlPlaceholder": "https://gitlab.company.com (für selbst gehostete)",
+      "repoAccessToken": "Zugriffstoken",
+      "repoAccessTokenPlaceholder": "Repository-Zugriffstoken",
+      "repoPath": "Repository-Pfad",
+      "repoPathPlaceholder": "org/repo (z.B.: acme-corp/finanzportal)",
+      "multiModuleLabel": "Mehrmoduligkes Projekt?",
+      "multiModuleHelp": {
+        "none": "Das Projekt hat ein einzelnes Repository.",
+        "subfolder": "Monorepo — alle Module in Unterordnern innerhalb desselben Repositories.",
+        "independent": "Jedes Modul hat sein eigenes Repository. Die individuelle Konfiguration erfolgt im Architekturbereich."
+      },
+      "repoIndependentInfo": "Bei Projekten mit unabhängigen Repositories pro Modul wird jedes Repository individuell im Architekturbereich des jeweiligen Moduls konfiguriert.",
+      "docSection": "Dokumentation",
+      "docTypeLabel": "Dokumentationstyp",
+      "docTypes": {
+        "embedded": "Im Repository eingebettet",
+        "independent": "Separates Repository"
+      },
+      "docRepoPath": "Dokumentations-Repository",
+      "docRepoPathPlaceholder": "org/repo-docs (z.B.: acme-corp/portal-docs)",
+      "docSecurityWarning": "Bei eingebetteter Dokumentation kann jeder Entwickler mit Repository-Zugriff die Dokumentation einsehen und ändern. Bei sensiblen Informationen verwenden Sie ein separates Repository.",
+      "docEmbedDisabled": "Eingebettete Dokumentation ist für Projekte mit unabhängigen Repositories pro Modul nicht verfügbar.",
+      "aiSection": "KI-API-Anbieter",
+      "aiHelp": "Konfigurieren Sie die KI-Modellanbieter, die von der Agenten-Pipeline verwendet werden. Sie können mehrere Anbieter auswählen.",
+      "aiAddProvider": "Anbieter hinzufügen",
+      "aiRemoveProvider": "Anbieter entfernen",
+      "aiNoProviders": "Keine KI-Anbieter konfiguriert. Fügen Sie Anbieter für die Agenten-Pipeline hinzu.",
+      "aiProviderIndex": "Anbieter #{{index}}",
+      "aiProviderName": "Anbieter",
+      "aiDefaultModel": "Standardmodell",
+      "aiDefaultModelPlaceholder": "z.B.: gpt-4o, claude-sonnet-4",
+      "aiApiKey": "API-Schlüssel",
+      "aiApiKeyPlaceholder": "API-Zugriffsschlüssel",
+      "aiEndpointUrl": "Endpunkt-URL",
+      "aiEndpointUrlPlaceholder": "Nur bei Bedarf (z.B.: Azure OpenAI)",
+      "aiRateTokens": "Token-Limit/Min",
+      "aiRateTokensPlaceholder": "Optional",
+      "aiRateRequests": "Anfragenlimit/Tag",
+      "aiRateRequestsPlaceholder": "Optional",
+      "aiGlobalInfo": "Global konfigurierte Anbieter des Mandanten:",
+      "aiCostWarning": "Die deep-ion-Plattform kontrolliert keine KI-Anbieterbudgets. Kostenüberwachung und -kontrolle sollten direkt im Dashboard des Anbieters erfolgen.",
+      "archSection": "Architektur",
+      "archHelp": "Definieren Sie die Projektmodule und die architektonische Blaupause für jedes.",
+      "archSingleHelp": "Das Projekt hat ein einzelnes Modul. Wählen Sie die architektonische Blaupause.",
+      "archMonorepoHelp": "Monorepo — geben Sie den Ordner und die Blaupause für jedes Modul an.",
+      "archIndependentHelp": "Unabhängige Repositories — geben Sie die Blaupause und das Repository für jedes Modul an.",
+      "archModuleName": "Modulname",
+      "archModuleNamePlaceholder": "Z.B.: Frontend Web",
+      "archBlueprint": "Architektonische Blaupause",
+      "archSelectBlueprint": "Blaupause auswählen...",
+      "archFolderPath": "Repository-Ordner",
+      "archFolderPathPlaceholder": "Z.B.: frontend",
+      "archRepoPath": "Modul-Repository",
+      "archRepoPathPlaceholder": "org/repo (z.B.: acme-corp/frontend)",
+      "archAddModule": "Modul hinzufügen",
+      "archRemoveModule": "Modul entfernen",
+      "archModuleIndex": "Modul #{{index}}",
+      "archNoModules": "Keine Module konfiguriert. Fügen Sie Module hinzu, um die Projektarchitektur zu definieren.",
+      "archSingleModuleLimit": "Einzelmodul-Projekte erlauben nur ein Modul.",
+      "errors": {
+        "nameRequired": "Projektname ist erforderlich",
+        "slugRequired": "Bezeichner ist erforderlich",
+        "slugInvalid": "Bezeichner darf nur Kleinbuchstaben, Zahlen und Bindestriche enthalten",
+        "descriptionRequired": "Beschreibung ist erforderlich",
+        "poRequired": "Das Team muss mindestens ein Mitglied mit der Product Owner (PO)-Rolle haben",
+        "apiKeyRequired": "API-Schlüssel ist erforderlich",
+        "moduleBlueprintRequired": "Blaupause ist für jedes Modul erforderlich",
+        "moduleNameRequired": "Modulname ist erforderlich",
+        "moduleFolderRequired": "Modulordner ist im Monorepo erforderlich",
+        "moduleRepoRequired": "Modul-Repository ist erforderlich"
+      }
+    },
+    "detail": {
+      "loading": "Projekt wird geladen...",
+      "repository": {
+        "title": "Repository",
+        "provider": "Anbieter",
+        "globalConfig": "Globale Mandantenkonfiguration wird verwendet",
+        "serverUrl": "Server",
+        "path": "Repository",
+        "notConfigured": "Repository noch nicht konfiguriert",
+        "multiModule": "Mehrmodulig"
+      },
+      "documentation": {
+        "title": "Dokumentation",
+        "type": "Typ",
+        "repo": "Repository",
+        "securityWarning": "Eingebettete Dokumentation — jeder Repository-Mitarbeiter kann zugreifen und ändern."
+      },
+      "aiProviders": {
+        "title": "KI-Anbieter",
+        "count": "Anbieter",
+        "empty": "Keine KI-Anbieter konfiguriert.",
+        "model": "Modell",
+        "endpoint": "Endpunkt",
+        "costWarning": "Die Kostenkontrolle von KI-Anbietern liegt in der Verantwortung des Mandanten. Überwachen Sie die Nutzung direkt im Dashboard des Anbieters."
+      },
+      "architecture": {
+        "title": "Architektur",
+        "modules": "Module",
+        "blueprint": "Blaupause",
+        "folder": "Ordner",
+        "repository": "Repository",
+        "empty": "Keine Architekturmodule konfiguriert."
+      },
+      "team": {
+        "title": "Team",
+        "members": "Mitglieder",
+        "roles": {
+          "po": "Product Owner",
+          "architect": "Architekt",
+          "tech-lead": "Tech Lead",
+          "developer": "Entwickler",
+          "qa": "QA",
+          "devops": "DevOps",
+          "business-analyst": "Business Analyst"
+        }
+      },
+      "meta": {
+        "title": "Projektinformationen",
+        "id": "ID",
+        "slug": "Slug",
+        "tenant": "Mandant",
+        "createdAt": "Erstellt am"
+      }
+    }
+  },
+  "usersPage": {
+    "title": "Benutzer",
+    "subtitle": "Benutzerregistrierung und -verwaltung",
+    "searchPlaceholder": "Nach Name oder E-Mail suchen...",
+    "newUser": "Neuer Benutzer",
+    "emptyState": "Keine Benutzer registriert. Fügen Sie den ersten Benutzer hinzu, um loszulegen.",
+    "showing": "{{count}} von {{total}} Benutzern angezeigt",
+    "resendInvite": "Einladung erneut senden",
+    "resendSuccess": "Einladung erneut an {{email}} gesendet",
+    "table": {
+      "user": "Benutzer",
+      "roles": "Rollen",
+      "status": "Status",
+      "invite": "Einladung",
+      "actions": "Aktionen"
+    },
+    "status": {
+      "active": "Aktiv",
+      "inactive": "Inaktiv",
+      "pending": "Ausstehend"
+    },
+    "inviteStatus": {
+      "pending": "Ausstehend",
+      "accepted": "Akzeptiert",
+      "expired": "Abgelaufen"
+    },
+    "roles": {
+      "admin": "Administrator",
+      "po": "Product Owner",
+      "architect": "Architekt",
+      "tech-lead": "Tech Lead",
+      "developer": "Entwickler",
+      "qa": "QA",
+      "devops": "DevOps",
+      "business-analyst": "Business Analyst",
+      "requirements-analyst": "Anforderungsanalyst",
+      "ux-analyst": "UX-Analyst"
+    },
+    "form": {
+      "createTitle": "Benutzer registrieren",
+      "createSubtitle": "Füllen Sie die Details aus und senden Sie die E-Mail-Einladung",
+      "name": "Vollständiger Name",
+      "namePlaceholder": "Z.B.: Max Mustermann",
+      "email": "E-Mail",
+      "emailPlaceholder": "Z.B.: max.mustermann@firma.de",
+      "roles": "Rollen",
+      "rolesHelp": "Wählen Sie eine oder mehrere Rollen aus, die der Benutzer auf der Plattform übernehmen kann",
+      "inviteInfo": "Eine E-Mail mit einem Einladungslink wird an den Benutzer gesendet. Der Link ist 7 Tage gültig. Der Benutzer kann sein Profil nach Annahme der Einladung vervollständigen.",
+      "sendInvite": "Einladung senden",
+      "inviteSent": "Einladung erfolgreich gesendet!",
+      "successMessage": "Eine E-Mail mit einem Zugriffslink wurde an {{email}} gesendet. Der Benutzer kann sein Profil nach Annahme der Einladung vervollständigen.",
+      "errors": {
+        "nameRequired": "Name ist erforderlich",
+        "emailRequired": "E-Mail ist erforderlich",
+        "emailInvalid": "Ungültige E-Mail-Adresse",
+        "rolesRequired": "Wählen Sie mindestens eine Rolle aus",
+        "submitFailed": "Benutzerregistrierung fehlgeschlagen. Bitte erneut versuchen."
+      }
+    },
+    "deleteDialog": {
+      "title": "Benutzer löschen",
+      "message": "Möchten Sie den Benutzer \"{{name}}\" wirklich löschen? Diese Aktion kann nicht rückgängig gemacht werden."
+    }
+  },
+  "profilePage": {
+    "title": "Mein Profil",
+    "subtitle": "Ihre beruflichen Informationen vervollständigen und aktualisieren",
+    "saveSuccess": "Profil erfolgreich aktualisiert!",
+    "changePhoto": "Foto ändern",
+    "sections": {
+      "basicInfo": "Grundlegende Informationen",
+      "locationAvailability": "Ort & Verfügbarkeit",
+      "phones": "Telefonnummern",
+      "languages": "Sprachen",
+      "skills": "Fähigkeiten",
+      "certifications": "Zertifizierungen",
+      "experience": "Berufserfahrung",
+      "education": "Ausbildung",
+      "socialLinks": "Links & Soziale Netzwerke"
+    },
+    "fields": {
+      "name": "Name",
+      "email": "E-Mail",
+      "bio": "Über mich",
+      "bioPlaceholder": "Beschreiben Sie kurz Ihre Erfahrung und Fachgebiete...",
+      "bioHint": "Maximal 500 Zeichen",
+      "location": "Ort",
+      "locationPlaceholder": "Z.B.: Berlin, Deutschland",
+      "timezone": "Zeitzone",
+      "selectTimezone": "Zeitzone auswählen",
+      "availability": "Stunden/Woche",
+      "availabilityHint": "Wöchentliche Verfügbarkeit in Stunden",
+      "phoneType": "Typ",
+      "phoneNumber": "Nummer",
+      "primary": "Primär",
+      "languagesPlaceholder": "Sprache eingeben und Enter drücken...",
+      "languageName": "Sprache",
+      "languageNamePlaceholder": "Z.B.: Deutsch",
+      "languageProficiency": "Kenntnisstand",
+      "selectProficiency": "Niveau auswählen",
+      "languageCertifications": "Zertifizierungen",
+      "languageCertificationsPlaceholder": "Zertifizierung eingeben und Enter drücken...",
+      "skillsPlaceholder": "Fähigkeit eingeben und Enter drücken...",
+      "certName": "Zertifizierungsname",
+      "certNamePlaceholder": "Z.B.: AWS Solutions Architect",
+      "certIssuer": "Aussteller",
+      "certIssuerPlaceholder": "Z.B.: Amazon Web Services",
+      "issueDate": "Ausstellungsdatum",
+      "expirationDate": "Ablaufdatum",
+      "credentialUrl": "Nachweis-URL",
+      "company": "Unternehmen",
+      "companyPlaceholder": "Z.B.: ACME GmbH",
+      "role": "Position",
+      "rolePlaceholder": "Z.B.: Senior-Entwickler",
+      "startDate": "Startdatum",
+      "endDate": "Enddatum",
+      "currentPosition": "Aktuelle Position",
+      "description": "Beschreibung",
+      "descriptionPlaceholder": "Beschreiben Sie Ihre Hauptaufgaben und Erfolge...",
+      "institution": "Institution",
+      "institutionPlaceholder": "Z.B.: Technische Universität Berlin",
+      "degree": "Abschluss",
+      "selectDegree": "Abschluss auswählen",
+      "fieldOfStudy": "Studienfeld",
+      "fieldPlaceholder": "Z.B.: Informatik",
+      "currentlyStudying": "Derzeit studierend",
+      "linkType": "Typ",
+      "linkUrl": "URL",
+      "linkLabel": "Bezeichnung",
+      "linkLabelPlaceholder": "Z.B.: Mein LinkedIn"
+    },
+    "phoneTypes": {
+      "mobile": "Mobil",
+      "work": "Arbeit",
+      "home": "Zuhause"
+    },
+    "linkTypes": {
+      "portfolio": "Portfolio",
+      "other": "Sonstiges"
+    },
+    "degrees": {
+      "technical": "Technisch",
+      "bachelor": "Bachelor",
+      "licentiate": "Lizenziat",
+      "postGrad": "Postgraduat",
+      "mba": "MBA",
+      "masters": "Master",
+      "doctorate": "Doktorat"
+    },
+    "proficiencyLevels": {
+      "basic": "Grundkenntnisse",
+      "intermediate": "Mittelstufe",
+      "advanced": "Fortgeschritten",
+      "fluent": "Fließend",
+      "native": "Muttersprache"
+    },
+    "addPhone": "Telefon hinzufügen",
+    "addLanguage": "Sprache hinzufügen",
+    "addCertification": "Zertifizierung hinzufügen",
+    "addExperience": "Erfahrung hinzufügen",
+    "addEducation": "Ausbildung hinzufügen",
+    "addSocialLink": "Link hinzufügen"
+  },
+  "pipelinesPage": {
+    "title": "Pipelines",
+    "subtitle": "KI-Agenten-Pipeline-Konfiguration — global oder pro Projekt",
+    "searchPlaceholder": "Pipelines nach Name oder Projekt suchen...",
+    "filterScope": "Nach Geltungsbereich filtern",
+    "filterStatus": "Nach Status filtern",
+    "allScopes": "Alle Geltungsbereiche",
+    "allStatuses": "Alle Status",
+    "createPipeline": "Neue Pipeline",
+    "openPipeline": "Pipeline {{name}} öffnen",
+    "assignments": "Zuweisungen",
+    "domains": "Domänen",
+    "scope": {
+      "global": "Global",
+      "project": "Pro Projekt"
+    },
+    "status": {
+      "active": "Aktiv",
+      "draft": "Entwurf",
+      "archived": "Archiviert"
+    },
+    "form": {
+      "title": "Neue Pipeline erstellen",
+      "subtitle": "Grundlegende Pipeline-Informationen konfigurieren",
+      "name": "Pipeline-Name",
+      "namePlaceholder": "Z.B.: Finanzportal-Pipeline",
+      "description": "Beschreibung",
+      "descriptionPlaceholder": "Beschreiben Sie Zweck und Umfang der Pipeline...",
+      "scope": "Geltungsbereich",
+      "errors": {
+        "nameRequired": "Name ist erforderlich",
+        "descriptionRequired": "Beschreibung ist erforderlich",
+        "submitFailed": "Pipeline konnte nicht erstellt werden. Bitte erneut versuchen."
+      }
+    },
+    "detail": {
+      "backToList": "Zurück zu Pipelines",
+      "tabs": {
+        "label": "Pipeline-Tabs",
+        "matrix": "Domäne × Tier-Matrix",
+        "tiers": "Tier-Konfiguration",
+        "settings": "Informationen"
+      },
+      "matrixHelp": "Konfigurieren Sie KI-Agenten für jede Kombination aus Domäne (DOM-01 bis DOM-05) und Klassifizierungs-Tier (T0 bis T3). Klicken Sie auf eine leere Zelle, um einen Agenten zuzuweisen oder eine vorhandene Zuweisung zu bearbeiten.",
+      "tiersHelp": "Klassifizierungskriterien und SLA-Konfiguration für jeden Pipeline-Tier.",
+      "domain": "Domäne",
+      "assign": "Zuweisen",
+      "addAssignment": "Agenten für {{domain}} in Tier {{tier}} zuweisen",
+      "cost": "Kosten",
+      "autoApprove": "Auto-genehmigen",
+      "criteria": "Klassifizierungskriterien",
+      "noCriteria": "Keine Kriterien definiert — alle Anforderungen sind berechtigt.",
+      "generalInfo": "Allgemeine Informationen",
+      "pipelineName": "Name",
+      "pipelineScope": "Geltungsbereich",
+      "project": "Projekt",
+      "createdBy": "Erstellt von",
+      "createdAt": "Erstellt am",
+      "updatedAt": "Aktualisiert am",
+      "stats": "Zusammenfassung",
+      "totalTiers": "Tiers",
+      "totalAssignments": "Zuweisungen",
+      "domainsConfigured": "Konfigurierte Domänen",
+      "batchAgents": "Batch-Agenten",
+      "editor": {
+        "agent": "Agent",
+        "selectAgent": "Agenten auswählen...",
+        "noAgentsForDomain": "Keine Agenten für diese Domäne registriert. In KI-Agenten registrieren.",
+        "llmModel": "LLM-Modell",
+        "selectLlm": "Modell auswählen...",
+        "executionMode": "Ausführungsmodus",
+        "batchWarning": "Der Batch-Modus spart ~{{savings}}% bei Token-Kosten, fügt jedoch eine Verarbeitungsverzögerung hinzu. Ideal für weniger dringende Tiers.",
+        "enabled": "Aktiviert",
+        "enable": "Aktivieren",
+        "disable": "Deaktivieren"
+      }
+    }
+  },
+  "agentsPage": {
+    "title": "KI-Agenten",
+    "subtitle": "Intelligente Agenten nach Domäne verwalten",
+    "searchPlaceholder": "Agenten nach Name, Beschreibung oder Tag suchen...",
+    "filterDomain": "Nach Domäne filtern",
+    "filterStatus": "Nach Status filtern",
+    "allDomains": "Alle Domänen",
+    "allStatuses": "Alle Status",
+    "createAgent": "Neuer Agent",
+    "skills": "Fähigkeiten",
+    "llms": "LLM-Modelle",
+    "prompts": "Prompts",
+    "executions": "Ausführungen",
+    "successRate": "Erfolgsrate",
+    "status": {
+      "active": "Aktiv",
+      "inactive": "Inaktiv",
+      "error": "Fehler",
+      "maintenance": "Wartung"
+    },
+    "autonomy": {
+      "full": "Autonom",
+      "semi": "Semi-autonom",
+      "assisted": "Unterstützt",
+      "none": "Keine Autonomie"
+    },
+    "form": {
+      "title": "Neuen Agenten erstellen",
+      "subtitle": "Grundlegende Informationen für den KI-Agenten konfigurieren",
+      "domain": "Domäne",
+      "name": "Agentenname",
+      "namePlaceholder": "Z.B.: Entdeckungsagent v2",
+      "description": "Beschreibung",
+      "descriptionPlaceholder": "Beschreiben Sie Zweck und Verantwortlichkeiten des Agenten...",
+      "autonomyLevel": "Autonomiestufe",
+      "tags": "Tags",
+      "tagsPlaceholder": "Z.B.: triage, klassifizierung, entdeckung",
+      "tagsHelp": "Durch Komma trennen",
+      "errors": {
+        "nameRequired": "Name ist erforderlich",
+        "descriptionRequired": "Beschreibung ist erforderlich",
+        "submitFailed": "Agent konnte nicht erstellt werden. Bitte erneut versuchen."
+      }
+    }
+  },
+  "agentDetail": {
+    "backToList": "Zurück zu Agenten",
+    "tabs": {
+      "label": "Agenten-Tabs",
+      "overview": "Übersicht",
+      "skills": "Fähigkeiten",
+      "llms": "LLM-Modelle",
+      "prompts": "Prompts",
+      "config": "Konfiguration"
+    },
+    "overview": {
+      "totalExecutions": "Gesamtausführungen",
+      "successRate": "Erfolgsrate",
+      "skills": "Fähigkeiten",
+      "llms": "LLM-Modelle",
+      "metadata": "Metadaten",
+      "createdBy": "Erstellt von",
+      "createdAt": "Erstellt am",
+      "updatedAt": "Aktualisiert am",
+      "lastActive": "Zuletzt aktiv"
+    },
+    "skills": {
+      "empty": "Keine Fähigkeiten registriert",
+      "enabled": "Aktiviert",
+      "disabled": "Deaktiviert",
+      "trigger": "Auslöser",
+      "timeout": "Zeitüberschreitung",
+      "confidence": "Min. Konfidenz",
+      "requiredTier": "LLM-Tier",
+      "executionCount": "Ausführungen",
+      "avgDuration": "Ø Dauer",
+      "lastExecuted": "Zuletzt ausgeführt",
+      "checks": "Prüfungen",
+      "deterministic": "Deterministisch",
+      "llmAssisted": "LLM-unterstützt",
+      "blocking": "Blockierend"
+    },
+    "llms": {
+      "empty": "Keine autorisierten LLM-Modelle",
+      "default": "Standard",
+      "provider": "Anbieter",
+      "tier": "Tier",
+      "maxTokens": "Max. Token",
+      "temperature": "Temperatur",
+      "costInput": "Eingangskosten",
+      "costOutput": "Ausgangskosten"
+    },
+    "prompts": {
+      "empty": "Keine Prompts registriert",
+      "inactive": "Inaktiv",
+      "viewContent": "Prompt-Inhalt anzeigen",
+      "view": "Anzeigen",
+      "hide": "Ausblenden",
+      "variables": "Variablen",
+      "content": "Inhalt",
+      "created": "Erstellt",
+      "updated": "Aktualisiert"
+    },
+    "config": {
+      "title": "Ausführungskonfiguration",
+      "maxConcurrentIssues": "Parallele Issues",
+      "maxRetries": "Max. Wiederholungen",
+      "cooldownSeconds": "Wartezeit",
+      "autoEscalateAfterSeconds": "Auto-eskalieren nach",
+      "retryOnFailure": "Bei Fehler wiederholen",
+      "notifications": "Benachrichtigungen",
+      "yes": "Ja",
+      "no": "Nein"
+    }
+  },
+  "kickoff": {
+    "page": {
+      "title": "Projekt starten",
+      "subtitle": "Projekt-Kickoff-Workflow mit KI-Agenten"
+    },
+    "activeKickoffs": "Aktive Kickoffs",
+    "startNew": "Neues Projekt starten",
+    "emptyState": "Keine laufenden Kickoffs. Starten Sie ein neues Projekt.",
+    "startedBy": "Gestartet von {{name}}",
+    "cancel": "Abbrechen",
+    "stepper": {
+      "label": "Kickoff-Schritte"
+    },
+    "steps": {
+      "initialDescription": "Erstbeschreibung",
+      "visionGeneration": "Vision wird generiert",
+      "visionReview": "Vision-Überprüfung",
+      "visionApproved": "Vision genehmigt",
+      "architectureCheck": "Architekturprüfung",
+      "architectureTask": "Architektenaufgabe",
+      "architectureGeneration": "Architektur wird generiert",
+      "architectureReview": "Architektur-Überprüfung",
+      "architectureApproved": "Architektur genehmigt",
+      "scaffoldGeneration": "Scaffold wird generiert",
+      "completed": "Abgeschlossen"
+    },
+    "newKickoff": {
+      "title": "Neues Projekt starten",
+      "selectProject": "Austehendes Projekt auswählen",
+      "descriptionLabel": "Projekterstbeschreibung",
+      "descriptionPlaceholder": "Beschreiben Sie Ziel, Umfang und Hauptfunktionen des Projekts...",
+      "noPendingProjects": "Keine Projekte mit ausstehendem Status verfügbar. Registrieren Sie unten ein neues Projekt.",
+      "start": "Kickoff starten",
+      "starting": "Wird gestartet...",
+      "createProject": {
+        "title": "Neues Projekt registrieren",
+        "name": "Projektname",
+        "namePlaceholder": "Z.B.: ACME Finanzportal",
+        "slug": "Bezeichner (Slug)",
+        "slugPlaceholder": "z.B.: acme-finanzportal",
+        "slugHelp": "Eindeutiger Bezeichner. Nur Kleinbuchstaben, Zahlen und Bindestriche verwenden.",
+        "description": "Beschreibung",
+        "descriptionPlaceholder": "Beschreiben Sie kurz das Projektziel...",
+        "submit": "Projekt registrieren",
+        "submitting": "Wird registriert...",
+        "success": "Projekt \"{{name}}\" erfolgreich registriert!",
+        "errors": {
+          "nameRequired": "Projektname ist erforderlich",
+          "slugRequired": "Bezeichner ist erforderlich",
+          "slugInvalid": "Nur Kleinbuchstaben, Zahlen und Bindestriche verwenden",
+          "descriptionRequired": "Beschreibung ist erforderlich"
+        }
+      }
+    },
+    "detail": {
+      "loading": "Kickoff wird geladen...",
+      "error": "Fehler beim Laden",
+      "notFound": "Kickoff für dieses Projekt nicht gefunden.",
+      "backToList": "Zurück zu Kickoffs",
+      "subtitle": "Projektinitialisierungs-Workflow",
+      "initialDescription": "Projekterstbeschreibung",
+      "generateVision": "Vision-Dokument generieren (DOM-02)",
+      "generateScaffold": "Modul-Scaffold generieren (DOM-03)"
+    },
+    "visionDoc": {
+      "title": "Vision-Dokument"
+    },
+    "archDoc": {
+      "title": "Architektur-Dokument"
+    },
+    "docStatus": {
+      "pending": "Ausstehend",
+      "generating": "Wird generiert...",
+      "draft": "Entwurf",
+      "inReview": "In Überprüfung",
+      "approved": "Genehmigt",
+      "rejected": "Abgelehnt"
+    },
+    "generatedBy": "Generiert von {{agent}}",
+    "reviewedBy": "Überprüft von {{name}}",
+    "edit": "Bearbeiten",
+    "save": "Speichern",
+    "editSection": "Abschnitt bearbeiten: {{title}}",
+    "editSectionContent": "Abschnittsinhalt: {{title}}",
+    "approve": "Dokument genehmigen",
+    "reject": "Überarbeitung anfragen",
+    "confirmReject": "Ablehnung bestätigen",
+    "rejectComment": "Ablehnungsgrund",
+    "rejectCommentPlaceholder": "Beschreiben Sie den Ablehnungsgrund und notwendige Verbesserungen...",
+    "agentProcessing": {
+      "title": "Agent {{agent}} verarbeitet",
+      "generatingVision": "Vision-Dokument aus Erstbeschreibung wird generiert...",
+      "generatingArchitecture": "Architektur-Dokument basierend auf genehmigter Vision wird generiert...",
+      "generatingScaffold": "Modul-Scaffolds gemäß Architektur-Dokument werden erstellt..."
+    },
+    "archCheck": {
+      "title": "Module & Blaupausen prüfen",
+      "description": "Das System prüft, ob das Projekt über konfigurierte Module und architektonische Blaupausen verfügt, bevor das Architektur-Dokument generiert wird.",
+      "checking": "Wird geprüft...",
+      "checkNow": "Jetzt prüfen",
+      "modules": "Projekmodule konfiguriert",
+      "blueprints": "Architektonische Blaupausen zugewiesen",
+      "missingTitle": "Ausstehende Konfigurationselemente",
+      "configureModules": "Module konfigurieren (Architektenaufgabe)",
+      "proceed": "Mit Generierung fortfahren"
+    },
+    "scaffold": {
+      "title": "Modul-Scaffolds",
+      "totalFiles": "{{count}} Dateien insgesamt generiert",
+      "success": "Erfolg",
+      "error": "Fehler",
+      "filesCount": "{{count}} Dateien"
+    },
+    "completed": {
+      "title": "Kickoff abgeschlossen!",
+      "message": "Projekt \"{{name}}\" wurde erfolgreich initialisiert. Alle Dokumente wurden genehmigt und Module wurden erstellt.",
+      "goToProjects": "Zu Projekten"
+    },
+    "tasks": {
+      "title": "Workflow-Aufgaben",
+      "assignedTo": "Zugewiesen an {{name}}",
+      "roles": {
+        "po": "Product Owner",
+        "business-analyst": "Business Analyst",
+        "architect": "Architekt"
+      },
+      "status": {
+        "pending": "Ausstehend",
+        "in_progress": "In Bearbeitung",
+        "completed": "Abgeschlossen",
+        "blocked": "Blockiert"
+      }
+    }
+  },
+  "tenants": {
+    "pageTitle": "Mandantenverwaltung",
+    "pageSubtitle": "Client-Organisationen auf der Plattform anzeigen und verwalten",
+    "newTenant": "+ Neuer Mandant",
+    "provisionFirst": "+ Ersten Mandanten bereitstellen",
+    "searchPlaceholder": "Nach Name oder Slug suchen...",
+    "filterAll": "Alle",
+    "filterActive": "Aktiv",
+    "filterInactive": "Inaktiv",
+    "columns": {
+      "tenant": "Mandant",
+      "tenantId": "ID",
+      "status": "Status",
+      "members": "Mitglieder",
+      "createdAt": "Erstellt am",
+      "actions": "Aktionen"
+    },
+    "status": {
+      "ATIVO": "Aktiv",
+      "INATIVO": "Inaktiv"
+    },
+    "actions": {
+      "viewDetails": "Details anzeigen",
+      "edit": "Bearbeiten",
+      "deactivate": "Deaktivieren"
+    },
+    "empty": {
+      "title": "Keine Mandanten registriert",
+      "description": "Keine Mandanten registriert. Stellen Sie den ersten Mandanten bereit, um loszulegen.",
+      "noResults": "Keine Mandanten für \"{{term}}\" gefunden."
+    },
+    "error": {
+      "load": "Mandanten konnten nicht geladen werden. Verbindung prüfen und erneut versuchen.",
+      "create": "Mandant konnte nicht bereitgestellt werden. Erneut versuchen.",
+      "update": "Speichern fehlgeschlagen. Felder prüfen und erneut versuchen.",
+      "deactivate": "Mandant konnte nicht deaktiviert werden. Erneut versuchen.",
+      "reactivate": "Mandant konnte nicht reaktiviert werden. Erneut versuchen.",
+      "slugDuplicate": "Dieser Slug wird bereits verwendet. Wählen Sie einen anderen Slug."
+    },
+    "success": {
+      "created": "Mandant {{name}} bereitgestellt. Einladung an {{email}} gesendet.",
+      "updated": "Änderungen erfolgreich gespeichert.",
+      "deactivated": "{{name}} wurde deaktiviert. Mitgliederzugriff wurde gesperrt.",
+      "reactivated": "{{name}} wurde reaktiviert. Mitgliederzugriff wurde wiederhergestellt."
+    },
+    "create": {
+      "title": "Neuen Mandanten bereitstellen",
+      "subtitle": "Füllen Sie die Details aus, um eine neue Client-Organisation zu erstellen",
+      "sectionOrg": "Organisationsdetails",
+      "sectionAdmin": "Erster Administrator",
+      "sectionPhones": "Administratortelefone",
+      "nome": "Organisationsname",
+      "nomePlaceholder": "Z.B.: ACME GmbH",
+      "slug": "Slug",
+      "slugHelp": "Nur Kleinbuchstaben, Zahlen und Bindestriche. Automatisch generiert — vor dem Speichern editierbar.",
+      "slugReadonly": "Der Slug kann nach der Erstellung nicht mehr geändert werden.",
+      "slugPreview": "app.deepion.net/{{slug}}",
+      "emailAdmin": "Administrator-E-Mail",
+      "emailAdminPlaceholder": "admin@firma.de",
+      "primeiroNome": "Vorname",
+      "primeiroNomePlaceholder": "Maria",
+      "sobrenome": "Nachname",
+      "sobrenomePlaceholder": "Müller",
+      "telefone": "Telefon",
+      "telefonePlaceholder": "+49 30 12345678",
+      "addPhone": "+ Telefon hinzufügen",
+      "removePhone": "Telefon entfernen",
+      "countryCode": "Ländervorwahl",
+      "submit": "Mandanten bereitstellen",
+      "submitting": "Wird bereitgestellt..."
+    },
+    "detail": {
+      "title": "Mandantendetail",
+      "sectionIdentification": "Identifikation",
+      "sectionStatus": "Status",
+      "sectionMembers": "Team-Mitglieder",
+      "sectionDangerZone": "Gefahrenzone",
+      "tenantId": "Mandanten-ID",
+      "tenantIdHelp": "Automatisch generiert (ULID). Als tenant_id-Anspruch im JWT weitergegeben.",
+      "nome": "Organisationsname",
+      "slug": "Slug",
+      "slugReadonly": "🔒 Der Slug kann nach der Erstellung nicht mehr geändert werden.",
+      "statusLabel": "Mandantenstatus",
+      "statusActive": "Aktiv",
+      "statusInactive": "Inaktiv",
+      "reactivateHelp": "Das Reaktivieren ermöglicht den Mitgliederzugriff sofort.",
+      "deactivateHelp": "Das Ausschalten fordert eine Bestätigung vor der Deaktivierung des Mandanten an.",
+      "membersCount": "{{count}} aktives/aktive Mitglied(er)",
+      "membersInfo": "Die individuelle Mitgliederverwaltung erfolgt durch den Mandantenadministrator.",
+      "infrastructure": "Im MVP arbeiten alle Mandanten auf gemeinsamer Infrastruktur.",
+      "emailAdmin": "Erste Admin-E-Mail",
+      "createdAt": "Erstellt am",
+      "saveChanges": "Änderungen speichern",
+      "saving": "Wird gespeichert...",
+      "deactivateTenant": "Mandant deaktivieren",
+      "deactivateWarning": "Deaktivierung macht alle aktiven Mitgliedssitzungen sofort ungültig.",
+      "backToList": "Zurück zur Liste"
+    },
+    "deactivate": {
+      "title": "Mandant deaktivieren",
+      "message": "Möchten Sie den Mandanten <strong>{{name}}</strong> wirklich deaktivieren?",
+      "warning": "Das Deaktivieren des Mandanten macht sofort alle aktiven Sitzungen von {{count}} Mitgliedern ungültig.",
+      "confirm": "Mandant deaktivieren",
+      "confirming": "Wird deaktiviert...",
+      "cancel": "Abbrechen"
+    },
+    "pagination": {
+      "showing": "{{from}}–{{to}} von {{total}} Mandanten angezeigt",
+      "previous": "Zurück",
+      "next": "Weiter",
+      "page": "Seite {{page}} von {{totalPages}}"
+    },
+    "summary": {
+      "total": "{{count}} Mandant(en)",
+      "active": "{{count}} aktiv",
+      "inactive": "{{count}} inaktiv"
+    }
+  }
+}

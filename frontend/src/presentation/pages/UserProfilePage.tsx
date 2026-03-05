@@ -1,4 +1,4 @@
-import { useState, useCallback, useRef } from 'react'
+import { useState, useCallback, useRef, useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 import {
   Camera,
@@ -31,6 +31,8 @@ import type {
   ProfessionalExperience,
   Education,
   SocialLink,
+  Language,
+  LanguageProficiency,
 } from '@domain/models/user'
 
 /* ── Section wrapper ── */
@@ -78,6 +80,117 @@ function Field({ label, htmlFor, children, hint }: FieldProps) {
       <label htmlFor={htmlFor} className="mb-1.5 block text-sm font-medium text-text">{label}</label>
       {children}
       {hint && <p className="mt-1 text-xs text-text-muted">{hint}</p>}
+    </div>
+  )
+}
+
+/* ── Common languages for autocomplete ── */
+const COMMON_LANGUAGES = [
+  'Português (BR)', 'Português (PT)', 'Inglês', 'Espanhol', 'Francês',
+  'Alemão', 'Italiano', 'Japonês', 'Coreano', 'Mandarim',
+  'Cantonês', 'Árabe', 'Hindi', 'Russo', 'Polonês',
+  'Holandês', 'Sueco', 'Norueguês', 'Dinamarquês', 'Finlandês',
+  'Turco', 'Grego', 'Hebraico', 'Tailandês', 'Vietnamita',
+  'Indonésio', 'Malaio', 'Tcheco', 'Húngaro', 'Romeno',
+  'Ucraniano', 'Catalão', 'Basco', 'Galego', 'Guarani',
+  'Quéchua', 'Libras', 'ASL', 'Língua de Sinais',
+]
+
+/* ── Autocomplete input ── */
+interface AutocompleteInputProps {
+  value: string
+  onChange: (v: string) => void
+  suggestions: string[]
+  placeholder?: string
+  className?: string
+}
+function AutocompleteInput({ value, onChange, suggestions, placeholder, className }: AutocompleteInputProps) {
+  const [open, setOpen] = useState(false)
+  const [activeIndex, setActiveIndex] = useState(-1)
+  const wrapperRef = useRef<HTMLDivElement>(null)
+  const listRef = useRef<HTMLUListElement>(null)
+
+  const filtered = value.trim()
+    ? suggestions.filter((s) => s.toLowerCase().includes(value.toLowerCase().trim()))
+    : []
+  const showDropdown = open && filtered.length > 0
+
+  useEffect(() => {
+    setActiveIndex(-1)
+  }, [value])
+
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (wrapperRef.current && !wrapperRef.current.contains(e.target as Node)) {
+        setOpen(false)
+      }
+    }
+    document.addEventListener('mousedown', handleClickOutside)
+    return () => document.removeEventListener('mousedown', handleClickOutside)
+  }, [])
+
+  useEffect(() => {
+    if (activeIndex >= 0 && listRef.current) {
+      const item = listRef.current.children[activeIndex] as HTMLElement | undefined
+      item?.scrollIntoView({ block: 'nearest' })
+    }
+  }, [activeIndex])
+
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (!showDropdown) return
+    if (e.key === 'ArrowDown') {
+      e.preventDefault()
+      setActiveIndex((i) => (i < filtered.length - 1 ? i + 1 : 0))
+    } else if (e.key === 'ArrowUp') {
+      e.preventDefault()
+      setActiveIndex((i) => (i > 0 ? i - 1 : filtered.length - 1))
+    } else if (e.key === 'Enter' && activeIndex >= 0) {
+      e.preventDefault()
+      onChange(filtered[activeIndex])
+      setOpen(false)
+    } else if (e.key === 'Escape') {
+      setOpen(false)
+    }
+  }
+
+  return (
+    <div ref={wrapperRef} className="relative">
+      <input
+        type="text"
+        value={value}
+        onChange={(e) => { onChange(e.target.value); setOpen(true) }}
+        onFocus={() => setOpen(true)}
+        onKeyDown={handleKeyDown}
+        placeholder={placeholder}
+        className={className}
+        role="combobox"
+        aria-expanded={showDropdown}
+        aria-autocomplete="list"
+        aria-activedescendant={activeIndex >= 0 ? `lang-option-${activeIndex}` : undefined}
+      />
+      {showDropdown && (
+        <ul
+          ref={listRef}
+          role="listbox"
+          className="absolute z-50 mt-1 max-h-48 w-full overflow-auto rounded-[var(--radius-md)] border border-border bg-card shadow-lg"
+        >
+          {filtered.map((item, i) => (
+            <li
+              key={item}
+              id={`lang-option-${i}`}
+              role="option"
+              aria-selected={i === activeIndex}
+              onMouseDown={() => { onChange(item); setOpen(false) }}
+              className={cn(
+                'cursor-pointer px-3 py-2 text-sm',
+                i === activeIndex ? 'bg-primary/10 text-primary' : 'text-text hover:bg-muted/50',
+              )}
+            >
+              {item}
+            </li>
+          ))}
+        </ul>
+      )}
     </div>
   )
 }
@@ -146,7 +259,9 @@ function ProfileForm({ userData }: ProfileFormProps) {
   const [bio, setBio] = useState(p?.bio ?? '')
   const [location, setLocation] = useState(p?.location ?? '')
   const [timezone, setTimezone] = useState(p?.timezone ?? '')
-  const [languages, setLanguages] = useState(p?.languages ?? [])
+  const [languages, setLanguages] = useState<Omit<Language, 'id'>[]>(
+    (p?.languages ?? []).map(({ name, proficiency, certifications }) => ({ name, proficiency, certifications })),
+  )
   const [skills, setSkills] = useState(p?.skills ?? [])
   const [availabilityHours, setAvailabilityHours] = useState(p?.availabilityHoursPerWeek?.toString() ?? '')
   const [phones, setPhones] = useState<Omit<PhoneType, 'id'>[]>(
@@ -353,8 +468,55 @@ function ProfileForm({ userData }: ProfileFormProps) {
             </Section>
 
             {/* ── Languages ── */}
-            <Section title={t('profilePage.sections.languages')} icon={Languages}>
-              <TagInput value={languages} onChange={setLanguages} placeholder={t('profilePage.fields.languagesPlaceholder')} ariaLabel={t('profilePage.sections.languages')} />
+            <Section title={t('profilePage.sections.languages')} icon={Languages} collapsible defaultOpen={languages.length > 0}>
+              <div className="flex flex-col gap-4">
+                {languages.map((lang, idx) => (
+                  <div key={idx} className="relative rounded-[var(--radius-md)] border border-border p-4">
+                    <button type="button" onClick={() => setLanguages(removeArrayItem(languages, idx))} className="absolute right-3 top-3 rounded-[var(--radius-md)] p-1 text-text-muted hover:bg-red-50 hover:text-red-600" aria-label={t('common.delete')}>
+                      <Trash2 className="h-4 w-4" />
+                    </button>
+                    <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+                      <Field label={t('profilePage.fields.languageName')}>
+                        <AutocompleteInput
+                          value={lang.name}
+                          onChange={(v) => setLanguages(updateArrayItem(languages, idx, { name: v }))}
+                          suggestions={COMMON_LANGUAGES}
+                          placeholder={t('profilePage.fields.languageNamePlaceholder')}
+                          className={inputClass}
+                        />
+                      </Field>
+                      <Field label={t('profilePage.fields.languageProficiency')}>
+                        <select value={lang.proficiency} onChange={(e) => setLanguages(updateArrayItem(languages, idx, { proficiency: e.target.value as LanguageProficiency }))} className={inputClass}>
+                          <option value="">{t('profilePage.fields.selectProficiency')}</option>
+                          <option value="basic">{t('profilePage.proficiencyLevels.basic')}</option>
+                          <option value="intermediate">{t('profilePage.proficiencyLevels.intermediate')}</option>
+                          <option value="advanced">{t('profilePage.proficiencyLevels.advanced')}</option>
+                          <option value="fluent">{t('profilePage.proficiencyLevels.fluent')}</option>
+                          <option value="native">{t('profilePage.proficiencyLevels.native')}</option>
+                        </select>
+                      </Field>
+                      <div className="sm:col-span-2">
+                        <Field label={t('profilePage.fields.languageCertifications')}>
+                          <TagInput
+                            value={lang.certifications}
+                            onChange={(certs) => setLanguages(updateArrayItem(languages, idx, { certifications: certs }))}
+                            placeholder={t('profilePage.fields.languageCertificationsPlaceholder')}
+                            ariaLabel={t('profilePage.fields.languageCertifications')}
+                          />
+                        </Field>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+                <button
+                  type="button"
+                  onClick={() => setLanguages([...languages, { name: '', proficiency: 'basic', certifications: [] }])}
+                  className="flex items-center gap-1.5 self-start rounded-[var(--radius-md)] border border-dashed border-border px-3 py-1.5 text-xs font-medium text-text-muted hover:border-primary hover:text-primary"
+                >
+                  <Plus className="h-3.5 w-3.5" />
+                  {t('profilePage.addLanguage')}
+                </button>
+              </div>
             </Section>
 
             {/* ── Skills ── */}

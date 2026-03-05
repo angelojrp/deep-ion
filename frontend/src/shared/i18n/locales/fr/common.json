@@ -33,9 +33,7 @@
     "changeLanguage": "Change language",
     "languages": {
       "pt-BR": "Português (BR)",
-      "en": "English",
-      "es": "Español",
-      "fr": "Français"
+      "en": "English"
     }
   },
   "pages": {

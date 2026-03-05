@@ -29,7 +29,14 @@
     "userMenu": "Menu do usuário",
     "profile": "Meu Perfil",
     "logout": "Sair",
-    "role": "Administrador"
+    "role": "Administrador",
+    "changeLanguage": "Alterar idioma",
+    "languages": {
+      "pt-BR": "Português (BR)",
+      "en": "English",
+      "es": "Español",
+      "fr": "Français"
+    }
   },
   "pages": {
     "dashboard": {
@@ -916,6 +923,12 @@
       "phoneNumber": "Número",
       "primary": "Principal",
       "languagesPlaceholder": "Digite um idioma e pressione Enter...",
+      "languageName": "Idioma",
+      "languageNamePlaceholder": "Ex.: Inglês",
+      "languageProficiency": "Nível de proficiência",
+      "selectProficiency": "Selecione o nível",
+      "languageCertifications": "Certificações",
+      "languageCertificationsPlaceholder": "Digite uma certificação e pressione Enter...",
       "skillsPlaceholder": "Digite uma habilidade e pressione Enter...",
       "certName": "Nome da certificação",
       "certNamePlaceholder": "Ex.: AWS Solutions Architect",
@@ -963,7 +976,15 @@
       "masters": "Mestrado",
       "doctorate": "Doutorado"
     },
+    "proficiencyLevels": {
+      "basic": "Básico",
+      "intermediate": "Intermediário",
+      "advanced": "Avançado",
+      "fluent": "Fluente",
+      "native": "Nativo"
+    },
     "addPhone": "Adicionar telefone",
+    "addLanguage": "Adicionar idioma",
     "addCertification": "Adicionar certificação",
     "addExperience": "Adicionar experiência",
     "addEducation": "Adicionar formação",
