@@ -110,7 +110,7 @@ git diff HEAD -- <cada arquivo>
 
 Para cada arquivo, extrair:
 
-**a. Módulo afetado** (usar exatamente um dos escopos abaixo):
+**a. Módulo afetado** (criar novos escopos caso necessário):
 
 | Escopo | Critério |
 |---|---|

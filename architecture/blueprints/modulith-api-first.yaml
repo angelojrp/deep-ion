@@ -101,8 +101,13 @@ architecture:
       options:
         interfaceOnly: true
         useSpringBoot3: true
+        useTags: true
+        openApiNullable: false
+        documentationProvider: springdoc
+        generateModelTests: false
         generateApiTests: false
         generateSupportingFiles: false
+        
     rules:
       mustContain:
         - One OpenAPI YAML file per module
