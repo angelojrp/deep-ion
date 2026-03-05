@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-BackofficeCoreApplication<backoffice-core>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "net.deepion.BackofficeCoreApplication",
+            "projectName": "backoffice-core",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}

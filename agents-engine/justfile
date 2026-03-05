@@ -1,0 +1,21 @@
+# justfile
+lint:
+    uv run ruff check src/ tests/
+    uv run mypy src/ --strict
+
+format:
+    uv run ruff format src/ tests/
+
+security:
+    uv run bandit -r src/ -ll
+
+test:
+    uv run pytest -m 'not e2e'
+
+test-all:
+    uv run pytest
+
+ci: lint security test
+
+pre-commit:
+    uv run pre-commit run --all-files

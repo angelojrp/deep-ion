@@ -1,0 +1,18 @@
+repos:
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: 1629a02ed57c23345951c75547bfe5fb73970fd3
+    hooks:
+      - id: ruff
+        args: [--fix]
+      - id: ruff-format
+  - repo: https://github.com/pre-commit/mirrors-mypy
+    rev: a66e98df7b4aeeb3724184b332785976d062b92e
+    hooks:
+      - id: mypy
+        args: [--strict]
+        additional_dependencies: [pydantic, pydantic-settings]
+  - repo: https://github.com/PyCQA/bandit
+    rev: 92ae8b82fb422a639f0ed8d99e96cea769594e08
+    hooks:
+      - id: bandit
+        args: ["-r", "src/", "-ll"]
