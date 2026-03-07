@@ -77,17 +77,17 @@ O Arquiteto Corporativo deve incluir no documento de taxonomia a tabela de class
 
 | Tipo | Quantidade | Localização |
 |------|-----------|-------------|
-| `system-prompt` | 6 | `.github/agents/` |
+| `system-prompt` | 8 | `.github/agents/` _(sendo 2 criados com frontmatter pelo PLAN-20260306-002: `governador-prompts.md` e `qa-comportamental.md`)_ |
 | `instruction` (global) | 1 | `.github/arquiteto-instructions.md` |
 | `instruction` (scoped) | 1 | `.github/instructions/process-governance.instructions.md` |
-| `task-prompt` | 32 | `.github/prompts/` |
+| `task-prompt` | 36 | `.github/prompts/` _(4 adicionados pelo PLAN-20260306-002: `di-behavioral-regression-design`, `di-behavioral-regression-implement`, `di-prompt-apply-frontmatter`, `di-prompt-governance-audit`)_ |
 | `runtime-prompt` | 0 existentes / 3 planejados | `agents-engine/src/deep_ion/dom_04_frontend/prompts/` |
 
 ---
 
 ### Artefatos de Saída
 
-- `docs/processos/gestores/fabrica-deep-ion/prompt-taxonomy.md` — documento de spec com os 4 tipos, políticas diferenciadas e mapeamento de todos os 40 prompts existentes
+- `docs/processos/gestores/fabrica-deep-ion/prompt-taxonomy.md` — documento de spec com os 4 tipos, políticas diferenciadas e mapeamento de todos os 46 prompts existentes
 
 ---
 
@@ -95,6 +95,6 @@ O Arquiteto Corporativo deve incluir no documento de taxonomia a tabela de class
 
 - [ ] Documento `prompt-taxonomy.md` publicado em `docs/processos/gestores/fabrica-deep-ion/`
 - [ ] Os 4 tipos estão definidos com localização canônica, política de controle e ciclo de vida
-- [ ] Todos os 40 prompts existentes estão classificados na tabela de mapeamento
+- [ ] Todos os 46 prompts existentes estão classificados na tabela de mapeamento
 - [ ] O documento foi revisado e aprovado pelo Tech Lead antes de T03 ser iniciada
 - [ ] O schema de frontmatter obrigatório por tipo está especificado (insumo direto para T03)

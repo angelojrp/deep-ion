@@ -28,13 +28,13 @@ linked_pr: ""
 
 **Classificação de Impacto:** T2  
 **Diagnóstico de origem:** [`DIAG-20260306-002`](../../../../../diretoria/DIAG-20260306-002_gestao-prompts.md)  
-**Escopo:** Todos os 40 artefatos de prompt em `.github/agents/`, `.github/prompts/`, `.github/instructions/`, `.github/arquiteto-instructions.md` e prompts Python em `agents-engine/`
+**Escopo:** Todos os 46 artefatos de prompt em `.github/agents/`, `.github/prompts/`, `.github/instructions/`, `.github/arquiteto-instructions.md` e prompts Python em `agents-engine/`
 
 ---
 
 ### Contexto
 
-O diagnóstico estratégico `DIAG-20260306-002` (Diretor de Processos, 2026-03-06) identificou **10 GAPs críticos** na gestão dos 40 artefatos de prompt que sustentam o comportamento operacional da fábrica deep-ion. Os prompts — em especial os 6 system prompts de agentes — são editados sem controle de mudança, sem versionamento semântico, sem registro de execução e sem testes de regressão comportamental. Uma alteração silenciosa em um system prompt muda o comportamento de toda a fábrica sem qualquer rastreabilidade.
+O diagnóstico estratégico `DIAG-20260306-002` (Diretor de Processos, 2026-03-06) identificou **10 GAPs críticos** na gestão dos 40 artefatos de prompt que sustentam o comportamento operacional da fábrica deep-ion. Os prompts — em especial os 8 system prompts de agentes — são editados sem controle de mudança, sem versionamento semântico, sem registro de execução e sem testes de regressão comportamental. Uma alteração silenciosa em um system prompt muda o comportamento de toda a fábrica sem qualquer rastreabilidade.
 
 Este plano implementa as 7 recomendações estratégicas do diagnóstico em 4 fases sequenciais, do controle imediato de risco (FASE 0) à manutenibilidade contínua (FASE 3).
 
@@ -63,7 +63,14 @@ Este plano implementa as 7 recomendações estratégicas do diagnóstico em 4 fa
 > **Nota de reatribuição (PLAN-20260306-002):** As tarefas T03 e T06 foram reatribuídas em
 > 2026-03-06 por análise de conformidade de agentes. T03 usava DOM-04 (sem skill de taxonomia
 > de prompts); T06 usava DOM-05b (fora de escopo de behavioral LLM testing). Ver
-> [PLAN-20260306-002](../../PLAN-20260306-002_novos-agentes-governanca-prompts/PLAN-20260306-002_novos-agentes-governanca-prompts.md).
+> [PLAN-20260306-002](../archive/PLAN-20260306-002_novos-agentes-governanca-prompts/PLAN-20260306-002_novos-agentes-governanca-prompts.md).
+>
+> **Nota de expansão de escopo (2026-03-07):** O PLAN-20260306-002 (status CONCLUIDO) incorporou
+> 2 novos system-prompts (`governador-prompts.md` e `qa-comportamental.md`, criados já com
+> frontmatter de governança aplicado) e 4 novos task-prompts (`di-behavioral-regression-design`,
+> `di-behavioral-regression-implement`, `di-prompt-apply-frontmatter`, `di-prompt-governance-audit`).
+> O inventário atualizado é de **46 artefatos** (8 system-prompts + 2 instructions + 36 task-prompts).
+> Impacto: T02 (tabela de mapeamento), T03 (lista e critérios), T06 (golden cases por agente), T07 (owners).
 
 ---
 
@@ -97,7 +104,7 @@ Este plano implementa as 7 recomendações estratégicas do diagnóstico em 4 fa
 | Rastreabilidade de execução | L1 — Inexistente | L3 — Hash SHA-256 registrado por execução de agente |
 | Testes de regressão comportamental | L1 — Inexistente | L3 — Suite com ≥3 golden cases por agente |
 | Processo de Prompt Inception | L1 — Inexistente | L2 — Processo documentado (PROC-010) |
-| Owners de task-prompts | L1 — Inexistente | L2 — Owner e SLA designados para todos os 32 |
+| Owners de task-prompts | L1 — Inexistente | L2 — Owner e SLA designados para todos os 36 |
 
 ---
 

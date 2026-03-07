@@ -31,6 +31,20 @@ Legenda: **R** = Responsável (executa) | **A** = Aprova (accountable) | **C** =
 | Compliance Arquitetural | — | — | — | — | — | **R** |
 | Auditoria de RNs | — | — | — | — | — | **R** |
 
+### Agentes de Governança
+
+| Etapa / Artefato | Gestor de Squads | Diretor de Squads | Governador de Prompts | QA Comportamental | Risk Arbiter* |
+|------------------|-----------------|-------------------|-----------------------|-------------------|---------------|
+| Todos os gates (monitoramento) | **I** | I | — | — | — |
+| Handoff Card (validação pós-gate) | **C** | — | — | — | — |
+| Relatório de saúde de squad | **R** | I | — | — | — |
+| Escalada crítica entre agentes | **R** | **A** | — | — | **C** |
+| Auditoria de consistência BAR→UC→RN | — | — | — | **R** | — |
+| Auditoria de prompts / agentes | — | — | **R** | — | — |
+| Decisão em impasse (bloqueio) | C | **A** | — | — | **R** |
+
+*Risk Arbiter: agente proposto (P1 do GAP-2)
+
 ### Profissionais Humanos
 
 | Etapa / Gate | PO | Tech Lead | Arquiteto | QA | Domain Expert | Analista |
@@ -76,6 +90,26 @@ Legenda: **R** = Responsável (executa) | **A** = Aprova (accountable) | **C** =
 - **DEVE:** Verificar cobertura vs TestPlan, auditar Modulith, auditar RNs no código
 - **NÃO DEVE:** Operar sem TestPlan aprovado, aprovar PR diretamente, modificar código
 - **ESCALA QUANDO:** Violação de RN-01/RN-02/RN-03, fronteira Modulith violada
+
+### Gestor de Squads
+- **DEVE:** Monitorar handoffs, auditar desvios de escopo, registrar relatórios em `docs/squad/gestores`
+- **NÃO DEVE:** Editar código, agentes, workflows ou executar comandos de terminal
+- **ESCALA QUANDO:** Handoff IA→Humano ignorado; gate crítico aprovado sem revisor obrigatório; SLA ultrapassado
+
+### Diretor de Squads
+- **DEVE:** Definir composição estratégica de squads, emitir diagnósticos, aprovar escaladas críticas
+- **NÃO DEVE:** Executar tarefas operacionais, editar artefatos de agentes diretamente
+- **ESCALA QUANDO:** Desvio sistêmico insolúvel no nível operacional
+
+### Governador de Prompts
+- **DEVE:** Auditar qualidade e conformidade de prompts, revisar criação/modificação de agentes
+- **NÃO DEVE:** Implementar código, aprovar gates de negócio ou técnicos
+- **ESCALA QUANDO:** Prompt com risco de comportamento não determinístico ou fora de escopo
+
+### QA Comportamental
+- **DEVE:** Auditar consistência BAR→UC→RN, gerar TestPlan, bloquear Gate 2 quando inconsistências críticas
+- **NÃO DEVE:** Aprovar gates, alterar artefatos de requisitos, operar sem BAR + Use Cases
+- **ESCALA QUANDO:** Inconsistência crítica BAR→UC irresolúvel; LGPD implicado sem DPO
 
 ---
 

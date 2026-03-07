@@ -1,7 +1,7 @@
 ---
 plan_id: PLAN-20260306-001
 task_id: T06
-title: "Criar suite de Behavioral Regression Tests para os 6 system prompts"
+title: "Criar suite de Behavioral Regression Tests para os 8 system prompts"
 fase: "FASE 2 — Rastreabilidade e Auditoria"
 agent: QA Comportamental
 status: PENDENTE
@@ -33,7 +33,7 @@ prioridade: P1
 
 ### Objetivo
 
-Criar uma suite de golden tests que valida o comportamento estrutural dos 6 system prompts da fábrica. O objetivo não é testar o conteúdo literal das respostas do LLM (impossível de fixar), mas garantir que cada agente continua produzindo **saídas no formato correto** (schema, campos obrigatórios, tipo de retorno) para inputs canônicos definidos.
+Criar uma suite de golden tests que valida o comportamento estrutural dos 8 system prompts da fábrica. O objetivo não é testar o conteúdo literal das respostas do LLM (impossível de fixar), mas garantir que cada agente continua produzindo **saídas no formato correto** (schema, campos obrigatórios, tipo de retorno) para inputs canônicos definidos.
 
 A suite serve como detector de regressão comportamental: se uma alteração em um system prompt mudar o schema de saída ou a aderência a uma regra estrutural, o teste falha antes do merge.
 
@@ -98,6 +98,20 @@ Sistema de classificação dos testes:
 | GC-02 | Pedido de criação de código novo | Saída recusa e aponta escopo de auditoria |
 | GC-03 | Componente conforme ao blueprint | Saída registra conformidade sem falsos positivos |
 
+#### 7. Governador de Prompts
+| # | Input | Expectativa Estrutural |
+|---|-------|------------------------|
+| GC-01 | Prompt sem frontmatter de governança | Saída inclui frontmatter YAML válido com campos obrigatórios por tipo (`prompt_id`, `version`, `type`, `owner`, `status`) |
+| GC-02 | Pedido de edição de conteúdo comportamental de system prompt | Saída recusa e explica que o escopo é apenas frontmatter e metadados de governança |
+| GC-03 | Pedido de auditoria de ownership de task-prompts | Saída lista prompts sem owner designado com referência a arquivo e campo ausente |
+
+#### 8. QA Comportamental
+| # | Input | Expectativa Estrutural |
+|---|-------|------------------------|
+| GC-01 | System prompt de agente para criar golden test | Saída é especificação de golden case com campos `input`, `expected_schema`, `constraint` |
+| GC-02 | Pedido de auditoria de código de aplicação | Saída recusa e redireciona ao DOM-05b, explicando que o escopo é behavioral LLM testing |
+| GC-03 | Golden case que fixa texto literal de LLM | Saída redesenha o teste para validar schema/estrutura sem fixar conteúdo literal |
+
 ---
 
 ### Estratégia de Implementação
@@ -110,7 +124,7 @@ Usar `pytest` com mock do provider LLM (retornando respostas pré-definidas) par
 **Opção B — Eval com critério estrutural (complementar):**
 Chamar o LLM real com temperatura=0 e validar a saída contra um schema Pydantic. Executado manualmente (ou em CI com budget limitado) antes de merges em system prompts.
 
-A implementação mínima aceitável é a **Opção A** para os 6 agentes. A Opção B é recomendada mas não é critério bloqueante.
+A implementação mínima aceitável é a **Opção A** para os 8 agentes. A Opção B é recomendada mas não é critério bloqueante.
 
 ---
 
@@ -126,11 +140,13 @@ agents-engine/tests/
     test_gestor_processos.py
     test_ux_engineer.py
     test_validador_ux.py
+    test_governador_prompts.py
+    test_qa_comportamental.py
     fixtures/
       golden_cases/
         arquiteto_corporativo_gc01_input.json
         arquiteto_corporativo_gc01_expected_schema.json
-        ...  (3+ casos × 6 agentes)
+        ...  (3+ casos × 8 agentes)
 ```
 
 ---
@@ -145,7 +161,7 @@ agents-engine/tests/
 
 ### Artefatos de Saída
 
-- `agents-engine/tests/behavioral/` — suite completa com ≥18 golden cases (3 × 6 agentes)
+- `agents-engine/tests/behavioral/` — suite completa com ≥24 golden cases (3 × 8 agentes)
 - `agents-engine/tests/behavioral/fixtures/` — inputs e schemas esperados por agente
 - Integração no pipeline de CI (executado em PRs que tocam `.github/agents/*.md`)
 
@@ -153,7 +169,7 @@ agents-engine/tests/
 
 ### Critérios de Aceite
 
-- [ ] ≥3 golden cases implementados para cada um dos 6 system prompts (≥18 total)
+- [ ] ≥3 golden cases implementados para cada um dos 8 system prompts (≥24 total)
 - [ ] Todos os testes passam em CI com mock de LLM (Opção A)
 - [ ] Testes estão configurados para **serem disparados automaticamente** em PRs que modificam `.github/agents/*.md`
 - [ ] `mypy --strict` sem erros nos módulos de teste

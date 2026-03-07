@@ -1,7 +1,7 @@
 ---
 plan_id: PLAN-20260306-001
 task_id: T07
-title: "Designar owners e SLA de manutenção para os 32 task-prompts"
+title: "Designar owners e SLA de manução para os 36 task-prompts"
 fase: "FASE 3 — Manutenibilidade Contínua"
 agent: Gestor de Processos
 status: PENDENTE
@@ -12,7 +12,7 @@ recomendacao: R-07
 prioridade: P2
 ---
 
-## Tarefa T07 — Owners e SLA dos 32 Task-Prompts
+## Tarefa T07 — Owners e SLA dos 36 Task-Prompts
 
 **Plano pai:** [PLAN-20260306-001](../PLAN-20260306-001_governanca-prompts.md)  
 **Fase:** FASE 3 — Manutenibilidade Contínua  
@@ -25,12 +25,12 @@ prioridade: P2
 
 ### Objetivo
 
-Eliminar o risco de desatualização silenciosa dos 32 `task-prompts` após mudanças no pipeline ou nos processos da fábrica. Cada task-prompt deve ter: um owner designado, um PROC relacionado (quando aplicável) e um SLA de revisão quando o processo que ele suporta for alterado.
+Eliminar o risco de desatualização silenciosa dos 36 `task-prompts` após mudanças no pipeline ou nos processos da fábrica. Cada task-prompt deve ter: um owner designado, um PROC relacionado (quando aplicável) e um SLA de revisão quando o processo que ele suporta for alterado.
 
 Após esta tarefa, quando um gate ou etapa do pipeline mudar, o Gestor de Processos pode determinar imediatamente quais task-prompts precisam ser revisados e notificar seus owners.
 
 **GAP endereçado:**
-- **GP-09** — 32 prompts de workflow sem owner nem SLA de manutenção
+- **GP-09** — 36 prompts de workflow sem owner nem SLA de manutenção
 
 ---
 
@@ -63,6 +63,8 @@ O processo PROC-010 (T04) define as regras de ciclo de vida. Esta tarefa popula 
 | `scaffold-*` | Arquiteto Corporativo | Governa scaffolding |
 | `commit-manager` | Tech Lead | Governa gestão de commits |
 | `process-gap-report` | Diretor de Processos | Governa relatório de GAPs |
+| `di-behavioral-regression-*` | QA Comportamental | Governa design e implementação de golden tests comportamentais |
+| `di-prompt-apply-frontmatter`, `di-prompt-governance-audit` | Governador de Prompts | Governa aplicação e auditoria de frontmatter de prompts |
 
 ---
 
@@ -83,7 +85,7 @@ Para cada task-prompt:
 
 ### Artefato a Produzir
 
-O Gestor de Processos deve produzir o arquivo `docs/processos/gestores/fabrica-deep-ion/task-prompt-owners.md` com a tabela abaixo preenchida para todos os 32 task-prompts:
+O Gestor de Processos deve produzir o arquivo `docs/processos/gestores/fabrica-deep-ion/task-prompt-owners.md` com a tabela abaixo preenchida para todos os 36 task-prompts:
 
 ```markdown
 # Catálogo de Owners de Task-Prompts
@@ -117,13 +119,13 @@ O Gestor de Processos deve produzir o arquivo `docs/processos/gestores/fabrica-d
 
 ### Artefatos de Saída
 
-- `docs/processos/gestores/fabrica-deep-ion/task-prompt-owners.md` — catálogo completo com owner e SLA de todos os 32 task-prompts
+- `docs/processos/gestores/fabrica-deep-ion/task-prompt-owners.md` — catálogo completo com owner e SLA de todos os 36 task-prompts
 
 ---
 
 ### Critérios de Aceite
 
-- [ ] `task-prompt-owners.md` publicado com todos os 32 task-prompts mapeados
+- [ ] `task-prompt-owners.md` publicado com todos os 36 task-prompts mapeados
 - [ ] Cada linha tem: `prompt_id`, `arquivo`, `owner`, `agente consumidor`, `PROC relacionado`, `SLA de revisão`
 - [ ] A seção de regras de gatilho de revisão está alinhada com o PROC-010 (T04)
 - [ ] O documento foi revisado pelo Tech Lead

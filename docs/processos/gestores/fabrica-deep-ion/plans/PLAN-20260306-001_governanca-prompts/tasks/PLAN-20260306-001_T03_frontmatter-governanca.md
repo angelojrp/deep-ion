@@ -1,7 +1,7 @@
 ---
 plan_id: PLAN-20260306-001
 task_id: T03
-title: "Adicionar frontmatter de governança em todos os 40 prompts existentes"
+title: "Adicionar frontmatter de governança em todos os 46 prompts existentes"
 fase: "FASE 1 — Fundação de Governança"
 agent: Governador de Prompts
 status: PENDENTE
@@ -12,7 +12,7 @@ recomendacao: R-02
 prioridade: P1
 ---
 
-## Tarefa T03 — Frontmatter de Governança nos 40 Prompts
+## Tarefa T03 — Frontmatter de Governança nos 46 Prompts
 
 **Plano pai:** [PLAN-20260306-001](../PLAN-20260306-001_governanca-prompts.md)  
 **Fase:** FASE 1 — Fundação de Governança  
@@ -31,10 +31,10 @@ prioridade: P1
 
 ### Objetivo
 
-Estabelecer a linha de base (`baseline`) de governança da fábrica adicionando frontmatter YAML padronizado a todos os 40 artefatos de prompt existentes. Após esta tarefa, cada prompt terá: identificador único, versão semântica inicial, tipo (da taxonomia T02), owner, consumers, status e data de revisão. Isso cria a rastreabilidade mínima para que T05 (hash) e T06 (testes de regressão) sejam implementados com precisão.
+Estabelecer a linha de base (`baseline`) de governança da fábrica adicionando frontmatter YAML padronizado a todos os 46 artefatos de prompt existentes. Após esta tarefa, cada prompt terá: identificador único, versão semântica inicial, tipo (da taxonomia T02), owner, consumers, status e data de revisão. Isso cria a rastreabilidade mínima para que T05 (hash) e T06 (testes de regressão) sejam implementados com precisão.
 
 **GAP endereçado:**
-- **GP-02** — Ausência de metadados de rastreabilidade em todos os 40 prompts
+- **GP-02** — Ausência de metadados de rastreabilidade em todos os 46 prompts
 
 ---
 
@@ -42,7 +42,7 @@ Estabelecer a linha de base (`baseline`) de governança da fábrica adicionando 
 
 > O schema definitivo deve ser validado contra o documento `prompt-taxonomy.md` produzido por T02. Os schemas abaixo são referências baseadas no diagnóstico DIAG-20260306-002 (R-02).
 
-#### Para `system-prompt` (6 arquivos em `.github/agents/`)
+#### Para `system-prompt` (8 arquivos em `.github/agents/`)
 
 ```yaml
 ---
@@ -74,7 +74,7 @@ sha256: ""
 ---
 ```
 
-#### Para `task-prompt` (32 arquivos em `.github/prompts/`)
+#### Para `task-prompt` (36 arquivos em `.github/prompts/`)
 
 ```yaml
 ---
@@ -92,21 +92,23 @@ related_proc: ""  # ex: PROC-001, PROC-002
 
 ---
 
-### Lista Completa dos 40 Arquivos a Atualizar
+### Lista Completa dos 46 Arquivos a Atualizar
 
-**6 system-prompts:**
+**8 system-prompts (2 já possuem frontmatter — apenas validar conformidade com schema T02):**
 - `.github/agents/arquiteto-corporativo.md` → `SP-arquiteto-corporativo`
 - `.github/agents/analista-negocios.md` → `SP-analista-negocios`
 - `.github/agents/diretor-processos.md` → `SP-diretor-processos`
 - `.github/agents/gestor-processos.md` → `SP-gestor-processos`
 - `.github/agents/ux-engineer.md` → `SP-ux-engineer`
 - `.github/agents/validador-ux.md` → `SP-validador-ux`
+- `.github/agents/governador-prompts.md` → `SP-governador-prompts` ⚠️ _frontmatter já aplicado pelo PLAN-20260306-002 — apenas validar conformidade com schema T02_
+- `.github/agents/qa-comportamental.md` → `SP-qa-comportamental` ⚠️ _frontmatter já aplicado pelo PLAN-20260306-002 — apenas validar conformidade com schema T02_
 
 **2 instructions:**
 - `.github/arquiteto-instructions.md` → `INS-arquiteto-global`
 - `.github/instructions/process-governance.instructions.md` → `INS-process-governance`
 
-**32 task-prompts:**
+**36 task-prompts:**
 - `.github/prompts/di-brief-new.prompt.md` → `TP-brief-new`
 - `.github/prompts/di-brief-refine.prompt.md` → `TP-brief-refine`
 - `.github/prompts/di-uc-new.prompt.md` → `TP-uc-new`
@@ -139,6 +141,10 @@ related_proc: ""  # ex: PROC-001, PROC-002
 - `.github/prompts/scaffold-modulo.prompt.md` → `TP-scaffold-modulo`
 - `.github/prompts/commit-manager.prompt.md` → `TP-commit-manager`
 - `.github/prompts/process-gap-report.prompt.md` → `TP-process-gap-report`
+- `.github/prompts/di-behavioral-regression-design.prompt.md` → `TP-behavioral-regression-design` _(criado pelo PLAN-20260306-002)_
+- `.github/prompts/di-behavioral-regression-implement.prompt.md` → `TP-behavioral-regression-implement` _(criado pelo PLAN-20260306-002)_
+- `.github/prompts/di-prompt-apply-frontmatter.prompt.md` → `TP-prompt-apply-frontmatter` _(criado pelo PLAN-20260306-002)_
+- `.github/prompts/di-prompt-governance-audit.prompt.md` → `TP-prompt-governance-audit` _(criado pelo PLAN-20260306-002)_
 
 > ⚠️ A lista acima é baseada no inventário do DIAG-20260306-002. DOM-04 deve confirmar os nomes exatos dos arquivos antes de iniciar o batch, pois pode haver variações de nomenclatura.
 
@@ -146,10 +152,10 @@ related_proc: ""  # ex: PROC-001, PROC-002
 
 ### Estratégia de Execução (Batch)
 
-DOM-04 deve executar a atualização em lote seguindo a ordem:
+O Governador de Prompts deve executar a atualização em lote seguindo a ordem:
 1. Primeiro os 2 `instructions` (menor risco, menor impacto de validação)
 2. Depois os 32 `task-prompts` (maior volume, agrupados por família di-ux, di-brief, etc.)
-3. Por último os 6 `system-prompts` (maior criticidade — os CODEOWNERS de T01 devem estar ativos)
+3. Por último os 8 `system-prompts` (maior criticidade — os CODEOWNERS de T01 devem estar ativos; para `governador-prompts.md` e `qa-comportamental.md` apenas validar, não aplicar)
 
 Toda atualização em lote deve ser enviada via **PR único por tipo** (3 PRs total), não em commits diretos, para permitir revisão diferenciada por categoria.
 
@@ -165,15 +171,16 @@ Toda atualização em lote deve ser enviada via **PR único por tipo** (3 PRs to
 
 ### Artefatos de Saída
 
-- 40 arquivos de prompt atualizados com frontmatter de governança válido
+- 46 arquivos de prompt com frontmatter de governança válido (40 com frontmatter aplicado + 2 system-prompts com frontmatter validado)
 - 3 PRs (1 por tipo: instructions, task-prompts, system-prompts)
 
 ---
 
 ### Critérios de Aceite
 
-- [ ] Todos os 8 arquivos de tipo `system-prompt` e `instruction` têm frontmatter com campos obrigatórios: `prompt_id`, `version`, `type`, `owner`, `status`, `last_reviewed`
-- [ ] Todos os 32 `task-prompts` têm frontmatter com campos obrigatórios: `prompt_id`, `version`, `type`, `owner`, `status`
+- [ ] Todos os 6 system-prompts originais e as 2 instructions têm frontmatter válido com campos obrigatórios: `prompt_id`, `version`, `type`, `owner`, `status`, `last_reviewed`
+- [ ] `governador-prompts.md` e `qa-comportamental.md` validados como conformes ao schema T02 para o tipo `system-prompt`
+- [ ] Todos os 36 `task-prompts` têm frontmatter com campos obrigatórios: `prompt_id`, `version`, `type`, `owner`, `status`
 - [ ] Nenhum arquivo de prompt tem frontmatter YAML inválido (validado por `yamllint`)
 - [ ] Todos os `prompt_id` são únicos no repositório
 - [ ] PRs de system-prompts foram revisados pelo owner designado no CODEOWNERS (validação de T01)

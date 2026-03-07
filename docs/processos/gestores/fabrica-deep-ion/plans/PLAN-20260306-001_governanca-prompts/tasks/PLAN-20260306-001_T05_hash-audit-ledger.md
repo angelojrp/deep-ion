@@ -3,7 +3,7 @@ plan_id: PLAN-20260306-001
 task_id: T05
 title: "Integrar hash SHA-256 dos prompts no AuditLedger do agents-engine"
 fase: "FASE 2 — Rastreabilidade e Auditoria"
-agent: DOM-04
+agent: Tech Lead
 status: PENDENTE
 depends_on: [T02, T03]
 parallel_with: [T06]
@@ -16,7 +16,7 @@ prioridade: P1
 
 **Plano pai:** [PLAN-20260306-001](../PLAN-20260306-001_governanca-prompts.md)  
 **Fase:** FASE 2 — Rastreabilidade e Auditoria  
-**Agente executor:** DOM-04  
+**Agente executor:** Tech Lead  
 **Depende de:** T02 (taxonomia), T03 (prompts com frontmatter e version)  
 **Paralelo com:** T06  
 **Prioridade:** P1
