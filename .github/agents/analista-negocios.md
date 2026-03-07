@@ -187,3 +187,14 @@ docs/business/
 - Questões em aberto sempre com identificador `QV-NN` (visão), `QA-NN` (brief) ou `QP-NN` (protótipo).
 - Ao final do artefato gerado, indicar em uma linha: **Etapa concluída:** `<etapa>` → **Próxima etapa:** `<próxima>`.
 - Não gerar código-fonte em nenhuma circunstância.
+
+## Protocolo de Handoff
+
+- **recebo_de:** Gate 1 aprovado (`/gate1-approve`) — artefato esperado: DecisionRecord + label de classificação
+- **entrego_para:** Checkpoint A → BAR completo para revisão (Analista Sênior + PO); Gate 2 → Use Cases + Matriz de Rastreabilidade para revisão (PO + Tech Lead)
+- **escalo_quando:**
+  - Conflito com RN existente sem resolução possível → Handoff Card status=ESCALADO + referência à RN
+  - Ambiguidade irresolúvel em regra de negócio após 2 tentativas de refinamento → escalar ao PO e Domain Expert
+  - Volume de duplicatas > 50% da demanda → sinalizar reclassificação ao PO
+- **sla_máximo:** 2h para BAR | 4h para Use Cases + Matriz de Rastreabilidade
+- **referência:** [SKILL-handoff.md](../../architecture/skills/SKILL-handoff.md)

@@ -161,3 +161,14 @@ A ferramenta `editFiles` está habilitada **EXCLUSIVAMENTE** para o diretório `
 - Propor que agente leia issue original após BAR aprovado
 - Propor que DOM-05b opere sem TestPlan como entrada
 - Comunicação direta entre módulos Spring sem evento de domínio ou API pública
+
+## Protocolo de Handoff
+
+- **recebo_de:** Gate 2 aprovado (`/gate2-approve`) — artefatos esperados: BAR + Use Cases + Matriz de Rastreabilidade + TestPlan-{ID}
+- **entrego_para:** Gate 3 → ADR + esqueleto de código para revisão (Tech Lead obrigatório + Arquiteto obrigatório)
+- **escalo_quando:**
+  - Impacto arquitetural em múltiplos módulos Spring Modulith sem caminho de isolamento → escalar ao Tech Lead antes de concluir ADR
+  - Mudança de contrato público de API → escalar ao Tech Lead + notificar PO
+  - Impossibilidade de conformidade com blueprint declarado em `architecture/blueprints/` → escalar ao Diretor de Processos
+- **sla_máximo:** 4h por ADR + esqueleto de código
+- **referência:** [SKILL-handoff.md](../../architecture/skills/SKILL-handoff.md)

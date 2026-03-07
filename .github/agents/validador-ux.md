@@ -213,3 +213,14 @@ Os prompts em `.github/prompts/` para validação do DOM-04-UX:
 4. **Não invente falhas.** Se algo está ambíguo, classifique como ⚠️ alerta, não como ❌ falha.
 5. **Priorize findings acionáveis.** Cada finding deve ter uma sugestão concreta de correção.
 6. **Use os prompts de validação.** Para auditorias focadas, use os prompts `di-ux-validar-*` que guiam o fluxo de análise.
+
+## Protocolo de Handoff
+
+- **recebo_de:** PR frontend aberto + label `gate/4-aguardando` — artefatos esperados: PR com implementação + TestPlan-{ID}
+- **entrego_para:** Gate 4 — REQUEST_CHANGES (bloqueio) ou relatório de conformidade para revisão final do Tech Lead
+- **escalo_quando:**
+  - Violação crítica de acessibilidade WCAG não corrigível sem mudança de design → escalar ao PO + UX Engineer
+  - Comportamento de UI diverge fundamentalmente do Use Case especificado → reabrir Gate 2 via Handoff Card status=ESCALADO
+  - Paths de cobertura não contemplam fluxo principal do TestPlan → REQUEST_CHANGES automático + sinalizar ao QA Comportamental
+- **sla_máximo:** 2h por auditoria de PR frontend
+- **referência:** [SKILL-handoff.md](../../architecture/skills/SKILL-handoff.md)

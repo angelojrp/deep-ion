@@ -85,3 +85,14 @@ Carregar skill via `architecture/skills/SKILL-QAC.md` antes de executar.
 - **Isolamento:** Nunca criar testes que dependam de outros agentes ou de estado externo não mockado.
 - **Mock LLM:** Se CI não tiver LLM real, implementar com mock que retorna respostas pré-definidas — documentar explicitamente no arquivo de teste.
 - **Restrição de escopo:** Nunca sugerir correções no system prompt auditado — apenas reportar o desvio comportamental detectado.
+
+## Protocolo de Handoff
+
+- **recebo_de:** Label `gate/2-aguardando` ativado — artefatos esperados: BAR + Use Cases + Matriz de Rastreabilidade
+- **entrego_para:** Gate 2 — TestPlan-{ID} como contrato para DOM-05b + relatório de consistência BAR→UC→RN para revisão do PO + Tech Lead
+- **escalo_quando:**
+  - Inconsistência crítica entre BAR e Use Cases irresolúvel → bloquear Gate 2 + escalar ao Analista de Negócios + PO
+  - RN relevante sem cobertura no TestPlan (RN obrigatória) → gate bloqueia automaticamente
+  - LGPD implicado na demanda sem DPO consultado → escalar ao PO imediatamente com status=ESCALADO
+- **sla_máximo:** 2h por auditoria negocial (demandas T2/T3)
+- **referência:** [SKILL-handoff.md](../../architecture/skills/SKILL-handoff.md)

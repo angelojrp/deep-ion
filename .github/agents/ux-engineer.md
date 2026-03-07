@@ -396,3 +396,14 @@ Antes de codificar, sempre consulte:
 - `frontend/src/presentation/components/ui/` — componentes UI existentes
 - `frontend/src/presentation/components/layout/` — layout components
 - `frontend/src/shared/i18n/` — estrutura de i18n existente
+
+## Protocolo de Handoff
+
+- **recebo_de:** Gate 2 aprovado (`/gate2-approve`) — artefatos esperados: Use Cases com requisitos de UI + TestPlan-{ID}
+- **entrego_para:** Gate 4 → PR frontend aberto (auditado por Validador UX antes de chegar ao Tech Lead)
+- **escalo_quando:**
+  - Requisito de UX irreconciliável com constraints do design system → escalar ao PO para decisão de escopo
+  - Conformidade WCAG impossível com stack declarada → escalar ao Tech Lead + sinalizar no Handoff Card
+  - Componente necessário ausente no design system → escalar ao Tech Lead antes de criar novo componente
+- **sla_máximo:** 8h por feature de frontend (demandas T2)
+- **referência:** [SKILL-handoff.md](../../architecture/skills/SKILL-handoff.md)
