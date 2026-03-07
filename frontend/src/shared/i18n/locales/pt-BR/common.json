@@ -15,7 +15,6 @@
     "users": "Usuários",
     "agents": "Agentes IA",
     "pipelines": "Pipelines",
-    "products": "Produtos",
     "settings": "Configurações",
     "chatbot": "Assistente IA",
     "sidebar": "Menu lateral",
@@ -1434,41 +1433,6 @@
       "total": "{{count}} tenant(s)",
       "active": "{{count}} ativo(s)",
       "inactive": "{{count}} inativo(s)"
-    }
-  },
-  "products": {
-    "title": "Produtos",
-    "subtitle": "Catálogo de produtos",
-    "searchPlaceholder": "Buscar produtos...",
-    "resultsCount": "{{count}} produto(s) encontrado(s)",
-    "viewProduct": "Ver detalhes de {{name}}",
-    "stock": {
-      "EM_ESTOQUE": "Em estoque",
-      "ULTIMAS_UNIDADES": "Últimas unidades",
-      "ESGOTADO": "Esgotado",
-      "PRE_VENDA": "Pré-venda"
-    },
-    "detail": {
-      "backToProducts": "Voltar para produtos",
-      "description": "Descrição",
-      "specifications": "Especificações técnicas",
-      "reviews": "Avaliações",
-      "reviewsCount": "avaliações",
-      "savings": "Economia de {{value}}",
-      "installments": "Em até {{count}}x de {{value}} sem juros",
-      "freeShipping": "Frete grátis",
-      "shippingCalc": "Calcular frete",
-      "businessDays": "dias úteis",
-      "addToCart": "Adicionar ao carrinho",
-      "unavailable": "Indisponível",
-      "favorite": "Favoritar",
-      "share": "Compartilhar",
-      "sales": "vendas",
-      "guarantee": "Garantia de 12 meses",
-      "showAll": "Ver todas as especificações",
-      "showLess": "Ver menos",
-      "showAllReviews": "Ver todas as {{count}} avaliações",
-      "showLessReviews": "Ver menos avaliações"
     }
   }
 }

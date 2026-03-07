@@ -16,8 +16,6 @@ export const ROUTES = {
   AGENTS: '/agents',
   AGENT_DETAIL: '/agents/:id',
   PIPELINES: '/pipelines',
-  PRODUCTS: '/products',
-  PRODUCT_DETAIL: '/products/:id',
   USERS: '/users',
   PROFILE: '/profile',
   CHATBOT: '/chatbot',

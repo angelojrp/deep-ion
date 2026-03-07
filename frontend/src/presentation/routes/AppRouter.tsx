@@ -61,12 +61,6 @@ const AgentDetailPage = lazy(() =>
 const PipelinesPage = lazy(() =>
   import('@presentation/pages/PipelinesPage').then((m) => ({ default: m.PipelinesPage })),
 )
-const ProductsPage = lazy(() =>
-  import('@presentation/pages/ProductsPage').then((m) => ({ default: m.ProductsPage })),
-)
-const ProductDetailPage = lazy(() =>
-  import('@presentation/pages/ProductDetailPage').then((m) => ({ default: m.ProductDetailPage })),
-)
 const ProjectKickoffPage = lazy(() =>
   import('@presentation/pages/ProjectKickoffPage').then((m) => ({ default: m.ProjectKickoffPage })),
 )
@@ -244,22 +238,6 @@ const router = createBrowserRouter([
         element: (
           <Suspense fallback={<LoadingFallback />}>
             <PipelinesPage />
-          </Suspense>
-        ),
-      },
-      {
-        path: ROUTES.PRODUCTS,
-        element: (
-          <Suspense fallback={<LoadingFallback />}>
-            <ProductsPage />
-          </Suspense>
-        ),
-      },
-      {
-        path: ROUTES.PRODUCT_DETAIL,
-        element: (
-          <Suspense fallback={<LoadingFallback />}>
-            <ProductDetailPage />
           </Suspense>
         ),
       },

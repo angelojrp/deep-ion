@@ -15,7 +15,6 @@
     "users": "Users",
     "agents": "AI Agents",
     "pipelines": "Pipelines",
-    "products": "Products",
     "settings": "Settings",
     "chatbot": "AI Assistant",
     "sidebar": "Sidebar navigation",
@@ -1434,41 +1433,6 @@
       "total": "{{count}} tenant(s)",
       "active": "{{count}} active",
       "inactive": "{{count}} inactive"
-    }
-  },
-  "products": {
-    "title": "Products",
-    "subtitle": "Product catalog",
-    "searchPlaceholder": "Search products...",
-    "resultsCount": "{{count}} product(s) found",
-    "viewProduct": "View details for {{name}}",
-    "stock": {
-      "EM_ESTOQUE": "In stock",
-      "ULTIMAS_UNIDADES": "Last units",
-      "ESGOTADO": "Out of stock",
-      "PRE_VENDA": "Pre-order"
-    },
-    "detail": {
-      "backToProducts": "Back to products",
-      "description": "Description",
-      "specifications": "Technical specifications",
-      "reviews": "Reviews",
-      "reviewsCount": "reviews",
-      "savings": "Save {{value}}",
-      "installments": "Up to {{count}}x of {{value}} interest-free",
-      "freeShipping": "Free shipping",
-      "shippingCalc": "Calculate shipping",
-      "businessDays": "business days",
-      "addToCart": "Add to cart",
-      "unavailable": "Unavailable",
-      "favorite": "Favorite",
-      "share": "Share",
-      "sales": "sales",
-      "guarantee": "12-month warranty",
-      "showAll": "Show all specifications",
-      "showLess": "Show less",
-      "showAllReviews": "Show all {{count}} reviews",
-      "showLessReviews": "Show less reviews"
     }
   }
 }
