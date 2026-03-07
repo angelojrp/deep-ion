@@ -15,6 +15,7 @@ import {
   Bot,
   GitBranch,
   Rocket,
+  ShoppingBag,
 } from 'lucide-react'
 import { cn } from '@shared/utils/cn'
 import { ROUTES } from '@shared/constants/routes'
@@ -31,6 +32,7 @@ const navItems = [
   { key: 'blueprints', to: ROUTES.BLUEPRINTS, icon: Layers },
   { key: 'agents', to: ROUTES.AGENTS, icon: Bot },
   { key: 'pipelines', to: ROUTES.PIPELINES, icon: GitBranch },
+  { key: 'products', to: ROUTES.PRODUCTS, icon: ShoppingBag },
   { key: 'users', to: ROUTES.USERS, icon: Users },
   { key: 'chatbot', to: ROUTES.CHATBOT, icon: MessageCircle },
   { key: 'settings', to: ROUTES.SETTINGS, icon: Settings },

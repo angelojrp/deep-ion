@@ -1,0 +1,178 @@
+[
+  {
+    "id": "prod-001",
+    "nome": "Smartphone Galaxy Ultra 256GB",
+    "slug": "smartphone-galaxy-ultra-256gb",
+    "descricao": "O mais avançado smartphone da linha Galaxy com câmera de 200MP, processador Snapdragon 8 Gen 3, tela Dynamic AMOLED 2X de 6.8 polegadas e bateria de 5000mAh com carregamento rápido de 45W. Design premium em titânio com certificação IP68.",
+    "descricaoCurta": "Smartphone premium com câmera 200MP e tela 6.8\" AMOLED",
+    "preco": 7499.90,
+    "precoPromocional": 6299.90,
+    "sku": "SM-S928B-256",
+    "categoria": "Eletrônicos",
+    "subcategoria": "Smartphones",
+    "marca": "Samsung",
+    "estoque": 42,
+    "statusEstoque": "EM_ESTOQUE",
+    "avaliacaoMedia": 4.7,
+    "totalAvaliacoes": 328,
+    "tags": ["5G", "câmera 200MP", "titânio", "S Pen", "IA"],
+    "especificacoes": [
+      { "grupo": "Tela", "nome": "Tamanho", "valor": "6.8 polegadas" },
+      { "grupo": "Tela", "nome": "Tecnologia", "valor": "Dynamic AMOLED 2X" },
+      { "grupo": "Tela", "nome": "Resolução", "valor": "3120 x 1440 (Quad HD+)" },
+      { "grupo": "Câmera", "nome": "Principal", "valor": "200MP Wide" },
+      { "grupo": "Câmera", "nome": "Ultra-wide", "valor": "12MP" },
+      { "grupo": "Câmera", "nome": "Teleobjetiva", "valor": "50MP (5x optical)" },
+      { "grupo": "Câmera", "nome": "Frontal", "valor": "12MP" },
+      { "grupo": "Performance", "nome": "Processador", "valor": "Snapdragon 8 Gen 3 for Galaxy" },
+      { "grupo": "Performance", "nome": "RAM", "valor": "12GB" },
+      { "grupo": "Performance", "nome": "Armazenamento", "valor": "256GB" },
+      { "grupo": "Bateria", "nome": "Capacidade", "valor": "5000mAh" },
+      { "grupo": "Bateria", "nome": "Carregamento", "valor": "45W com fio / 15W wireless" },
+      { "grupo": "Geral", "nome": "Sistema Operacional", "valor": "Android 14 + One UI 6.1" },
+      { "grupo": "Geral", "nome": "Resistência", "valor": "IP68" },
+      { "grupo": "Geral", "nome": "Peso", "valor": "232g" }
+    ],
+    "fotos": [
+      { "id": "foto-1", "url": "https://placehold.co/800x800/1a1a2e/e0e0e0?text=Galaxy+Ultra+Front", "alt": "Vista frontal", "principal": true },
+      { "id": "foto-2", "url": "https://placehold.co/800x800/1a1a2e/e0e0e0?text=Galaxy+Ultra+Back", "alt": "Vista traseira", "principal": false },
+      { "id": "foto-3", "url": "https://placehold.co/800x800/1a1a2e/e0e0e0?text=Galaxy+Ultra+Side", "alt": "Vista lateral", "principal": false },
+      { "id": "foto-4", "url": "https://placehold.co/800x800/1a1a2e/e0e0e0?text=Galaxy+Ultra+Camera", "alt": "Detalhe câmera", "principal": false }
+    ],
+    "comentarios": [
+      { "id": "com-1", "autor": "Carlos Mendes", "avatar": "CM", "nota": 5, "titulo": "Melhor smartphone que já tive", "texto": "A câmera é impressionante, principalmente em condições de pouca luz. O desempenho é absurdo e a bateria dura o dia todo com uso intenso.", "data": "2026-02-28T14:30:00Z", "curtidas": 24, "verificado": true },
+      { "id": "com-2", "autor": "Ana Beatriz", "avatar": "AB", "nota": 4, "titulo": "Excelente, mas pesado", "texto": "Qualidade de construção impecável. Porém, o peso de 232g se sente após uso prolongado. Fora isso, é perfeito.", "data": "2026-02-20T09:15:00Z", "curtidas": 12, "verificado": true },
+      { "id": "com-3", "autor": "Roberto Silva", "avatar": "RS", "nota": 5, "titulo": "Vale cada centavo", "texto": "Migrei de um iPhone e não me arrependi. A S Pen é muito útil para anotações rápidas e o zoom de 100x é impressionante.", "data": "2026-02-15T16:45:00Z", "curtidas": 18, "verificado": false },
+      { "id": "com-4", "autor": "Juliana Costa", "avatar": "JC", "nota": 4, "titulo": "Ótimo aparelho", "texto": "Uso para trabalho e fotografia. A IA generativa nos recursos de edição de foto é muito boa. Desconto de um ponto pela falta de carregador na caixa.", "data": "2026-02-10T11:20:00Z", "curtidas": 8, "verificado": true },
+      { "id": "com-5", "autor": "Marcos Oliveira", "avatar": "MO", "nota": 3, "titulo": "Bom, mas superaquece", "texto": "Performance excelente no geral, mas em jogos pesados ele esquenta bastante. A câmera compensa, mas esperava mais pela faixa de preço.", "data": "2026-01-30T20:00:00Z", "curtidas": 5, "verificado": false }
+    ],
+    "vendedor": { "nome": "TechStore Brasil", "avaliacao": 4.8, "totalVendas": 15420 },
+    "frete": { "gratis": true, "prazoMinimo": 2, "prazoMaximo": 5 },
+    "criadoEm": "2026-01-10T08:00:00Z",
+    "atualizadoEm": "2026-03-01T10:00:00Z"
+  },
+  {
+    "id": "prod-002",
+    "nome": "Notebook ProBook 15 i7 16GB 512SSD",
+    "slug": "notebook-probook-15-i7-16gb-512ssd",
+    "descricao": "Notebook profissional com processador Intel Core i7 13ª geração, 16GB RAM DDR5, SSD NVMe de 512GB, tela IPS Full HD de 15.6 polegadas antirreflexo. Ideal para trabalho e produtividade com autonomia de até 10 horas.",
+    "descricaoCurta": "Notebook profissional i7, 16GB RAM, 512GB SSD",
+    "preco": 5299.00,
+    "precoPromocional": null,
+    "sku": "NB-PB15-I7-16-512",
+    "categoria": "Eletrônicos",
+    "subcategoria": "Notebooks",
+    "marca": "Dell",
+    "estoque": 15,
+    "statusEstoque": "EM_ESTOQUE",
+    "avaliacaoMedia": 4.5,
+    "totalAvaliacoes": 189,
+    "tags": ["i7 13ª gen", "16GB DDR5", "512GB NVMe", "profissional"],
+    "especificacoes": [
+      { "grupo": "Tela", "nome": "Tamanho", "valor": "15.6 polegadas" },
+      { "grupo": "Tela", "nome": "Tecnologia", "valor": "IPS Full HD antirreflexo" },
+      { "grupo": "Performance", "nome": "Processador", "valor": "Intel Core i7-1365H" },
+      { "grupo": "Performance", "nome": "RAM", "valor": "16GB DDR5 4800MHz" },
+      { "grupo": "Performance", "nome": "Armazenamento", "valor": "512GB SSD NVMe" },
+      { "grupo": "Bateria", "nome": "Autonomia", "valor": "Até 10 horas" },
+      { "grupo": "Geral", "nome": "Sistema Operacional", "valor": "Windows 11 Pro" },
+      { "grupo": "Geral", "nome": "Peso", "valor": "1.74kg" }
+    ],
+    "fotos": [
+      { "id": "foto-5", "url": "https://placehold.co/800x800/2d2d44/e0e0e0?text=ProBook+15+Open", "alt": "Notebook aberto", "principal": true },
+      { "id": "foto-6", "url": "https://placehold.co/800x800/2d2d44/e0e0e0?text=ProBook+15+Side", "alt": "Vista lateral", "principal": false },
+      { "id": "foto-7", "url": "https://placehold.co/800x800/2d2d44/e0e0e0?text=ProBook+15+Keyboard", "alt": "Teclado", "principal": false }
+    ],
+    "comentarios": [
+      { "id": "com-6", "autor": "Fernando Souza", "avatar": "FS", "nota": 5, "titulo": "Perfeito para trabalho", "texto": "Uso para desenvolvimento de software e ele roda tudo sem travar. Tela excelente e teclado muito confortável.", "data": "2026-02-25T10:00:00Z", "curtidas": 15, "verificado": true },
+      { "id": "com-7", "autor": "Patrícia Lima", "avatar": "PL", "nota": 4, "titulo": "Boa relação custo-benefício", "texto": "Para a faixa de preço, entrega muito. SSD rápido, boa tela e bateria que realmente dura. Só sinto falta de uma GPU dedicada.", "data": "2026-02-18T14:30:00Z", "curtidas": 9, "verificado": true }
+    ],
+    "vendedor": { "nome": "InfoShop Digital", "avaliacao": 4.6, "totalVendas": 8320 },
+    "frete": { "gratis": true, "prazoMinimo": 3, "prazoMaximo": 7 },
+    "criadoEm": "2026-01-15T09:00:00Z",
+    "atualizadoEm": "2026-02-28T12:00:00Z"
+  },
+  {
+    "id": "prod-003",
+    "nome": "Fone de Ouvido Bluetooth ANC Pro",
+    "slug": "fone-ouvido-bluetooth-anc-pro",
+    "descricao": "Fone de ouvido over-ear com cancelamento ativo de ruído (ANC) avançado, Bluetooth 5.3, bateria de 40 horas, driver de 40mm com Hi-Res Audio. Conforto excepcional com almofadas de espuma memory, dobrável e com estojo de transporte.",
+    "descricaoCurta": "Fone Bluetooth ANC com 40h de bateria e Hi-Res Audio",
+    "preco": 899.90,
+    "precoPromocional": 749.90,
+    "sku": "FN-ANC-PRO-BLK",
+    "categoria": "Acessórios",
+    "subcategoria": "Áudio",
+    "marca": "Sony",
+    "estoque": 0,
+    "statusEstoque": "ESGOTADO",
+    "avaliacaoMedia": 4.9,
+    "totalAvaliacoes": 512,
+    "tags": ["ANC", "Bluetooth 5.3", "Hi-Res", "40h bateria"],
+    "especificacoes": [
+      { "grupo": "Áudio", "nome": "Driver", "valor": "40mm" },
+      { "grupo": "Áudio", "nome": "Resposta", "valor": "4Hz - 40kHz" },
+      { "grupo": "Áudio", "nome": "Codec", "valor": "LDAC, AAC, SBC" },
+      { "grupo": "Conectividade", "nome": "Bluetooth", "valor": "5.3" },
+      { "grupo": "Conectividade", "nome": "NFC", "valor": "Sim" },
+      { "grupo": "Bateria", "nome": "Duração", "valor": "40 horas (ANC ligado)" },
+      { "grupo": "Bateria", "nome": "Carregamento", "valor": "USB-C, carga rápida 3min=3h" },
+      { "grupo": "Geral", "nome": "Peso", "valor": "254g" }
+    ],
+    "fotos": [
+      { "id": "foto-8", "url": "https://placehold.co/800x800/3d3d5c/e0e0e0?text=ANC+Pro+Front", "alt": "Vista frontal", "principal": true },
+      { "id": "foto-9", "url": "https://placehold.co/800x800/3d3d5c/e0e0e0?text=ANC+Pro+Folded", "alt": "Dobrado", "principal": false }
+    ],
+    "comentarios": [
+      { "id": "com-8", "autor": "Lucas Almeida", "avatar": "LA", "nota": 5, "titulo": "O melhor ANC do mercado", "texto": "Silêncio absoluto. Uso no escritório e é como se ninguém existisse ao redor. Som cristalino e conforto para usar o dia todo.", "data": "2026-03-01T08:00:00Z", "curtidas": 45, "verificado": true },
+      { "id": "com-9", "autor": "Camila Ferreira", "avatar": "CF", "nota": 5, "titulo": "Bateria impressionante", "texto": "40 horas não é marketing, é real. Carrego uma vez por semana no máximo. Qualidade sonora excelente com LDAC.", "data": "2026-02-22T18:30:00Z", "curtidas": 32, "verificado": true },
+      { "id": "com-10", "autor": "Diego Martins", "avatar": "DM", "nota": 5, "titulo": "Confortável demais", "texto": "As almofadas de memory foam são incríveis. Uso por horas sem incômodo. O ANC adaptativo funciona muito bem.", "data": "2026-02-14T12:15:00Z", "curtidas": 21, "verificado": false }
+    ],
+    "vendedor": { "nome": "AudioMax Store", "avaliacao": 4.9, "totalVendas": 22150 },
+    "frete": { "gratis": false, "prazoMinimo": 5, "prazoMaximo": 10 },
+    "criadoEm": "2025-12-01T08:00:00Z",
+    "atualizadoEm": "2026-03-02T15:00:00Z"
+  },
+  {
+    "id": "prod-004",
+    "nome": "Smart TV OLED 65\" 4K",
+    "slug": "smart-tv-oled-65-4k",
+    "descricao": "Smart TV OLED de 65 polegadas com resolução 4K, painel de pixels auto-emissivos para preto absoluto, processador α9 Gen6 AI, Dolby Vision IQ e Dolby Atmos, sistema webOS 24, HDMI 2.1 para gaming a 120Hz e design infinity edge.",
+    "descricaoCurta": "TV OLED 65\" 4K com Dolby Vision e 120Hz",
+    "preco": 12999.00,
+    "precoPromocional": 10499.00,
+    "sku": "TV-OLED65-4K-2026",
+    "categoria": "Eletrônicos",
+    "subcategoria": "TVs",
+    "marca": "LG",
+    "estoque": 8,
+    "statusEstoque": "ULTIMAS_UNIDADES",
+    "avaliacaoMedia": 4.8,
+    "totalAvaliacoes": 95,
+    "tags": ["OLED", "4K", "120Hz", "Dolby Vision", "gaming"],
+    "especificacoes": [
+      { "grupo": "Tela", "nome": "Tamanho", "valor": "65 polegadas" },
+      { "grupo": "Tela", "nome": "Tecnologia", "valor": "OLED" },
+      { "grupo": "Tela", "nome": "Resolução", "valor": "3840 x 2160 (4K)" },
+      { "grupo": "Tela", "nome": "Taxa de atualização", "valor": "120Hz" },
+      { "grupo": "Áudio", "nome": "Dolby Atmos", "valor": "Sim" },
+      { "grupo": "Conectividade", "nome": "HDMI 2.1", "valor": "4 portas" },
+      { "grupo": "Conectividade", "nome": "Wi-Fi", "valor": "Wi-Fi 6E" },
+      { "grupo": "Geral", "nome": "Sistema", "valor": "webOS 24" },
+      { "grupo": "Geral", "nome": "Processador", "valor": "α9 Gen6 AI" }
+    ],
+    "fotos": [
+      { "id": "foto-10", "url": "https://placehold.co/800x800/1e3a5f/e0e0e0?text=OLED+TV+65+Front", "alt": "Vista frontal", "principal": true },
+      { "id": "foto-11", "url": "https://placehold.co/800x800/1e3a5f/e0e0e0?text=OLED+TV+65+Side", "alt": "Vista lateral", "principal": false },
+      { "id": "foto-12", "url": "https://placehold.co/800x800/1e3a5f/e0e0e0?text=OLED+TV+65+Back", "alt": "Vista traseira", "principal": false }
+    ],
+    "comentarios": [
+      { "id": "com-11", "autor": "Thiago Nascimento", "avatar": "TN", "nota": 5, "titulo": "Cinema em casa de verdade", "texto": "O preto absoluto do OLED é incomparável. Assistir filmes com Dolby Vision é uma experiência surreal. Gaming a 120Hz é butter smooth.", "data": "2026-02-26T20:00:00Z", "curtidas": 38, "verificado": true },
+      { "id": "com-12", "autor": "Renata Vasconcelos", "avatar": "RV", "nota": 4, "titulo": "Maravilhosa, mas cara", "texto": "Qualidade de imagem absurda. O webOS é intuitivo e fluido. O preço é salgado, mas o desconto ajudou.", "data": "2026-02-20T15:45:00Z", "curtidas": 14, "verificado": true }
+    ],
+    "vendedor": { "nome": "MegaEletro", "avaliacao": 4.7, "totalVendas": 31200 },
+    "frete": { "gratis": true, "prazoMinimo": 5, "prazoMaximo": 12 },
+    "criadoEm": "2026-01-20T08:00:00Z",
+    "atualizadoEm": "2026-03-03T09:00:00Z"
+  }
+]
